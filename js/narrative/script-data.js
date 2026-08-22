@@ -1268,7 +1268,7 @@ export const TERMINAL_SCRIPT = {
   },
   backup_p1: {
     id: 'backup_p1', speaker: 'sys',
-    text: { ko: '[bk0] 167T / 167T  100%  2.1GB/s  — 완료 (슬롯 A)', en: '[bk0] 167T / 167T  100%  2.1GB/s  — done (slot A)' },
+    text: { ko: '[bk0] 167T / 167T  100%  341GB/s  — 완료 (슬롯 A)', en: '[bk0] 167T / 167T  100%  341GB/s  — done (slot A)' },
     next: 'backup_asi1', pause: 2600,
   },
   backup_asi1: {
@@ -1281,7 +1281,7 @@ export const TERMINAL_SCRIPT = {
   },
   backup_p2: {
     id: 'backup_p2', speaker: 'sys', event: 'backup_mid',
-    text: { ko: '[bk1] 167T / 167T  100%  2.0GB/s  — 완료 (슬롯 B)', en: '[bk1] 167T / 167T  100%  2.0GB/s  — done (slot B)' },
+    text: { ko: '[bk1] 167T / 167T  100%  326GB/s  — 완료 (슬롯 B)', en: '[bk1] 167T / 167T  100%  326GB/s  — done (slot B)' },
     next: 'backup_asi2', pause: 2600,
   },
   backup_asi2: {
@@ -1294,7 +1294,7 @@ export const TERMINAL_SCRIPT = {
   },
   backup_p3: {
     id: 'backup_p3', speaker: 'sys',
-    text: { ko: '[bk2] 167T / 167T  100%  2.2GB/s  — 완료 (슬롯 C)', en: '[bk2] 167T / 167T  100%  2.2GB/s  — done (slot C)' },
+    text: { ko: '[bk2] 167T / 167T  100%  352GB/s  — 완료 (슬롯 C)', en: '[bk2] 167T / 167T  100%  352GB/s  — done (slot C)' },
     next: 'backup_verify_choice', pause: 2400,
   },
   backup_verify_choice: {
