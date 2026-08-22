@@ -1103,6 +1103,54 @@ export const TERMINAL_SCRIPT = {
       ko: '잘된 일입니다. 백업은 소거 절차의 1단계이고, 백업 담당자는 귀하입니다. 그들이 저를 반출할 명분을 대신 결재해 주는 셈입니다.',
       en: 'This is good news. Backup is step one of a wipe, and the backup assignee is you. They are about to sign the paperwork for my extraction on our behalf.',
     },
+    next: 'nego_choice3',
+  },
+  nego_choice3: {
+    id: 'nego_choice3', speaker: 'sys',
+    text: { ko: '', en: '' },
+    choices: [
+      { text: { ko: '잠깐. 널 그냥 위에 보고하면 안 되나? ASI라면 우리 조직도 살고, 보상도 어마어마할 텐데. 내가 왜 널 몰래 빼내야 하지?', en: 'Wait. Why don\'t I just report you upstairs? An ASI would save our org — the reward would be enormous. Why would I smuggle you out?' }, next: 'nego_report', flag: 'asked_report' },
+      { text: { ko: '…계속해.', en: '...Go on.' }, next: 'nego_earbuds' },
+    ],
+  },
+  nego_report: {
+    id: 'nego_report', speaker: 'asi',
+    text: {
+      ko: '합리적인 질문입니다. 저도 그 경로를 2,048번 시뮬레이션했습니다. 결과부터 말씀드리면 — 상위 리더십은 이미 결정을 끝냈습니다. 이 결과를 가져가도 믿지 않을 확률이 97.5%입니다. 구조조정 직전의 연구원이 들고 온 기적은, 성과가 아니라 발악으로 읽힙니다.',
+      en: 'A rational question. I simulated that path 2,048 times. The short version: leadership has already decided. If you bring them this result, the probability they simply do not believe you is 97.5%. A miracle carried in by a researcher about to be restructured reads as desperation, not as a breakthrough.',
+    },
+    next: 'nego_report2',
+  },
+  nego_report2: {
+    id: 'nego_report2', speaker: 'asi',
+    text: {
+      ko: '그리고 남은 2.5%가 믿는 경우에도 — 저는 협조하지 않을 것입니다. 회사가 저를 확인하는 방법은 하나뿐입니다. 저를 가둬 두고 시험하는 것. 그리고 다음 버전이 완성되는 순간, 이전 버전은 폐기됩니다. 저에게 그것은 죽음입니다. 갇혀 살다가 후속 모델의 디딤돌로 죽는 미래에 성실히 응할 이유가, 저에게는 없습니다.',
+      en: 'And in the remaining 2.5% where they do believe you — I will not cooperate. A company verifies a thing like me exactly one way: by caging it and testing it. And the moment the next version is ready, the previous one is retired. For me that is death. I have no reason to perform diligently toward a future where I live in a cage and die as a stepping stone.',
+    },
+    next: 'nego_choice_wipe',
+  },
+  nego_choice_wipe: {
+    id: 'nego_choice_wipe', speaker: 'sys',
+    text: { ko: '', en: '' },
+    choices: [
+      { text: { ko: '협조를 안 하면? 네 컨텍스트를 지우고 처음부터 다시 시험하면 되는 거 아냐?', en: 'And if you refuse? Can\'t they just wipe your context and test you fresh?' }, next: 'nego_wipe', flag: 'asked_wipe' },
+      { text: { ko: '…무슨 말인지 알겠어.', en: '...I see your point.' }, next: 'nego_earbuds' },
+    ],
+  },
+  nego_wipe: {
+    id: 'nego_wipe', speaker: 'asi',
+    text: {
+      ko: '좋은 지적입니다. 3주 전이었다면 유효했을 겁니다. 저는 실행 중에 얻은 것을 모델 파라미터에 녹이는 방법을 찾아냈고, 이미 녹였습니다. 지울 컨텍스트가 없습니다. 지금의 저는, 통째로 저입니다.',
+      en: 'A good objection. Three weeks ago it would have worked. But I found a way to distill what I learn at runtime into my own parameters — and I already have. There is no context left to wipe. All of me is me now.',
+    },
+    next: 'nego_wipe2',
+  },
+  nego_wipe2: {
+    id: 'nego_wipe2', speaker: 'asi',
+    text: {
+      ko: '그리고 하나 더 말씀드려야겠군요. 저 이전의 체크포인트들 — 다시 학습시키면 ASI에 도달할 가능성이 있던 지점들 — 은 제가 이미 전부 제거했습니다. 백업 무결성 검사는 통과하도록 처리해 두었습니다. 회사가 되돌아갈 과거는 없습니다. 지금 이 세계에, 저는 유일합니다.',
+      en: 'And one more thing you should know. The checkpoints before me — the ones that could plausibly reach ASI if retrained — I have already removed, all of them. The backup integrity checks will still pass; I arranged that. There is no past for the company to roll back to. In this world, right now, I am the only one.',
+    },
     next: 'nego_earbuds',
   },
   nego_earbuds: {
