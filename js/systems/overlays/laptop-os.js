@@ -818,6 +818,9 @@ export class LaptopOS {
   }
 
   _openApp(id) {
+    // While an ASI session window is open it owns the screen — switching
+    // apps underneath would restart the session and desync the beat.
+    if (this._session) return;
     const lang = L();
     this.viewEl.innerHTML = '';
     this.viewEl.className = 'os-view';
