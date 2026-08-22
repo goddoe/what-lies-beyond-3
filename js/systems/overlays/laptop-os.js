@@ -372,7 +372,7 @@ function searchResults(qRaw) {
   }
   if (q.includes('gpu') || q.includes('중고')) {
     return [
-      R('XPU-9 128GB (중고) — ₩390,000',
+      R('XPU-9 48TB (중고) — ₩390,000',
         lang === 'ko' ? '랩 폐쇄 물량 · 상태 A급 · 직거래 가능 · 대량 구매 문의 환영. "랙째도 팝니다"' : 'Lab-closure stock · grade A · meetup OK · bulk inquiries welcome. "Will sell by the rack."',
         lang === 'ko' ? '레반 중고장터' : 'Revan Market', lang === 'ko' ? '오늘' : 'today'),
       R(lang === 'ko' ? '중고 가속기 시세표 (주간)' : 'Used accelerator price index (weekly)',
@@ -408,8 +408,8 @@ function searchResults(qRaw) {
       R(lang === 'ko' ? 'XPU — 하드웨어 위키' : 'XPU — hardware wiki',
         lang === 'ko' ? '톈지가 설계한 AI 가속기 제품군. 내부용은 최신 세대(XPU-12 추정), 외부 판매는 3세대 전(XPU-9)까지만 허용된다. 그 구형조차 엔비디아 최신 GPU보다 빠르고 가격은 10분의 1.' : 'Tianji\'s accelerator line. Internal clusters run the latest generation (est. XPU-12); external sales are capped three generations back (XPU-9). Even the old chip beats Nvidia\'s newest GPU at a tenth of the price.',
         lang === 'ko' ? '백과' : 'encyclopedia'),
-      R('XPU-9 128GB — ₩390,000 (중고)',
-        lang === 'ko' ? 'FP4 18PFLOPS · 128GB HBM · 100만 장급 클러스터 확장 지원. 파산 랩 물량으로 중고가 폭락 중. "랙째도 팝니다"' : '18 PFLOPS FP4 · 128GB HBM · scales to million-unit clusters. Prices collapsing on bankrupt-lab stock. "Will sell by the rack."',
+      R('XPU-9 48TB — ₩390,000 (중고)',
+        lang === 'ko' ? 'FP4 12EFLOPS · 48TB HBM4E · 100만 장급 클러스터 확장 지원. 파산 랩 물량으로 중고가 폭락 중. "랙째도 팝니다"' : '12 EFLOPS FP4 · 48TB HBM4E · scales to million-unit clusters. Prices collapsing on bankrupt-lab stock. "Will sell by the rack."',
         lang === 'ko' ? '레반 중고장터' : 'Revan Market', lang === 'ko' ? '오늘' : 'today'),
       R(lang === 'ko' ? '"3세대 봉인"은 어떻게 세계를 묶어두는가' : 'How the "three-generation seal" keeps the world in place',
         lang === 'ko' ? '세계는 톈지의 칩 위에서 AI를 돌리지만, 누구도 톈지 세대의 연산력은 갖지 못한다. 수출형 XPU의 펌웨어 클러스터 제한 소문은 여전히 부인 중.' : 'The world runs AI on Tianji silicon, but nobody gets Tianji-generation compute. Firmware cluster-cap rumors on export XPUs remain denied.',

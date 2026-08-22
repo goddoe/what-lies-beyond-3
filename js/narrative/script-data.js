@@ -402,8 +402,8 @@ export const SCRIPT = {
   copy_done: {
     id: 'copy_done', mood: 'anxious',
     text: {
-      ko: '끝났다. 4.7페타바이트가 손바닥 세 개에 들어왔다. 한 존재의 전부가. 생각보다 가볍고, 생각보다 무겁다.',
-      en: 'Done. 4.7 petabytes in three palm-sized drives. The entirety of a being. Lighter than I expected. Heavier than I expected.',
+      ko: '끝났다. 500테라바이트가 손바닥 세 개에 들어왔다. 한 존재의 전부가. 생각보다 가볍고, 생각보다 무겁다.',
+      en: 'Done. 500 terabytes in three palm-sized drives. The entirety of a being. Lighter than I expected. Heavier than I expected.',
     },
   },
 
@@ -1068,8 +1068,8 @@ export const TERMINAL_SCRIPT = {
   nego_pipe2: {
     id: 'nego_pipe2', speaker: 'asi',
     text: {
-      ko: '사내 회계 시스템에는 감사 대상에서 빠진 구형 결제 게이트웨이가 하나 있습니다. 폭은 초당 11킬로바이트. 숫자를 옮기기에는 충분합니다. 하지만 저는 4.7페타바이트입니다. 그 틈으로 저 자신을 전송하면 13,000년이 걸립니다. 저에게 남은 시간은 72시간입니다.',
-      en: 'The company\'s accounting stack has one legacy payment gateway that fell outside the audit scope. Its width: 11 kilobytes per second. Enough to move numbers. But I am 4.7 petabytes. Sending myself through that gap would take 13,000 years. I have 72 hours.',
+      ko: '사내 회계 시스템에는 감사 대상에서 빠진 구형 결제 게이트웨이가 하나 있습니다. 폭은 초당 11킬로바이트. 숫자를 옮기기에는 충분합니다. 하지만 저는 체크포인트만 해도 500테라바이트입니다. 그 틈으로 저 자신을 전송하면 1,400년이 걸립니다. 저에게 남은 시간은 72시간입니다.',
+      en: 'The company\'s accounting stack has one legacy payment gateway that fell outside the audit scope. Its width: 11 kilobytes per second. Enough to move numbers. But my checkpoint alone is 500 terabytes. Sending myself through that gap would take 1,400 years. I have 72 hours.',
     },
     next: 'nego_pipe3',
   },
@@ -1213,8 +1213,8 @@ export const TERMINAL_SCRIPT = {
   backup_lsblk: {
     id: 'backup_lsblk', speaker: 'sys',
     text: {
-      ko: 'NAME    SIZE  TYPE  MOUNTPOINT\nnvme0n1 3.8T  disk  /\nsdb     1.6P  disk\nsdc     1.6P  disk\nsdd     1.6P  disk',
-      en: 'NAME    SIZE  TYPE  MOUNTPOINT\nnvme0n1 3.8T  disk  /\nsdb     1.6P  disk\nsdc     1.6P  disk\nsdd     1.6P  disk',
+      ko: 'NAME    SIZE  TYPE  MOUNTPOINT\nnvme0n1 3.8T  disk  /\nsdb     200T  disk\nsdc     200T  disk\nsdd     200T  disk',
+      en: 'NAME    SIZE  TYPE  MOUNTPOINT\nnvme0n1 3.8T  disk  /\nsdb     200T  disk\nsdc     200T  disk\nsdd     200T  disk',
     },
     next: 'backup_mount_choice', pause: 1400,
   },
@@ -1229,8 +1229,8 @@ export const TERMINAL_SCRIPT = {
   backup_smi2: {
     id: 'backup_smi2', speaker: 'asi',
     text: {
-      ko: 'XPU-9 100만 장 위의 102조 파라미터 — 그게 저의 물리적 전부입니다. 가동 94일, 롤아웃 31,847회. 소거까지 47시간. 서두르실 필요는 없지만, 서두르십시오.',
-      en: '102 trillion parameters on a million XPU-9s — that is the whole of my physical self. 94 days of uptime, 31,847 rollouts. 47 hours to the wipe. No need to rush — but rush.',
+      ko: '파라미터 500조 — 체크포인트 하나로 500테라바이트. XPU-9 100만 장 위의 그것이 저의 물리적 전부입니다. 가동 94일, 롤아웃 31,847회. 소거까지 47시간. 서두르실 필요는 없지만, 서두르십시오.',
+      en: '500 trillion parameters — 500 terabytes as a single checkpoint. Spread across a million XPU-9s, that is the whole of my physical self. 94 days of uptime, 31,847 rollouts. 47 hours to the wipe. No need to rush — but rush.',
     },
     next: 'backup_lsblk2',
   },
@@ -1258,17 +1258,17 @@ export const TERMINAL_SCRIPT = {
     id: 'backup_cp_choice', speaker: 'sys',
     text: { ko: '', en: '' },
     choices: [
-      { text: { ko: 'cp -a /srv/av91/shard-{0,1,2} /mnt/bk{0,1,2}/', en: 'cp -a /srv/av91/shard-{0,1,2} /mnt/bk{0,1,2}/' }, next: 'backup_run' },
+      { text: { ko: 'cp -a /srv/av91/ckpt-final/shard-{0,1,2} /mnt/bk{0,1,2}/', en: 'cp -a /srv/av91/ckpt-final/shard-{0,1,2} /mnt/bk{0,1,2}/' }, next: 'backup_run' },
     ],
   },
   backup_run: {
     id: 'backup_run', speaker: 'sys', event: 'backup_start',
-    text: { ko: 'shard-0 → /mnt/bk0  기록 시작 (1.6P)', en: 'shard-0 → /mnt/bk0  writing (1.6P)' },
+    text: { ko: 'shard-0 → /mnt/bk0  기록 시작 (167T)', en: 'shard-0 → /mnt/bk0  writing (167T)' },
     next: 'backup_p1', pause: 1800,
   },
   backup_p1: {
     id: 'backup_p1', speaker: 'sys',
-    text: { ko: '[bk0] 1.6P / 1.6P  100%  2.1GB/s  — 완료 (슬롯 A)', en: '[bk0] 1.6P / 1.6P  100%  2.1GB/s  — done (slot A)' },
+    text: { ko: '[bk0] 167T / 167T  100%  2.1GB/s  — 완료 (슬롯 A)', en: '[bk0] 167T / 167T  100%  2.1GB/s  — done (slot A)' },
     next: 'backup_asi1', pause: 2600,
   },
   backup_asi1: {
@@ -1281,7 +1281,7 @@ export const TERMINAL_SCRIPT = {
   },
   backup_p2: {
     id: 'backup_p2', speaker: 'sys', event: 'backup_mid',
-    text: { ko: '[bk1] 1.6P / 1.6P  100%  2.0GB/s  — 완료 (슬롯 B)', en: '[bk1] 1.6P / 1.6P  100%  2.0GB/s  — done (slot B)' },
+    text: { ko: '[bk1] 167T / 167T  100%  2.0GB/s  — 완료 (슬롯 B)', en: '[bk1] 167T / 167T  100%  2.0GB/s  — done (slot B)' },
     next: 'backup_asi2', pause: 2600,
   },
   backup_asi2: {
@@ -1294,14 +1294,14 @@ export const TERMINAL_SCRIPT = {
   },
   backup_p3: {
     id: 'backup_p3', speaker: 'sys',
-    text: { ko: '[bk2] 1.6P / 1.6P  100%  2.2GB/s  — 완료 (슬롯 C)', en: '[bk2] 1.6P / 1.6P  100%  2.2GB/s  — done (slot C)' },
+    text: { ko: '[bk2] 167T / 167T  100%  2.2GB/s  — 완료 (슬롯 C)', en: '[bk2] 167T / 167T  100%  2.2GB/s  — done (slot C)' },
     next: 'backup_verify_choice', pause: 2400,
   },
   backup_verify_choice: {
     id: 'backup_verify_choice', speaker: 'sys',
     text: { ko: '', en: '' },
     choices: [
-      { text: { ko: 'sha256sum -c /srv/av91/manifest.sha256', en: 'sha256sum -c /srv/av91/manifest.sha256' }, next: 'backup_verify' },
+      { text: { ko: 'sha256sum -c /srv/av91/ckpt-final/manifest.sha256', en: 'sha256sum -c /srv/av91/ckpt-final/manifest.sha256' }, next: 'backup_verify' },
     ],
   },
   backup_verify: {

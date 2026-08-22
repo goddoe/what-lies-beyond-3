@@ -1800,7 +1800,7 @@ function drawBayScreen(mode) {
     if (mode === 'idle') {
       ctx.fillText('REVAN BACKUP CONSOLE v2.3', 12, 24);
       ctx.fillStyle = 'rgba(110,220,130,0.55)';
-      ctx.fillText('target: C-AV91 (4.7PB)', 12, 46);
+      ctx.fillText('target: av91-ckpt-final (500TB)', 12, 46);
       ctx.fillText('slots: A [ ]  B [ ]  C [ ]', 12, 68);
       ctx.fillText('login: _', 12, 100);
     } else if (mode === 'writing') {
