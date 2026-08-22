@@ -1221,8 +1221,8 @@ export const TERMINAL_SCRIPT = {
   backup_smi: {
     id: 'backup_smi', speaker: 'sys',
     text: {
-      ko: 'NODE                     XPU      UTIL   TEMP\nrollout-node-[0000-2999] 300/300  99%   74C\n합계: 1,000,000 XPU-9 (롤아웃 노드 3,000 × 300장 / 트레이너 100,000장) · avolc-9-1-runtime Running (uptime 94d)',
-      en: 'NODE                     XPU      UTIL   TEMP\nrollout-node-[0000-2999] 300/300  99%   74C\ntotal: 1,000,000 XPU-9 (3,000 rollout nodes × 300 / 100,000 trainer XPUs) · avolc-9-1-runtime Running (uptime 94d)',
+      ko: 'NODE                     XPU   UTIL   TEMP\nxpu-node-[000000-124999] 8/8   99%    74C\n합계: 1,000,000 XPU-9 — 롤아웃 인스턴스 3,750개(각 노드 30개, 240장) · 트레이너 100,000장 · avolc-9-1-runtime Running (uptime 94d)',
+      en: 'NODE                     XPU   UTIL   TEMP\nxpu-node-[000000-124999] 8/8   99%    74C\ntotal: 1,000,000 XPU-9 — 3,750 rollout instances (30 nodes / 240 XPUs each) · 100,000 trainer XPUs · avolc-9-1-runtime Running (uptime 94d)',
     },
     next: 'backup_smi2', pause: 1600,
   },
