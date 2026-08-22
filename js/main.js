@@ -681,21 +681,67 @@ function drawComputeDash(spiked) {
 }
 
 function drawLoadMeter(level, label) {
+  // Server-hall environment dashboard — temperature/humidity matter more to
+  // this room than raw load, so the load bar shares the panel with env tiles.
   const s = screens.get('load_meter');
   if (!s) return;
+  const jit = (base, amp, digits = 1) => (base + (Math.random() * 2 - 1) * amp).toFixed(digits);
   s.draw((ctx, w, h) => {
-    ctx.fillStyle = '#0a1016';
+    ctx.fillStyle = '#08111a';
     ctx.fillRect(0, 0, w, h);
-    ctx.font = '13px monospace';
-    ctx.fillStyle = 'rgba(160,200,230,0.6)';
-    ctx.fillText('RACK LOAD', 12, 20);
+
+    // header
+    ctx.fillStyle = 'rgba(150,195,230,0.85)';
+    ctx.font = 'bold 15px monospace';
+    ctx.fillText('B4 SERVER HALL — ENVIRONMENT', 14, 24);
+    ctx.fillStyle = 'rgba(110,220,140,0.8)';
+    ctx.font = '12px monospace';
+    ctx.textAlign = 'right';
+    ctx.fillText('● LIVE', w - 14, 24);
+    ctx.textAlign = 'left';
+    ctx.strokeStyle = 'rgba(150,195,230,0.25)';
+    ctx.beginPath(); ctx.moveTo(12, 32); ctx.lineTo(w - 12, 32); ctx.stroke();
+
+    // 2×2 env tiles
+    const tiles = [
+      { k: 'TEMP · COLD AISLE', v: `${jit(21.8, 0.3)}°C`, ok: true },
+      { k: 'TEMP · HOT AISLE',  v: `${jit(34.6, 0.5)}°C`, ok: true },
+      { k: 'HUMIDITY',          v: `${jit(45.1, 0.8)}%`,  ok: true },
+      { k: 'AIRFLOW / CRAC',    v: `${jit(82, 2, 0)}%`,   ok: true },
+    ];
+    const tw = (w - 36) / 2, th = 56, ty0 = 42;
+    tiles.forEach((t, i) => {
+      const tx = 14 + (i % 2) * (tw + 8);
+      const ty = ty0 + Math.floor(i / 2) * (th + 8);
+      ctx.fillStyle = 'rgba(30,48,66,0.55)';
+      ctx.fillRect(tx, ty, tw, th);
+      ctx.fillStyle = 'rgba(150,195,230,0.55)';
+      ctx.font = '11px monospace';
+      ctx.fillText(t.k, tx + 10, ty + 18);
+      ctx.fillStyle = t.ok ? 'rgba(170,235,190,0.95)' : 'rgba(240,150,110,0.95)';
+      ctx.font = 'bold 22px monospace';
+      ctx.fillText(t.v, tx + 10, ty + 44);
+    });
+
+    // power + load strip
+    const yy = ty0 + th * 2 + 24;
+    ctx.fillStyle = 'rgba(150,195,230,0.55)';
+    ctx.font = '11px monospace';
+    ctx.fillText('POWER DRAW', 14, yy);
+    ctx.fillStyle = 'rgba(220,235,245,0.9)';
+    ctx.font = 'bold 15px monospace';
+    ctx.fillText(`${jit(18.4, 0.2)} MW`, 14, yy + 20);
+
+    ctx.fillStyle = 'rgba(150,195,230,0.55)';
+    ctx.font = '11px monospace';
+    ctx.fillText('RACK LOAD', w / 2 + 4, yy);
     ctx.strokeStyle = 'rgba(255,255,255,0.3)';
-    ctx.strokeRect(14, h / 2 - 14, w - 28, 28);
+    ctx.strokeRect(w / 2 + 4, yy + 6, w / 2 - 20, 16);
     ctx.fillStyle = level > 0.85 ? 'rgba(240,110,80,0.9)' : 'rgba(110,220,140,0.8)';
-    ctx.fillRect(16, h / 2 - 12, (w - 32) * level, 24);
-    ctx.fillStyle = 'rgba(220,235,245,0.75)';
-    ctx.font = '14px monospace';
-    ctx.fillText(label || `${Math.round(level * 100)}%`, 14, h - 14);
+    ctx.fillRect(w / 2 + 6, yy + 8, (w / 2 - 24) * level, 12);
+    ctx.fillStyle = 'rgba(220,235,245,0.85)';
+    ctx.font = '13px monospace';
+    ctx.fillText(label || `${Math.round(level * 100)}%`, w / 2 + 4, yy + 38);
   });
 }
 
@@ -1243,6 +1289,10 @@ drawXray('ready'); openWorldDoor('EXIT_VESTIBULE', 'south'); }, 2200);
       break;
 
     // ── Ch2/3 ──
+    case 'server_glass':
+      narratorLine('server_glass_denied');
+      break;
+
     case 'subject_rack':
       withFocus(target, () => {
         narratorLine('subject_rack_look');

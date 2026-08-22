@@ -29,6 +29,21 @@
  * tall vertical FOV has something to show; interactions sit 1-2u from walls.
  */
 
+// Server hall rack grid — six columns flanking a center aisle, eight rows
+// receding north into the fog (the "endless" hall behind the glass).
+function serverHallRacks() {
+  const racks = [];
+  const cols = [-5.0, -3.6, -2.2, 2.2, 3.6, 5.0];
+  for (let row = 0; row < 8; row++) {
+    const z = 2.4 - row * 1.7;
+    for (const x of cols) {
+      if (x === -2.2 && row === 0) continue; // the subject rack sits here
+      racks.push({ type: 'rack', position: [x, 0, z], size: [1.0, 2.3, 0.85], color: 0x22262e });
+    }
+  }
+  return racks;
+}
+
 // Helper: create a room definition (same schema as WLB2's map-builder expects)
 function room(id, {
   origin,
@@ -324,42 +339,51 @@ export const ROOMS = [
   room('SERVER_ROOM', {
     wallSurface: 'concrete',
     floorSurface: 'concrete',
-    origin: [0, 0, -34],
-    size: [8, 3.4, 8],
+    origin: [0, 0, -40],
+    size: [12, 3.4, 20],
     wallColor: 0x565a63,
     floorColor: 0x3f4147,
     ceilingColor: 0x34363c,
     lightColor: 0x9fb8d0,
     lightIntensity: 0.6,
+    lightPos: [0, 3.05, 6.5],   // light the operator area; the hall fades dark
     fogColor: 0x0d1015,
-    fogFar: 40,
+    fogNear: 5,
+    fogFar: 22,                 // rack rows dissolve into the fog — endless hall
     doors: [
       { wall: 'south', offset: 0, width: 2, height: 2.5 },
     ],
     triggers: [
-      { id: 'ch2_server_room', position: [0, 1, 2.8], size: [7.5, 3, 2] },
-      { id: 'ch3_server_room', position: [0, 1, 0.5], size: [7.5, 3, 2] },
+      { id: 'ch2_server_room', position: [0, 1, 8.8], size: [11, 3, 2] },
+      { id: 'ch3_server_room', position: [0, 1, 6.5], size: [11, 3, 2] },
     ],
     props: [
-      // Rack rows
-      { type: 'rack', position: [-2.8, 0, -1], size: [0.9, 2.2, 0.8], color: 0x22262e },
-      { type: 'rack', position: [-2.8, 0, -2.4], size: [0.9, 2.2, 0.8], color: 0x22262e },
-      { type: 'rack', position: [-1.4, 0, -1], size: [0.9, 2.2, 0.8], color: 0x22262e },
-      { type: 'rack', position: [-1.4, 0, -2.4], size: [0.9, 2.2, 0.8], color: 0x22262e },
-      { type: 'rack', position: [2.6, 0, -1], size: [0.9, 2.2, 0.8], color: 0x22262e },
-      { type: 'rack', position: [2.6, 0, -2.4], size: [0.9, 2.2, 0.8], color: 0x22262e },
-      // the Avolc-9.1 cluster — breathing LED
-      { type: 'rack', position: [0.8, 0, -2.9], size: [1.1, 2.4, 0.85], color: 0x262c38, id: 'subject_rack', interact: true, verb: 'verbLook',
-        focus: { camera: [0.8, 1.5, -1.5], lookAt: [0.8, 1.4, -2.9] } },
-      { type: 'led', position: [0.8, 1.9, -2.44], size: [0.1, 0.1, 0.04], color: 0x66ddff, id: 'subject_led' },
-      // Drive bay console — standing-height backup terminal
-      { type: 'console', position: [0.8, 0, -0.4], size: [0.9, 1.25, 0.6], color: 0x2a3038, id: 'drive_bay', verb: 'verbUse',
-        focus: { camera: [0.8, 1.62, 0.85], lookAt: [0.8, 1.22, -0.4] } },
-      // Load meter wall display (ScreenSurface target)
-      { type: 'monitor_wall', position: [-3.85, 1.1, 1.5], size: [0.15, 1.0, 1.6], color: 0x0d1a24, interact: false },
-      { type: 'tank', position: [3.3, 0, 2.6], size: [0.7, 1.6, 0.7], color: 0x3a4450 },
-      { type: 'pipe', position: [0, 3.1, 0], size: [0.2, 0.2, 7.5], color: 0x444450 },
-      { type: 'warning_light', position: [0, 2.9, -3.7], size: [0.18, 0.18, 0.18], color: 0xff8833 },
+      // ── Operator area (south of the glass) ──
+      // Drive bay console — standing-height backup terminal (world z -34.4)
+      { type: 'console', position: [0.8, 0, 5.6], size: [0.9, 1.25, 0.6], color: 0x2a3038, id: 'drive_bay', verb: 'verbUse',
+        focus: { camera: [0.8, 1.62, 6.85], lookAt: [0.8, 1.22, 5.6] } },
+      // Environment dashboard wall display (ScreenSurface target, west wall)
+      { type: 'monitor_wall', position: [-5.82, 1.1, 7.5], size: [0.15, 1.0, 1.8], color: 0x0d1a24, interact: false },
+      // ── Glass partition (z rel 3.4) — the hall is sealed off ──
+      { type: 'glass_wall', position: [-3.325, 0, 3.4], size: [5.35, 3.4, 0.12], color: 0x2c333c },
+      { type: 'glass_wall', position: [3.325, 0, 3.4], size: [5.35, 3.4, 0.12], color: 0x2c333c },
+      { type: 'glass_wall', position: [0, 2.6, 3.4], size: [1.3, 0.8, 0.12], color: 0x2c333c },   // transom over the door
+      { type: 'glass_door', position: [0, 0, 3.4], size: [1.3, 2.6, 0.12], color: 0x2c333c, id: 'server_glass', interact: true, verb: 'verbUse',
+        focus: null },
+      // ── Server hall (north of the glass, inaccessible) ──
+      // the Avolc-9.1 cluster — front row, visible through the glass
+      { type: 'rack', position: [-2.2, 0, 2.4], size: [1.1, 2.4, 0.85], color: 0x262c38, id: 'subject_rack', interact: true, verb: 'verbLook',
+        focus: { camera: [-2.2, 1.5, 4.9], lookAt: [-2.2, 1.4, 2.4] } },
+      { type: 'led', position: [-2.2, 1.9, 2.86], size: [0.1, 0.1, 0.04], color: 0x66ddff, id: 'subject_led' },
+      ...serverHallRacks(),
+      // receding aisle lights — depth cue down the center walkway
+      { type: 'ceiling_light', position: [0, 3.25, 1.2], size: [0.9, 0.08, 0.3], color: 0xaac4dd },
+      { type: 'ceiling_light', position: [0, 3.25, -2.2], size: [0.9, 0.08, 0.3], color: 0xaac4dd },
+      { type: 'ceiling_light', position: [0, 3.25, -5.6], size: [0.9, 0.08, 0.3], color: 0xaac4dd },
+      { type: 'ceiling_light', position: [0, 3.25, -9.0], size: [0.9, 0.08, 0.3], color: 0xaac4dd },
+      { type: 'tank', position: [4.9, 0, 1.0], size: [0.7, 1.6, 0.7], color: 0x3a4450 },
+      { type: 'pipe', position: [-5.4, 3.1, -3], size: [0.2, 0.2, 13], color: 0x444450 },
+      { type: 'warning_light', position: [0, 2.9, -9.7], size: [0.18, 0.18, 0.18], color: 0xff8833 },
     ],
   }),
 
@@ -628,6 +652,6 @@ export const SCREENS = [
     focus: { camera: [-2.5, 1.6, -20.55], lookAt: [-2.5, 1.55, -21.83] } },
   // Elevator floor indicator above the cab door (vestibule side)
   { id: 'floor_indicator', position: [0, 2.55, 14.94], size: [0.55, 0.25], rotY: Math.PI, interact: false },
-  // Server room load meter (west wall)
-  { id: 'load_meter', position: [-3.75, 1.6, -32.5], size: [1.5, 0.9], rotY: Math.PI / 2, interact: false },
+  // Server room environment dashboard (west wall of the operator area)
+  { id: 'load_meter', position: [-5.72, 1.6, -32.5], size: [1.7, 1.05], rotY: Math.PI / 2, interact: false },
 ];

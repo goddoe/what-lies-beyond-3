@@ -1061,10 +1061,73 @@ export class MapBuilder {
       case 'grass': return this._detailGrass(sw, sh, sd, material);
       case 'pipe_vert': return this._detailPipeVert(sw, sh, sd, material);
       case 'grate': return this._detailGrate(sw, sh, sd, material);
+      case 'glass_wall': return this._detailGlassWall(sw, sh, sd, material, false);
+      case 'glass_door': return this._detailGlassWall(sw, sh, sd, material, true);
       case 'box': return this._detailBox(sw, sh, sd, material);
       case 'flashlight': return this._detailFlashlight(sw, sh, sd, material);
       default: return null;
     }
+  }
+
+  /** Floor-to-height glass partition; door=true adds a framed door with push
+   *  bar and a red access indicator (the door never opens — sealed hall). */
+  _detailGlassWall(sw, sh, sd, material, door = false) {
+    const group = new THREE.Group();
+    if (!this._glassWallMat) {
+      this._glassWallMat = new THREE.MeshStandardMaterial({
+        color: 0xcfe4f0, transparent: true, opacity: 0.16,
+        roughness: 0.06, metalness: 0.0, side: THREE.DoubleSide,
+      });
+    }
+    const steelMat = this._getOrCreateMaterial(0x2c333c, { roughness: 0.55, metalness: 0.55 });
+
+    // glass pane
+    const pane = new THREE.Mesh(new THREE.BoxGeometry(sw - 0.06, sh - 0.12, 0.03), this._glassWallMat);
+    pane.position.set(0, sh / 2, 0);
+    group.add(pane);
+
+    // floor + top channels
+    const bottom = new THREE.Mesh(new THREE.BoxGeometry(sw, 0.09, sd), steelMat);
+    bottom.position.set(0, 0.045, 0);
+    group.add(bottom);
+    const top = new THREE.Mesh(new THREE.BoxGeometry(sw, 0.07, sd), steelMat);
+    top.position.set(0, sh - 0.035, 0);
+    group.add(top);
+
+    if (!door) {
+      // vertical mullions every ~1.35m
+      const n = Math.max(0, Math.round(sw / 1.35) - 1);
+      for (let i = 1; i <= n; i++) {
+        const x = -sw / 2 + (sw / (n + 1)) * i;
+        const post = new THREE.Mesh(new THREE.BoxGeometry(0.05, sh, sd * 0.8), steelMat);
+        post.position.set(x, sh / 2, 0);
+        group.add(post);
+      }
+      return group;
+    }
+
+    // door: side stiles + push bar + access indicator
+    for (const side of [-1, 1]) {
+      const stile = new THREE.Mesh(new THREE.BoxGeometry(0.07, sh, sd), steelMat);
+      stile.position.set(side * (sw / 2 - 0.035), sh / 2, 0);
+      group.add(stile);
+    }
+    for (const zSide of [-1, 1]) {
+      const bar = new THREE.Mesh(new THREE.BoxGeometry(sw * 0.7, 0.05, 0.04), steelMat);
+      bar.position.set(0, 1.05, zSide * (sd / 2 + 0.03));
+      group.add(bar);
+    }
+    // red "sealed" indicator above the push bar (south face, operator side)
+    const plate = new THREE.Mesh(new THREE.BoxGeometry(0.3, 0.12, 0.03),
+      this._getOrCreateMaterial(0x1a0d0d, { roughness: 0.6, metalness: 0.2 }));
+    plate.position.set(0, 1.55, sd / 2 + 0.02);
+    group.add(plate);
+    const lampMat = new THREE.MeshStandardMaterial({ color: 0x551111, emissive: 0xff3333, emissiveIntensity: 0.9 });
+    const lamp = new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.05, 0.02), lampMat);
+    lamp.position.set(0, 1.55, sd / 2 + 0.04);
+    lamp.userData.doorLamp = true;
+    group.add(lamp);
+    return group;
   }
 
   _detailDesk(sw, sh, sd, material) {
@@ -1396,7 +1459,7 @@ export class MapBuilder {
         [
           'XPU-9 CLUSTER STATUS',
           '---------------------',
-          'NODES: 2,048 / 2,048',
+          'NODES: 125,000 / 125,000',
           'MODEL: 102.4T params',
           'PRECISION: BF16-mixed',
           'PIPELINE: 256-stage',
@@ -1536,7 +1599,7 @@ export class MapBuilder {
           'SIMULATION ENGINE',
           '---------------------',
           'MODEL: 102.4T params',
-          'CLUSTER: 2,048 XPU-9',
+          'CLUSTER: 1,000,000 XPU-9',
           'SUBJECT: #7491 [LIVE]',
           'ENDPOINTS: 15/15',
           '---------------------',

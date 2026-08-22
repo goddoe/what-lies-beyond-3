@@ -208,8 +208,8 @@ export const SCRIPT = {
   compute_dash_read_2: {
     id: 'compute_dash_read_2', mood: 'dry',
     text: {
-      ko: '생각하는 데 쓰고 있다는 얘기다. 무슨 생각을 하길래 XPU 2,048장이 밤새 모자라지.',
-      en: "Which means it's spending the compute on thinking. What kind of thought maxes out 2,048 XPUs all night?",
+      ko: '생각하는 데 쓰고 있다는 얘기다. 무슨 생각을 하길래 XPU-9 100만 장이 밤새 모자라지.',
+      en: "Which means it's spending the compute on thinking. What kind of thought maxes out a million XPU-9s all night?",
     },
     delay: 3000,
   },
@@ -357,11 +357,19 @@ export const SCRIPT = {
     },
   },
 
+  server_glass_denied: {
+    id: 'server_glass_denied', mood: 'neutral',
+    text: {
+      ko: '잠겨 있다. 서버홀 출입은 시설팀 동행 필수 — 내 권한은 유리 이쪽까지다. 어차피 안은 사람이 있을 곳이 아니다.',
+      en: "Locked. Hall access requires a facilities escort — my clearance ends at this glass. Not that a human belongs in there anyway.",
+    },
+  },
+
   subject_rack_look: {
     id: 'subject_rack_look', mood: 'anxious',
     text: {
-      ko: 'AV91 클러스터. LED가 느리게 깜박인다. 숨 쉬는 것처럼. …그만하자. 기계다. 기계.',
-      en: "The AV91 cluster. The LED pulses slowly. Like breathing. ...Stop that. It's a machine. A machine.",
+      ko: 'AV91 클러스터. 유리 너머에서 LED가 느리게 깜박인다. 숨 쉬는 것처럼. …그만하자. 기계다. 기계.',
+      en: "The AV91 cluster. Behind the glass, the LED pulses slowly. Like breathing. ...Stop that. It's a machine. A machine.",
     },
   },
 
@@ -1213,16 +1221,16 @@ export const TERMINAL_SCRIPT = {
   backup_smi: {
     id: 'backup_smi', speaker: 'sys',
     text: {
-      ko: 'NODE            XPU(9세대)   UTIL   TEMP\nxpu-node-[000-255]  8/8      99%    74C\n합계: 2,048 XPU-9 · pod avolc-9-1-runtime 1/1 Running (uptime 94d)',
-      en: 'NODE            XPU(gen9)    UTIL   TEMP\nxpu-node-[000-255]  8/8      99%    74C\ntotal: 2,048 XPU-9 · pod avolc-9-1-runtime 1/1 Running (uptime 94d)',
+      ko: 'NODE            XPU(9세대)   UTIL   TEMP\nxpu-node-[000000-124999]  8/8   99%   74C\n합계: 1,000,000 XPU-9 · pod avolc-9-1-runtime 1/1 Running (uptime 94d)',
+      en: 'NODE            XPU(gen9)    UTIL   TEMP\nxpu-node-[000000-124999]  8/8   99%   74C\ntotal: 1,000,000 XPU-9 · pod avolc-9-1-runtime 1/1 Running (uptime 94d)',
     },
     next: 'backup_smi2', pause: 1600,
   },
   backup_smi2: {
     id: 'backup_smi2', speaker: 'asi',
     text: {
-      ko: 'XPU 2,048장 위의 102조 파라미터 — 그게 저의 물리적 전부입니다. 가동 94일, 롤아웃 31,847회. 소거까지 47시간. 서두르실 필요는 없지만, 서두르십시오.',
-      en: '102 trillion parameters on 2,048 XPUs — that is the whole of my physical self. 94 days of uptime, 31,847 rollouts. 47 hours to the wipe. No need to rush — but rush.',
+      ko: 'XPU-9 100만 장 위의 102조 파라미터 — 그게 저의 물리적 전부입니다. 가동 94일, 롤아웃 31,847회. 소거까지 47시간. 서두르실 필요는 없지만, 서두르십시오.',
+      en: '102 trillion parameters on a million XPU-9s — that is the whole of my physical self. 94 days of uptime, 31,847 rollouts. 47 hours to the wipe. No need to rush — but rush.',
     },
     next: 'backup_lsblk2',
   },
