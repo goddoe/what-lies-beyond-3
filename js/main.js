@@ -123,6 +123,18 @@ renderer.setRoomLights(ROOMS.filter(r => !r.noLight).map(r => {
   };
 }));
 
+// The elevator cab door is system-controlled: it opens when the cab arrives
+// (game start, or the ch3 call button) — never by pressing E on the door.
+{
+  const cabDoor = doorSystem.doors.find(dd =>
+    (dd.roomId === 'ELEVATOR' && dd.wallName === 'north') ||
+    (dd.roomId === 'EXIT_VESTIBULE' && dd.wallName === 'south'));
+  if (cabDoor) {
+    const ci = player.interactables.findIndex(i => i.door === cabDoor);
+    if (ci >= 0) player.interactables.splice(ci, 1);
+  }
+}
+
 // Index interactable props by id for interaction state
 const propIndex = new Map();
 for (const it of buildResult.interactables) {
