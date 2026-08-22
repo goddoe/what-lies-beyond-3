@@ -1464,7 +1464,7 @@ export class MapBuilder {
           '  (30 nodes x 8 XPU)',
           'TRAINER: 100,000 XPU',
           'MODEL: 500.0T params',
-          'PRECISION: BF16-mixed',
+          'PRECISION: MXFP4-mixed',
           '---------------------',
           'JOB: avolc-9-1-rollout',
           'UPTIME: 94d 07:12',
