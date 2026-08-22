@@ -739,10 +739,10 @@ function drawLoadMeter(level, label) {
     const yy = ty0 + th * 2 + 24;
     ctx.fillStyle = 'rgba(150,195,230,0.55)';
     ctx.font = '11px monospace';
-    ctx.fillText('POWER DRAW', 14, yy);
+    ctx.fillText('POWER DRAW · PUE 1.08', 14, yy);
     ctx.fillStyle = 'rgba(220,235,245,0.9)';
     ctx.font = 'bold 15px monospace';
-    ctx.fillText(`${jit(18.4, 0.2)} MW`, 14, yy + 20);
+    ctx.fillText(`${jit(2.14, 0.02, 2)} GW`, 14, yy + 20);
 
     ctx.fillStyle = 'rgba(150,195,230,0.55)';
     ctx.font = '11px monospace';
