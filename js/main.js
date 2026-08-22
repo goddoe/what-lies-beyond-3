@@ -797,6 +797,8 @@ function has(flag) {
 // ── Chapter management ─────────────────────────────────
 
 function startChapter(n, { silentCard = false } = {}) {
+  // never change chapters underneath an open screen (laptop OS, phone, ...)
+  if (om.isOpen) om.close({ skipRelock: true });
   gameState.chapter = n;
   const ch = getChapter(n);
   applyChapterBaseline(n);
@@ -1415,24 +1417,38 @@ function handleReportTerminal(target) {
 
 // Story beats launched from inside the laptop OS (camera already focused —
 // the overlay manager swaps the OS for the beat overlay).
-laptopOS.onLaunchBeat = (beat) => {
+laptopOS.onReportSubmitted = (beat) => {
+  releaseFocus();
   if (beat === 'report1') {
-    narratorLine('report1_open');
-    reportComposer.open('report1', {
-      onSubmit: () => {
-        releaseFocus();
-        setFlag('ch1_report_done');
-        narratorLine('report1_sent');
-        setTimeout(() => phone.receive('m_boss_reply1'), 2500);
-        // The spike lands shortly after
-        setTimeout(() => {
-          setFlag('spike_happened');
-          drawComputeDash(true);
-          narratorLine('spike_noticed');
-        }, 9000);
-      },
-    });
-  } else if (beat === 'contact1') {
+    setFlag('ch1_report_done');
+    narratorLine('report1_sent');
+    setTimeout(() => phone.receive('m_boss_reply1'), 2500);
+    // The spike lands shortly after
+    setTimeout(() => {
+      setFlag('spike_happened');
+      drawComputeDash(true);
+      narratorLine('spike_noticed');
+    }, 9000);
+  } else if (beat === 'report2') {
+    setFlag('report2_done');
+    narratorLine('report2_sent');
+    setTimeout(() => phone.receive('m_boss_reply2'), 3000);
+    setTimeout(() => {
+      setFlag('decommission');
+      phone.receive('m_decommission');
+      narratorLine('decommission_received');
+    }, 10000);
+    setTimeout(() => {
+      phone.receive('m_boss_decomm');
+      setFlag('backup_authorized');
+      unlockRestrictedDoor();
+      narratorLine('door_unlocked');
+    }, 17000);
+  }
+};
+
+laptopOS.onLaunchBeat = (beat) => {
+  if (beat === 'contact1') {
     terminalOverlay.start('contact1_1', {
       title: 'REVAN REPORT v4.2',
       onEnd: () => {
@@ -1454,27 +1470,6 @@ laptopOS.onLaunchBeat = (beat) => {
           narratorLine('negotiation_after');
           phone.receive('m_boss_anomaly_req');
         }, 9000);
-      },
-    });
-  } else if (beat === 'report2') {
-    narratorLine('report2_open');
-    reportComposer.open('report2', {
-      onSubmit: () => {
-        releaseFocus();
-        setFlag('report2_done');
-        narratorLine('report2_sent');
-        setTimeout(() => phone.receive('m_boss_reply2'), 3000);
-        setTimeout(() => {
-          setFlag('decommission');
-          phone.receive('m_decommission');
-          narratorLine('decommission_received');
-        }, 10000);
-        setTimeout(() => {
-          phone.receive('m_boss_decomm');
-          setFlag('backup_authorized');
-          unlockRestrictedDoor();
-          narratorLine('door_unlocked');
-        }, 17000);
       },
     });
   }
