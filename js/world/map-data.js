@@ -440,8 +440,8 @@ export const ROOMS = [
     fogNear: 8,
     fogFar: 35,
     doors: [
-      { wall: 'north', offset: 0, width: 1.4, height: 2.2 },
-      { wall: 'west', offset: -0.5, width: 1.1, height: 2.1 },   // → BATHROOM (z=3.0)
+      { wall: 'north', offset: 0, width: 1.4, height: 2.2, hinged: true },
+      { wall: 'west', offset: -0.5, width: 1.1, height: 2.1, hinged: true },   // → BATHROOM (z=3.0)
     ],
     triggers: [
       { id: 'ch4_arrive', position: [0, 1, 1.5], size: [2.8, 2.5, 2.5] },
@@ -471,9 +471,9 @@ export const ROOMS = [
     fogNear: 8,
     fogFar: 35,
     doors: [
-      { wall: 'south', offset: 0, width: 1.4, height: 2.2 },
-      { wall: 'east', offset: -1.0, width: 1.3, height: 2.2 },   // → SPARE_ROOM (z=-4)
-      { wall: 'west', offset: 0, width: 1.3, height: 2.2 },      // → BEDROOM (z=-3)
+      { wall: 'south', offset: 0, width: 1.4, height: 2.2, hinged: true },
+      { wall: 'east', offset: -1.0, width: 1.3, height: 2.2, hinged: true },   // → SPARE_ROOM (z=-4)
+      { wall: 'west', offset: 0, width: 1.3, height: 2.2, hinged: true },      // → BEDROOM (z=-3)
     ],
     triggers: [
       { id: 'ch4_living', position: [0, 1, 0], size: [6.5, 2.5, 6] },
@@ -511,7 +511,7 @@ export const ROOMS = [
     fogNear: 8,
     fogFar: 35,
     doors: [
-      { wall: 'west', offset: 0, width: 1.3, height: 2.2 },
+      { wall: 'west', offset: 0, width: 1.3, height: 2.2, hinged: true },
     ],
     triggers: [
       { id: 'ch4_spare', position: [0, 1, 0.5], size: [3.5, 2.5, 3.5] },
@@ -556,7 +556,7 @@ export const ROOMS = [
     fogNear: 8,
     fogFar: 35,
     doors: [
-      { wall: 'east', offset: 0, width: 1.3, height: 2.2 },      // → LIVING_ROOM
+      { wall: 'east', offset: 0, width: 1.3, height: 2.2, hinged: true },      // → LIVING_ROOM
     ],
     props: [
       // Bed against the west wall, headboard on the north wall
@@ -591,7 +591,7 @@ export const ROOMS = [
     fogNear: 8,
     fogFar: 35,
     doors: [
-      { wall: 'east', offset: 0, width: 1.1, height: 2.1 },      // → APT_HALL
+      { wall: 'east', offset: 0, width: 1.1, height: 2.1, hinged: true },      // → APT_HALL
     ],
     props: [
       // Sink counter + mirror on the north wall

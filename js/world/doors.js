@@ -64,6 +64,21 @@ export class DoorSystem {
       roughness: 0.3,
       metalness: 0.1,
     });
+    this._woodMat = new THREE.MeshStandardMaterial({
+      color: 0x8a6f52,
+      roughness: 0.72,
+      metalness: 0.0,
+    });
+    this._woodFrameMat = new THREE.MeshStandardMaterial({
+      color: 0x5e4b38,
+      roughness: 0.8,
+      metalness: 0.0,
+    });
+    this._handleMat = new THREE.MeshStandardMaterial({
+      color: 0xb8a878,
+      roughness: 0.3,
+      metalness: 0.85,
+    });
     // Invisible material for collider/interact meshes (must remain "visible" for raycasting)
     this._invisibleMat = new THREE.MeshBasicMaterial({
       transparent: true,
@@ -85,7 +100,7 @@ export class DoorSystem {
    * @param {string} opts.roomId - room identifier
    * @returns {object} door instance
    */
-  createDoor({ cx, cy, cz, width, height, axis, wallName, roomId, glass = false }) {
+  createDoor({ cx, cy, cz, width, height, axis, wallName, roomId, glass = false, hinged = false }) {
     const door = {
       id: `${roomId}_${wallName}`,
       cx, cy, cz, width, height, axis, wallName, roomId,
@@ -96,6 +111,13 @@ export class DoorSystem {
 
     const doorGroup = new THREE.Group();
     door.doorGroup = doorGroup;
+
+    if (hinged) {
+      this._buildHingedDoor(door);
+      this.group.add(doorGroup);
+      this.doors.push(door);
+      return door;
+    }
 
     const panelThickness = 0.08;
     const frameSize = 0.08;
@@ -281,6 +303,119 @@ export class DoorSystem {
   }
 
   /**
+   * Hinged home door: one wooden panel swinging on a pivot at the jamb.
+   * The panel swings ~105° away from the wall; the doorway collider is the
+   * same invisible box the sliding doors use.
+   */
+  _buildHingedDoor(door) {
+    const { cx, cy, cz, width, height, axis } = door;
+    const doorGroup = door.doorGroup;
+    const isNS = axis === 'z';
+    const frameSize = 0.07;
+    const panelT = 0.05;
+    const panelW = width - frameSize * 2 - 0.02;
+    const panelH = height - frameSize - 0.015;
+    const halfW = width / 2;
+    const halfH = height / 2;
+
+    door.hinged = true;
+    door.openAngle = Math.PI * 0.58; // ~105°
+
+    // pivot at the door jamb (left edge for N/S walls, near edge for E/W)
+    const pivot = new THREE.Group();
+    if (isNS) pivot.position.set(cx - halfW + frameSize, cy, cz);
+    else pivot.position.set(cx, cy, cz - halfW + frameSize);
+    door.pivot = pivot;
+    doorGroup.add(pivot);
+
+    // wooden leaf — local +x (NS) / +z (EW) from the hinge
+    const leafGeo = isNS
+      ? new THREE.BoxGeometry(panelW, panelH, panelT)
+      : new THREE.BoxGeometry(panelT, panelH, panelW);
+    const leaf = new THREE.Mesh(leafGeo, this._woodMat);
+    if (isNS) leaf.position.set(panelW / 2 + 0.01, panelH / 2, 0);
+    else leaf.position.set(0, panelH / 2, panelW / 2 + 0.01);
+    pivot.add(leaf);
+
+    // two recessed panels carved into the leaf face (both sides)
+    for (const side of [-1, 1]) {
+      for (const [py, ph] of [[panelH * 0.68, panelH * 0.42], [panelH * 0.24, panelH * 0.3]]) {
+        const inset = isNS
+          ? new THREE.Mesh(new THREE.BoxGeometry(panelW * 0.72, ph, 0.012), this._woodFrameMat)
+          : new THREE.Mesh(new THREE.BoxGeometry(0.012, ph, panelW * 0.72), this._woodFrameMat);
+        if (isNS) inset.position.set(leaf.position.x, py, side * (panelT / 2));
+        else inset.position.set(side * (panelT / 2), py, leaf.position.z);
+        pivot.add(inset);
+        inset.userData._leafChild = true;
+      }
+    }
+
+    // lever handle on the free edge, both faces
+    for (const side of [-1, 1]) {
+      const grip = isNS
+        ? new THREE.Mesh(new THREE.BoxGeometry(0.16, 0.035, 0.03), this._handleMat)
+        : new THREE.Mesh(new THREE.BoxGeometry(0.03, 0.035, 0.16), this._handleMat);
+      if (isNS) grip.position.set(panelW - 0.14, 1.02, side * (panelT / 2 + 0.025));
+      else grip.position.set(side * (panelT / 2 + 0.025), 1.02, panelW - 0.14);
+      pivot.add(grip);
+      const rose = new THREE.Mesh(new THREE.CylinderGeometry(0.028, 0.028, 0.015, 12), this._handleMat);
+      rose.rotation.x = isNS ? Math.PI / 2 : 0;
+      rose.rotation.z = isNS ? 0 : Math.PI / 2;
+      if (isNS) rose.position.set(panelW - 0.07, 1.02, side * (panelT / 2 + 0.008));
+      else rose.position.set(side * (panelT / 2 + 0.008), 1.02, panelW - 0.07);
+      pivot.add(rose);
+    }
+
+    // hinge knuckles on the pivot edge
+    for (const hy of [0.35, panelH - 0.35]) {
+      const knuckle = new THREE.Mesh(new THREE.CylinderGeometry(0.02, 0.02, 0.11, 8), this._handleMat);
+      knuckle.position.set(0, hy, 0);
+      pivot.add(knuckle);
+    }
+
+    // wooden casing: two side jambs + head (no floor threshold)
+    const jambGeo = isNS
+      ? new THREE.BoxGeometry(frameSize, height, panelT + 0.1)
+      : new THREE.BoxGeometry(panelT + 0.1, height, frameSize);
+    const jambA = new THREE.Mesh(jambGeo, this._woodFrameMat);
+    const jambB = new THREE.Mesh(jambGeo.clone(), this._woodFrameMat);
+    if (isNS) {
+      jambA.position.set(cx - halfW + frameSize / 2, cy + halfH, cz);
+      jambB.position.set(cx + halfW - frameSize / 2, cy + halfH, cz);
+    } else {
+      jambA.position.set(cx, cy + halfH, cz - halfW + frameSize / 2);
+      jambB.position.set(cx, cy + halfH, cz + halfW - frameSize / 2);
+    }
+    doorGroup.add(jambA, jambB);
+    const headGeo = isNS
+      ? new THREE.BoxGeometry(width, frameSize, panelT + 0.1)
+      : new THREE.BoxGeometry(panelT + 0.1, frameSize, width);
+    const head = new THREE.Mesh(headGeo, this._woodFrameMat);
+    head.position.set(cx, cy + height + frameSize / 2, cz);
+    doorGroup.add(head);
+
+    // collider + interact volumes (same contract as sliding doors)
+    const colliderGeo = isNS
+      ? new THREE.BoxGeometry(width, height, 0.3)
+      : new THREE.BoxGeometry(0.3, height, width);
+    const colliderMesh = new THREE.Mesh(colliderGeo, this._invisibleMat);
+    colliderMesh.position.set(cx, cy + halfH, cz);
+    colliderMesh.renderOrder = -1;
+    doorGroup.add(colliderMesh);
+    door.colliderMesh = colliderMesh;
+    door.slideAxis = isNS ? 'x' : 'z'; // used only for collider rebuild sizing
+
+    const interactGeo = isNS
+      ? new THREE.BoxGeometry(width + 0.4, height + 0.2, 0.6)
+      : new THREE.BoxGeometry(0.6, height + 0.2, width + 0.4);
+    const interactMesh = new THREE.Mesh(interactGeo, this._invisibleMat);
+    interactMesh.position.set(cx, cy + halfH, cz);
+    interactMesh.renderOrder = -1;
+    doorGroup.add(interactMesh);
+    door.interactMesh = interactMesh;
+  }
+
+  /**
    * Open a door with shutter animation.
    */
   openDoor(door) {
@@ -324,13 +459,17 @@ export class DoorSystem {
       // Ease-out cubic: 1 - (1-t)^3
       const ease = 1 - Math.pow(1 - t, 3);
 
-      const prop = door.slideAxis; // 'x' or 'z'
-      const k = door.closing ? 1 - ease : ease; // closing runs the slide in reverse
-      door.panelA.position[prop] = door.panelAStart + (door.panelATarget - door.panelAStart) * k;
-      door.panelB.position[prop] = door.panelBStart + (door.panelBTarget - door.panelBStart) * k;
-      // Seam follows panel B's direction
-      const seamCenter = door.slideAxis === 'x' ? door.cx : door.cz;
-      door.seam.position[prop] = seamCenter + (door.panelBTarget - door.panelBStart) * k;
+      const k = door.closing ? 1 - ease : ease; // closing runs the motion in reverse
+      if (door.hinged) {
+        door.pivot.rotation.y = -door.openAngle * k;
+      } else {
+        const prop = door.slideAxis; // 'x' or 'z'
+        door.panelA.position[prop] = door.panelAStart + (door.panelATarget - door.panelAStart) * k;
+        door.panelB.position[prop] = door.panelBStart + (door.panelBTarget - door.panelBStart) * k;
+        // Seam follows panel B's direction
+        const seamCenter = door.slideAxis === 'x' ? door.cx : door.cz;
+        door.seam.position[prop] = seamCenter + (door.panelBTarget - door.panelBStart) * k;
+      }
 
       if (t >= 1) {
         done.push(door);
@@ -359,9 +498,11 @@ export class DoorSystem {
       }
       door.opened = true;
 
-      // Switch LEDs to green
-      for (const led of door.leds) {
-        led.material = this._ledGreenMat;
+      // Switch LEDs to green (sliding doors only — hinged home doors have none)
+      if (door.leds) {
+        for (const led of door.leds) {
+          led.material = this._ledGreenMat;
+        }
       }
 
       // Hide the interact mesh while open — a later closeDoor() re-enables

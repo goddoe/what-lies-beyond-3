@@ -659,6 +659,7 @@ export class MapBuilder {
         locked,
         passage: door.passage || false,
         glass: door.glass || false,
+        hinged: door.hinged || false,
       });
     }
     return doorInfos;
@@ -805,13 +806,13 @@ export class MapBuilder {
         this.doorSystem.createDoor({
           cx: wx + doorOffset, cy: wy, cz: wz,
           width: doorWidth, height: doorHeight,
-          axis, wallName, roomId: room.id, glass: door.glass,
+          axis, wallName, roomId: room.id, glass: door.glass, hinged: door.hinged,
         });
       } else {
         this.doorSystem.createDoor({
           cx: wx, cy: wy, cz: wz + doorOffset,
           width: doorWidth, height: doorHeight,
-          axis, wallName, roomId: room.id, glass: door.glass,
+          axis, wallName, roomId: room.id, glass: door.glass, hinged: door.hinged,
         });
       }
     }
