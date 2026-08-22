@@ -574,8 +574,8 @@ const SLACK_CHANNELS = {
       { who: 'Liam', color: '#3e7ab0', when: { ko: '1주 전', en: '1 wk ago' },
         text: { ko: '네, 금요일까지 올리겠습니다.', en: 'Yes — it\'ll be in by Friday.' }, reacts: [] },
       { who: 'Chris', color: '#7a5ac2', when: { ko: '1주 전', en: '1 wk ago' },
-        text: { ko: '고맙다. 힘든 건 아는데, 들어줄 수는 있으니까 언제든 말해라. 예산은 못 주지만 술은 산다.', en: 'Thanks. I know it\'s rough. I can always listen — can\'t give you budget, but drinks are on me.' },
-        reacts: [['🍻', 1]] },
+        text: { ko: '고맙다. 힘든 건 아는데, 들어줄 수는 있으니까 언제든 말해라. 예산은 못 주지만 밥은 언제나 사줄게.', en: 'Thanks. I know it\'s rough. I can always listen — can\'t give you budget, but a meal is on me, anytime.' },
+        reacts: [['🍚', 1]] },
     ],
   },
   'dm-mina': {

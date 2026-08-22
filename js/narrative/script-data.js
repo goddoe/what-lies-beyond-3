@@ -1429,7 +1429,7 @@ export const MESSENGER_SCRIPT = {
 
   m_boss_reply1: {
     id: 'm_boss_reply1', sender: 'boss',
-    text: { ko: '수고했다. 예산 회의는 다음 주다. 내가 잘 말해볼 테니까 리포트는 계속 제때 부탁한다. 밥은 먹고 다니냐.', en: "Good work. Budget meeting is next week — I'll make our case, just keep the reports coming on time. Are you eating properly?" },
+    text: { ko: '수고했다. 예산 회의는 다음 주다. 내가 잘 말해볼 테니까 리포트는 계속 제때 부탁한다.', en: "Good work. Budget meeting is next week — I'll make our case, just keep the reports coming on time." },
   },
 
   m_boss_anomaly_req: {
