@@ -347,7 +347,7 @@ export const ROOMS = [
       { type: 'rack', position: [-1.4, 0, -2.4], size: [0.9, 2.2, 0.8], color: 0x22262e },
       { type: 'rack', position: [2.6, 0, -1], size: [0.9, 2.2, 0.8], color: 0x22262e },
       { type: 'rack', position: [2.6, 0, -2.4], size: [0.9, 2.2, 0.8], color: 0x22262e },
-      // Subject #7491's cluster — breathing LED
+      // the Avolc-9.1 cluster — breathing LED
       { type: 'rack', position: [0.8, 0, -2.9], size: [1.1, 2.4, 0.85], color: 0x262c38, id: 'subject_rack', interact: true, verb: 'verbLook',
         focus: { camera: [0.8, 1.5, -1.5], lookAt: [0.8, 1.4, -2.9] } },
       { type: 'led', position: [0.8, 1.9, -2.44], size: [0.1, 0.1, 0.04], color: 0x66ddff, id: 'subject_led' },

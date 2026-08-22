@@ -629,7 +629,7 @@ function drawFeedWlb2() {
     ctx.fillRect(cx - 3, cy + h * 0.05, 6, 12);
     ctx.font = '13px monospace';
     ctx.fillStyle = 'rgba(255,255,255,0.55)';
-    ctx.fillText('FEED 07 — SUBJECT #7491', 10, 18);
+    ctx.fillText('FEED 07 — AVOLC-9.1 (RL)', 10, 18);
     ctx.fillStyle = 'rgba(255,80,80,0.9)';
     ctx.fillText('● REC', w - 60, 18);
     ctx.fillStyle = 'rgba(255,255,255,0.35)';
@@ -667,7 +667,7 @@ function drawComputeDash(spiked) {
     ctx.fillRect(0, 0, w, h);
     ctx.font = '13px monospace';
     ctx.fillStyle = 'rgba(160,200,230,0.6)';
-    ctx.fillText('COMPUTE — CLUSTER C-7491', 12, 20);
+    ctx.fillText('COMPUTE — CLUSTER C-AV91', 12, 20);
     const bw = (w - 60) / bars.length;
     bars.forEach((v, i) => {
       const bh = (h - 70) * v;
@@ -1255,7 +1255,7 @@ drawXray('ready'); openWorldDoor('EXIT_VESTIBULE', 'south'); }, 2200);
           narratorLine('drives_inserted');
           animateBayDrives('insert', () => {
             terminalOverlay.start('backup_1', {
-              title: 'REVAN BACKUP // C-7491',
+              title: 'REVAN BACKUP // AVOLC-9.1',
               onEnd: () => {
                 releaseFocus();
                 animateBayDrives('eject', () => {
@@ -1725,11 +1725,11 @@ function drawBayScreen(mode) {
     if (mode === 'idle') {
       ctx.fillText('REVAN BACKUP CONSOLE v2.3', 12, 24);
       ctx.fillStyle = 'rgba(110,220,130,0.55)';
-      ctx.fillText('target: C-7491 (4.7PB)', 12, 46);
+      ctx.fillText('target: C-AV91 (4.7PB)', 12, 46);
       ctx.fillText('slots: A [ ]  B [ ]  C [ ]', 12, 68);
       ctx.fillText('login: _', 12, 100);
     } else if (mode === 'writing') {
-      ctx.fillText('cp -a /srv/c7491/shard-* …', 12, 24);
+      ctx.fillText('cp -a /srv/av91/shard-* …', 12, 24);
       ctx.fillStyle = 'rgba(255,190,90,0.9)';
       ctx.fillText('WRITE  2.1GB/s  fan-cap 78%', 12, 50);
       ctx.fillStyle = 'rgba(110,220,130,0.8)';

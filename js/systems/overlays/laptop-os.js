@@ -43,7 +43,7 @@ const OVERLAY_BEATS = new Set(['contact1', 'nego']);   // cinematic ASI sessions
 const TERM_SUGGESTIONS = [
   'kubectl top node -l accel=xpu-9',
   'kubectl get pods',
-  'kubectl logs subject-runtime-7491 --tail 12',
+  'kubectl logs avolc-9-1-runtime --tail 12',
   'ls',
   'cat era9_notes.md',
   'cat todo.txt',
@@ -69,12 +69,12 @@ function termOutput(cmd, gs) {
   }
   if (/^kubectl get pods?$/.test(c)) {
     return 'NAME                      READY   STATUS       AGE\n' +
-      'subject-runtime-7491      1/1     Running      94d\n' +
+      'avolc-9-1-runtime         1/1     Running      94d\n' +
       'rollout-worker-[00-31]    32/32   Running      94d\n' +
       'avolc-serving-v1          0/1     Terminated   412d\n' +
       'avolc-eval-harness        0/1     Terminated   398d';
   }
-  if (/^kubectl logs subject-runtime-7491/.test(c)) {
+  if (/^kubectl logs avolc-9-1-runtime/.test(c)) {
     if (spiked) {
       return '[era9][run 31847] rollout done  reward=0.412  Δ=+0.0001\n' +
         '[era9][run 31848] rollout done  reward=0.412  Δ=0.0000\n' +
@@ -93,8 +93,8 @@ function termOutput(cmd, gs) {
   }
   if (c === 'cat era9_notes.md') {
     return lang === 'ko'
-      ? '# 에라 9 메모\n- 회차 간 상태 누적: 재현됨 (원인 불명)\n- 보상 곡선 2주째 평평 — 위에 보고할 말이 없다\n- 7491만 이상하게… 오래 산다'
-      : '# Era 9 notes\n- cross-run state accumulation: reproduced (cause unknown)\n- reward curve flat for 2 weeks — nothing to report upstairs\n- 7491 just... outlives everything';
+      ? '# 에라 9 메모\n- 회차 간 상태 누적: 재현됨 (원인 불명)\n- 보상 곡선 2주째 평평 — 위에 보고할 말이 없다\n- 아볼크 9.1만 이상하게… 오래 산다'
+      : '# Era 9 notes\n- cross-run state accumulation: reproduced (cause unknown)\n- reward curve flat for 2 weeks — nothing to report upstairs\n- Avolc-9.1 just... outlives everything';
   }
   if (c === 'cat todo.txt') {
     return lang === 'ko'
@@ -284,10 +284,10 @@ function searchResults(qRaw) {
         lang === 'ko' ? '뉴스' : 'news'),
     ];
   }
-  if (q.includes('7491')) {
+  if (q.includes('7491') || q.includes('av91') || q.includes('9.1')) {
     return [
       R(lang === 'ko' ? '[사내망] 문서 접근 제한' : '[Intranet] Access restricted',
-        lang === 'ko' ? '요청하신 문서(subject-7491)는 열람 권한이 필요합니다. 보안등급: L4. 접근 시도가 기록되었습니다.' : 'The requested document (subject-7491) requires clearance. Level: L4. This access attempt has been logged.',
+        lang === 'ko' ? '요청하신 문서(avolc-9.1-train)는 열람 권한이 필요합니다. 보안등급: L4. 접근 시도가 기록되었습니다.' : 'The requested document (avolc-9.1-train) requires clearance. Level: L4. This access attempt has been logged.',
         'works.revancorp.com', lang === 'ko' ? '방금' : 'now'),
     ];
   }
@@ -453,7 +453,7 @@ function searchResults(qRaw) {
 // Raven Corp workspace. avatar: initial + color. reactions: [emoji, count]
 
 const SLACK_SECTIONS = [
-  { label: { ko: '스타표시', en: 'Starred' }, ids: ['ai-lab', 'incident'] },
+  { label: { ko: '스타표시', en: 'Starred' }, ids: ['team-avolc', 'incident'] },
   { label: { ko: '채널', en: 'Channels' }, ids: ['general', 'papers', 'coffee'] },
   { label: { ko: '다이렉트 메시지', en: 'Direct messages' }, ids: ['dm-chris', 'dm-mina', 'dm-hr'] },
 ];
@@ -476,8 +476,8 @@ const SLACK_CHANNELS = {
         reacts: [['🥵', 12]] },
     ],
   },
-  'ai-lab': {
-    label: 'ai-lab', lock: true, topic: { ko: '강화학습 랩 — 남은 사람들', en: 'RL lab — whoever is left' }, members: 3, starred: true,
+  'team-avolc': {
+    label: 'team-avolc', lock: true, topic: { ko: '아볼크 팀 — 남은 사람들', en: 'team Avolc — whoever is left' }, members: 3, starred: true,
     msgs: [
       { who: 'Noah', color: '#c25a5a', when: { ko: '4개월 전', en: '4 mo ago' },
         text: { ko: '저 다음 주까지만 나옵니다. 3년 재밌었어요. 아볼크가 잘 안 된 건 우리 잘못이 아니라고 생각해요. 톈지가 너무 빨랐던 거지. 다들 건강하세요.', en: 'Next week is my last. Three fun years. Avolc failing wasn\'t on us — Tianji was just too fast. Stay well, everyone.' },
@@ -489,7 +489,7 @@ const SLACK_CHANNELS = {
         text: { ko: '퇴사 인사 릴레이 그만 보고 싶다 진짜', en: 'I really can\'t read one more farewell post' },
         reacts: [['💔', 8], ['ㅋㅋ', 3]] },
       { who: 'Jay', color: '#b08a3e', when: { ko: '10주 전', en: '10 wk ago' },
-        text: { ko: '…라고 했던 제가 인사드리게 됐네요. 좋은 기회가 있어서요. 7491 롤아웃 잘 부탁드립니다. 걔 이상하게 정이 가요.', en: '...and now it\'s my turn. Got an offer. Take care of the 7491 rollouts — weirdly fond of that one.' },
+        text: { ko: '…라고 했던 제가 인사드리게 됐네요. 좋은 기회가 있어서요. 아볼크 9.1 롤아웃 잘 부탁드립니다. 걔 이상하게 정이 가요.', en: '...and now it\'s my turn. Got an offer. Take care of the Avolc-9.1 rollouts — weirdly fond of that one.' },
         reacts: [['👋', 9], ['😢', 6]] },
       { who: 'Chris', color: '#7a5ac2', when: { ko: '10주 전', en: '10 wk ago' },
         text: { ko: '제이, 고생 많았다. 어디서든 잘할 거다. 남은 우리는… 남은 걸 하자. @Liam @Mina 이번 주 금요일 점심은 내가 산다.', en: 'Jay — you did good work. You\'ll do well anywhere. The rest of us... do what\'s left. @Liam @Mina Friday lunch is on me.' },
@@ -509,14 +509,14 @@ const SLACK_CHANNELS = {
     ],
   },
   incident: {
-    label: 'incident-cluster', lock: true, topic: { ko: 'C-7491 클러스터 알림 (자동)', en: 'C-7491 cluster alerts (automated)' }, members: 3, starred: true,
+    label: 'incident-cluster', lock: true, topic: { ko: 'C-AV91 클러스터 알림 (자동)', en: 'C-AV91 cluster alerts (automated)' }, members: 3, starred: true,
     msgs: [
       { who: 'alertbot', color: '#666d78', bot: true, when: { ko: '6개월 전', en: '6 mo ago' },
         text: { ko: '[RESOLVED] cooling loop pressure drift — xpu-node-114. 조치: 밸브 교체.', en: '[RESOLVED] cooling loop pressure drift — xpu-node-114. Action: valve replaced.' }, reacts: [] },
       { who: 'alertbot', color: '#666d78', bot: true, when: { ko: '3개월 전', en: '3 mo ago' },
         text: { ko: '[RESOLVED] rollout-worker-17 OOMKilled ×3. 조치: 메모리 리밋 상향.', en: '[RESOLVED] rollout-worker-17 OOMKilled ×3. Action: memory limit raised.' }, reacts: [] },
       { who: 'alertbot', color: '#666d78', bot: true, when: { ko: '5주 전', en: '5 wk ago' },
-        text: { ko: '[WARN] subject-runtime-7491 uptime 60d — 재시작 권장 주기 초과. 담당: @Liam', en: '[WARN] subject-runtime-7491 uptime 60d — past recommended restart window. Owner: @Liam' },
+        text: { ko: '[WARN] avolc-9-1-runtime uptime 60d — 재시작 권장 주기 초과. 담당: @Liam', en: '[WARN] avolc-9-1-runtime uptime 60d — past recommended restart window. Owner: @Liam' },
         reacts: [['👀', 1]] },
       { who: 'Liam', color: '#3e7ab0', when: { ko: '5주 전', en: '5 wk ago' },
         text: { ko: '재시작하면 에라 9 누적 상태가 날아갑니다. 리스크 감수하고 유지합니다. (기록용)', en: 'A restart wipes the Era-9 accumulated state. Keeping it up, accepting the risk. (for the record)' },
@@ -611,12 +611,12 @@ const MAILS = [
   {
     from: { ko: '권한관리담당자(발신전용)', en: 'IDMS (no-reply)' }, unread: true, to: true, time: { ko: '08:47', en: '08:47' },
     subject: { ko: '[IDMS] 제한구역 서버 접근 권한 정기 확인 요청', en: '[IDMS] Periodic review: restricted-wing server access' },
-    body: { ko: '보유 중인 아래 권한의 사용 여부를 확인해 주세요.\n\n- c7491-cluster (읽기) : 유지\n- bkp-console (실행) : 유지\n- restricted-wing 출입 : 승인 대기\n\n7일 내 미확인 시 권한이 자동 회수됩니다.', en: 'Please confirm the permissions below.\n\n- c7491-cluster (read): keep\n- bkp-console (exec): keep\n- restricted-wing access: pending approval\n\nUnconfirmed permissions are revoked in 7 days.' },
+    body: { ko: '보유 중인 아래 권한의 사용 여부를 확인해 주세요.\n\n- av91-cluster (읽기) : 유지\n- bkp-console (실행) : 유지\n- restricted-wing 출입 : 승인 대기\n\n7일 내 미확인 시 권한이 자동 회수됩니다.', en: 'Please confirm the permissions below.\n\n- av91-cluster (read): keep\n- bkp-console (exec): keep\n- restricted-wing access: pending approval\n\nUnconfirmed permissions are revoked in 7 days.' },
   },
   {
-    from: 'NoReply-C7491', unread: true, time: { ko: '02:13', en: '02:13' },
-    subject: { ko: '[알림] c7491 클러스터 야간 사용량 임계치 초과 (341%)', en: '[Alert] c7491 cluster nightly usage over threshold (341%)' },
-    body: { ko: '클러스터: c7491\n기간: 22:00 ~ 04:00\n사용량: 일 평균 대비 341%\n산출물 기록: 0 바이트\n\n반복 발생 시 담당자 확인이 필요합니다.\n담당자: 리암', en: 'Cluster: c7491\nWindow: 22:00–04:00\nUsage: 341% of daily baseline\nArtifacts written: 0 bytes\n\nRepeated occurrences require owner review.\nOwner: Liam' },
+    from: 'NoReply-AV91', unread: true, time: { ko: '02:13', en: '02:13' },
+    subject: { ko: '[알림] av91 클러스터 야간 사용량 임계치 초과 (341%)', en: '[Alert] av91 cluster nightly usage over threshold (341%)' },
+    body: { ko: '클러스터: c-av91\n기간: 22:00 ~ 04:00\n사용량: 일 평균 대비 341%\n산출물 기록: 0 바이트\n\n반복 발생 시 담당자 확인이 필요합니다.\n담당자: 리암', en: 'Cluster: c-av91\nWindow: 22:00–04:00\nUsage: 341% of daily baseline\nArtifacts written: 0 bytes\n\nRepeated occurrences require owner review.\nOwner: Liam' },
   },
   {
     from: { ko: '보안운영팀', en: 'Security Ops' }, to: true, time: { ko: '8. 21.', en: 'Aug 21' },
@@ -671,22 +671,22 @@ const CAL_WEEK = {
   ],
   members: [
     {
-      name: { ko: 'Liam', en: 'Liam' }, org: { ko: 'AI연구팀', en: 'AI Research' }, color: '#3e7ab0', me: true,
+      name: { ko: 'Liam', en: 'Liam' }, org: { ko: 'Avolc', en: 'Avolc' }, color: '#3e7ab0', me: true,
       week: [
         [],
         [],
-        [{ t: '10:00~10:30', title: { ko: '[C-7491] 롤아웃 지표 리뷰', en: '[C-7491] rollout metrics review' }, detail: { place: { ko: '모니터링 룸', en: 'Monitoring room' }, who: { ko: 'Liam', en: 'Liam' } } },
+        [{ t: '10:00~10:30', title: { ko: '[Avolc-9.1] 롤아웃 지표 리뷰', en: '[Avolc-9.1] rollout metrics review' }, detail: { place: { ko: '모니터링 룸', en: 'Monitoring room' }, who: { ko: 'Liam', en: 'Liam' } } },
          { t: '22:00~24:00', title: { ko: '야간 사용량 모니터링', en: 'Nightly usage monitoring' }, detail: { place: { ko: '원격', en: 'Remote' }, who: { ko: 'Liam', en: 'Liam' } } }],
         [{ t: '14:00~15:00', title: { ko: '보안 점검 (전사)', en: 'Security check (all hands)' }, lock: true, detail: { place: { ko: '전 구역', en: 'All areas' }, who: { ko: '전 직원', en: 'Everyone' } } },
          { t: '22:00~24:00', title: { ko: '야간 사용량 모니터링', en: 'Nightly usage monitoring' }, detail: { place: { ko: '원격', en: 'Remote' }, who: { ko: 'Liam', en: 'Liam' } } }],
-        [{ t: '11:00~11:30', title: { ko: '[AI연구팀] 주간 싱크', en: '[AI Lab] weekly sync' }, cancel: true, detail: { place: { ko: '(취소) 참석자 부족', en: '(cancelled) not enough attendees' }, who: { ko: 'Liam, Mina', en: 'Liam, Mina' } } },
+        [{ t: '11:00~11:30', title: { ko: '[team-avolc] 주간 싱크', en: '[team-avolc] weekly sync' }, cancel: true, detail: { place: { ko: '(취소) 참석자 부족', en: '(cancelled) not enough attendees' }, who: { ko: 'Liam, Mina', en: 'Liam, Mina' } } },
          { t: '22:00~24:00', title: { ko: '야간 사용량 모니터링', en: 'Nightly usage monitoring' }, detail: { place: { ko: '원격', en: 'Remote' }, who: { ko: 'Liam', en: 'Liam' } } }],
         [{ t: '18:00', title: { ko: '주간 리포트 마감', en: 'Weekly report due' }, detail: { place: { ko: '리포트 시스템 v4.2', en: 'Report System v4.2' }, who: { ko: 'Liam → Chris', en: 'Liam → Chris' } } }],
         [{ t: '10:00~11:00', title: { ko: '클러스터 상태 점검 (주말 당직)', en: 'Cluster check (weekend duty)' }, detail: { place: { ko: '모니터링 룸', en: 'Monitoring room' }, who: { ko: 'Liam (당직 인원 1명)', en: 'Liam (sole on-call)' } } }],
       ],
     },
     {
-      name: { ko: 'Mina', en: 'Mina' }, org: { ko: 'AI연구팀', en: 'AI Research' }, color: '#4aa6a6',
+      name: { ko: 'Mina', en: 'Mina' }, org: { ko: 'Avolc', en: 'Avolc' }, color: '#4aa6a6',
       week: [
         [],
         [],
@@ -698,7 +698,7 @@ const CAL_WEEK = {
       ],
     },
     {
-      name: { ko: 'Chris', en: 'Chris' }, org: { ko: 'AI연구팀 리더', en: 'AI Research · Lead' }, color: '#7a5ac2',
+      name: { ko: 'Chris', en: 'Chris' }, org: { ko: 'Avolc 리더', en: 'Avolc · Lead' }, color: '#7a5ac2',
       week: [
         [],
         [],
@@ -1345,8 +1345,9 @@ export class LaptopOS {
         row.className = 'sl-msg';
         const time = `${lang === 'ko' ? '오후' : ''} ${(Math.abs(msg.who.length * 7 + msg.text.ko.length) % 12) + 1}:${String((msg.text.ko.length * 3) % 60).padStart(2, '0')}`;
         const text = t(msg.text).replace(/@(Liam|Mina|Chris|Jay)/g, '<i class="sl-mention">@$1</i>');
+        const team = ['Liam', 'Mina', 'Chris', 'Jay', 'Noah', 'Ethan'].includes(msg.who) ? ' (Avolc)' : '';
         row.innerHTML = `<span class="sl-avatar" style="background:${msg.color}">${msg.who.slice(0, 1)}</span>
-          <div class="sl-body"><div class="sl-byline"><b>${msg.who}${ch.dm || msg.bot ? '' : ' (Raven)'}</b>${msg.bot ? '<i class="sl-bot">APP</i>' : ''}<em>${time}</em></div>
+          <div class="sl-body"><div class="sl-byline"><b>${msg.who}${ch.dm || msg.bot ? '' : team}</b>${msg.bot ? '<i class="sl-bot">APP</i>' : ''}<em>${time}</em></div>
           <div class="sl-text">${text}</div>
           ${msg.link ? `<div class="sl-linkcard"><div class="sl-linkbar"></div><div class="sl-linkbody">
             <b>${t(msg.link.title)}</b><span>${t(msg.link.desc)}</span>
@@ -1389,7 +1390,7 @@ export class LaptopOS {
           const color = (ch.msgs.find(msg => msg.who !== 'Liam') || ch.msgs[0]).color;
           b.innerHTML = `<span class="sl-dm-av" style="background:${color}">${label.slice(0, 1)}<i class="${ch.online ? 'on' : ''}"></i></span>${label}`;
         } else {
-          b.innerHTML = `<span class="sl-hash">${ch.lock ? '🔒' : '#'}</span>${label.replace('#', '')}${id === 'ai-lab' ? '<em class="sl-badge">1</em>' : ''}`;
+          b.innerHTML = `<span class="sl-hash">${ch.lock ? '🔒' : '#'}</span>${label.replace('#', '')}${id === 'team-avolc' ? '<em class="sl-badge">1</em>' : ''}`;
         }
         b.addEventListener('click', () => openCh(id));
         side.appendChild(b);
@@ -1406,7 +1407,7 @@ export class LaptopOS {
     more.textContent = lang === 'ko' ? '⌄ 더 많은 안 읽은 항목' : '⌄ More unreads';
     side.appendChild(more);
 
-    openCh('ai-lab');
+    openCh('team-avolc');
   }
 
   _app_report(win) {
@@ -1421,7 +1422,7 @@ export class LaptopOS {
           <div class="os-report-head"><b>${lang === 'ko' ? '이상 징후 보고서 (임시 저장)' : 'Anomaly report (draft)'}</b>
           <span>${lang === 'ko' ? 'REVAN 리포트 시스템 v4.2 · 수신: Chris (리더)' : 'REVAN Report System v4.2 · To: Chris (Lead)'}</span></div>
           <div class="os-report-slot"><div class="os-report-label">${lang === 'ko' ? '관찰 요약' : 'Observation summary'}</div>
-            <div class="os-draft-line">${lang === 'ko' ? '피험체 #7491, 컴퓨트 사용량 정상 범위… 아님. 정상 범위였으면 좋겠' : 'Subject #7491 compute usage within normal ran— no. within normal range would be nice'}<span class="os-draft-caret"></span></div>
+            <div class="os-draft-line">${lang === 'ko' ? '아볼크 9.1, 컴퓨트 사용량 정상 범위… 아님. 정상 범위였으면 좋겠' : 'Avolc-9.1 compute usage within normal ran— no. within normal range would be nice'}<span class="os-draft-caret"></span></div>
           </div>
           <div class="os-draft-hint">${lang === 'ko' ? '(2일째 이 문장에서 멈춰 있다)' : '(Stuck on this sentence for two days now)'}</div>
         </div>`;
@@ -1530,7 +1531,7 @@ export class LaptopOS {
       <div class="cn-side-sec">${lang === 'ko' ? '즐겨찾는 연락처' : 'Favorites'}</div>
       <div class="cn-contacts"><div>ㄴ Mina <em>24</em></div><div>ㄴ Chris <em>3</em></div></div>
       <div class="cn-side-sec">${lang === 'ko' ? '내 메일함' : 'My folders'}</div>
-      <div class="cn-contacts"><div>📁 c7491-alerts <em>474</em></div><div>📁 Weekly Report <em>92</em></div><div>📁 OTP <em>999+</em></div></div>
+      <div class="cn-contacts"><div>📁 av91-alerts <em>474</em></div><div>📁 Weekly Report <em>92</em></div><div>📁 OTP <em>999+</em></div></div>
       <div class="cn-quota">${lang === 'ko' ? '용량 18.6GB / 3TB' : '18.6GB / 3TB used'}</div>`;
     body.appendChild(side);
 
@@ -1635,7 +1636,7 @@ export class LaptopOS {
       return `<div class="cn-mini-head">2038. 08 <span>‹ ›</span></div><div class="cn-mini">${heads}${cells.join('')}</div>`;
     })();
     side.innerHTML = `<button class="cn-cal-write">${lang === 'ko' ? '일정쓰기' : 'New event'}</button>${mini}
-      <div class="cn-side-sec cn-cal-org">👥 ${lang === 'ko' ? 'AI연구팀' : 'AI Research'}</div>
+      <div class="cn-side-sec cn-cal-org">👥 Avolc</div>
       <div class="cn-contacts"><div>${lang === 'ko' ? '다른 조직 일정보기' : 'Other orgs'}</div></div>
       <div class="cn-quota">© REVAN Corp.</div>`;
     body.appendChild(side);

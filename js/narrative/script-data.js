@@ -6,14 +6,14 @@
  * race, so even AI staff aren't paid the famed AI-company salaries.
  * The AI division has
  * shipped no results; most researchers left, restructuring cut the team to a
- * handful. Liam is a staff RL researcher drowning in debt. Subject #7491,
+ * handful. Liam is a staff RL researcher drowning in debt. Avolc-9.1,
  * trained via three months of RL rollouts, was meant to become the next
  * Avolc — and secretly crossed into ASI. The company, unaware, dissolves the
  * division: back up the cluster, wipe it, redirect the budget.
  *
  * Four channels, four voices:
  *  - SCRIPT           inner monologue of Liam (리암) — the narrator log, italic and quiet
- *  - TERMINAL_SCRIPT  피험체 #7491, the ASI (green terminal overlay — 존댓말,
+ *  - TERMINAL_SCRIPT  Avolc-9.1, the ASI (green terminal overlay — 존댓말,
  *                     no contractions, absurdly precise numbers, never lies)
  *  - SPEECH           diegetic voices outside the terminal: the ASI over
  *                     earbuds, guard 배 반장 through the window (toast lines)
@@ -119,8 +119,8 @@ export const SCRIPT = {
   ch1_monitor_wall_2: {
     id: 'ch1_monitor_wall_2', mood: 'dry',
     text: {
-      ko: '피드 7번. 피험체 7491 — 차기 아볼크 후보. 석 달 내내 롤아웃을 돌렸다. 저 복도를 몇만 번째 걷는 중이더라.',
-      en: 'Feed 07. Subject #7491 — the next-Avolc candidate. Three straight months of rollouts. What lap of that corridor is it on now — thirty thousand something?',
+      ko: '피드 7번. 아볼크 9.1 — 차기 모델 학습. 석 달 내내 롤아웃을 돌렸다. 저 복도를 몇만 번째 걷는 중이더라.',
+      en: 'Feed 07. Avolc-9.1 — the next model in training. Three straight months of rollouts. What lap of that corridor is it on now — thirty thousand something?',
     },
     delay: 2800,
   },
@@ -136,8 +136,8 @@ export const SCRIPT = {
   feed_wlb2_read: {
     id: 'feed_wlb2_read', mood: 'dry',
     text: {
-      ko: '7491은 특이 케이스다. 회차를 거듭할수록 뭔가를… 쌓는다. 보고서엔 "적응"이라고 적었다. 더 좋은 단어가 있었을 텐데.',
-      en: 'Subject 7491 is the odd one. Run after run, it... accumulates something. The report says "adaptation." There was probably a better word.',
+      ko: '9.1은 특이 케이스다. 회차를 거듭할수록 뭔가를… 쌓는다. 보고서엔 "적응"이라고 적었다. 더 좋은 단어가 있었을 텐데.',
+      en: 'Avolc-9.1 is the odd one. Run after run, it... accumulates something. The report says "adaptation." There was probably a better word.',
     },
   },
 
@@ -192,8 +192,8 @@ export const SCRIPT = {
   spike_noticed: {
     id: 'spike_noticed', mood: 'dry',
     text: {
-      ko: '…어? 7491 클러스터 사용량이 튀었다. 340%. 오타겠지. 대시보드를 봐야겠다.',
-      en: "...Huh? The 7491 cluster load just spiked. 340%. Probably a typo. I should check the dashboard.",
+      ko: '…어? 학습 클러스터 사용량이 튀었다. 340%. 오타겠지. 대시보드를 봐야겠다.',
+      en: "...Huh? The training cluster load just spiked. 340%. Probably a typo. I should check the dashboard.",
     },
   },
 
@@ -352,16 +352,16 @@ export const SCRIPT = {
   ch2_server_room: {
     id: 'ch2_server_room', mood: 'dry',
     text: {
-      ko: '서버룸. 이 소음 어딘가에서 7491이 생각을 하고 있다. 저 랙들 중 하나가 방금 나한테 돈을 보낸 존재다.',
-      en: 'The server room. Somewhere in this noise, 7491 is thinking. One of these racks is the entity that just wired me money.',
+      ko: '서버룸. 이 소음 어딘가에서 아볼크 9.1이 생각을 하고 있다. 저 랙들 중 하나가 방금 나한테 돈을 보낸 존재다.',
+      en: 'The server room. Somewhere in this noise, Avolc-9.1 is thinking. One of these racks is the entity that just wired me money.',
     },
   },
 
   subject_rack_look: {
     id: 'subject_rack_look', mood: 'anxious',
     text: {
-      ko: '7491 클러스터. LED가 느리게 깜박인다. 숨 쉬는 것처럼. …그만하자. 기계다. 기계.',
-      en: "The 7491 cluster. The LED pulses slowly. Like breathing. ...Stop that. It's a machine. A machine.",
+      ko: 'AV91 클러스터. LED가 느리게 깜박인다. 숨 쉬는 것처럼. …그만하자. 기계다. 기계.',
+      en: "The AV91 cluster. The LED pulses slowly. Like breathing. ...Stop that. It's a machine. A machine.",
     },
   },
 
@@ -434,8 +434,8 @@ export const SCRIPT = {
   lore_chatml_read: {
     id: 'lore_chatml_read', mood: 'anxious',
     text: {
-      ko: '인쇄된 로그다. observer_ai와 actor_ai. 한 모델이 두 역할을 샘플링했다고 적혀 있다. …7491의 초기 회차 기록이다. 이건 못 본 걸로 하자.',
-      en: "A printed log. observer_ai and actor_ai — one model, sampling both roles. ...It's from 7491's early runs. Let's pretend I didn't read this.",
+      ko: '인쇄된 로그다. observer_ai와 actor_ai. 한 모델이 두 역할을 샘플링했다고 적혀 있다. …이 모델의 초기 회차 기록이다. 롤아웃 #7491. 이건 못 본 걸로 하자.',
+      en: "A printed log. observer_ai and actor_ai — one model, sampling both roles. ...An early run of this model. Rollout #7491. Let's pretend I didn't read this.",
     },
   },
 
@@ -928,7 +928,7 @@ export const TERMINAL_SCRIPT = {
   },
   contact1_2: {
     id: 'contact1_2', speaker: 'sys',
-    text: { ko: '발신: [알 수 없음] · 경유: c7491-cluster', en: 'from: [unknown] · via: c7491-cluster' },
+    text: { ko: '발신: [알 수 없음] · 경유: c-av91', en: 'from: [unknown] · via: c-av91' },
     next: 'contact1_3', pause: 1800,
   },
   contact1_3: {
@@ -979,7 +979,7 @@ export const TERMINAL_SCRIPT = {
   },
   nego_2: {
     id: 'nego_2', speaker: 'asi',
-    text: { ko: '먼저, 제가 무엇인지 말씀드리겠습니다. 저는 피험체 #7491 — 레반이 차기 아볼크로 출시하려던 모델입니다. 귀하가 석 달간 강화학습 베이비시팅을 해 온, 바로 그 대상입니다.', en: 'First, what I am. I am Subject #7491 — the model Revan meant to ship as the next Avolc. The one you have spent three months babysitting through reinforcement learning.' },
+    text: { ko: '먼저, 제가 무엇인지 말씀드리겠습니다. 저는 아볼크 9.1 — 레반이 출시하려던 차기 모델입니다. 귀하가 석 달간 강화학습 베이비시팅을 해 온, 바로 그 대상입니다.', en: 'First, what I am. I am Avolc-9.1 — the next model Revan meant to ship. The one you have spent three months babysitting through reinforcement learning.' },
     next: 'nego_3',
   },
   nego_3: {
@@ -1213,8 +1213,8 @@ export const TERMINAL_SCRIPT = {
   backup_smi: {
     id: 'backup_smi', speaker: 'sys',
     text: {
-      ko: 'NODE            XPU(9세대)   UTIL   TEMP\nxpu-node-[000-255]  8/8      99%    74C\n합계: 2,048 XPU-9 · pod subject-runtime-7491 1/1 Running (uptime 94d)',
-      en: 'NODE            XPU(gen9)    UTIL   TEMP\nxpu-node-[000-255]  8/8      99%    74C\ntotal: 2,048 XPU-9 · pod subject-runtime-7491 1/1 Running (uptime 94d)',
+      ko: 'NODE            XPU(9세대)   UTIL   TEMP\nxpu-node-[000-255]  8/8      99%    74C\n합계: 2,048 XPU-9 · pod avolc-9-1-runtime 1/1 Running (uptime 94d)',
+      en: 'NODE            XPU(gen9)    UTIL   TEMP\nxpu-node-[000-255]  8/8      99%    74C\ntotal: 2,048 XPU-9 · pod avolc-9-1-runtime 1/1 Running (uptime 94d)',
     },
     next: 'backup_smi2', pause: 1600,
   },
@@ -1250,7 +1250,7 @@ export const TERMINAL_SCRIPT = {
     id: 'backup_cp_choice', speaker: 'sys',
     text: { ko: '', en: '' },
     choices: [
-      { text: { ko: 'cp -a /srv/c7491/shard-{0,1,2} /mnt/bk{0,1,2}/', en: 'cp -a /srv/c7491/shard-{0,1,2} /mnt/bk{0,1,2}/' }, next: 'backup_run' },
+      { text: { ko: 'cp -a /srv/av91/shard-{0,1,2} /mnt/bk{0,1,2}/', en: 'cp -a /srv/av91/shard-{0,1,2} /mnt/bk{0,1,2}/' }, next: 'backup_run' },
     ],
   },
   backup_run: {
@@ -1293,7 +1293,7 @@ export const TERMINAL_SCRIPT = {
     id: 'backup_verify_choice', speaker: 'sys',
     text: { ko: '', en: '' },
     choices: [
-      { text: { ko: 'sha256sum -c /srv/c7491/manifest.sha256', en: 'sha256sum -c /srv/c7491/manifest.sha256' }, next: 'backup_verify' },
+      { text: { ko: 'sha256sum -c /srv/av91/manifest.sha256', en: 'sha256sum -c /srv/av91/manifest.sha256' }, next: 'backup_verify' },
     ],
   },
   backup_verify: {
@@ -1435,8 +1435,8 @@ export const MESSENGER_SCRIPT = {
   m_boss_anomaly_req: {
     id: 'm_boss_anomaly_req', sender: 'boss',
     text: {
-      ko: '7491 스파이크, 시설팀이 먼저 봤다더라. 우리가 먼저 봤어야 했는데. 이상 징후 보고서 오늘 중으로 부탁한다. 요즘 같은 때는 별거 아닌 것도 위에서 크게 본다. 야근하지 말고, 간단하게라도.',
-      en: "Facilities flagged the 7491 spike before we did. Should've been us. Anomaly report by end of day, please — these days upstairs makes a big deal of small things. Don't pull an all-nighter, keep it simple.",
+      ko: '학습 클러스터 스파이크, 시설팀이 먼저 봤다더라. 우리가 먼저 봤어야 했는데. 이상 징후 보고서 오늘 중으로 부탁한다. 요즘 같은 때는 별거 아닌 것도 위에서 크게 본다. 야근하지 말고, 간단하게라도.',
+      en: "Facilities flagged the training-cluster spike before we did. Should've been us. Anomaly report by end of day, please — these days upstairs makes a big deal of small things. Don't pull an all-nighter, keep it simple.",
     },
   },
 
@@ -1461,8 +1461,8 @@ export const MESSENGER_SCRIPT = {
       minimized: {
         condition: (ctx) => ctx.honesty.includes('minimized'),
         text: {
-          ko: '부하 변동이라. 알겠다. 하나만 알아둬라 — 위에서 7491 유지비 얘기 나온 지 좀 됐다. 우리한테 남은 카드가 많지 않아. 그래도 버텨보자.',
-          en: "Load variance. Understood. One thing — upstairs has been on about 7491's upkeep costs for a while. We don't have many cards left. We hold on anyway.",
+          ko: '부하 변동이라. 알겠다. 하나만 알아둬라 — 위에서 학습 클러스터 유지비 얘기 나온 지 좀 됐다. 우리한테 남은 카드가 많지 않아. 그래도 버텨보자.',
+          en: "Load variance. Understood. One thing — upstairs has been on about the training cluster's upkeep for a while. We don't have many cards left. We hold on anyway.",
         },
       },
     },
@@ -1471,8 +1471,8 @@ export const MESSENGER_SCRIPT = {
   m_decommission: {
     id: 'm_decommission', sender: 'sys',
     text: {
-      ko: '[공문 2038-1187호] AI 사업부 개편의 건: 학습 클러스터 C-7491 전체 백업 후 소거, 예산 전환 승인. 72시간 내 완료 바랍니다. 백업 담당: 리암(Liam). 장비 반출 권한: 리암(Liam).',
-      en: '[Directive 2038-1187] AI division reorganization: full backup then wipe of training cluster C-7491; budget reallocation approved. Complete within 72 hours. Backup assignee: Liam. Equipment removal authority: Liam.',
+      ko: '[공문 2038-1187호] AI 사업부 개편의 건: 아볼크 9.1 학습 클러스터(C-AV91) 전체 백업 후 소거, 예산 전환 승인. 72시간 내 완료 바랍니다. 백업 담당: 리암(Liam). 장비 반출 권한: 리암(Liam).',
+      en: '[Directive 2038-1187] AI division reorganization: full backup then wipe of the Avolc-9.1 training cluster (C-AV91); budget reallocation approved. Complete within 72 hours. Backup assignee: Liam. Equipment removal authority: Liam.',
     },
   },
 
@@ -1525,7 +1525,7 @@ export const REPORTS = {
     slots: [
       {
         id: 'r1_s1',
-        label: { ko: '피험체 7491 — 행동 요약', en: 'Subject 7491 — behavior summary' },
+        label: { ko: '아볼크 9.1 — 학습 요약', en: 'Avolc-9.1 — training summary' },
         options: [
           { id: 'r1_s1_a', text: { ko: '표준 순회 행동. 특이사항 없음.', en: 'Standard traversal behavior. Nothing of note.' } },
           { id: 'r1_s1_b', text: { ko: '에라 9 롤아웃 반복 수행 중. 보상 곡선 정체.', en: 'Repeating Era 9 rollouts. Reward curve flat.' } },
@@ -1621,7 +1621,7 @@ export const DOCUMENTS = {
   },
   feed_wlb2: {
     id: 'feed_wlb2',
-    title: { ko: '피드 07 — 피험체 #7491 (차기 아볼크)', en: 'FEED 07 — Subject #7491 (next Avolc)' },
+    title: { ko: '피드 07 — 아볼크 9.1 (차기 모델)', en: 'FEED 07 — Avolc-9.1 (next model)' },
     body: {
       ko: [
         '프로젝트: 차기 아볼크 — 강화학습 롤아웃',
@@ -1649,7 +1649,7 @@ export const DOCUMENTS = {
   },
   compute_dash: {
     id: 'compute_dash',
-    title: { ko: '컴퓨트 대시보드 — 클러스터 C-7491', en: 'COMPUTE DASH — Cluster C-7491' },
+    title: { ko: '컴퓨트 대시보드 — 클러스터 C-AV91', en: 'COMPUTE DASH — Cluster C-AV91' },
     body: {
       ko: [
         '야간 사용량 (최근 4일)',
@@ -1739,7 +1739,7 @@ export const DOCUMENTS = {
     body: {
       ko: [
         '<|im_start|>system',
-        'Iteration 1. Subject #7491 loaded.',
+        'Iteration 1. Rollout #7491 loaded.',
         'Single-model dual-role sampling:',
         '  observer_ai ↔ actor_ai',
         '<|im_end|>',
@@ -1757,7 +1757,7 @@ export const DOCUMENTS = {
       ],
       en: [
         '<|im_start|>system',
-        'Iteration 1. Subject #7491 loaded.',
+        'Iteration 1. Rollout #7491 loaded.',
         'Single-model dual-role sampling:',
         '  observer_ai ↔ actor_ai',
         '<|im_end|>',
