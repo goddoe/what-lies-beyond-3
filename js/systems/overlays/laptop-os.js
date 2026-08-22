@@ -121,89 +121,6 @@ const TRENDING = [
   { ko: '이직 준비', en: 'changing jobs' },
 ];
 
-// Editorial SVG illustrations — inline vector art, no external assets.
-const THUMBS = {
-  tianji: `<svg viewBox="0 0 160 100" xmlns="http://www.w3.org/2000/svg">
-    <defs><linearGradient id="tj1" x1="0" y1="1" x2="1" y2="0">
-      <stop offset="0" stop-color="#7a1420"/><stop offset="1" stop-color="#d5372c"/></linearGradient></defs>
-    <rect width="160" height="100" fill="url(#tj1)"/>
-    <g stroke="#ffd9a0" stroke-width="1.4" opacity="0.85" fill="none">
-      <path d="M12 84 L44 66 L70 72 L102 40 L128 46 L150 16"/>
-      <circle cx="44" cy="66" r="2.4" fill="#ffd9a0"/><circle cx="102" cy="40" r="2.4" fill="#ffd9a0"/>
-      <circle cx="150" cy="16" r="3.4" fill="#ffe9c8"/></g>
-    <g fill="#ffca7a" opacity="0.35"><rect x="14" y="14" width="22" height="3"/><rect x="14" y="21" width="14" height="3"/></g>
-  </svg>`,
-  openai: `<svg viewBox="0 0 160 100" xmlns="http://www.w3.org/2000/svg">
-    <defs><linearGradient id="oa1" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#3c414c"/><stop offset="1" stop-color="#14161c"/></linearGradient></defs>
-    <rect width="160" height="100" fill="url(#oa1)"/>
-    <g stroke="#aeb6c4" stroke-width="2" fill="none" opacity="0.9">
-      <circle cx="80" cy="46" r="20" stroke-dasharray="8 7" transform="rotate(20 80 46)"/></g>
-    <path d="M80 66 L80 84" stroke="#aeb6c4" stroke-width="2" opacity="0.5"/>
-    <path d="M56 84 L104 84" stroke="#6a7280" stroke-width="2"/>
-    <g fill="#e0e4ec" opacity="0.18"><rect x="20" y="70" width="10" height="14"/><rect x="34" y="62" width="10" height="22"/><rect x="118" y="76" width="10" height="8"/><rect x="132" y="80" width="10" height="4"/></g>
-  </svg>`,
-  revan: `<svg viewBox="0 0 160 100" xmlns="http://www.w3.org/2000/svg">
-    <defs><linearGradient id="rv1" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#0d3524"/><stop offset="1" stop-color="#052015"/></linearGradient></defs>
-    <rect width="160" height="100" fill="url(#rv1)"/>
-    <g fill="#0f7a48"><rect x="58" y="26" width="44" height="62" rx="2"/></g>
-    <g fill="#8fe8b8">
-      <rect x="64" y="34" width="7" height="7" opacity="0.9"/><rect x="76" y="34" width="7" height="7" opacity="0.25"/><rect x="88" y="34" width="7" height="7" opacity="0.25"/>
-      <rect x="64" y="47" width="7" height="7" opacity="0.25"/><rect x="76" y="47" width="7" height="7" opacity="0.9"/><rect x="88" y="47" width="7" height="7" opacity="0.25"/>
-      <rect x="64" y="60" width="7" height="7" opacity="0.25"/><rect x="76" y="60" width="7" height="7" opacity="0.25"/><rect x="88" y="60" width="7" height="7" opacity="0.9"/>
-    </g>
-    <g fill="#0a5432" opacity="0.8"><rect x="24" y="52" width="24" height="36"/><rect x="112" y="60" width="26" height="28"/></g>
-    <rect x="0" y="88" width="160" height="12" fill="#03150d"/>
-  </svg>`,
-  sovereign: `<svg viewBox="0 0 160 100" xmlns="http://www.w3.org/2000/svg">
-    <defs><radialGradient id="sv1" cx="0.5" cy="0.45" r="0.7">
-      <stop offset="0" stop-color="#2a3350"/><stop offset="1" stop-color="#11162a"/></radialGradient></defs>
-    <rect width="160" height="100" fill="url(#sv1)"/>
-    <circle cx="80" cy="50" r="30" fill="none" stroke="#8Fa0c8" stroke-width="1.2" opacity="0.8"/>
-    <path d="M50 50 Q80 34 110 50 M50 50 Q80 66 110 50 M80 20 L80 80" stroke="#8fa0c8" stroke-width="0.8" fill="none" opacity="0.55"/>
-    <path d="M62 36 Q84 30 100 42 Q108 52 96 62 Q78 70 64 60 Q54 48 62 36 Z" fill="#d5372c" opacity="0.75"/>
-  </svg>`,
-  gpu: `<svg viewBox="0 0 160 100" xmlns="http://www.w3.org/2000/svg">
-    <defs><linearGradient id="gp1" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#242836"/><stop offset="1" stop-color="#121420"/></linearGradient></defs>
-    <rect width="160" height="100" fill="url(#gp1)"/>
-    <g fill="#3b7f66"><rect x="18" y="30" width="34" height="24" rx="2"/></g>
-    <g stroke="#9fe0c0" stroke-width="1" opacity="0.7">
-      <path d="M22 30 L22 24 M30 30 L30 24 M38 30 L38 24 M46 30 L46 24 M22 54 L22 60 M30 54 L30 60 M38 54 L38 60 M46 54 L46 60"/></g>
-    <rect x="24" y="36" width="14" height="12" fill="#183828"/>
-    <path d="M64 26 L88 44 L104 40 L120 62 L136 58 L148 82" stroke="#ff6a5a" stroke-width="2.4" fill="none"/>
-    <path d="M141 74 L148 82 L150 71" stroke="#ff6a5a" stroke-width="2.4" fill="none"/>
-  </svg>`,
-  xpu: `<svg viewBox="0 0 160 100" xmlns="http://www.w3.org/2000/svg">
-    <defs><linearGradient id="xp1" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#1a1006"/><stop offset="1" stop-color="#2c1a08"/></linearGradient></defs>
-    <rect width="160" height="100" fill="url(#xp1)"/>
-    <rect x="55" y="25" width="50" height="50" rx="4" fill="#3a2410"/>
-    <rect x="65" y="35" width="30" height="30" rx="2" fill="#c99a3e"/>
-    <g stroke="#c99a3e" stroke-width="1.4" opacity="0.7">
-      <path d="M55 35 L40 35 M55 45 L36 45 M55 55 L40 55 M55 65 L44 65 M105 35 L120 35 M105 45 L124 45 M105 55 L120 55 M105 65 L116 65"/></g>
-    <circle cx="80" cy="50" r="6" fill="#ff5a3c" opacity="0.85"/>
-  </svg>`,
-  nvidia: `<svg viewBox="0 0 160 100" xmlns="http://www.w3.org/2000/svg">
-    <defs><linearGradient id="nv1" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#20261c"/><stop offset="1" stop-color="#0e120c"/></linearGradient></defs>
-    <rect width="160" height="100" fill="url(#nv1)"/>
-    <path d="M20 80 L60 80 L60 40 Q80 28 100 40 L100 80 L140 80" stroke="#5a6a52" stroke-width="2" fill="none"/>
-    <path d="M64 44 Q80 34 96 44 L96 76 L64 76 Z" fill="#76b043" opacity="0.4"/>
-    <path d="M112 30 L136 54 M136 30 L112 54" stroke="#d5372c" stroke-width="3" opacity="0.8"/>
-  </svg>`,
-  jeonse: `<svg viewBox="0 0 160 100" xmlns="http://www.w3.org/2000/svg">
-    <defs><linearGradient id="js1" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#5a4a2c"/><stop offset="1" stop-color="#2c2416"/></linearGradient></defs>
-    <rect width="160" height="100" fill="url(#js1)"/>
-    <g fill="#e8d9b0"><path d="M52 52 L80 30 L108 52 Z"/><rect x="60" y="52" width="40" height="30"/></g>
-    <rect x="74" y="64" width="12" height="18" fill="#5a4a2c"/>
-    <g fill="#ffb84d" font-family="sans-serif" font-weight="bold" font-size="16"><text x="114" y="46">%</text></g>
-    <path d="M116 58 L130 44 M130 44 L130 54 M130 44 L120 44" stroke="#ffb84d" stroke-width="2.2" fill="none"/>
-  </svg>`,
-};
-
 const NEWS = [
   {
     id: 'tianji', thumb: 'tianji',
@@ -336,9 +253,9 @@ const NEWS = [
   },
 ];
 
-// news thumb: generated editorial photo with the SVG art as fallback
+// news thumb: gpt-image-2 editorial photo (assets/web/news-<id>.jpg)
 function thumbHTML(id) {
-  return `<img src="assets/web/news-${id}.jpg" alt="" loading="lazy" onerror="this.remove()">${THUMBS[id] || ''}`;
+  return `<img src="assets/web/news-${id}.jpg" alt="" loading="lazy">`;
 }
 
 // Portal widgets

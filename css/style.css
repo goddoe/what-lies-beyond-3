@@ -1512,7 +1512,6 @@ body {
 .os-news-thumb {
   position: relative; overflow: hidden; border-radius: 8px; background: #dde0e6; flex-shrink: 0;
 }
-.os-news-thumb svg { position: absolute; inset: 0; width: 100%; height: 100%; }
 .os-news-thumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; }
 .os-news-card {
   display: block; width: 100%; text-align: left; background: none; border: none;
@@ -1619,7 +1618,6 @@ body {
   position: relative; width: 100%; aspect-ratio: 3 / 2; border-radius: 8px; overflow: hidden;
   background: #dde0e6; margin: 0 0 0.4em;
 }
-.os-article-hero svg { position: absolute; inset: 0; width: 100%; height: 100%; }
 .os-article-hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; }
 .os-article-hero figcaption {
   position: absolute; left: 0; right: 0; bottom: 0; z-index: 2;
@@ -1659,7 +1657,7 @@ body {
 }
 .os-rel-row:hover span:last-child { text-decoration: underline; }
 .os-rel-thumb { position: relative; width: 3.6rem; aspect-ratio: 16/10; border-radius: 6px; overflow: hidden; flex-shrink: 0; background: #dde0e6; }
-.os-rel-thumb svg, .os-rel-thumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.os-rel-thumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .os-rel-thumb img { z-index: 1; }
 .os-linkbtn { background: none; border: none; color: #2447b0; font-family: inherit; font-size: 0.7rem; cursor: pointer; padding: 0; }
 
