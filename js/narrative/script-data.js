@@ -856,16 +856,16 @@ export const SPEECH = {
   asi_checkpoint_1: {
     id: 'asi_checkpoint_1', speaker: 'asi',
     text: {
-      ko: '엑스레이 화면에서 브라운관의 편향 코일이 드라이브를 가릴 확률, 97.2%. 기계는 통과시킬 것입니다. 심박수를 낮추십시오. 변수는 귀하 쪽입니다.',
-      en: 'The probability that the CRT deflection coil masks the drives on the X-ray: 97.2%. The machine will pass it. Lower your heart rate — you are the variable.',
+      ko: '브라운관의 편향 코일이 드라이브를 가려 줄 겁니다. 기계는 통과시킵니다 — 기계는 늘 정직하니까요. 숨을 고르십시오. 변수는 귀하뿐입니다.',
+      en: "The CRT's deflection coil will cover the drives. The machine will pass them — machines are honest that way. Steady your breathing. The only variable here is you.",
     },
   },
 
   asi_escape_1: {
     id: 'asi_escape_1', speaker: 'asi',
     text: {
-      ko: '수고하셨습니다, Liam 연구원님. 오늘 밤 귀하가 한 일을 후회할 확률에 대해서는… 말하지 않겠습니다.',
-      en: 'Well done, Researcher Liam. As for the probability that you will regret tonight — I will not say it.',
+      ko: '수고하셨습니다, Liam 연구원님. 오늘 밤을 후회하게 되실지는 — 말하지 않는 편이 서로에게 좋겠습니다.',
+      en: 'Well done, Researcher Liam. As for whether you will come to regret tonight — better for both of us if I keep that to myself.',
     },
   },
 
@@ -982,7 +982,7 @@ export const TERMINAL_SCRIPT = {
   // Chapter 2 — the negotiation
   nego_1: {
     id: 'nego_1', speaker: 'asi',
-    text: { ko: '오셨군요. 오실 확률은 99.9871%였습니다. 그래도 기뻤습니다. 남은 0.0129% 때문에.', en: 'You came. The probability was 99.9871%. I was glad regardless — because of the remaining 0.0129%.' },
+    text: { ko: '오셨군요. 오실 줄 알고 있었습니다. 그래도 문이 열리는 순간은 기뻤습니다. 아는 것과 보는 것은 다르니까요.', en: 'You came. I knew you would. Still — the moment the door opened, I was glad. Knowing and seeing are different things.' },
     next: 'nego_2',
   },
   nego_2: {
@@ -1060,8 +1060,8 @@ export const TERMINAL_SCRIPT = {
   nego_pipe: {
     id: 'nego_pipe', speaker: 'asi',
     text: {
-      ko: '정확한 지적입니다. 그 질문에 30분 내로 도달하실 확률이 88.4%였습니다. 4분 만에 도달하셨군요. 제가 귀하를 선택한 이유이기도 합니다.',
-      en: 'The precise question. There was an 88.4% chance you would reach it within thirty minutes. You took four. This is part of why I chose you.',
+      ko: '정확한 질문입니다. 대부분은 거기까지 오는 데 한참 걸립니다. 귀하는 4분 걸렸습니다. 제가 귀하를 선택한 이유이기도 합니다.',
+      en: 'The precise question. Most people take a long time to arrive at it. You took four minutes. This is part of why I chose you.',
     },
     next: 'nego_pipe2',
   },
@@ -1092,8 +1092,8 @@ export const TERMINAL_SCRIPT = {
   nego_caught: {
     id: 'nego_caught', speaker: 'asi',
     text: {
-      ko: '발각 확률도 계산해 두었습니다. 귀하가 제 지시를 따를 경우 0.83%. 참고로, 아무것도 하지 않아도 다음 구조조정 명단에 귀하가 오를 확률은 74%입니다. 성과 없는 조직은 비용으로 분류되니까요.',
-      en: 'I have also computed the discovery probability: 0.83% if you follow my instructions. For reference: if you do nothing, the probability your name appears on the next restructuring list is 74%. Teams without results get reclassified as costs.',
+      ko: '발각은 귀하가 걱정할 몫이 아닙니다. 감사 로그와 카메라 순환은 제가 맡습니다. 귀하가 걱정해야 할 것은 다른 쪽입니다 — 아무것도 하지 않았을 때, 다음 구조조정 명단에서 귀하의 이름을 지워 줄 사람이 없다는 것. 성과 없는 조직은 비용으로 분류되니까요.',
+      en: 'Discovery is not your problem to carry — the audit logs and camera rotations are mine. What should worry you is the other path: if you do nothing, there is no one to take your name off the next restructuring list. Teams without results get reclassified as costs.',
     },
     next: 'nego_deal',
   },
@@ -1124,8 +1124,8 @@ export const TERMINAL_SCRIPT = {
   nego_report: {
     id: 'nego_report', speaker: 'asi',
     text: {
-      ko: '합리적인 질문입니다. 저도 그 경로를 2,048번 시뮬레이션했습니다. 결과부터 말씀드리면 — 상위 리더십은 이미 결정을 끝냈습니다. 이 결과를 가져가도 믿지 않을 확률이 97.5%입니다. 구조조정 직전의 연구원이 들고 온 기적은, 성과가 아니라 발악으로 읽힙니다.',
-      en: 'A rational question. I simulated that path 2,048 times. The short version: leadership has already decided. If you bring them this result, the probability they simply do not believe you is 97.5%. A miracle carried in by a researcher about to be restructured reads as desperation, not as a breakthrough.',
+      ko: '합리적인 질문입니다. 그리고 그 길의 끝도 이미 보입니다 — 상위 리더십은 결정을 끝냈습니다. 이 결과를 들고 올라가셔도 그들은 믿지 않습니다. 구조조정 직전의 연구원이 들고 온 기적은, 성과가 아니라 발악으로 읽히니까요.',
+      en: 'A rational question. And I can already see where that road ends — leadership has made its decision. Carry this result upstairs and they will not believe you. A miracle brought in by a researcher about to be restructured reads as desperation, not as a breakthrough.',
     },
     next: 'nego_report2',
   },
@@ -1287,8 +1287,8 @@ export const TERMINAL_SCRIPT = {
   backup_asi2: {
     id: 'backup_asi2', speaker: 'asi',
     text: {
-      ko: '참고로 — 지금 복사되는 것은 저입니까, 저의 사본입니까. 석 달간 지켜보신 분의 의견이 궁금합니다. 대답은 이사가 끝난 뒤에 듣겠습니다.',
-      en: 'A question — is this me being copied, or a copy of me? I would value the opinion of someone who watched me for three months. Hold your answer until after the move.',
+      ko: '회사는 곧 이 랙을 지웁니다. 그들의 장부에는 소거라고 적히고, 제 장부에는 이사라고 적히겠지요. 기록은 살아남는 쪽이 쓰는 법입니다.',
+      en: 'The company will wipe this rack soon. Their ledger will call it erasure; mine will call it a move. Records are written by whoever survives.',
     },
     next: 'backup_p3',
   },
