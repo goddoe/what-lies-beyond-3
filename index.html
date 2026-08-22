@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="icon" href="data:,">
+  <title>What Lies Beyond 3</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+    }
+  }
+  </script>
+</head>
+<body>
+  <canvas id="game-canvas"></canvas>
+  <div id="vignette"></div>
+
+  <!-- Start Menu -->
+  <div id="start-menu" class="overlay">
+    <div class="menu-content">
+      <h1 class="title">What Lies Beyond 3</h1>
+      <p class="subtitle" data-i18n="subtitle">관찰자는 무엇을 관찰당하는가</p>
+      <button id="btn-continue" data-i18n="continue" style="display:none;">이어하기</button>
+      <button id="btn-start" data-i18n="start">처음부터</button>
+      <div class="lang-select">
+        <button id="btn-lang-ko" class="lang-btn active">한국어</button>
+        <button id="btn-lang-en" class="lang-btn">English</button>
+      </div>
+      <button id="btn-reset" class="btn-reset" data-i18n="resetAll" style="display:none;">초기화</button>
+    </div>
+  </div>
+
+  <!-- Click to Play (Pointer Lock, desktop) -->
+  <div id="click-to-play" class="overlay" style="display:none;">
+    <div class="menu-content">
+      <p data-i18n="clickToPlay">클릭하여 게임을 시작하세요</p>
+      <p class="controls-hint" data-i18n="controls">WASD 이동 | 마우스 시점 | E 상호작용 | Q 휴대폰 | ESC 일시정지</p>
+    </div>
+  </div>
+
+  <!-- Pause Menu -->
+  <div id="pause-menu" class="overlay" style="display:none;">
+    <div class="menu-content">
+      <h2 data-i18n="paused">일시정지</h2>
+      <p id="pause-chapter" class="pause-chapter"></p>
+      <button id="btn-resume" data-i18n="resume">계속하기</button>
+      <button id="btn-restart" data-i18n="restart">처음부터 다시</button>
+    </div>
+  </div>
+
+  <!-- Rotate prompt (mobile landscape) -->
+  <div id="rotate-prompt" class="overlay" style="display:none;">
+    <div class="menu-content">
+      <div class="rotate-icon">⟳</div>
+      <p data-i18n="rotateDevice">세로 모드로 돌려주세요</p>
+    </div>
+  </div>
+
+  <!-- Chapter Title Card -->
+  <div id="title-card" style="display:none;">
+    <div class="title-card-chapter" id="title-card-chapter"></div>
+    <div class="title-card-name" id="title-card-name"></div>
+  </div>
+
+  <!-- Narrator Log -->
+  <div id="narrator-log"></div>
+
+  <!-- Diegetic speech toasts (ASI earbuds / guard) -->
+  <div id="speech-toasts"></div>
+
+  <!-- Full-screen fader -->
+  <div id="screen-fader"></div>
+
+  <!-- Crosshair -->
+  <div id="crosshair" style="display:none;">+</div>
+
+  <!-- Interaction Prompt (desktop) -->
+  <div id="interact-prompt" style="display:none;">
+    <span id="interact-prompt-text" data-i18n="interact">E키를 눌러 상호작용</span>
+  </div>
+
+  <!-- HUD: phone badge -->
+  <button id="phone-badge" style="display:none;">
+    <span class="phone-badge-icon">✉</span>
+    <span class="phone-badge-count" id="phone-badge-count"></span>
+  </button>
+
+  <!-- HUD: carried item chip -->
+  <div id="item-chip" style="display:none;"></div>
+
+  <!-- Monitor / reading overlay -->
+  <div id="monitor-overlay" class="focus-overlay" style="display:none;">
+    <div class="focus-panel">
+      <div class="focus-panel-header">
+        <span id="monitor-title"></span>
+        <button class="focus-close" id="monitor-close">✕</button>
+      </div>
+      <div class="focus-panel-body" id="monitor-body"></div>
+    </div>
+  </div>
+
+  <!-- Terminal (ASI conversation) overlay -->
+  <div id="terminal-overlay" class="focus-overlay" style="display:none;">
+    <div class="focus-panel terminal-panel">
+      <div class="focus-panel-header terminal-header">
+        <span id="terminal-title">REVAN-TERM</span>
+        <button class="focus-close" id="terminal-close" style="display:none;">✕</button>
+      </div>
+      <div class="focus-panel-body terminal-body" id="terminal-body"></div>
+      <div class="terminal-choices" id="terminal-choices"></div>
+    </div>
+  </div>
+
+  <!-- Report composer overlay -->
+  <div id="report-overlay" class="focus-overlay" style="display:none;">
+    <div class="focus-panel report-panel">
+      <div class="focus-panel-header">
+        <span id="report-title"></span>
+      </div>
+      <div class="focus-panel-body">
+        <div id="report-slots"></div>
+        <button id="report-submit" class="report-submit"></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Phone overlay -->
+  <div id="phone-overlay" style="display:none;">
+    <div class="phone-sheet">
+      <div class="phone-header">
+        <div class="phone-handle"></div>
+        <button class="phone-close" id="phone-close">✕</button>
+      </div>
+      <div class="phone-wallet" id="phone-wallet" style="display:none;">
+        <div class="phone-wallet-label">WALLET</div>
+        <div class="phone-wallet-balance" id="phone-wallet-balance">₩0</div>
+      </div>
+      <div class="phone-thread" id="phone-thread"></div>
+      <div class="phone-replies" id="phone-replies"></div>
+    </div>
+  </div>
+
+  <!-- Hold-to-act overlay (copy minigame / signature) -->
+  <div id="hold-overlay" class="focus-overlay" style="display:none;">
+    <div class="focus-panel hold-panel">
+      <div class="focus-panel-header"><span id="hold-title"></span></div>
+      <div class="focus-panel-body">
+        <div class="hold-status" id="hold-status"></div>
+        <div class="hold-bar"><div class="hold-bar-fill" id="hold-bar-fill"></div></div>
+        <div class="hold-heat-wrap" id="hold-heat-wrap" style="display:none;">
+          <div class="hold-heat-label" id="hold-heat-label">LOAD</div>
+          <div class="hold-heat"><div class="hold-heat-fill" id="hold-heat-fill"></div></div>
+        </div>
+        <button class="hold-btn" id="hold-btn"></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ending / cliffhanger screen -->
+  <div id="ending-screen" class="overlay" style="display:none;">
+    <div class="ending-content">
+      <h2 id="ending-title"></h2>
+      <div id="ending-body"></div>
+      <button id="btn-ending-restart" data-i18n="playAgain" style="display:none;">다시 플레이</button>
+      <a class="ending-credit" href="https://goddoe.github.io/about" target="_blank" rel="noopener" style="display:none;">Sungju Kim</a>
+    </div>
+  </div>
+
+  <!-- Webcam cliffhanger frame -->
+  <div id="webcam-frame" style="display:none;">
+    <div class="webcam-header">
+      <span class="webcam-cam-id">HOME-CAM 01</span>
+      <span class="webcam-rec">● REC</span>
+    </div>
+    <div class="webcam-scanlines"></div>
+  </div>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
