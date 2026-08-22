@@ -660,6 +660,9 @@ export class MapBuilder {
         passage: door.passage || false,
         glass: door.glass || false,
         hinged: door.hinged || false,
+        color: door.color,
+        metal: door.metal || false,
+        window: door.window !== false,
       });
     }
     return doorInfos;
@@ -726,12 +729,14 @@ export class MapBuilder {
             cx: wx + doorOffset, cy: wy, cz: wz,
             width: doorWidth, height: doorHeight,
             axis, wallName, roomId: room.id,
+            color: 0x565c66, metal: true, window: false,
           });
         } else {
           kcDoor = this.doorSystem.createDoor({
             cx: wx, cy: wy, cz: wz + doorOffset,
             width: doorWidth, height: doorHeight,
             axis, wallName, roomId: room.id,
+            color: 0x565c66, metal: true, window: false,
           });
         }
         // Store door reference for unlockDoor to find
@@ -807,12 +812,14 @@ export class MapBuilder {
           cx: wx + doorOffset, cy: wy, cz: wz,
           width: doorWidth, height: doorHeight,
           axis, wallName, roomId: room.id, glass: door.glass, hinged: door.hinged,
+          ...(door.color !== undefined ? { color: door.color } : {}), metal: door.metal, window: door.window,
         });
       } else {
         this.doorSystem.createDoor({
           cx: wx, cy: wy, cz: wz + doorOffset,
           width: doorWidth, height: doorHeight,
           axis, wallName, roomId: room.id, glass: door.glass, hinged: door.hinged,
+          ...(door.color !== undefined ? { color: door.color } : {}), metal: door.metal, window: door.window,
         });
       }
     }

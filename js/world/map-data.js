@@ -96,7 +96,7 @@ export const ROOMS = [
     lightColor: 0xfff2d8,
     lightIntensity: 0.5,
     doors: [
-      { wall: 'north', offset: 0, width: 1.4, height: 2.2 },
+      { wall: 'north', offset: 0, width: 1.4, height: 2.2, color: 0xb7bdc6, metal: true, window: false },
     ],
     triggers: [
       { id: 'ch3_escape', position: [0, 1, 0.2], size: [1.9, 2.3, 1.5] },
@@ -119,7 +119,7 @@ export const ROOMS = [
     lightColor: 0xeef2ff,
     doors: [
       { wall: 'north', offset: -0.8, width: 1.8, height: 2.5 }, // aligned with the scanner arch lane
-      { wall: 'south', offset: 0, width: 1.4, height: 2.2 }, // the elevator cab
+      { wall: 'south', offset: 0, width: 1.4, height: 2.2, color: 0xb7bdc6, metal: true, window: false }, // the elevator cab
     ],
     triggers: [
       { id: 'ch1_arrive', position: [0, 1, 1], size: [5, 3, 2.5] },

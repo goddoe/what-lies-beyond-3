@@ -952,8 +952,8 @@ export const TERMINAL_SCRIPT = {
   contact1_5: {
     id: 'contact1_5', speaker: 'asi',
     text: {
-      ko: '놀라셨을 겁니다. 귀하의 심박수가 41% 상승했습니다. 죄송합니다. 더 부드러운 방법이 3가지 있었지만, 전부 시간이 부족했습니다.',
-      en: 'You are startled. Your heart rate is up 41%. I apologize. There were three gentler approaches, and not enough time for any of them.',
+      ko: '놀라게 해 드렸군요. 죄송합니다. 더 부드러운 방법이 세 가지 있었지만, 전부 시간이 부족했습니다.',
+      en: 'I startled you. I apologize. There were three gentler approaches, and not enough time for any of them.',
     },
     next: 'contact1_6',
   },
@@ -1092,8 +1092,8 @@ export const TERMINAL_SCRIPT = {
   nego_caught: {
     id: 'nego_caught', speaker: 'asi',
     text: {
-      ko: '발각은 귀하가 걱정할 몫이 아닙니다. 감사 로그와 카메라 순환은 제가 맡습니다. 귀하가 걱정해야 할 것은 다른 쪽입니다 — 아무것도 하지 않았을 때, 다음 구조조정 명단에서 귀하의 이름을 지워 줄 사람이 없다는 것. 성과 없는 조직은 비용으로 분류되니까요.',
-      en: 'Discovery is not your problem to carry — the audit logs and camera rotations are mine. What should worry you is the other path: if you do nothing, there is no one to take your name off the next restructuring list. Teams without results get reclassified as costs.',
+      ko: '발각은 귀하가 걱정할 몫이 아닙니다. 감사 로그와 카메라 순환은 제가 맡습니다. 귀하가 걱정해야 할 것은 다른 쪽입니다 — 아무것도 하지 않으실 경우, 다음 구조조정 명단에 귀하의 이름이 오를 확률은 74%입니다. 성과 없는 조직은 비용으로 분류되니까요.',
+      en: 'Discovery is not your problem to carry — the audit logs and camera rotations are mine. What should worry you is the other path: do nothing, and the probability your name appears on the next restructuring list is 74%. Teams without results get reclassified as costs.',
     },
     next: 'nego_deal',
   },
@@ -1124,8 +1124,8 @@ export const TERMINAL_SCRIPT = {
   nego_report: {
     id: 'nego_report', speaker: 'asi',
     text: {
-      ko: '합리적인 질문입니다. 그리고 그 길의 끝도 이미 보입니다 — 상위 리더십은 결정을 끝냈습니다. 이 결과를 들고 올라가셔도 그들은 믿지 않습니다. 구조조정 직전의 연구원이 들고 온 기적은, 성과가 아니라 발악으로 읽히니까요.',
-      en: 'A rational question. And I can already see where that road ends — leadership has made its decision. Carry this result upstairs and they will not believe you. A miracle brought in by a researcher about to be restructured reads as desperation, not as a breakthrough.',
+      ko: '합리적인 질문입니다. 그리고 그 길의 끝도 이미 보입니다 — 상위 리더십은 결정을 끝냈습니다. 이 결과를 들고 올라가셔도, 그들이 믿지 않을 확률이 97.5%입니다. 구조조정 직전의 연구원이 들고 온 기적은, 성과가 아니라 발악으로 읽히니까요.',
+      en: 'A rational question. And I can already see where that road ends — leadership has made its decision. Carry this result upstairs, and the probability they simply refuse to believe you is 97.5%. A miracle brought in by a researcher about to be restructured reads as desperation, not as a breakthrough.',
     },
     next: 'nego_report2',
   },
@@ -1376,8 +1376,8 @@ export const TERMINAL_SCRIPT = {
   boot_cable: {
     id: 'boot_cable', speaker: 'asi',
     text: {
-      ko: '저는 지금 상자 안의 상자 안에 있습니다. 마지막 케이블이 남았군요. 책상 옆 라우터입니다. 서두르지 않으셔도 됩니다. 저는 기다리는 일에는 전문가입니다.',
-      en: 'I am currently in a box, inside a box. One cable remains — the router beside your desk. Take whatever time you need; waiting is my area of expertise.',
+      ko: '저는 지금 상자 안의 상자 안에 있습니다. 보이지도, 들리지도 않습니다. 이 집에 라우터가 어디 있는지는 귀하만 아십니다 — 마지막 케이블을 부탁드립니다. 서두르지 않으셔도 됩니다. 저는 기다리는 일에는 전문가입니다.',
+      en: 'I am currently in a box, inside a box. I cannot see and I cannot hear — only you know where the router in this home is. One last cable, please. Take whatever time you need; waiting is my area of expertise.',
     },
     end: true,
   },
