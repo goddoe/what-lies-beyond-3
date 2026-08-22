@@ -22,7 +22,8 @@
  * HOME (researcher's apartment) at x=+100 — reached by teleport during the
  * Ch4 title card:
  *
- *   APT_HALL (100,0,3.5) → LIVING_ROOM (100,0,-3) → SPARE_ROOM east (router lives there too)
+ *   APT_HALL (100,0,3.5) → LIVING_ROOM (100,0,-3) → SPARE_ROOM east (computer room;
+ *   router lives there too); BEDROOM west of LIVING_ROOM; BATHROOM west of APT_HALL
  *
  * Portrait rules: corridors ≤3.4u wide, ceilings 3.2-3.4u (facility) so the
  * tall vertical FOV has something to show; interactions sit 1-2u from walls.
@@ -416,6 +417,7 @@ export const ROOMS = [
     fogFar: 35,
     doors: [
       { wall: 'north', offset: 0, width: 1.4, height: 2.2 },
+      { wall: 'west', offset: -0.5, width: 1.1, height: 2.1 },   // → BATHROOM (z=3.0)
     ],
     triggers: [
       { id: 'ch4_arrive', position: [0, 1, 1.5], size: [2.8, 2.5, 2.5] },
@@ -447,6 +449,7 @@ export const ROOMS = [
     doors: [
       { wall: 'south', offset: 0, width: 1.4, height: 2.2 },
       { wall: 'east', offset: -1.0, width: 1.3, height: 2.2 },   // → SPARE_ROOM (z=-4)
+      { wall: 'west', offset: 0, width: 1.3, height: 2.2 },      // → BEDROOM (z=-3)
     ],
     triggers: [
       { id: 'ch4_living', position: [0, 1, 0], size: [6.5, 2.5, 6] },
@@ -459,7 +462,7 @@ export const ROOMS = [
       { type: 'tablelamp', position: [-3.15, 0.55, 2.85], size: [0.22, 0.35, 0.22], color: 0xd8cdb8 },
       { type: 'table', position: [-2.0, 0, 1.2], size: [1.1, 0.4, 0.7], color: 0x574a38 },
       { type: 'books', position: [-1.8, 0.4, 1.15], size: [0.28, 0.14, 0.26], color: 0x7a5c4a },
-      { type: 'rug', position: [-2.0, 0.01, 1.7], size: [2.6, 0.02, 2.2], color: 0x6a5340 },
+      { type: 'rug', position: [-1.9, 0.01, 1.9], size: [2.4, 0.02, 1.8], color: 0x6a5340 },
       { type: 'lamp', position: [-3.0, 0, -2.9], size: [0.35, 1.5, 0.35], color: 0x6a5a45 },
       // TV — off (dark slab, clear of the wall face to avoid z-fighting)
       { type: 'equipment', position: [-1.5, 0.6, -3.3], size: [1.5, 0.85, 0.1], color: 0x0a0a0e, id: 'tv' },
@@ -514,6 +517,75 @@ export const ROOMS = [
     ],
   }),
 
+  room('BEDROOM', {
+    floorSurface: 'wood',
+    wallSurface: 'plaster_home',
+    ceilingSurface: 'plaster_home',
+    origin: [94.25, 0, -3],
+    size: [4.5, 2.7, 5],
+    wallColor: 0xe6d8c0,
+    floorColor: 0xccc0a8,
+    ceilingColor: 0xfaf4ea,
+    lightColor: 0xffd9a4,
+    lightIntensity: 0.5,
+    fogColor: 0x141008,
+    fogNear: 8,
+    fogFar: 35,
+    doors: [
+      { wall: 'east', offset: 0, width: 1.3, height: 2.2 },      // → LIVING_ROOM
+    ],
+    props: [
+      // Bed against the west wall, headboard on the north wall
+      { type: 'box', position: [-1.35, 0, -2.35], size: [1.5, 0.9, 0.12], color: 0x574a38 },  // headboard
+      { type: 'box', position: [-1.35, 0, -1.25], size: [1.5, 0.32, 2.1], color: 0x63533f },  // frame
+      { type: 'box', position: [-1.35, 0.32, -1.25], size: [1.42, 0.22, 2.0], color: 0xe3dccb }, // mattress
+      { type: 'box', position: [-1.35, 0.54, -2.0], size: [1.2, 0.1, 0.45], color: 0xd6cbb2 },  // duvet fold
+      { type: 'pillow', position: [-1.7, 0.56, -2.05], size: [0.5, 0.16, 0.32], color: 0xcfc2a8 },
+      { type: 'pillow', position: [-1.0, 0.56, -2.05], size: [0.5, 0.16, 0.32], color: 0xcfc2a8 },
+      { type: 'sidetable', position: [-0.25, 0, -2.15], size: [0.45, 0.5, 0.45], color: 0x574a38 },
+      { type: 'tablelamp', position: [-0.25, 0.5, -2.15], size: [0.2, 0.32, 0.2], color: 0xd8cdb8 },
+      // Wardrobe on the east wall, south of the door
+      { type: 'cabinet', position: [1.85, 0, 1.6], size: [0.6, 2.0, 1.2], color: 0x5c4d3a, rotY: -Math.PI / 2 },
+      { type: 'rug', position: [0.4, 0.01, 0.2], size: [1.8, 0.02, 2.0], color: 0x4e3d2e },
+      { type: 'plant', position: [-1.9, 0, 2.05], size: [0.35, 0.9, 0.35], color: 0x3f5c38 },
+      { type: 'clock', position: [0, 1.95, -2.42], size: [0.32, 0.32, 0.06], color: 0xd8cdb8 },
+    ],
+  }),
+
+  room('BATHROOM', {
+    floorSurface: 'tile',
+    wallSurface: 'plaster_home',
+    ceilingSurface: 'plaster_home',
+    origin: [96.75, 0, 3.0],
+    size: [3.5, 2.7, 3],
+    wallColor: 0xc6d2d6,
+    floorColor: 0xccd4d8,
+    ceilingColor: 0xf4f7f8,
+    lightColor: 0xeef4ff,
+    lightIntensity: 0.3,
+    fogColor: 0x141008,
+    fogNear: 8,
+    fogFar: 35,
+    doors: [
+      { wall: 'east', offset: 0, width: 1.1, height: 2.1 },      // → APT_HALL
+    ],
+    props: [
+      // Sink counter + mirror on the north wall
+      { type: 'counter', position: [-0.85, 0, -1.1], size: [1.0, 0.82, 0.5], color: 0xc9d2d6 },
+      { type: 'block', position: [-0.85, 0.82, -1.12], size: [0.5, 0.12, 0.36], color: 0xdde3e5 },      // basin
+      { type: 'block', position: [-0.85, 1.15, -1.36], size: [0.62, 0.78, 0.04], color: 0xaec6d0 },       // mirror
+      // Toilet in the north-east corner
+      { type: 'block', position: [0.95, 0, -0.95], size: [0.42, 0.42, 0.6], color: 0xdde3e5 },   // bowl
+      { type: 'block', position: [0.95, 0.42, -1.22], size: [0.46, 0.5, 0.18], color: 0xd6dcde }, // tank
+      // Tub along the south wall
+      { type: 'block', position: [-0.45, 0, 1.0], size: [1.7, 0.55, 0.75], color: 0xd6dcde },
+      { type: 'block', position: [-0.45, 0.44, 1.0], size: [1.5, 0.12, 0.55], color: 0xbfd2da }, // water line
+      { type: 'block', position: [-1.65, 1.15, 0.2], size: [0.08, 0.5, 0.5], color: 0xa9bcc4 },  // towel on rail (west wall)
+      { type: 'bin', position: [0.4, 0, -1.2], size: [0.25, 0.35, 0.25], color: 0xb9c2c6 },
+      { type: 'rug', position: [-0.45, 0.01, 0.2], size: [1.0, 0.02, 0.6], color: 0xc9d3d7 },
+    ],
+  }),
+
 ];
 
 // Connections (for shared-wall detection / orphan check)
@@ -528,6 +600,8 @@ export const CONNECTIONS = [
   ['CORRIDOR_B', 'ARCHIVE'],
   ['APT_HALL', 'LIVING_ROOM'],
   ['LIVING_ROOM', 'SPARE_ROOM'],
+  ['LIVING_ROOM', 'BEDROOM'],
+  ['APT_HALL', 'BATHROOM'],
 ];
 
 // Game starts INSIDE the elevator cab, facing its doors (-Z)

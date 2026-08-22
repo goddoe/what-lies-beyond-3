@@ -59,6 +59,7 @@ export class TerminalOverlay {
     this.onEnd = opts.onEnd || null;
     this._keepOpen = !!opts.keepOpenOnEnd;
     this._closeDelay = opts.closeDelay || 2800;
+    this._clickToClose = !!opts.clickToClose;
     this._running = true;
 
     this.om.open(this.el, State.TERMINAL, {
@@ -199,6 +200,21 @@ export class TerminalOverlay {
     this.onEnd = null;
     if (this._keepOpen) {
       if (cb) cb();
+      return;
+    }
+    if (this._clickToClose) {
+      // Wait for an explicit click — the ending shouldn't advance on its own
+      const hint = document.createElement('div');
+      hint.className = 'terminal-line term-dismiss';
+      hint.textContent = getLanguage() === 'ko' ? '[ 클릭하여 닫기 ]' : '[ click to close ]';
+      this.bodyEl.appendChild(hint);
+      this._scroll();
+      const onClick = () => {
+        this.el.removeEventListener('click', onClick);
+        this.close();
+        if (cb) cb();
+      };
+      setTimeout(() => this.el.addEventListener('click', onClick), 500);
       return;
     }
     // Show close affordance briefly, then auto-close

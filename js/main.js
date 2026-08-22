@@ -1980,7 +1980,7 @@ function playCliffhanger() {
     // The terminal answers
     terminalOverlay.start('final_1', {
       title: 'LIAM-HOME-01',
-      closeDelay: 9000,
+      clickToClose: true,
       onEnd: () => {
         setTimeout(webcamShot, 900);
       },

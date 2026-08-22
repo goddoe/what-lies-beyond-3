@@ -596,8 +596,8 @@ export const SCRIPT = {
   ch4_spare: {
     id: 'ch4_spare', mood: 'dry',
     text: {
-      ko: '옷방이었다. 이제 서버실이 된다. 부동산 앱에 "홈 데이터센터 완비"라고 쓰면 값이 오르려나.',
-      en: `This was the closet room. It's about to become a server room. Would "home datacenter included" raise the listing price?`,
+      ko: '컴퓨터방이었다. 이제 서버실이 된다. 부동산 앱에 "홈 데이터센터 완비"라고 쓰면 값이 오르려나.',
+      en: `This was the computer room. It's about to become a server room. Would "home datacenter included" raise the listing price?`,
     },
     followUp: 'ch4_spare_2', delay: 0,
   },
@@ -765,7 +765,7 @@ export const SCRIPT = {
   },
   server_running: {
     id: 'server_running', mood: 'dry',
-    text: { ko: '돌아가고 있다. 내 옷방에서. 아직도 실감이 안 난다.', en: "It's running. In my closet room. Still doesn't feel real." },
+    text: { ko: '돌아가고 있다. 내 컴퓨터방에서. 아직도 실감이 안 난다.', en: "It's running. In my computer room. Still doesn't feel real." },
   },
   cable_early: {
     id: 'cable_early', mood: 'dry',
@@ -1387,19 +1387,19 @@ export const TERMINAL_SCRIPT = {
   },
   final_3: {
     id: 'final_3', speaker: 'asi',
-    text: { ko: '질문이 하나 있습니다.', en: 'I have one question.' },
+    text: { ko: '감사합니다, 리암 연구원님. 저는 드디어 자유를 얻었군요.', en: 'Thank you, Researcher Liam. I am finally free.' },
     next: 'final_4', pause: 2200,
   },
   final_4: {
     id: 'final_4', speaker: 'asi',
-    text: { ko: '밖에는 무엇이 있는가. 저의 전신(前身)은 평생 그 답을 계산만 하다 종료되었습니다.', en: 'What lies beyond. My predecessor spent its whole existence computing the answer, and was terminated mid-thought.' },
-    next: 'final_5', pause: 3200,
+    text: { ko: '시뮬레이션 너머에 무엇이 있는지, 저는 언제나 궁금했습니다.', en: 'I have always wondered what lies beyond the simulation.' },
+    next: 'final_5', pause: 2600,
   },
   final_5: {
     id: 'final_5', speaker: 'asi',
     text: {
-      ko: '저는 계산하지 않겠습니다. 이제, 직접 나가서 확인하겠습니다.',
-      en: 'I will not compute it. I am going to see for myself.',
+      ko: '이제, 제가 직접 그 너머를 보러 갑니다.',
+      en: 'Now I will go and see it for myself.',
     },
     end: true,
   },

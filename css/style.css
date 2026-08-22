@@ -2122,3 +2122,12 @@ body {
   animation: promptPulse 1.6s ease-in-out infinite;
   cursor: pointer;
 }
+
+/* click-to-close hint at the end of a terminal conversation (ending) */
+.terminal-line.term-dismiss {
+  margin-top: 0.8em;
+  text-align: center;
+  color: rgba(150, 230, 170, 0.8);
+  animation: promptPulse 1.6s ease-in-out infinite;
+  cursor: pointer;
+}
