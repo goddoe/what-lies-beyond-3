@@ -129,8 +129,8 @@ export const ROOMS = [
     lightIntensity: 1.2,
     lightPos: [0, 3.05, -2],
     doors: [
-      { wall: 'south', offset: -1.8, width: 1.8, height: 2.5 },   // exit lane (world x=-0.8)
-      { wall: 'north', offset: -1, width: 2, height: 2.5, locked: 'keycard' }, // badge gate controls this
+      { wall: 'south', offset: -1.8, width: 1.8, height: 2.5, glass: true },   // exit lane (world x=-0.8) — glass entrance door
+      { wall: 'north', offset: -1, width: 2, height: 2.5, passage: true }, // open gateway — the badge-gate glass flaps control passage
       { wall: 'east', offset: -3.2, width: 1.6, height: 2.5, locked: 'keycard' }, // security office door — decorative
     ],
     triggers: [
@@ -184,7 +184,7 @@ export const ROOMS = [
     lightColor: 0xe8f0fa,
     lightIntensity: 1.0,
     doors: [
-      { wall: 'south', offset: 0, width: 2, height: 2.5 },
+      { wall: 'south', offset: 0, width: 2, height: 2.5, passage: true }, // faces the lobby badge gate
       { wall: 'north', offset: 0, width: 2, height: 2.5 },
     ],
     triggers: [

@@ -657,6 +657,8 @@ export class MapBuilder {
         width,
         height,
         locked,
+        passage: door.passage || false,
+        glass: door.glass || false,
       });
     }
     return doorInfos;
@@ -796,17 +798,20 @@ export class MapBuilder {
       if (this._suppressDoorMesh && this._suppressDoorMesh.has(`${room.id}_${wallName}`)) {
         // Wall faces a locked door on the other room — cutout sections are kept
         // for passage once unlocked, but no door mesh is created here.
+      } else if (door.passage) {
+        // Open doorway — no panels. Something else (e.g. the badge-gate glass
+        // flaps) controls passage here.
       } else if (axis === 'z') {
         this.doorSystem.createDoor({
           cx: wx + doorOffset, cy: wy, cz: wz,
           width: doorWidth, height: doorHeight,
-          axis, wallName, roomId: room.id,
+          axis, wallName, roomId: room.id, glass: door.glass,
         });
       } else {
         this.doorSystem.createDoor({
           cx: wx, cy: wy, cz: wz + doorOffset,
           width: doorWidth, height: doorHeight,
-          axis, wallName, roomId: room.id,
+          axis, wallName, roomId: room.id, glass: door.glass,
         });
       }
     }

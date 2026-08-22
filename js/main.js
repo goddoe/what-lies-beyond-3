@@ -934,15 +934,12 @@ function unlockRestrictedDoor() {
   if (newDoor && newDoor.type === 'door') player.interactables.push(newDoor);
 }
 
-let badgeUnlocked = false;
-function unlockBadgeGate({ open = false } = {}) {
-  if (!badgeUnlocked) {
-    badgeUnlocked = true;
-    mapBuilder.unlockDoor('LOBBY', 'north', player.colliders);
-    const newDoor = mapBuilder.interactables[mapBuilder.interactables.length - 1];
-    if (newDoor && newDoor.type === 'door') player.interactables.push(newDoor);
-  }
-  if (open) openWorldDoor('LOBBY', 'north');
+// The badge gate is now a pair of waist-high glass flaps between the
+// pedestals (see the assembly further down). Once authorized, they retract
+// automatically when the player approaches — from either side.
+let gateAuthTime = 0;
+function unlockBadgeGate() {
+  gateAuthTime = 0;
 }
 
 function setPropVisible(propId, visible) {
@@ -1144,10 +1141,11 @@ function handleProp(target) {
 
     // ── Ch1 ──
     case 'badge_gate':
-      if (setFlag('badge_done')) {
+      if (!has('badge_done')) {
+        gateAuthTime = performance.now() + 1100; // let the tap animation land first
+        setFlag('badge_done');
         playBadgeTap();
         setTimeout(() => narratorLine('badge_ok'), 700);
-        setTimeout(() => unlockBadgeGate({ open: true }), 1300);
       } else {
         narratorLine('badge_again');
       }
@@ -1786,6 +1784,59 @@ function ensureBeltMac() {
   renderer.scene.add(beltMac);
 }
 
+// ── Badge gate flaps: waist-high glass guards between the pedestals.
+//    Raised = blocked. Once authorized they drop into the floor whenever the
+//    player comes near (either direction) and rise again after passing. ──
+let gateFlaps = null;
+let gateCollider = null;
+let gateFlapDown = 0; // 0 = raised, 1 = fully lowered
+const GATE = { x: 0, z: -3.35, halfSpan: 1.125, panelH: 0.8, baseY: 0.12 };
+{
+  gateFlaps = new THREE.Group();
+  const glassMat = new THREE.MeshPhysicalMaterial({
+    color: 0xd6ecff, transparent: true, opacity: 0.28, roughness: 0.05, metalness: 0.1,
+  });
+  const edgeMat = new THREE.MeshStandardMaterial({ color: 0x9aa2ae, roughness: 0.3, metalness: 0.85 });
+  for (const side of [-1, 1]) {
+    const w = GATE.halfSpan - 0.03;
+    const pane = new THREE.Mesh(new THREE.BoxGeometry(w, GATE.panelH, 0.035), glassMat);
+    pane.position.set(side * (w / 2 + 0.02), GATE.baseY + GATE.panelH / 2, 0);
+    gateFlaps.add(pane);
+    const edge = new THREE.Mesh(new THREE.BoxGeometry(w, 0.045, 0.05), edgeMat);
+    edge.position.set(side * (w / 2 + 0.02), GATE.baseY + GATE.panelH + 0.02, 0);
+    gateFlaps.add(edge);
+  }
+  gateFlaps.position.set(GATE.x, 0, GATE.z);
+  renderer.scene.add(gateFlaps);
+
+  gateCollider = new THREE.Mesh(
+    new THREE.BoxGeometry(GATE.halfSpan * 2, 1.4, 0.16),
+    new THREE.MeshBasicMaterial({ visible: false })
+  );
+  gateCollider.position.set(GATE.x, 0.7, GATE.z);
+  renderer.scene.add(gateCollider);
+  player.colliders.push(gateCollider);
+}
+
+function updateGateFlaps(delta) {
+  if (!gateFlaps) return;
+  const p = renderer.camera.position;
+  const near = Math.abs(p.x - GATE.x) < 1.7 && Math.abs(p.z - GATE.z) < 1.9;
+  const authorized = has('badge_done') && performance.now() >= gateAuthTime;
+  const want = (authorized && near && gameState.is(State.PLAYING)) ? 1 : 0;
+  const speed = 2.6;
+  if (gateFlapDown !== want) {
+    gateFlapDown += Math.sign(want - gateFlapDown) * speed * delta / (GATE.panelH + 0.15);
+    gateFlapDown = Math.max(0, Math.min(1, gateFlapDown));
+    gateFlaps.position.y = -gateFlapDown * (GATE.panelH + 0.15);
+  }
+  // collider active while the flaps are mostly raised
+  const blocked = gateFlapDown < 0.55;
+  const idx = player.colliders.indexOf(gateCollider);
+  if (blocked && idx < 0) player.colliders.push(gateCollider);
+  if (!blocked && idx >= 0) player.colliders.splice(idx, 1);
+}
+
 // ── Badge tap: Liam's ID card dips onto the gate's top reader pad ──
 let badgeCard = null;
 let badgeTap = null;
@@ -2012,7 +2063,6 @@ gameState.on('roomEnter', ({ roomId }) => {
     // shut the whole way out behind the player — it's work time
     closeWorldDoor('EXIT_VESTIBULE', 'south');
     closeWorldDoor('LOBBY', 'south');
-    closeWorldDoor('LOBBY', 'north');
   }
 });
 
@@ -2194,6 +2244,7 @@ function gameLoop() {
   updateBayDrives(delta);
   updateNightShutter(delta);
   updateBadgeTap(delta);
+  updateGateFlaps(delta);
 
   // While a scripted beat is playing (speech sequence, focus hold, belt run)
   // the interact prompt must vanish — runs outside the PLAYING/focus gate

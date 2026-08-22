@@ -28,6 +28,18 @@ export class DoorSystem {
       roughness: 0.4,
       metalness: 0.7,
     });
+    this._glassMat = new THREE.MeshPhysicalMaterial({
+      color: 0xcfe4f5,
+      transparent: true,
+      opacity: 0.22,
+      roughness: 0.05,
+      metalness: 0.1,
+    });
+    this._pushBarMat = new THREE.MeshStandardMaterial({
+      color: 0x8a919c,
+      roughness: 0.35,
+      metalness: 0.8,
+    });
     this._frameMat = new THREE.MeshStandardMaterial({
       color: 0x3a3a44,
       roughness: 0.6,
@@ -73,7 +85,7 @@ export class DoorSystem {
    * @param {string} opts.roomId - room identifier
    * @returns {object} door instance
    */
-  createDoor({ cx, cy, cz, width, height, axis, wallName, roomId }) {
+  createDoor({ cx, cy, cz, width, height, axis, wallName, roomId, glass = false }) {
     const door = {
       id: `${roomId}_${wallName}`,
       cx, cy, cz, width, height, axis, wallName, roomId,
@@ -94,23 +106,43 @@ export class DoorSystem {
     // N/S walls (axis='z'): wall is thin along Z, extends along X. Panels slide along X.
     // E/W walls (axis='x'): wall is thin along X, extends along Z. Panels slide along Z.
     const isNS = axis === 'z';
+    const panelMat = glass ? this._glassMat : this._panelMat;
 
     // slideAxis: the property name we'll animate ('x' or 'z')
     door.slideAxis = isNS ? 'x' : 'z';
 
+    // glass doors get a horizontal push bar so the pane reads at a glance
+    const addBar = (panel) => {
+      if (!glass) return;
+      const barGeo = isNS
+        ? new THREE.BoxGeometry(panelW * 0.8, 0.05, panelThickness + 0.03)
+        : new THREE.BoxGeometry(panelThickness + 0.03, 0.05, panelW * 0.8);
+      const bar = new THREE.Mesh(barGeo, this._pushBarMat);
+      bar.position.set(0, -halfH + 1.05, 0);
+      panel.add(bar);
+      const edgeGeo = isNS
+        ? new THREE.BoxGeometry(panelW, 0.04, panelThickness + 0.015)
+        : new THREE.BoxGeometry(panelThickness + 0.015, 0.04, panelW);
+      const edge = new THREE.Mesh(edgeGeo, this._pushBarMat);
+      edge.position.set(0, halfH - frameSize - 0.04, 0);
+      panel.add(edge);
+    };
+
     if (isNS) {
       // ── N/S wall: panels slide left/right along X ──
       const panelGeoL = new THREE.BoxGeometry(panelW, height - frameSize * 2, panelThickness);
-      const panelL = new THREE.Mesh(panelGeoL, this._panelMat);
+      const panelL = new THREE.Mesh(panelGeoL, panelMat);
       panelL.position.set(cx - panelW / 2, cy + halfH, cz);
+      addBar(panelL);
       doorGroup.add(panelL);
       door.panelA = panelL;
       door.panelAStart = panelL.position.x;
       door.panelATarget = cx - panelW / 2 - panelW;
 
       const panelGeoR = new THREE.BoxGeometry(panelW, height - frameSize * 2, panelThickness);
-      const panelR = new THREE.Mesh(panelGeoR, this._panelMat);
+      const panelR = new THREE.Mesh(panelGeoR, panelMat);
       panelR.position.set(cx + panelW / 2, cy + halfH, cz);
+      addBar(panelR);
       doorGroup.add(panelR);
       door.panelB = panelR;
       door.panelBStart = panelR.position.x;
@@ -172,16 +204,18 @@ export class DoorSystem {
     } else {
       // ── E/W wall: panels slide left/right along Z ──
       const panelGeoL = new THREE.BoxGeometry(panelThickness, height - frameSize * 2, panelW);
-      const panelL = new THREE.Mesh(panelGeoL, this._panelMat);
+      const panelL = new THREE.Mesh(panelGeoL, panelMat);
       panelL.position.set(cx, cy + halfH, cz - panelW / 2);
+      addBar(panelL);
       doorGroup.add(panelL);
       door.panelA = panelL;
       door.panelAStart = panelL.position.z;
       door.panelATarget = cz - panelW / 2 - panelW;
 
       const panelGeoR = new THREE.BoxGeometry(panelThickness, height - frameSize * 2, panelW);
-      const panelR = new THREE.Mesh(panelGeoR, this._panelMat);
+      const panelR = new THREE.Mesh(panelGeoR, panelMat);
       panelR.position.set(cx, cy + halfH, cz + panelW / 2);
+      addBar(panelR);
       doorGroup.add(panelR);
       door.panelB = panelR;
       door.panelBStart = panelR.position.z;
