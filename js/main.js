@@ -2302,9 +2302,11 @@ function gameLoop() {
       if (touchControls) touchControls.setInteractTarget(target);
     }
 
-    // Ch4 hesitation lines while standing at the router
+    // Ch4 hesitation lines while standing at the router (spare-room corner)
     if (gameState.chapter === 4 && has('transferred') && !has('plugged') && hesitationStart > 0
-        && gameState.currentRoom === 'UTILITY_NOOK') {
+        && gameState.currentRoom === 'SPARE_ROOM'
+        && Math.abs(renderer.camera.position.x - 107.05) < 1.6
+        && Math.abs(renderer.camera.position.z - (-3.4)) < 1.6) {
       const stood = (performance.now() - hesitationStart) / 1000;
       if (stood > 14 && hesitationLinesFired === 0) { hesitationLinesFired = 1; narratorLine('hesitation_1'); }
       if (stood > 34 && hesitationLinesFired === 1) { hesitationLinesFired = 2; narratorLine('hesitation_2'); }

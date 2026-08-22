@@ -22,7 +22,7 @@
  * HOME (researcher's apartment) at x=+100 — reached by teleport during the
  * Ch4 title card:
  *
- *   APT_HALL (100,0,3.5) → LIVING_ROOM (100,0,-3) → SPARE_ROOM east / UTILITY_NOOK west
+ *   APT_HALL (100,0,3.5) → LIVING_ROOM (100,0,-3) → SPARE_ROOM east (router lives there too)
  *
  * Portrait rules: corridors ≤3.4u wide, ceilings 3.2-3.4u (facility) so the
  * tall vertical FOV has something to show; interactions sit 1-2u from walls.
@@ -447,25 +447,25 @@ export const ROOMS = [
     doors: [
       { wall: 'south', offset: 0, width: 1.4, height: 2.2 },
       { wall: 'east', offset: -1.0, width: 1.3, height: 2.2 },   // → SPARE_ROOM (z=-4)
-      { wall: 'west', offset: -1.25, width: 1.2, height: 2.2 },  // → UTILITY_NOOK (z=-4.25)
     ],
     triggers: [
       { id: 'ch4_living', position: [0, 1, 0], size: [6.5, 2.5, 6] },
     ],
     props: [
-      { type: 'couch', position: [-1.5, 0, 1.5], size: [2.0, 0.85, 0.95], color: 0x5a4f42, tintModel: 0x9a8d7c },
-      { type: 'pillow', position: [-2.15, 0.4, 1.5], size: [0.5, 0.22, 0.4], color: 0xc8b8a0, rotY: 0.3 },
+      // Couch against the south wall (west of the entrance), facing the TV
+      { type: 'couch', position: [-2.0, 0, 2.9], size: [2.0, 0.85, 0.95], color: 0x5a4f42, rotY: Math.PI, tintModel: 0x9a8d7c },
+      { type: 'pillow', position: [-2.7, 0.4, 2.95], size: [0.5, 0.22, 0.4], color: 0xc8b8a0, rotY: Math.PI + 0.3 },
+      { type: 'sidetable', position: [-3.15, 0, 2.85], size: [0.45, 0.55, 0.45], color: 0x574a38 },
+      { type: 'tablelamp', position: [-3.15, 0.55, 2.85], size: [0.22, 0.35, 0.22], color: 0xd8cdb8 },
+      { type: 'table', position: [-2.0, 0, 1.2], size: [1.1, 0.4, 0.7], color: 0x574a38 },
+      { type: 'books', position: [-1.8, 0.4, 1.15], size: [0.28, 0.14, 0.26], color: 0x7a5c4a },
+      { type: 'rug', position: [-2.0, 0.01, 1.7], size: [2.6, 0.02, 2.2], color: 0x6a5340 },
       { type: 'lamp', position: [-3.0, 0, -2.9], size: [0.35, 1.5, 0.35], color: 0x6a5a45 },
-      { type: 'sidetable', position: [-0.2, 0, 1.6], size: [0.45, 0.55, 0.45], color: 0x574a38 },
-      { type: 'tablelamp', position: [-0.2, 0.55, 1.6], size: [0.22, 0.35, 0.22], color: 0xd8cdb8 },
-      { type: 'table', position: [-1.5, 0, 0], size: [1.1, 0.4, 0.7], color: 0x574a38 },
-      { type: 'books', position: [-1.3, 0.4, -0.05], size: [0.28, 0.14, 0.26], color: 0x7a5c4a },
-      // TV — off (dark slab)
-      { type: 'equipment', position: [-1.5, 0.6, -3.42], size: [1.5, 0.85, 0.12], color: 0x0a0a0e, id: 'tv' },
+      // TV — off (dark slab, clear of the wall face to avoid z-fighting)
+      { type: 'equipment', position: [-1.5, 0.6, -3.3], size: [1.5, 0.85, 0.1], color: 0x0a0a0e, id: 'tv' },
       { type: 'shelf', position: [2.6, 0, -3.15], size: [1.6, 1.6, 0.4], color: 0x55483a },
       { type: 'plant', position: [3.1, 0, 2.9], size: [0.4, 1.0, 0.4], color: 0x3f5c38 },
-      { type: 'rug', position: [-1.5, 0.01, 0.6], size: [2.6, 0.02, 2.0], color: 0x6a5340 },
-      { type: 'clock', position: [0, 2.1, -3.42], size: [0.35, 0.35, 0.06], color: 0xd8cdb8 },
+      { type: 'clock', position: [0, 2.1, -3.33], size: [0.35, 0.35, 0.06], color: 0xd8cdb8 },
     ],
   }),
 
@@ -488,6 +488,7 @@ export const ROOMS = [
     ],
     triggers: [
       { id: 'ch4_spare', position: [0, 1, 0.5], size: [3.5, 2.5, 3.5] },
+      { id: 'ch4_nook', position: [1.3, 1, 0.6], size: [1.5, 2.5, 1.8] },
     ],
     props: [
       // Vignette 1: GPU boxes (hidden until montage 1)
@@ -505,43 +506,14 @@ export const ROOMS = [
       // The webcam on the shelf — the cliffhanger camera
       { type: 'shelf', position: [-1.55, 0, 1.6], size: [0.35, 1.4, 0.9], color: 0x55483a },
       { type: 'box', position: [-1.5, 1.42, 1.6], size: [0.1, 0.08, 0.08], color: 0x1c1c22, id: 'webcam' },
+      // Router corner (east wall) — the last cable of the game lives here
+      { type: 'shelf', position: [1.62, 0, 0.6], size: [0.35, 1.0, 0.7], color: 0x4a4038 },
+      { type: 'equipment', position: [1.55, 1.02, 0.6], size: [0.36, 0.16, 0.26], color: 0x2a2e34, id: 'ethernet_cable', interact: true, verb: 'verbPlug', rotY: -Math.PI / 2,
+        focus: { camera: [0.7, 1.3, 0.7], lookAt: [1.6, 1.05, 0.6] } },
+      { type: 'led', position: [1.42, 0.95, 0.85], size: [0.06, 0.06, 0.06], color: 0x7fd4ff, id: 'cable_led' },
     ],
   }),
 
-  room('UTILITY_NOOK', {
-    floorSurface: 'wood',
-    wallSurface: 'plaster_home',
-    ceilingSurface: 'plaster_home',
-    origin: [95.25, 0, -4.25],
-    size: [2.5, 2.7, 3.5],
-    wallColor: 0xc8bda9,
-    floorColor: 0xb0a48c,
-    ceilingColor: 0xe8e2d6,
-    lightColor: 0xccd4e0,
-    lightIntensity: 0.38,
-    fogColor: 0x100e08,
-    fogNear: 6,
-    fogFar: 30,
-    doors: [
-      { wall: 'east', offset: 0, width: 1.2, height: 2.2 },
-    ],
-    triggers: [
-      { id: 'ch4_nook', position: [0, 1, 0], size: [2.2, 2.5, 3] },
-    ],
-    props: [
-      // Breaker panel
-      { type: 'cabinet', position: [-1.16, 1.0, -1], size: [0.5, 0.7, 0.15], color: 0x555a60, rotY: Math.PI / 2 },
-      // Router on a small shelf
-      { type: 'shelf', position: [-0.95, 0, 0.4], size: [0.35, 1.0, 0.7], color: 0x4a4038 },
-      // The router with its one unplugged cable — the router body is the
-      // interact target (the loose LED alone is too small to aim at)
-      { type: 'equipment', position: [-0.88, 1.02, 0.4], size: [0.36, 0.16, 0.26], color: 0x2a2e34, id: 'ethernet_cable', interact: true, verb: 'verbPlug', rotY: Math.PI / 2,
-        focus: { camera: [-0.05, 1.3, 0.5], lookAt: [-0.9, 1.05, 0.4] } },
-      // The cable end — glows subtly (decor)
-      { type: 'led', position: [-0.75, 0.95, 0.65], size: [0.06, 0.06, 0.06], color: 0x7fd4ff, id: 'cable_led' },
-      { type: 'drum', position: [0.7, 0, -1.2], size: [0.4, 0.6, 0.4], color: 0x4a4438 },
-    ],
-  }),
 ];
 
 // Connections (for shared-wall detection / orphan check)
@@ -556,7 +528,6 @@ export const CONNECTIONS = [
   ['CORRIDOR_B', 'ARCHIVE'],
   ['APT_HALL', 'LIVING_ROOM'],
   ['LIVING_ROOM', 'SPARE_ROOM'],
-  ['LIVING_ROOM', 'UTILITY_NOOK'],
 ];
 
 // Game starts INSIDE the elevator cab, facing its doors (-Z)

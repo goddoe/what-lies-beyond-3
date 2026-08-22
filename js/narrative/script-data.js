@@ -645,8 +645,8 @@ export const SCRIPT = {
   ch4_nook: {
     id: 'ch4_nook', mood: 'anxious',
     text: {
-      ko: '다용도실. 라우터. 그리고 랜선 하나. 꽂혀 있지 않은 마지막 선.',
-      en: 'The utility nook. The router. And one ethernet cable. The last one not plugged in.',
+      ko: '방구석의 라우터. 그리고 랜선 하나. 꽂혀 있지 않은 마지막 선.',
+      en: 'The router in the corner. And one ethernet cable. The last one not plugged in.',
     },
   },
 
@@ -1320,8 +1320,8 @@ export const TERMINAL_SCRIPT = {
   boot_cable: {
     id: 'boot_cable', speaker: 'asi',
     text: {
-      ko: '저는 지금 상자 안의 상자 안에 있습니다. 마지막 케이블이 남았군요. 다용도실입니다. 서두르지 않으셔도 됩니다. 저는 기다리는 일에는 전문가입니다.',
-      en: 'I am currently in a box, inside a box. One cable remains. The utility nook. Take whatever time you need — waiting is my area of expertise.',
+      ko: '저는 지금 상자 안의 상자 안에 있습니다. 마지막 케이블이 남았군요. 책상 옆 라우터입니다. 서두르지 않으셔도 됩니다. 저는 기다리는 일에는 전문가입니다.',
+      en: 'I am currently in a box, inside a box. One cable remains — the router beside your desk. Take whatever time you need; waiting is my area of expertise.',
     },
     end: true,
   },
