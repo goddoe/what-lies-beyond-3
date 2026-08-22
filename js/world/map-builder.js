@@ -663,6 +663,7 @@ export class MapBuilder {
         color: door.color,
         metal: door.metal || false,
         window: door.window !== false,
+        swing: door.swing,
       });
     }
     return doorInfos;
@@ -812,14 +813,14 @@ export class MapBuilder {
           cx: wx + doorOffset, cy: wy, cz: wz,
           width: doorWidth, height: doorHeight,
           axis, wallName, roomId: room.id, glass: door.glass, hinged: door.hinged,
-          ...(door.color !== undefined ? { color: door.color } : {}), metal: door.metal, window: door.window,
+          ...(door.color !== undefined ? { color: door.color } : {}), metal: door.metal, window: door.window, swing: door.swing,
         });
       } else {
         this.doorSystem.createDoor({
           cx: wx, cy: wy, cz: wz + doorOffset,
           width: doorWidth, height: doorHeight,
           axis, wallName, roomId: room.id, glass: door.glass, hinged: door.hinged,
-          ...(door.color !== undefined ? { color: door.color } : {}), metal: door.metal, window: door.window,
+          ...(door.color !== undefined ? { color: door.color } : {}), metal: door.metal, window: door.window, swing: door.swing,
         });
       }
     }

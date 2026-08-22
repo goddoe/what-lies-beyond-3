@@ -441,7 +441,7 @@ export const ROOMS = [
     fogFar: 35,
     doors: [
       { wall: 'north', offset: 0, width: 1.4, height: 2.2, hinged: true },
-      { wall: 'west', offset: -0.5, width: 1.1, height: 2.1, hinged: true },   // → BATHROOM (z=3.0)
+      { wall: 'west', offset: -0.5, width: 1.1, height: 2.1, hinged: true, swing: -1 },   // → BATHROOM (z=3.0); swings into the hall, clear of the toilet
     ],
     triggers: [
       { id: 'ch4_arrive', position: [0, 1, 1.5], size: [2.8, 2.5, 2.5] },
@@ -591,7 +591,7 @@ export const ROOMS = [
     fogNear: 8,
     fogFar: 35,
     doors: [
-      { wall: 'east', offset: 0, width: 1.1, height: 2.1, hinged: true },      // → APT_HALL
+      { wall: 'east', offset: 0, width: 1.1, height: 2.1, hinged: true, swing: -1 },      // → APT_HALL; swings into the hall, clear of the toilet
     ],
     props: [
       // Sink counter + mirror on the north wall

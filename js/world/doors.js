@@ -110,7 +110,7 @@ export class DoorSystem {
   }
 
   createDoor({ cx, cy, cz, width, height, axis, wallName, roomId, glass = false, hinged = false,
-               color = 0xcdd2d6, metal = false, window = true }) {
+               color = 0xcdd2d6, metal = false, window = true, swing = 1 }) {
     const door = {
       id: `${roomId}_${wallName}`,
       cx, cy, cz, width, height, axis, wallName, roomId,
@@ -123,6 +123,7 @@ export class DoorSystem {
     door.doorGroup = doorGroup;
 
     if (hinged) {
+      door.swing = swing === -1 ? -1 : 1;
       this._buildHingedDoor(door);
       this.group.add(doorGroup);
       this.doors.push(door);
@@ -362,6 +363,7 @@ export class DoorSystem {
 
     door.hinged = true;
     door.openAngle = Math.PI * 0.58; // ~105°
+    door.swing = door.swing || 1;
 
     // pivot at the door jamb (left edge for N/S walls, near edge for E/W)
     const pivot = new THREE.Group();
@@ -503,7 +505,7 @@ export class DoorSystem {
 
       const k = door.closing ? 1 - ease : ease; // closing runs the motion in reverse
       if (door.hinged) {
-        door.pivot.rotation.y = -door.openAngle * k;
+        door.pivot.rotation.y = -door.openAngle * k * door.swing;
       } else {
         const prop = door.slideAxis; // 'x' or 'z'
         door.panelA.position[prop] = door.panelAStart + (door.panelATarget - door.panelAStart) * k;
