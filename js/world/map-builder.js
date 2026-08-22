@@ -1174,6 +1174,78 @@ export class MapBuilder {
     return group;
   }
 
+  _generateMacScreenMaterial() {
+    // The in-world laptop shows the same fake-macOS desktop the player sees
+    // when they zoom in (wallpaper + menubar + dock).
+    if (this._macScreenMat) return this._macScreenMat;
+    const canvas = document.createElement('canvas');
+    canvas.width = 512; canvas.height = 320;
+    const ctx = canvas.getContext('2d');
+
+    // wallpaper (matches #laptop-os CSS gradients)
+    const base = ctx.createLinearGradient(0, 0, 120, 320);
+    base.addColorStop(0, '#1b2033');
+    base.addColorStop(0.45, '#232a44');
+    base.addColorStop(1, '#2c2440');
+    ctx.fillStyle = base;
+    ctx.fillRect(0, 0, 512, 320);
+    let blob = ctx.createRadialGradient(102, 32, 0, 102, 32, 300);
+    blob.addColorStop(0, 'rgba(52, 64, 107, 0.9)');
+    blob.addColorStop(1, 'rgba(52, 64, 107, 0)');
+    ctx.fillStyle = blob;
+    ctx.fillRect(0, 0, 512, 320);
+    blob = ctx.createRadialGradient(435, 272, 0, 435, 272, 260);
+    blob.addColorStop(0, 'rgba(91, 58, 99, 0.85)');
+    blob.addColorStop(1, 'rgba(91, 58, 99, 0)');
+    ctx.fillStyle = blob;
+    ctx.fillRect(0, 0, 512, 320);
+
+    // menubar
+    ctx.fillStyle = 'rgba(18, 20, 28, 0.72)';
+    ctx.fillRect(0, 0, 512, 18);
+    ctx.fillStyle = 'rgba(240, 242, 248, 0.9)';
+    ctx.font = 'bold 10px sans-serif';
+    ctx.fillText('\uF8FF  Finder', 8, 12);
+    ctx.fillStyle = 'rgba(240, 242, 248, 0.6)';
+    ctx.font = '9px sans-serif';
+    ctx.fillText('파일  편집  보기', 62, 12);
+    ctx.textAlign = 'right';
+    ctx.fillText('▮▮▮▯  20:41', 504, 12);
+    ctx.textAlign = 'left';
+
+    // dock
+    const dockW = 250, dockX = (512 - dockW) / 2, dockY = 276;
+    ctx.fillStyle = 'rgba(30, 32, 44, 0.6)';
+    ctx.beginPath();
+    ctx.roundRect(dockX, dockY, dockW, 36, 10);
+    ctx.fill();
+    const icons = [
+      ['#16181e', '>_', '#7ee787'],
+      ['#2f7ae0', '⊚', '#fff'],
+      ['#ffffff', '✤', '#c73866'],
+      ['#e8eaee', '▤', '#444'],
+      ['#4a92e8', '✉', '#fff'],
+      ['#f2f2f4', '▦', '#d0453a'],
+    ];
+    icons.forEach((ic, i) => {
+      const x = dockX + 12 + i * 38;
+      ctx.fillStyle = ic[0];
+      ctx.beginPath();
+      ctx.roundRect(x, dockY + 5, 26, 26, 7);
+      ctx.fill();
+      ctx.fillStyle = ic[2];
+      ctx.font = 'bold 13px sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText(ic[1], x + 13, dockY + 23);
+      ctx.textAlign = 'left';
+    });
+
+    const tex = new THREE.CanvasTexture(canvas);
+    tex.colorSpace = THREE.SRGBColorSpace;
+    this._macScreenMat = new THREE.MeshBasicMaterial({ map: tex, toneMapped: false });
+    return this._macScreenMat;
+  }
+
   _generateScreenMaterial(roomId) {
     // OFFICE_WING: blank terminal before lore completion
     if (roomId === 'OFFICE_WING' && !(this.collectedLore && this.collectedLore.size >= 8)) {
@@ -2693,7 +2765,7 @@ export class MapBuilder {
     const bezel = new THREE.Mesh(new THREE.BoxGeometry(sw * 0.985, lidH * 0.97, 0.004), dark);
     bezel.position.set(0, lidH / 2, 0.008);
     lid.add(bezel);
-    const scr = new THREE.Mesh(new THREE.PlaneGeometry(sw * 0.93, lidH * 0.86), this._generateScreenMaterial(roomId));
+    const scr = new THREE.Mesh(new THREE.PlaneGeometry(sw * 0.93, lidH * 0.86), this._generateMacScreenMaterial());
     scr.position.set(0, lidH / 2, 0.012);
     lid.add(scr);
     group.add(lid);
