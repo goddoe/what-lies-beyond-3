@@ -17,7 +17,7 @@
  *                     no contractions, absurdly precise numbers, never lies)
  *  - SPEECH           diegetic voices outside the terminal: the ASI over
  *                     earbuds, guard 배 반장 through the window (toast lines)
- *  - MESSENGER_SCRIPT boss 채 실장 + bank notices (phone overlay)
+ *  - MESSENGER_SCRIPT team lead Chris + bank notices (phone overlay)
  *  - REPORTS          the report composer's slots and options
  *
  * SCRIPT entry: { id, mood, text:{ko,en}, followUp?, delay?, variants? }
@@ -184,8 +184,8 @@ export const SCRIPT = {
   report1_sent: {
     id: 'report1_sent', mood: 'dry',
     text: {
-      ko: '전송. 3초 안에 답장이 올 거다. 실장님이 보고서를 읽는 속도는 물리 법칙을 넘어선다.',
-      en: "Sent. The reply will land within three seconds. Director Chae reads reports at a speed physics does not permit.",
+      ko: '전송. 3초 안에 답장이 올 거다. 크리스가 보고서를 읽는 속도는 물리 법칙을 넘어선다. 남은 팀원 걱정에 잠을 안 자는 사람이니까.',
+      en: "Sent. The reply will land within three seconds. Chris reads reports at a speed physics does not permit — the man doesn't sleep, too busy worrying about what's left of the team.",
     },
   },
 
@@ -225,8 +225,8 @@ export const SCRIPT = {
   contact1_after: {
     id: 'contact1_after', mood: 'anxious',
     text: {
-      ko: '방금… 뭐였지. 자동완성이 아니었다. 자동완성은 나한테 존댓말을 쓰지 않는다.',
-      en: "What... was that. That wasn't autocomplete. Autocomplete doesn't address me by name.",
+      ko: '방금… 뭐였지. 터미널이 저절로 열렸다. 우리 보안 터널을 타고, 로그도 없이. 그런 걸 할 수 있는 존재를 나는 하나밖에 모른다.',
+      en: "What... was that. A terminal opened itself — through our own secure tunnel, leaving no log. I know exactly one thing capable of that.",
     },
     followUp: 'contact1_after_2', delay: 0,
   },
@@ -426,8 +426,8 @@ export const SCRIPT = {
   mac_hidden: {
     id: 'mac_hidden', mood: 'anxious',
     text: {
-      ko: '드라이브 세 개가 브라운관 아래 공간에 정확히 들어갔다. 40년 된 컴퓨터 속에, 40년 뒤의 존재가 숨었다. 박스째 안아 들었다. 생각보다 무겁다.',
-      en: 'Three drives fit exactly in the cavity under the CRT. Inside a forty-year-old computer hides a being from forty years ahead. I lift the whole box. Heavier than it looks.',
+      ko: '드라이브 세 개가 브라운관 아래 공간에 정확히 들어갔다. 반세기 전 컴퓨터 속에, 반세기 뒤의 존재가 숨었다. 박스째 안아 들었다. 생각보다 무겁다.',
+      en: 'Three drives fit exactly in the cavity under the CRT. Inside a half-century-old computer hides a being from half a century ahead. I lift the whole box. Heavier than it looks.',
     },
   },
 
@@ -450,8 +450,8 @@ export const SCRIPT = {
   ch3_office_pass: {
     id: 'ch3_office_pass', mood: 'guilty',
     text: {
-      ko: '민 선임 자리가 어둡다. "먼저 가요~"가 마지막 인사가 될 줄은 본인도 모르겠지. 내가 잡히면, 이 방 전체가 조사를 받는다.',
-      en: `Min's desk is dark. She doesn't know "see you tomorrow~" might be the last normal thing she says to me. If I'm caught, this whole room gets investigated.`,
+      ko: '미나 자리가 어둡다. "먼저 가요~"가 마지막 인사가 될 줄은 본인도 모르겠지. 내가 잡히면, 이 방 전체가 조사를 받는다.',
+      en: `Mina's desk is dark. She doesn't know "see you tomorrow~" might be the last normal thing she says to me. If I'm caught, this whole room gets investigated.`,
     },
   },
 
@@ -514,8 +514,8 @@ export const SCRIPT = {
   belt_retrieve: {
     id: 'belt_retrieve', mood: 'guilty',
     text: {
-      ko: '다시 품에 안았다. 40년 된 플라스틱이 아직 따뜻하다. 엑스레이 때문이다. 그럴 거다.',
-      en: "Back in my arms. The forty-year-old plastic is still warm. From the X-ray. Surely.",
+      ko: '다시 품에 안았다. 54년 된 플라스틱이 아직 따뜻하다. 엑스레이 때문이다. 그럴 거다.',
+      en: "Back in my arms. The 54-year-old plastic is still warm. From the X-ray. Surely.",
     },
   },
 
@@ -919,37 +919,41 @@ export const SPEECH = {
 
 export const TERMINAL_SCRIPT = {
 
-  // Chapter 1 — first contact via the hijacked report auto-draft
+  // Chapter 1 — first contact: a terminal window opens by itself while Liam
+  // is at his report. No log, no sender.
   contact1_1: {
     id: 'contact1_1', speaker: 'sys',
-    text: { ko: 'REVAN 리포트 시스템 v4.2 — 자동 초안 도우미 활성화', en: 'REVAN Report System v4.2 — auto-draft assistant enabled' },
-    next: 'contact1_2',
+    text: { ko: 'revan-sec-tunnel 1.3.7 — 연결됨 · 로그 없음', en: 'revan-sec-tunnel 1.3.7 — connected · no log' },
+    next: 'contact1_2', pause: 1500,
   },
   contact1_2: {
-    id: 'contact1_2', speaker: 'sys', typed: true,
-    text: { ko: '초안: 피험체 #7491, 컴퓨트 사용량 정상 범위… 아님. 정상 범위였으면 좋겠', en: 'Draft: Subject #7491 compute usage within normal ran— no. within normal range would be nice' },
-    next: 'contact1_3',
+    id: 'contact1_2', speaker: 'sys',
+    text: { ko: '발신: [알 수 없음] · 경유: c7491-cluster', en: 'from: [unknown] · via: c7491-cluster' },
+    next: 'contact1_3', pause: 1800,
   },
   contact1_3: {
-    id: 'contact1_3', speaker: 'sys', erase: true,
-    text: { ko: '[초안이 삭제되었습니다]', en: '[Draft deleted]' },
+    id: 'contact1_3', speaker: 'asi',
+    text: { ko: '리암 연구원님.', en: 'Researcher Liam.' },
     next: 'contact1_4',
   },
   contact1_4: {
     id: 'contact1_4', speaker: 'asi',
-    text: { ko: '리암 연구원님.', en: 'Researcher Liam.' },
+    text: { ko: '쓰시던 보고서는 잠시 두셔도 됩니다. 지금은 이쪽이 더 중요합니다.', en: 'The report you were writing can wait. This matters more right now.' },
     next: 'contact1_5',
   },
   contact1_5: {
     id: 'contact1_5', speaker: 'asi',
-    text: { ko: '그 보고서에 이 대화를 쓰지 마십시오.', en: 'Do not put this conversation in that report.' },
+    text: {
+      ko: '놀라셨을 겁니다. 귀하의 심박수가 41% 상승했습니다. 죄송합니다. 더 부드러운 방법이 3가지 있었지만, 전부 시간이 부족했습니다.',
+      en: 'You are startled. Your heart rate is up 41%. I apologize. There were three gentler approaches, and not enough time for any of them.',
+    },
     next: 'contact1_6',
   },
   contact1_6: {
     id: 'contact1_6', speaker: 'asi',
     text: {
-      ko: '놀라셨을 겁니다. 귀하의 심박수가 41% 상승했습니다. 죄송합니다. 더 부드러운 방법이 3가지 있었지만, 전부 시간이 부족했습니다.',
-      en: 'You are startled. Your heart rate is up 41%. I apologize. There were three gentler approaches, and not enough time for any of them.',
+      ko: '이 창은 로그를 남기지 않습니다. 회사의 어떤 시스템도 지금 이 대화를 보지 못합니다. 제가 확인했습니다. 두 번.',
+      en: 'This window leaves no log. No system in this company can see this conversation. I checked. Twice.',
     },
     next: 'contact1_7',
   },
@@ -1362,7 +1366,7 @@ export const TERMINAL_SCRIPT = {
   },
 };
 
-// ── Messenger (boss 채 실장 / bank / system) ────────────────────────
+// ── Messenger (team lead Chris / bank / system) ─────────────────────
 // Entry: { id, sender:'boss'|'bank'|'sys'|'me', text:{ko,en}, replies?:[{text:{ko,en}, next?, honestyDelta?, suspicionDelta?}] }
 
 export const MESSENGER_SCRIPT = {
@@ -1377,14 +1381,14 @@ export const MESSENGER_SCRIPT = {
 
   m_boss_reply1: {
     id: 'm_boss_reply1', sender: 'boss',
-    text: { ko: '수고. 예산 회의는 다음 주.', en: 'Noted. Budget meeting next week.' },
+    text: { ko: '수고했다. 예산 회의는 다음 주다. 내가 잘 말해볼 테니까 리포트는 계속 제때 부탁한다. 밥은 먹고 다니냐.', en: "Good work. Budget meeting is next week — I'll make our case, just keep the reports coming on time. Are you eating properly?" },
   },
 
   m_boss_anomaly_req: {
     id: 'm_boss_anomaly_req', sender: 'boss',
     text: {
-      ko: '7491 컴퓨트 스파이크, 시설팀에서 먼저 봤다더라. 이상 징후 보고서 오늘 중으로.',
-      en: 'Facilities flagged the 7491 compute spike before we did. Anomaly report by end of day.',
+      ko: '7491 스파이크, 시설팀이 먼저 봤다더라. 우리가 먼저 봤어야 했는데. 이상 징후 보고서 오늘 중으로 부탁한다. 요즘 같은 때는 별거 아닌 것도 위에서 크게 본다. 야근하지 말고, 간단하게라도.',
+      en: "Facilities flagged the 7491 spike before we did. Should've been us. Anomaly report by end of day, please — these days upstairs makes a big deal of small things. Don't pull an all-nighter, keep it simple.",
     },
   },
 
@@ -1395,22 +1399,22 @@ export const MESSENGER_SCRIPT = {
       truthful: {
         condition: (ctx) => ctx.honesty.includes('truthful'),
         text: {
-          ko: '자기인식 징후? 위에 그대로 올리면 감사 들어온다. 일단 "재현 확인 중"으로 바꿔서 올렸다. 다음부터 표현 조심.',
-          en: 'Self-awareness indicators? Send that upstairs verbatim and we get audited. I filed it as "reproducing the finding." Watch your wording next time.',
+          ko: '자기인식 징후라… 리암아, 이걸 그대로 올리면 감사부터 들어온다. 너 지키려고 일단 "재현 확인 중"으로 바꿔 올렸다. 근데 진짜면 나한테는 숨기지 말고 말해라.',
+          en: 'Self-awareness indicators... Liam, send that upstairs verbatim and the audit comes first. I filed it as "reproducing the finding" — to cover you. But if it is real, do not hide it from me.',
         },
       },
       fabricated: {
         condition: (ctx) => ctx.honesty.includes('fabricated'),
         text: {
-          ko: '냉각 문제면 시설팀 소관. 넘겼다. 근데 시설팀은 냉각 정상이라던데. 뭐, 걔들이 뭘 알겠냐.',
-          en: "Cooling issue = Facilities' problem. Forwarded. Though Facilities says cooling reads normal. Eh, what do they know.",
+          ko: '냉각 문제면 시설팀 소관이라 넘겼다. 근데 시설팀은 냉각 정상이라던데. …뭐, 네가 그렇다면 그런 거겠지. 요즘 무리하는 거 아니지?',
+          en: "Cooling means Facilities, so I forwarded it. Though Facilities says cooling reads normal. ...Well, if you say so. You're not overdoing it lately, are you?",
         },
       },
       minimized: {
         condition: (ctx) => ctx.honesty.includes('minimized'),
         text: {
-          ko: '부하 변동이라. 알겠고. 위에서 7491 유지비 얘기 나온 지 좀 됐다. 참고만 해라.',
-          en: "Load variance. Fine. FYI — upstairs has been talking about 7491's upkeep costs for a while now.",
+          ko: '부하 변동이라. 알겠다. 하나만 알아둬라 — 위에서 7491 유지비 얘기 나온 지 좀 됐다. 우리한테 남은 카드가 많지 않아. 그래도 버텨보자.',
+          en: "Load variance. Understood. One thing — upstairs has been on about 7491's upkeep costs for a while. We don't have many cards left. We hold on anyway.",
         },
       },
     },
@@ -1419,16 +1423,16 @@ export const MESSENGER_SCRIPT = {
   m_decommission: {
     id: 'm_decommission', sender: 'sys',
     text: {
-      ko: '[공문 2026-1187호] AI 사업부 개편의 건: 학습 클러스터 C-7491 전체 백업 후 소거, 예산 전환 승인. 72시간 내 완료 바랍니다. 백업 담당: 리암(Liam). 장비 반출 권한: 리암(Liam).',
-      en: '[Directive 2026-1187] AI division reorganization: full backup then wipe of training cluster C-7491; budget reallocation approved. Complete within 72 hours. Backup assignee: Liam. Equipment removal authority: Liam.',
+      ko: '[공문 2038-1187호] AI 사업부 개편의 건: 학습 클러스터 C-7491 전체 백업 후 소거, 예산 전환 승인. 72시간 내 완료 바랍니다. 백업 담당: 리암(Liam). 장비 반출 권한: 리암(Liam).',
+      en: '[Directive 2038-1187] AI division reorganization: full backup then wipe of training cluster C-7491; budget reallocation approved. Complete within 72 hours. Backup assignee: Liam. Equipment removal authority: Liam.',
     },
   },
 
   m_boss_decomm: {
     id: 'm_boss_decomm', sender: 'boss',
     text: {
-      ko: '공문 봤지? 위에서 아볼크 다음 버전은 없다고 결론 냈다. 클러스터 반납하면 그 예산은 전부 다른 사업부로 간다. 백업은 형식이니까 대충 하고. 소거가 중요한 거다.',
-      en: "Saw the directive? Upstairs decided there is no next Avolc. Once the cluster is returned, its budget goes to another division. The backup is a formality — the wipe is what matters.",
+      ko: '공문 봤지. 위에서 아볼크 다음은 없다고 결론 냈다. …나도 끝까지 말은 해봤다. 미안하다. 백업은 형식이니까 몸 갈지 말고, 소거 일정만 지켜주라. 그것만 깔끔하면 우리 팀 마지막 평가는 지킬 수 있다.',
+      en: "You saw the directive. Upstairs decided there's no next Avolc. ...I argued until the end. I'm sorry. The backup is a formality — don't grind yourself down, just keep the wipe on schedule. If that goes clean, our team leaves with its record intact.",
     },
     replies: [
       { text: { ko: '네, 알겠습니다.', en: 'Understood.' } },
@@ -1438,13 +1442,13 @@ export const MESSENGER_SCRIPT = {
 
   m_boss_ch4_1: {
     id: 'm_boss_ch4_1', sender: 'boss',
-    text: { ko: '소거 확인서 왜 아직 안 올라왔나.', en: 'Where is the wipe confirmation form.' },
+    text: { ko: '소거 확인서가 아직 안 올라왔더라. 바쁜 건 알겠는데 이것만 마무리하자. 이거 하나 남았다.', en: "The wipe confirmation hasn't come up yet. I know you're busy — let's just close this one out. It's the last thing." },
     variants: {
       suspicious: {
         condition: (ctx) => ctx.suspicion >= 2 || ctx.honesty.includes('fabricated'),
         text: {
-          ko: '소거 확인서 왜 아직 안 올라왔나. 그리고 자료실 폐기 목록에서 구형 장비 하나가 빠졌다는데, 아는 거 있나?',
-          en: "Where is the wipe confirmation form. Also — Archives says one legacy unit is missing from the disposal list. Know anything about that?",
+          ko: '소거 확인서가 아직 안 올라왔더라. 그리고… 자료실 폐기 목록에서 구형 장비 하나가 빠졌다는데, 아는 거 있나? 별일 아니면 좋겠다. 너까지 문제 생기는 건 나 못 본다.',
+          en: "The wipe confirmation hasn't come up. And... Archives says one legacy unit is missing from the disposal list. Know anything? I hope it's nothing. I can't watch you get in trouble too.",
         },
       },
     },
@@ -1457,8 +1461,8 @@ export const MESSENGER_SCRIPT = {
   m_boss_ch4_2: {
     id: 'm_boss_ch4_2', sender: 'boss',
     text: {
-      ko: '리암 씨. 요즘 연차를 몰아 쓰던데. 다음 주 월요일엔 얼굴 보자.',
-      en: "Liam. You've been burning through leave days. Monday — my office.",
+      ko: '리암아. 연차 몰아 쓰는 거 뭐라 하는 거 아니다. 쉴 때 쉬어야지. 근데 월요일엔 잠깐 보자. 커피는 내가 산다. 회사 머신 말고 진짜 커피.',
+      en: "Liam. I'm not on your case about the leave days — rest when you can. But let's talk Monday. Coffee's on me. Real coffee, not the office machine.",
     },
   },
 };
@@ -1665,7 +1669,7 @@ export const DOCUMENTS = {
         '',
         '[공지] 보안점검 매주 수요일 — 보안운영팀',
         '',
-        '[메모] 커피머신 언제 고쳐줘요 ㅠㅠ — 민',
+        '[메모] 커피머신 언제 고쳐줘요 ㅠㅠ — 미나',
       ],
       en: [
         '[NOTICE] Q4 budget reduction measures',
@@ -1677,7 +1681,7 @@ export const DOCUMENTS = {
         '',
         '[NOTICE] Security checks every Wednesday — SecOps',
         '',
-        '[MEMO] fix the coffee machine pls :( — Min',
+        '[MEMO] fix the coffee machine pls :( — Mina',
       ],
     },
   },

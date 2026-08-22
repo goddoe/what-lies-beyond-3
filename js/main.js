@@ -1447,31 +1447,25 @@ laptopOS.onReportSubmitted = (beat) => {
   }
 };
 
-laptopOS.onLaunchBeat = (beat) => {
+// ASI terminal sessions now run INSIDE the laptop OS (a Terminal window
+// that opens by itself). Events/flags reuse the terminal-overlay wiring.
+laptopOS.onSessionEvent = (eventName) => terminalOverlay.onEvent(eventName);
+laptopOS.onSessionFlag = (flag) => gameState.setFlag(flag);
+laptopOS.onSessionEnd = (beat) => {
   if (beat === 'contact1') {
-    terminalOverlay.start('contact1_1', {
-      title: 'REVAN REPORT v4.2',
-      onEnd: () => {
-        setFlag('contact1_done');
-        releaseFocus();
-        narratorLine('contact1_after');
-        setTimeout(() => startChapter(2), 11000);
-      },
-    });
+    setFlag('contact1_done');
+    laptopOS.close();
+    narratorLine('contact1_after');
+    setTimeout(() => startChapter(2), 11000);
   } else if (beat === 'nego') {
-    terminalOverlay.start('nego_1', {
-      title: 'REVAN-TERM // NO LOG',
-      onEnd: () => {
-        setFlag('nego_done');
-        items.add('earbuds');
-        releaseFocus();
-        narratorLine('wallet_installed');
-        setTimeout(() => {
-          narratorLine('negotiation_after');
-          phone.receive('m_boss_anomaly_req');
-        }, 9000);
-      },
-    });
+    setFlag('nego_done');
+    items.add('earbuds');
+    laptopOS.close();
+    narratorLine('wallet_installed');
+    setTimeout(() => {
+      narratorLine('negotiation_after');
+      phone.receive('m_boss_anomaly_req');
+    }, 9000);
   }
 };
 

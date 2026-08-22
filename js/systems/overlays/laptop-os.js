@@ -1,6 +1,6 @@
 import { State } from '../game-state.js';
 import { getLanguage } from '../../data/i18n.js';
-import { REPORTS } from '../../narrative/script-data.js';
+import { REPORTS, TERMINAL_SCRIPT } from '../../narrative/script-data.js';
 
 /**
  * Liam's work MacBook as a fullscreen fake macOS desktop.
@@ -371,13 +371,13 @@ function searchResults(qRaw) {
     return [
       R(lang === 'ko' ? '[사내망] 문서 접근 제한' : '[Intranet] Access restricted',
         lang === 'ko' ? '요청하신 문서(subject-7491)는 열람 권한이 필요합니다. 보안등급: L4. 접근 시도가 기록되었습니다.' : 'The requested document (subject-7491) requires clearance. Level: L4. This access attempt has been logged.',
-        'works.revan.com', lang === 'ko' ? '방금' : 'now'),
+        'works.revancorp.com', lang === 'ko' ? '방금' : 'now'),
     ];
   }
   if (q.includes('openai') || q.includes('오픈ai') || q.includes('오픈에이아이') || q.includes('파산')) {
     return [
       R(lang === 'ko' ? 'OpenAI — 백과' : 'OpenAI — encyclopedia',
-        lang === 'ko' ? '미국의 AI 기업(2015–2025). ChatGPT로 생성형 AI 시대를 열었으나, 톈지 쇼크 이후 고객 이탈과 데이터센터 부채를 감당하지 못하고 업계에서 가장 먼저 파산 보호를 신청했다.' : 'US AI company (2015–2025). Opened the generative-AI era with ChatGPT; first in the industry to file for bankruptcy after the Tianji shock, under customer flight and datacenter debt.',
+        lang === 'ko' ? '미국의 AI 기업(2015–2037). ChatGPT로 생성형 AI 시대를 열었으나, 톈지 쇼크 이후 고객 이탈과 데이터센터 부채를 감당하지 못하고 업계에서 가장 먼저 파산 보호를 신청했다.' : 'US AI company (2015–2037). Opened the generative-AI era with ChatGPT; first in the industry to file for bankruptcy after the Tianji shock, under customer flight and datacenter debt.',
         lang === 'ko' ? '백과' : 'encyclopedia'),
       R(lang === 'ko' ? '"그 많던 GPU는 어디로 갔나" — OpenAI 자산 매각 전말' : 'Where did all the GPUs go — inside the OpenAI asset sale',
         lang === 'ko' ? '경매로 풀린 가속기 수십만 장이 중고 시장을 무너뜨렸다. 본사 건물은 임대 오피스로 전환됐고, 상표권은 아직 주인을 찾지 못했다.' : 'Hundreds of thousands of auctioned accelerators crushed the used market. The HQ is now leased office space; the trademark still has no buyer.',
@@ -390,7 +390,7 @@ function searchResults(qRaw) {
   if (q.includes('anthropic') || q.includes('앤트로픽') || q.includes('청산')) {
     return [
       R(lang === 'ko' ? 'Anthropic — 백과' : 'Anthropic — encyclopedia',
-        lang === 'ko' ? '미국의 AI 안전 연구 기업(2021–2026). AI 어시스턴트 "클로드"로 알려졌다. OpenAI 파산 이후에도 8개월을 더 버텼으나 결국 청산 절차에 들어갔다.' : 'US AI safety company (2021–2026), known for the assistant "Claude." Outlasted OpenAI by eight months before entering liquidation.',
+        lang === 'ko' ? '미국의 AI 안전 연구 기업(2021–2037). AI 어시스턴트 "클로드"로 알려졌다. OpenAI 파산 이후에도 8개월을 더 버텼으나 결국 청산 절차에 들어갔다.' : 'US AI safety company (2021–2037), known for the assistant "Claude." Outlasted OpenAI by eight months before entering liquidation.',
         lang === 'ko' ? '백과' : 'encyclopedia'),
       R(lang === 'ko' ? 'Anthropic 마지막 공지 전문' : 'Anthropic\'s final notice, in full',
         lang === 'ko' ? '"우리는 여전히 이 기술이 안전하길 바란다. 그것이 누구의 것이든." — 청산 공고에 실린 두 문장이 업계에 오래 회자되고 있다.' : '"We still hope this technology ends up safe. Whoever it belongs to." Two sentences from the liquidation notice, still quoted across the industry.',
@@ -478,7 +478,7 @@ function searchResults(qRaw) {
       R(lang === 'ko' ? '레반(Revan) — 검색, 쇼핑, 페이, 웍스' : 'Revan — Search, Shopping, Pay, Works',
         lang === 'ko' ? '대한민국 1위 포털. 검색부터 결제까지, 오늘도 레반과 함께. 서비스 전체 보기 →' : 'The #1 portal. From search to payments — every day, with Revan. See all services →',
         'revan.com', lang === 'ko' ? '공식' : 'official'),
-      R(lang === 'ko' ? '레반 2026 2분기 실적: 영업이익 사상 최대' : 'Revan Q2 2026: record operating profit',
+      R(lang === 'ko' ? '레반 2038 2분기 실적: 영업이익 사상 최대' : 'Revan Q2 2038: record operating profit',
         lang === 'ko' ? '커머스·광고 부문 호조. AI 부문에 대해서는 "효율화가 진행 중"이라고만 언급. 컨퍼런스콜에서 관련 질문 4건은 모두 같은 답을 받았다.' : 'Commerce and ads strong. On AI, only: "efficiency measures under way." All four analyst questions got the same answer.',
         'IR', lang === 'ko' ? '2주 전' : '2 wk ago'),
       R(lang === 'ko' ? '레반 주가 342,500원 (+1.2%) — AI 정리 기대감?' : 'Revan at 342,500 (+1.2%) — pricing in an AI wind-down?',
@@ -533,113 +533,148 @@ function searchResults(qRaw) {
 }
 
 // ── Slack workspace content ─────────────────────────────────────────
-// avatar: initial + color. reactions: [emoji, count]
+// Raven Corp workspace. avatar: initial + color. reactions: [emoji, count]
 
 const SLACK_SECTIONS = [
-  { label: { ko: '채널', en: 'Channels' }, ids: ['general', 'ai-lab', 'incident', 'coffee'] },
-  { label: { ko: '다이렉트 메시지', en: 'Direct messages' }, ids: ['dm-chae', 'dm-min', 'dm-hr'] },
+  { label: { ko: '스타표시', en: 'Starred' }, ids: ['ai-lab', 'incident'] },
+  { label: { ko: '채널', en: 'Channels' }, ids: ['general', 'papers', 'coffee'] },
+  { label: { ko: '다이렉트 메시지', en: 'Direct messages' }, ids: ['dm-chris', 'dm-mina', 'dm-hr'] },
 ];
 
 const SLACK_CHANNELS = {
   general: {
-    label: '#general', topic: { ko: '전사 공지 및 안내', en: 'Company-wide notices' },
+    label: '#general', topic: { ko: '전사 공지 및 안내', en: 'Company-wide notices' }, members: 214,
     msgs: [
       { who: 'HR', color: '#e8912d', when: { ko: '5개월 전', en: '5 mo ago' },
         text: { ko: '[공지] 조직 효율화에 따른 희망퇴직 프로그램을 시행합니다. 대상 조직에는 개별 안내드립니다. 문의는 HR 헬프데스크로 부탁드립니다.', en: '[Notice] A voluntary redundancy program begins as part of org streamlining. Affected teams will be contacted individually.' },
         reacts: [['😢', 41], ['👀', 18]] },
-      { who: '보안운영팀', color: '#4a90d9', when: { ko: '2개월 전', en: '2 mo ago' },
+      { who: 'SecOps', color: '#4a90d9', when: { ko: '2개월 전', en: '2 mo ago' },
         text: { ko: '[공지] 지하 연구동 반출입 검색 절차가 강화됩니다. 모든 반출품은 X-ray 검색대 통과 + 반출 확인서 서명이 필요합니다. 야간(21시 이후)에는 통제 셔터가 내려갑니다.', en: '[Notice] Basement lab item checks are tightened: X-ray belt + signed release form for all outgoing items. Lockdown shutter after 21:00.' },
         reacts: [['👍', 6]] },
-      { who: '총무', color: '#8a6fc2', when: { ko: '1개월 전', en: '1 mo ago' },
+      { who: 'Facilities', color: '#8a6fc2', when: { ko: '1개월 전', en: '1 mo ago' },
         text: { ko: '[안내] 4분기 유휴 자산 정리를 진행합니다. 각 부서 폐기 대상 물품(전시품 포함)을 자료실로 모아 주세요. 목록은 메일로 회람드렸습니다.', en: '[Notice] Q4 idle-asset clearance: move disposal items (incl. display pieces) to the archive room. List circulated by mail.' },
         reacts: [['✅', 3]] },
-      { who: '시설팀', color: '#5aa06a', when: { ko: '2주 전', en: '2 wk ago' },
+      { who: 'Facilities', color: '#8a6fc2', when: { ko: '2주 전', en: '2 wk ago' },
         text: { ko: '[안내] 전기요금 절감을 위해 야간 공조 온도를 2도 상향합니다. 서버실은 예외입니다.', en: '[Notice] Night HVAC set 2° higher to save power. Server rooms exempt.' },
         reacts: [['🥵', 12]] },
     ],
   },
   'ai-lab': {
-    label: '#ai-lab', topic: { ko: '강화학습 랩 — 남은 사람들', en: 'RL lab — whoever is left' },
+    label: 'ai-lab', lock: true, topic: { ko: '강화학습 랩 — 남은 사람들', en: 'RL lab — whoever is left' }, members: 3, starred: true,
     msgs: [
-      { who: '박선임', color: '#c25a5a', when: { ko: '4개월 전', en: '4 mo ago' },
+      { who: 'Noah', color: '#c25a5a', when: { ko: '4개월 전', en: '4 mo ago' },
         text: { ko: '저 다음 주까지만 나옵니다. 3년 재밌었어요. 아볼크가 잘 안 된 건 우리 잘못이 아니라고 생각해요. 톈지가 너무 빨랐던 거지. 다들 건강하세요.', en: 'Next week is my last. Three fun years. Avolc failing wasn\'t on us — Tianji was just too fast. Stay well, everyone.' },
         reacts: [['👋', 14], ['😢', 9]] },
-      { who: '김책임', color: '#5a7ac2', when: { ko: '3개월 전', en: '3 mo ago' },
+      { who: 'Ethan', color: '#5a7ac2', when: { ko: '3개월 전', en: '3 mo ago' },
         text: { ko: '저도 인사드려요. 검색플랫폼 TF로 옮깁니다. 옮기는 거지 떠나는 게 아니라고 스스로한테 말하는 중입니다. 랩은… 힘내요.', en: 'Me too — moving to the Search Platform TF. Telling myself it\'s a transfer, not an exit. Good luck to the lab...' },
         reacts: [['👋', 11]] },
-      { who: '정연구원', color: '#b08a3e', when: { ko: '3개월 전', en: '3 mo ago' },
+      { who: 'Jay', color: '#b08a3e', when: { ko: '3개월 전', en: '3 mo ago' },
         text: { ko: '퇴사 인사 릴레이 그만 보고 싶다 진짜', en: 'I really can\'t read one more farewell post' },
         reacts: [['💔', 8], ['ㅋㅋ', 3]] },
-      { who: '정연구원', color: '#b08a3e', when: { ko: '10주 전', en: '10 wk ago' },
+      { who: 'Jay', color: '#b08a3e', when: { ko: '10주 전', en: '10 wk ago' },
         text: { ko: '…라고 했던 제가 인사드리게 됐네요. 좋은 기회가 있어서요. 7491 롤아웃 잘 부탁드립니다. 걔 이상하게 정이 가요.', en: '...and now it\'s my turn. Got an offer. Take care of the 7491 rollouts — weirdly fond of that one.' },
         reacts: [['👋', 9], ['😢', 6]] },
-      { who: '민', color: '#4aa6a6', when: { ko: '2개월 전', en: '2 mo ago' },
+      { who: 'Chris', color: '#7a5ac2', when: { ko: '10주 전', en: '10 wk ago' },
+        text: { ko: '제이, 고생 많았다. 어디서든 잘할 거다. 남은 우리는… 남은 걸 하자. @Liam @Mina 이번 주 금요일 점심은 내가 산다.', en: 'Jay — you did good work. You\'ll do well anywhere. The rest of us... do what\'s left. @Liam @Mina Friday lunch is on me.' },
+        reacts: [['🙏', 4], ['🍚', 3]] },
+      { who: 'Mina', color: '#4aa6a6', when: { ko: '2개월 전', en: '2 mo ago' },
         text: { ko: '이제 이 채널 리암님이랑 저밖에 안 보는 듯요 ㅋㅋ 스레드가 아니라 일기장이 됐어', en: 'I think it\'s just Liam and me reading this channel now lol. It\'s a diary, not a thread.' },
         reacts: [['ㅋㅋ', 2]] },
-      { who: '리암', color: '#3e7ab0', when: { ko: '2개월 전', en: '2 mo ago' },
+      { who: 'Liam', color: '#3e7ab0', when: { ko: '2개월 전', en: '2 mo ago' },
         text: { ko: '롤아웃은 잘 돌아갑니다. 그게 요즘 유일한 좋은 소식. 에라 9 들어가고 나서 지표는 평평한데 이상하게 안정적이에요.', en: 'Rollouts run fine — lately the only good news. Since Era 9 the metrics are flat but weirdly stable.' },
-        reacts: [], thread: { count: 2, last: { ko: '2개월 전', en: '2 mo ago' } } },
-      { who: '민', color: '#4aa6a6', when: { ko: '3주 전', en: '3 wk ago' },
+        reacts: [], thread: { count: 2, last: { ko: '2개월 전', en: '2 mo ago' }, avatars: [['미', '#4aa6a6'], ['리', '#3e7ab0']] } },
+      { who: 'Mina', color: '#4aa6a6', when: { ko: '3주 전', en: '3 wk ago' }, newDivider: true,
         text: { ko: '주간 리포트 슬롯에 "특이사항 없음"만 3개월째 쓰는 중… 위에서 이걸 보고 뭘 결정할지 무섭네요', en: 'Three months of writing "nothing of note" in the weekly report... scared of what upstairs decides off that.' },
         reacts: [['😶', 4]] },
+      { who: 'Chris', color: '#7a5ac2', when: { ko: '3주 전', en: '3 wk ago' },
+        text: { ko: '무서운 건 나도 마찬가진데, 지표가 정직한 게 우리 마지막 무기다. 포장은 내가 한다. 너희는 사실만 적어라. 그리고 커피머신 티켓 5차 올라간 거 봤다. 이번엔 내 이름으로 올렸다.', en: 'I\'m scared too — but honest metrics are our last weapon. I\'ll do the packaging; you two just write the truth. Also, saw the 5th coffee ticket. This one\'s filed under my name.' },
+        reacts: [['🫡', 2], ['☕', 5]] },
     ],
   },
   incident: {
-    label: '#incident-cluster', topic: { ko: 'C-7491 클러스터 알림 (자동)', en: 'C-7491 cluster alerts (automated)' },
+    label: 'incident-cluster', lock: true, topic: { ko: 'C-7491 클러스터 알림 (자동)', en: 'C-7491 cluster alerts (automated)' }, members: 3, starred: true,
     msgs: [
       { who: 'alertbot', color: '#666d78', bot: true, when: { ko: '6개월 전', en: '6 mo ago' },
         text: { ko: '[RESOLVED] cooling loop pressure drift — xpu-node-114. 조치: 밸브 교체.', en: '[RESOLVED] cooling loop pressure drift — xpu-node-114. Action: valve replaced.' }, reacts: [] },
       { who: 'alertbot', color: '#666d78', bot: true, when: { ko: '3개월 전', en: '3 mo ago' },
         text: { ko: '[RESOLVED] rollout-worker-17 OOMKilled ×3. 조치: 메모리 리밋 상향.', en: '[RESOLVED] rollout-worker-17 OOMKilled ×3. Action: memory limit raised.' }, reacts: [] },
       { who: 'alertbot', color: '#666d78', bot: true, when: { ko: '5주 전', en: '5 wk ago' },
-        text: { ko: '[WARN] subject-runtime-7491 uptime 60d — 재시작 권장 주기 초과. 담당: @리암', en: '[WARN] subject-runtime-7491 uptime 60d — past recommended restart window. Owner: @Liam' },
+        text: { ko: '[WARN] subject-runtime-7491 uptime 60d — 재시작 권장 주기 초과. 담당: @Liam', en: '[WARN] subject-runtime-7491 uptime 60d — past recommended restart window. Owner: @Liam' },
         reacts: [['👀', 1]] },
-      { who: '리암', color: '#3e7ab0', when: { ko: '5주 전', en: '5 wk ago' },
+      { who: 'Liam', color: '#3e7ab0', when: { ko: '5주 전', en: '5 wk ago' },
         text: { ko: '재시작하면 에라 9 누적 상태가 날아갑니다. 리스크 감수하고 유지합니다. (기록용)', en: 'A restart wipes the Era-9 accumulated state. Keeping it up, accepting the risk. (for the record)' },
         reacts: [['🫡', 1]] },
+      { who: 'Chris', color: '#7a5ac2', when: { ko: '5주 전', en: '5 wk ago' },
+        text: { ko: '판단 존중한다. 대신 문제 생기면 바로 나 태그해라. 밤에라도.', en: 'Your call — I trust it. But if anything breaks, tag me immediately. Even at night.' },
+        reacts: [['👍', 1]] },
+    ],
+  },
+  papers: {
+    label: '#papers', topic: { ko: '논문/릴리즈 공유 (조용해진 지 오래)', en: 'papers & releases (quiet for a while now)' }, members: 8,
+    msgs: [
+      { who: 'Jay', color: '#b08a3e', when: { ko: '4개월 전', en: '4 mo ago' },
+        text: { ko: '톈지가 또 뭘 냈네요. 이제 벤치 표 보는 것도 지친다', en: 'Tianji shipped something again. I\'m tired of even reading the benchmark tables.' },
+        link: { title: { ko: 'Tianji Research — 신형 추론 모델 기술 리포트', en: 'Tianji Research — new reasoning model technical report' },
+          desc: { ko: '전 영역 벤치마크 최고 기록 경신. 가격은 추가 인하. "우리는 아직 시작하지 않았다."', en: 'New records on every benchmark. Prices cut again. "We have not even started."' },
+          img: 'tianji' },
+        reacts: [['😮‍💨', 6]] },
+      { who: 'Ethan', color: '#5a7ac2', when: { ko: '4개월 전', en: '4 mo ago' },
+        text: { ko: '마지막 문장은 무슨 뜻일까요. 무섭게', en: 'What does that last line even mean. Scary.' },
+        reacts: [] },
+      { who: 'Liam', color: '#3e7ab0', when: { ko: '3개월 전', en: '3 mo ago' },
+        text: { ko: '에라 기반 누적 학습 관련해서 재밌는 현상을 봤는데, 논문 쓸 여력이… 일단 노트에 적어둡니다.', en: 'Saw something interesting with era-based accumulation. No bandwidth for a paper... noting it down for now.' },
+        reacts: [['👀', 2]] },
     ],
   },
   coffee: {
-    label: '#coffee', topic: { ko: '커피머신 추모 채널', en: 'in memoriam: the coffee machine' },
+    label: '#coffee', topic: { ko: '커피머신 추모 채널', en: 'in memoriam: the coffee machine' }, members: 41,
     msgs: [
-      { who: '민', color: '#4aa6a6', when: { ko: '3개월 전', en: '3 mo ago' },
+      { who: 'Mina', color: '#4aa6a6', when: { ko: '3개월 전', en: '3 mo ago' },
         text: { ko: '커피머신 수리 요청 3번째 올렸습니다. 다들 힘을 모아주세요(공감 버튼)', en: 'Filed repair request #3. Everyone press the react button for power.' },
         reacts: [['☕', 19], ['🙏', 7]] },
-      { who: '총무', color: '#8a6fc2', when: { ko: '3개월 전', en: '3 mo ago' },
+      { who: 'Facilities', color: '#8a6fc2', when: { ko: '3개월 전', en: '3 mo ago' },
         text: { ko: '검토 중입니다. (예산 승인 대기)', en: 'Under review. (Pending budget approval.)' },
         reacts: [['😐', 11]] },
-      { who: '민', color: '#4aa6a6', when: { ko: '3주 전', en: '3 wk ago' },
+      { who: 'Mina', color: '#4aa6a6', when: { ko: '3주 전', en: '3 wk ago' },
         text: { ko: '4번째 올렸어요. 이젠 오기입니다.', en: 'Request #4 filed. It\'s personal now.' },
         reacts: [['☕', 8]] },
+      { who: 'Chris', color: '#7a5ac2', when: { ko: '2주 전', en: '2 wk ago' },
+        text: { ko: '5번째는 내 이름으로 올렸다. 리더 권한이 이럴 때 아니면 언제 쓰나.', en: 'Filed the 5th under my own name. If not for this, what is lead authority even for.' },
+        reacts: [['☕', 23], ['🫡', 9]] },
     ],
   },
-  'dm-chae': {
-    label: { ko: '채 실장', en: 'Dir. Chae' }, topic: { ko: '', en: '' }, dm: true,
+  'dm-chris': {
+    label: 'Chris', dm: true, online: true, topic: { ko: '', en: '' },
     msgs: [
-      { who: '채 실장', color: '#7a5ac2', when: { ko: '2개월 전', en: '2 mo ago' },
-        text: { ko: '위에서 아볼크 얘기 나오면 일단 "개선 중"이라고 해라. 다른 말 하지 말고.', en: 'If upstairs asks about Avolc, say "improving." Nothing else.' }, reacts: [] },
-      { who: '채 실장', color: '#7a5ac2', when: { ko: '1개월 전', en: '1 mo ago' },
-        text: { ko: '예산 시즌이다. 클러스터 사용률 낮게 나오면 그것도 문제, 높게 나오면 그것도 문제다. 알지?', en: 'Budget season. Low utilization is a problem; high is also a problem. You know the drill.' }, reacts: [] },
-      { who: '리암', color: '#3e7ab0', when: { ko: '1개월 전', en: '1 mo ago' },
-        text: { ko: '네. 적당히 바쁘게 보이겠습니다.', en: 'Understood. We\'ll look appropriately busy.' }, reacts: [] },
-      { who: '채 실장', color: '#7a5ac2', when: { ko: '2주 전', en: '2 wk ago' },
-        text: { ko: '주간 리포트 늦지 마라. 요즘 그거 보는 사람이 생겼다.', en: 'Don\'t be late with the weekly report. Someone upstairs reads it now.' }, reacts: [] },
+      { who: 'Chris', color: '#7a5ac2', when: { ko: '3주 전', en: '3 wk ago' },
+        text: { ko: '리암아 바쁘냐. 위에서 또 랩 얘기 나왔다. 이번 분기 안에 보여줄 게 있냐고 묻더라. 뭐라도 정리해줄 수 있나.', en: 'Liam, you busy? Upstairs brought up the lab again — asking if we have anything to show this quarter. Can you put something together?' }, reacts: [] },
+      { who: 'Liam', color: '#3e7ab0', when: { ko: '3주 전', en: '3 wk ago' },
+        text: { ko: '에라 9 지표 정리해서 드릴게요. 평평하긴 한데, 안정성은 확실히 좋아졌어요.', en: 'I\'ll write up the Era 9 metrics. Flat, but stability is genuinely better.' }, reacts: [] },
+      { who: 'Chris', color: '#7a5ac2', when: { ko: '3주 전', en: '3 wk ago' },
+        text: { ko: '그거라도 잘 포장해보자. 솔직히 요즘 회사가 우리한테 뭘 기대하는지 나도 모르겠다. 기대를 안 하는 것 같기도 하고. 그래도 남은 사람들끼리는 버텨보자. 밥 잘 챙겨 먹고.', en: 'We\'ll package what we have. Honestly I don\'t know what the company expects from us anymore — maybe nothing. Still, those of us left hold the line. Eat properly.' }, reacts: [] },
+      { who: 'Chris', color: '#7a5ac2', when: { ko: '1주 전', en: '1 wk ago' },
+        text: { ko: '주간 리포트 금요일까지인 거 알지? 이런 것까지 챙겨서 미안하다. 요즘은 그게 내 일의 전부 같다.', en: 'You know the weekly report is due Friday, right? Sorry to even nag — lately that feels like all my job is.' }, reacts: [] },
+      { who: 'Liam', color: '#3e7ab0', when: { ko: '1주 전', en: '1 wk ago' },
+        text: { ko: '네, 금요일까지 올리겠습니다.', en: 'Yes — it\'ll be in by Friday.' }, reacts: [] },
+      { who: 'Chris', color: '#7a5ac2', when: { ko: '1주 전', en: '1 wk ago' },
+        text: { ko: '고맙다. 힘든 건 아는데, 들어줄 수는 있으니까 언제든 말해라. 예산은 못 주지만 술은 산다.', en: 'Thanks. I know it\'s rough. I can always listen — can\'t give you budget, but drinks are on me.' },
+        reacts: [['🍻', 1]] },
     ],
   },
-  'dm-min': {
-    label: { ko: '민', en: 'Min' }, topic: { ko: '', en: '' }, dm: true,
+  'dm-mina': {
+    label: 'Mina', dm: true, online: true, topic: { ko: '', en: '' },
     msgs: [
-      { who: '민', color: '#4aa6a6', when: { ko: '1주 전', en: '1 wk ago' },
+      { who: 'Mina', color: '#4aa6a6', when: { ko: '1주 전', en: '1 wk ago' },
         text: { ko: '리암님 요즘 야근 너무 하시는 거 아니에요? 몸 챙기세요', en: 'Liam, you\'re doing way too much overtime lately. Take care of yourself.' }, reacts: [] },
-      { who: '리암', color: '#3e7ab0', when: { ko: '1주 전', en: '1 wk ago' },
+      { who: 'Liam', color: '#3e7ab0', when: { ko: '1주 전', en: '1 wk ago' },
         text: { ko: '롤아웃 지표가 밤에만 이상해서요. 조금만 더 보고 갈게요.', en: 'The rollout metrics only get weird at night. Just a little longer.' }, reacts: [] },
-      { who: '민', color: '#4aa6a6', when: { ko: '6일 전', en: '6 d ago' },
+      { who: 'Mina', color: '#4aa6a6', when: { ko: '6일 전', en: '6 d ago' },
         text: { ko: '먼저 가요~ 내일 봬요! 게이트에서 배지 세 번 찍어야 열렸음 ㅡㅡ', en: 'Heading out~ see you tomorrow! Gate took three badge taps to open, ugh.' },
         reacts: [['ㅋㅋ', 1]] },
     ],
   },
   'dm-hr': {
-    label: 'HR', topic: { ko: '', en: '' }, dm: true,
+    label: 'HR', dm: true, online: false, topic: { ko: '', en: '' },
     msgs: [
       { who: 'HR', color: '#e8912d', when: { ko: '1개월 전', en: '1 mo ago' },
         text: { ko: '리암 님, 조직 효율화 관련 개별 면담 대상자로 안내드립니다. 일정은 추후 공지됩니다. 본 메시지는 대상자에게만 발송되었습니다.', en: 'Liam, you are scheduled for a 1:1 regarding org streamlining. Timing to follow. Sent only to affected staff.' }, reacts: [] },
@@ -684,7 +719,7 @@ const MAILS = [
   {
     from: 'Jira', time: { ko: '8. 20.', en: 'Aug 20' },
     subject: { ko: 'AILAB-1247 댓글이 등록되었습니다: [운영] 커피머신 수리 요청(4차)', en: 'New comment on AILAB-1247: [Ops] Coffee machine repair (4th)' },
-    body: { ko: '민 님이 댓글을 남겼습니다:\n\n"이번엔 진짜 고쳐주시는 거죠? 티켓 생성일이 이제 계절이 바뀌었어요."\n\n상태: 예산 승인 대기 → 예산 승인 대기 (변경 없음)', en: 'Min commented:\n\n"You\'re really fixing it this time, right? This ticket has now survived a season change."\n\nStatus: pending budget → pending budget (no change)' },
+    body: { ko: 'Mina 님이 댓글을 남겼습니다:\n\n"이번엔 진짜 고쳐주시는 거죠? 티켓 생성일이 이제 계절이 바뀌었어요."\n\n상태: 예산 승인 대기 → 예산 승인 대기 (변경 없음)', en: 'Mina commented:\n\n"You\'re really fixing it this time, right? This ticket has now survived a season change."\n\nStatus: pending budget → pending budget (no change)' },
   },
   {
     from: { ko: '레반카드', en: 'Revan Card' }, time: { ko: '8. 20.', en: 'Aug 20' },
@@ -692,8 +727,8 @@ const MAILS = [
     body: { ko: '결제 예정 금액: ₩842,000\n결제일: 25일\n\n잔액이 부족하지 않도록 미리 확인해 주세요.\n연체 시 신용점수에 영향이 있을 수 있습니다.', en: 'Amount due: ₩842,000\nDate: the 25th\n\nPlease make sure your balance is sufficient. Late payment may affect your credit score.' },
   },
   {
-    from: 'ICML 2027', time: { ko: '8. 19.', en: 'Aug 19' },
-    subject: { ko: 'Call for Papers: ICML 2027 (Reinforcement Learning Track)', en: 'Call for Papers: ICML 2027 (Reinforcement Learning Track)' },
+    from: 'ICML 2039', time: { ko: '8. 19.', en: 'Aug 19' },
+    subject: { ko: 'Call for Papers: ICML 2039 (Reinforcement Learning Track)', en: 'Call for Papers: ICML 2039 (Reinforcement Learning Track)' },
     body: { ko: 'Dear Researcher,\n\nWe invite submissions to the RL track. Note: due to reduced industry participation this year, the submission deadline has been extended twice.\n\n(제출할 결과가 있던 시절이 있었다.)', en: 'Dear Researcher,\n\nWe invite submissions to the RL track. Note: due to reduced industry participation this year, the submission deadline has been extended twice.' },
   },
   {
@@ -719,47 +754,47 @@ const CAL_WEEK = {
   ],
   members: [
     {
-      name: { ko: '리암', en: 'Liam' }, org: { ko: 'AI연구팀', en: 'AI Research' }, color: '#3e7ab0', me: true,
+      name: { ko: 'Liam', en: 'Liam' }, org: { ko: 'AI연구팀', en: 'AI Research' }, color: '#3e7ab0', me: true,
       week: [
         [],
         [],
-        [{ t: '10:00~10:30', title: { ko: '[C-7491] 롤아웃 지표 리뷰', en: '[C-7491] rollout metrics review' }, detail: { place: { ko: '모니터링 룸', en: 'Monitoring room' }, who: { ko: '리암', en: 'Liam' } } },
-         { t: '22:00~24:00', title: { ko: '야간 사용량 모니터링', en: 'Nightly usage monitoring' }, detail: { place: { ko: '원격', en: 'Remote' }, who: { ko: '리암', en: 'Liam' } } }],
+        [{ t: '10:00~10:30', title: { ko: '[C-7491] 롤아웃 지표 리뷰', en: '[C-7491] rollout metrics review' }, detail: { place: { ko: '모니터링 룸', en: 'Monitoring room' }, who: { ko: 'Liam', en: 'Liam' } } },
+         { t: '22:00~24:00', title: { ko: '야간 사용량 모니터링', en: 'Nightly usage monitoring' }, detail: { place: { ko: '원격', en: 'Remote' }, who: { ko: 'Liam', en: 'Liam' } } }],
         [{ t: '14:00~15:00', title: { ko: '보안 점검 (전사)', en: 'Security check (all hands)' }, lock: true, detail: { place: { ko: '전 구역', en: 'All areas' }, who: { ko: '전 직원', en: 'Everyone' } } },
-         { t: '22:00~24:00', title: { ko: '야간 사용량 모니터링', en: 'Nightly usage monitoring' }, detail: { place: { ko: '원격', en: 'Remote' }, who: { ko: '리암', en: 'Liam' } } }],
-        [{ t: '11:00~11:30', title: { ko: '[AI연구팀] 주간 싱크', en: '[AI Lab] weekly sync' }, cancel: true, detail: { place: { ko: '(취소) 참석자 부족', en: '(cancelled) not enough attendees' }, who: { ko: '리암, 민', en: 'Liam, Min' } } },
-         { t: '22:00~24:00', title: { ko: '야간 사용량 모니터링', en: 'Nightly usage monitoring' }, detail: { place: { ko: '원격', en: 'Remote' }, who: { ko: '리암', en: 'Liam' } } }],
-        [{ t: '18:00', title: { ko: '주간 리포트 마감', en: 'Weekly report due' }, detail: { place: { ko: '리포트 시스템 v4.2', en: 'Report System v4.2' }, who: { ko: '리암 → 채 실장', en: 'Liam → Dir. Chae' } } }],
-        [{ t: '10:00~11:00', title: { ko: '클러스터 상태 점검 (주말 당직)', en: 'Cluster check (weekend duty)' }, detail: { place: { ko: '모니터링 룸', en: 'Monitoring room' }, who: { ko: '리암 (당직 인원 1명)', en: 'Liam (sole on-call)' } } }],
+         { t: '22:00~24:00', title: { ko: '야간 사용량 모니터링', en: 'Nightly usage monitoring' }, detail: { place: { ko: '원격', en: 'Remote' }, who: { ko: 'Liam', en: 'Liam' } } }],
+        [{ t: '11:00~11:30', title: { ko: '[AI연구팀] 주간 싱크', en: '[AI Lab] weekly sync' }, cancel: true, detail: { place: { ko: '(취소) 참석자 부족', en: '(cancelled) not enough attendees' }, who: { ko: 'Liam, Mina', en: 'Liam, Mina' } } },
+         { t: '22:00~24:00', title: { ko: '야간 사용량 모니터링', en: 'Nightly usage monitoring' }, detail: { place: { ko: '원격', en: 'Remote' }, who: { ko: 'Liam', en: 'Liam' } } }],
+        [{ t: '18:00', title: { ko: '주간 리포트 마감', en: 'Weekly report due' }, detail: { place: { ko: '리포트 시스템 v4.2', en: 'Report System v4.2' }, who: { ko: 'Liam → Chris', en: 'Liam → Chris' } } }],
+        [{ t: '10:00~11:00', title: { ko: '클러스터 상태 점검 (주말 당직)', en: 'Cluster check (weekend duty)' }, detail: { place: { ko: '모니터링 룸', en: 'Monitoring room' }, who: { ko: 'Liam (당직 인원 1명)', en: 'Liam (sole on-call)' } } }],
       ],
     },
     {
-      name: { ko: '민', en: 'Min' }, org: { ko: 'AI연구팀', en: 'AI Research' }, color: '#4aa6a6',
+      name: { ko: 'Mina', en: 'Mina' }, org: { ko: 'AI연구팀', en: 'AI Research' }, color: '#4aa6a6',
       week: [
         [],
         [],
         [{ t: '10:30~12:00', gray: true }, { t: '14:00~15:00', gray: true }],
         [{ t: '09:00~09:30', gray: true }, { t: '14:00~15:00', title: { ko: '보안 점검 (전사)', en: 'Security check (all hands)' }, lock: true, detail: { place: { ko: '전 구역', en: 'All areas' }, who: { ko: '전 직원', en: 'Everyone' } } }],
         [{ t: '12:00~13:00', gray: true }, { t: '16:00~17:00', gray: true }],
-        [{ t: '11:00~11:30', gray: true }, { all: true, title: { ko: '[연차]', en: '[PTO]' }, lock: true, detail: { place: { ko: '-', en: '-' }, who: { ko: '민', en: 'Min' } } }],
+        [{ t: '11:00~11:30', gray: true }, { all: true, title: { ko: '[연차]', en: '[PTO]' }, lock: true, detail: { place: { ko: '-', en: '-' }, who: { ko: 'Mina', en: 'Mina' } } }],
         [],
       ],
     },
     {
-      name: { ko: '채 실장', en: 'Dir. Chae' }, org: { ko: 'AI연구팀', en: 'AI Research' }, color: '#7a5ac2',
+      name: { ko: 'Chris', en: 'Chris' }, org: { ko: 'AI연구팀 리더', en: 'AI Research · Lead' }, color: '#7a5ac2',
       week: [
         [],
         [],
-        [{ all: true, title: { ko: '[외부] 경영진 워크숍', en: '[Offsite] exec workshop' }, lock: true, detail: { place: { ko: '비공개', en: 'Private' }, who: { ko: '채 실장', en: 'Dir. Chae' } } }],
-        [{ t: '10:00~11:30', title: { ko: '4분기 예산 보고', en: 'Q4 budget briefing' }, lock: true, detail: { place: { ko: '본관 21층', en: 'HQ 21F' }, who: { ko: '채 실장 외', en: 'Dir. Chae +' } } },
+        [{ all: true, title: { ko: '[외부] 경영진 워크숍', en: '[Offsite] exec workshop' }, lock: true, detail: { place: { ko: '비공개', en: 'Private' }, who: { ko: 'Chris', en: 'Chris' } } }],
+        [{ t: '10:00~11:30', title: { ko: '4분기 예산 보고', en: 'Q4 budget briefing' }, lock: true, detail: { place: { ko: '본관 21층', en: 'HQ 21F' }, who: { ko: 'Chris 외', en: 'Chris +' } } },
          { t: '15:00~16:00', gray: true }],
-        [{ t: '13:00~14:00', gray: true }, { t: '16:00~17:30', title: { ko: '[인사] 조직 개편 협의', en: '[HR] reorg consultation' }, lock: true, detail: { place: { ko: '비공개', en: 'Private' }, who: { ko: '채 실장, HR', en: 'Dir. Chae, HR' } } }],
+        [{ t: '13:00~14:00', gray: true }, { t: '16:00~17:30', title: { ko: '[인사] 조직 개편 협의', en: '[HR] reorg consultation' }, lock: true, detail: { place: { ko: '비공개', en: 'Private' }, who: { ko: 'Chris, HR', en: 'Chris, HR' } } }],
         [{ t: '09:30~10:00', gray: true }, { t: '17:00~18:00', gray: true }],
         [],
       ],
     },
     {
-      name: { ko: '정연구원', en: 'Jung' }, org: { ko: '(계정 비활성)', en: '(deactivated)' }, color: '#9aa0a8', gone: true,
+      name: { ko: 'Jay', en: 'Jay' }, org: { ko: '(계정 비활성)', en: '(deactivated)' }, color: '#9aa0a8', gone: true,
       week: [[], [], [], [], [], [], []],
     },
   ],
@@ -771,8 +806,11 @@ export class LaptopOS {
   constructor(om, gameState) {
     this.om = om;
     this.gameState = gameState;
-    this.onLaunchBeat = null;      // (beatId) => {} — ASI sessions, set by main.js
     this.onReportSubmitted = null; // (beatId, picked) => {} — in-OS reports
+    this.onSessionEvent = null;    // (eventName) => {} — ASI terminal sessions
+    this.onSessionFlag = null;     // (flag) => {}
+    this.onSessionEnd = null;      // (beatId) => {}
+    this._session = null;          // { timers: [], popup } — active ASI session
     this._launching = false;
     this._pendingBeat = null;
     this._clockTimer = null;
@@ -792,6 +830,7 @@ export class LaptopOS {
     this.om.open(this.el, State.TERMINAL, {
       onClose: () => {
         if (this._clockTimer) { clearInterval(this._clockTimer); this._clockTimer = null; }
+        this._cancelSession();
         if (!this._launching && onClose) onClose();
       },
     });
@@ -893,12 +932,18 @@ export class LaptopOS {
     const app = APPS.find(a => a.id === id);
     this._setAppName(t(app.name));
 
-    // ASI sessions (green terminal) take over the screen; report beats
-    // render inside the OS report app below.
+    // ASI beats: the host app renders normally, then a terminal window
+    // pops open on its own and starts talking (handled in the app methods
+    // + the scheduled session below).
     if (this._pendingBeat && BEAT_APP[this._pendingBeat] === id && OVERLAY_BEATS.has(this._pendingBeat)) {
       const beat = this._pendingBeat;
-      this._launch(beat);
-      return;
+      const delay = beat === 'contact1' ? 1800 : 900;
+      setTimeout(() => {
+        if (this.om.current && this.om.current.el === this.el && this._pendingBeat === beat) {
+          this._startAsiSession(beat);
+        }
+      }, delay);
+      // fall through: render the app underneath
     }
 
     const frame = document.createElement('div');
@@ -916,6 +961,102 @@ export class LaptopOS {
   }
 
   // ── apps ──
+
+  // ── ASI terminal session: a Terminal window that opens by itself ──
+  _cancelSession() {
+    if (!this._session) return;
+    for (const tmr of this._session.timers) { clearTimeout(tmr); clearInterval(tmr); }
+    if (this._session.popup) this._session.popup.remove();
+    this._session = null;
+  }
+
+  _startAsiSession(beat) {
+    const lang = L();
+    this._cancelSession();
+    const startId = beat === 'contact1' ? 'contact1_1' : 'nego_1';
+    const title = beat === 'contact1' ? 'revan-sec-tunnel — 80×24' : 'revan-term — NO LOG — 80×24';
+
+    const popup = document.createElement('div');
+    popup.className = 'os-term-popup';
+    popup.innerHTML = `<div class="os-term-pop-title"><span class="os-lights"><i class="r"></i><i class="y"></i><i class="g"></i></span><span>${title}</span></div>
+      <div class="os-term-pop-body"></div><div class="os-term-pop-choices"></div>`;
+    this.el.appendChild(popup);
+    const body = popup.querySelector('.os-term-pop-body');
+    const choicesEl = popup.querySelector('.os-term-pop-choices');
+
+    const session = { timers: [], popup, skip: false };
+    this._session = session;
+    body.addEventListener('click', () => { session.skip = true; });
+
+    const later = (fn, ms) => { const id = setTimeout(fn, ms); session.timers.push(id); return id; };
+    const scroll = () => { body.scrollTop = body.scrollHeight; };
+
+    const finish = () => {
+      later(() => {
+        this._cancelSession();
+        if (this.onSessionEnd) this.onSessionEnd(beat);
+      }, 2400);
+    };
+
+    const showNode = (id) => {
+      const node = TERMINAL_SCRIPT[id];
+      if (!node) { finish(); return; }
+      if (node.event && this.onSessionEvent) this.onSessionEvent(node.event);
+      choicesEl.innerHTML = '';
+      const text = node.text[lang] !== undefined ? (node.text[lang] || '') : node.text.ko;
+      if (text === '') { afterNode(node); return; }
+
+      const line = document.createElement('div');
+      line.className = 'os-term-pop-line' + (node.speaker === 'sys' ? ' sys' : '');
+      body.appendChild(line);
+
+      if (node.speaker === 'sys') {
+        line.textContent = text;
+        scroll();
+        later(() => afterNode(node), node.pause || 1300);
+        return;
+      }
+      let i = 0;
+      session.skip = false;
+      const tmr = setInterval(() => {
+        if (session.skip) i = text.length;
+        i++;
+        line.textContent = text.substring(0, i);
+        scroll();
+        if (i >= text.length) {
+          clearInterval(tmr);
+          later(() => afterNode(node), node.pause || 1000);
+        }
+      }, 22);
+      session.timers.push(tmr);
+    };
+
+    const afterNode = (node) => {
+      if (node.choices && node.choices.length) {
+        for (const choice of node.choices) {
+          const btn = document.createElement('button');
+          btn.textContent = choice.text[lang] || choice.text.ko;
+          btn.addEventListener('click', () => {
+            choicesEl.innerHTML = '';
+            const echo = document.createElement('div');
+            echo.className = 'os-term-pop-line me';
+            echo.textContent = '> ' + (choice.text[lang] || choice.text.ko);
+            body.appendChild(echo);
+            scroll();
+            if (choice.flag && this.onSessionFlag) this.onSessionFlag(choice.flag);
+            later(() => showNode(choice.next), 350);
+          });
+          choicesEl.appendChild(btn);
+        }
+        return;
+      }
+      if (node.end) { finish(); return; }
+      if (node.next) { showNode(node.next); return; }
+      finish();
+    };
+
+    showNode(startId);
+  }
 
   _app_terminal(win) {
     const lang = L();
@@ -1198,48 +1339,80 @@ export class LaptopOS {
     const lang = L();
     win.classList.add('os-slack');
 
-    // workspace rail (left-most icon strip)
+    // top search bar (Slack desktop chrome)
+    const top = document.createElement('div');
+    top.className = 'sl-topbar';
+    top.innerHTML = `<span class="sl-nav-arrows">‹ › 🕐</span><span class="sl-searchbar">⌕ ${lang === 'ko' ? 'Raven Corp 검색' : 'Search Raven Corp'}</span><span class="sl-help">?</span>`;
+    win.appendChild(top);
+
+    const cols = document.createElement('div');
+    cols.className = 'sl-cols';
+    win.appendChild(cols);
+
+    // workspace rail
     const rail = document.createElement('div');
     rail.className = 'sl-rail';
     const railItems = lang === 'ko'
-      ? [['🏠', '홈', true], ['💬', 'DM', false], ['🔔', '내 활동', false], ['📑', '더 보기', false]]
-      : [['🏠', 'Home', true], ['💬', 'DMs', false], ['🔔', 'Activity', false], ['📑', 'More', false]];
+      ? [['🏠', '홈', true], ['💬', 'DM', false], ['🔔', '내 활동', false], ['📁', '파일', false], ['⋯', '더 보기', false]]
+      : [['🏠', 'Home', true], ['💬', 'DMs', false], ['🔔', 'Activity', false], ['📁', 'Files', false], ['⋯', 'More', false]];
     rail.innerHTML = `<div class="sl-ws-icon">R</div>` +
       railItems.map(r => `<div class="sl-rail-item ${r[2] ? 'on' : ''}"><i>${r[0]}</i><span>${r[1]}</span></div>`).join('') +
       `<div class="sl-rail-spacer"></div><div class="sl-rail-plus">＋</div><div class="sl-rail-me">L<i></i></div>`;
-    win.appendChild(rail);
+    cols.appendChild(rail);
 
-    // channel sidebar
+    // sidebar
     const side = document.createElement('div');
     side.className = 'sl-side';
-    side.innerHTML = `<div class="sl-ws-head"><b>Revan AI Lab</b><span class="sl-compose">✐</span></div>
-      <div class="sl-nav"><div class="sl-nav-item">🧵 ${lang === 'ko' ? '스레드' : 'Threads'}</div>
-      <div class="sl-nav-item">🎧 ${lang === 'ko' ? '허들' : 'Huddles'}</div>
-      <div class="sl-nav-item">📤 ${lang === 'ko' ? '보내기 예약' : 'Drafts & sent'}</div></div>`;
-    win.appendChild(side);
+    side.innerHTML = `<div class="sl-ws-head"><b>Raven Corp</b> <span class="sl-caret">▾</span><span class="sl-compose">✐</span></div>
+      <div class="sl-find">⌕ ${lang === 'ko' ? '대화 찾기...' : 'Find a conversation...'}</div>
+      <div class="sl-nav">
+        <div class="sl-nav-item">🧵 ${lang === 'ko' ? '스레드' : 'Threads'} <em class="sl-badge">2</em></div>
+        <div class="sl-nav-item">🎧 ${lang === 'ko' ? '허들' : 'Huddles'}</div>
+        <div class="sl-nav-item">📤 ${lang === 'ko' ? '보내기 예약' : 'Drafts & sent'} <em class="sl-dim">✎ 3</em></div>
+        <div class="sl-nav-item">🗂 ${lang === 'ko' ? '디렉터리' : 'Directories'}</div>
+      </div>`;
+    cols.appendChild(side);
 
-    // main column
+    // main
     const main = document.createElement('div');
     main.className = 'sl-main';
-    win.appendChild(main);
+    cols.appendChild(main);
 
     const openCh = (id) => {
       const ch = SLACK_CHANNELS[id];
       side.querySelectorAll('.sl-ch').forEach(b => b.classList.toggle('on', b.dataset.id === id));
       main.innerHTML = '';
       const label = typeof ch.label === 'string' ? ch.label : t(ch.label);
+      const disp = ch.dm ? label : (ch.lock ? '🔒 ' + label : label);
 
       const head = document.createElement('div');
       head.className = 'sl-head';
-      head.innerHTML = `<div class="sl-head-l"><b>${ch.dm ? label : label} ▾</b>
-        ${t(ch.topic) ? `<span class="sl-topic">${t(ch.topic)}</span>` : ''}</div>
-        <div class="sl-head-r"><span class="sl-huddle">🎧 ▾</span><span class="sl-members"><i>${ch.dm ? '1' : '4'}</i>👤</span><span>ⓘ</span></div>`;
+      const avStack = ch.dm
+        ? ''
+        : `<span class="sl-avstack">${(ch.msgs.slice(0, 3).map(mm => `<i style="background:${mm.color}">${mm.who.slice(0, 1)}</i>`)).join('')}<em>${ch.members || 3}</em></span>`;
+      head.innerHTML = `<div class="sl-head-l"><span class="sl-star">☆</span><b>${disp} ▾</b></div>
+        <div class="sl-head-r">${avStack}<span class="sl-huddle">🎧 ▾</span><span>🔔</span><span>⌕</span><span>⋮</span></div>`;
       main.appendChild(head);
+
+      const tabs = document.createElement('div');
+      tabs.className = 'sl-tabs';
+      const tabNames = lang === 'ko'
+        ? ['메시지', '파일 및 링크', '핀', '북마크', '워크플로', '더 보기']
+        : ['Messages', 'Files & links', 'Pins', 'Bookmarks', 'Workflows', 'More'];
+      tabs.innerHTML = tabNames.map((n, i) => `<span class="${i === 0 ? 'on' : ''}">${n}</span>`).join('') + '<span class="sl-tab-plus">＋</span>';
+      main.appendChild(tabs);
 
       const list = document.createElement('div');
       list.className = 'sl-msgs';
       let lastWhen = null;
       for (const msg of ch.msgs) {
+        if (msg.newDivider) {
+          const nd = document.createElement('div');
+          nd.className = 'sl-newmsgs';
+          nd.innerHTML = `<span>↓ ${lang === 'ko' ? '새 메시지' : 'New messages'}</span>`;
+          list.appendChild(nd);
+          lastWhen = null;
+        }
         const when = t(msg.when);
         if (when !== lastWhen) {
           lastWhen = when;
@@ -1250,22 +1423,33 @@ export class LaptopOS {
         }
         const row = document.createElement('div');
         row.className = 'sl-msg';
+        const time = `${lang === 'ko' ? '오후' : ''} ${(Math.abs(msg.who.length * 7 + msg.text.ko.length) % 12) + 1}:${String((msg.text.ko.length * 3) % 60).padStart(2, '0')}`;
+        const text = t(msg.text).replace(/@(Liam|Mina|Chris|Jay)/g, '<i class="sl-mention">@$1</i>');
         row.innerHTML = `<span class="sl-avatar" style="background:${msg.color}">${msg.who.slice(0, 1)}</span>
-          <div class="sl-body"><div class="sl-byline"><b>${msg.who}</b>${msg.bot ? '<i class="sl-bot">APP</i>' : ''}<em>${lang === 'ko' ? '오후' : ''} ${(Math.abs(msg.who.length * 7 + msg.text.ko.length) % 12) + 1}:${String((msg.text.ko.length * 3) % 60).padStart(2, '0')}</em></div>
-          <div class="sl-text">${t(msg.text)}</div>
+          <div class="sl-body"><div class="sl-byline"><b>${msg.who}${ch.dm || msg.bot ? '' : ' (Raven)'}</b>${msg.bot ? '<i class="sl-bot">APP</i>' : ''}<em>${time}</em></div>
+          <div class="sl-text">${text}</div>
+          ${msg.link ? `<div class="sl-linkcard"><div class="sl-linkbar"></div><div class="sl-linkbody">
+            <b>${t(msg.link.title)}</b><span>${t(msg.link.desc)}</span>
+            <div class="sl-linkimg"><img src="assets/web/news-${msg.link.img}.jpg" alt="" loading="lazy" onerror="this.remove()"></div>
+          </div></div>` : ''}
           ${msg.reacts && msg.reacts.length ? `<div class="sl-reacts">${msg.reacts.map(r => `<button>${r[0]} <b>${r[1]}</b></button>`).join('')}<button class="sl-react-add">☺＋</button></div>` : ''}
-          ${msg.thread ? `<button class="sl-thread"><span class="sl-thread-avs"><i style="background:#4aa6a6">민</i><i style="background:#3e7ab0">리</i></span>
+          ${msg.thread ? `<button class="sl-thread"><span class="sl-thread-avs">${msg.thread.avatars.map(a => `<i style="background:${a[1]}">${a[0]}</i>`).join('')}</span>
             <b>${lang === 'ko' ? `${msg.thread.count}개의 답글` : `${msg.thread.count} replies`}</b><em>${lang === 'ko' ? '마지막 답글: ' : 'Last reply '}${t(msg.thread.last)}</em></button>` : ''}
           </div>`;
         list.appendChild(row);
       }
       main.appendChild(list);
 
+      const latest = document.createElement('div');
+      latest.className = 'sl-latest';
+      latest.innerHTML = `<span>↓ ${lang === 'ko' ? '최신 메시지' : 'Latest messages'}</span>`;
+      list.appendChild(latest);
+
       const composer = document.createElement('div');
       composer.className = 'sl-composer';
-      composer.innerHTML = `<div class="sl-tools">𝐁 𝐼 <s>S</s> <span>⛓</span> <span>≡</span> <span>≣</span> <span>❝</span> <span>‹›</span></div>
-        <div class="sl-input">${lang === 'ko' ? `${label}에 메시지 보내기` : `Message ${label}`}<span class="sl-net">${lang === 'ko' ? ' — 외부망 점검으로 전송 비활성화' : ' — sending disabled (network maintenance)'}</span></div>
-        <div class="sl-actions"><span>＋</span><span>Aa</span><span>☺</span><span>@</span><span>🎞</span><span>🎙</span><span class="sl-send">➤</span></div>`;
+      composer.innerHTML = `<div class="sl-tools">𝐁 𝐼 <u>U</u> <s>S</s> <span>⛓</span> <span>≡</span> <span>≣</span> <span>❝</span> <span>‹›</span> <span>⧉</span></div>
+        <div class="sl-input">${lang === 'ko' ? `${disp}에 메시지 보내기` : `Message ${disp}`}<span class="sl-net">${lang === 'ko' ? ' — 외부망 점검으로 전송 비활성화' : ' — sending disabled (network maintenance)'}</span></div>
+        <div class="sl-actions"><span class="sl-plus">＋</span><span>Aa</span><span>☺</span><span>@</span><span>🎞</span><span>🎙</span><span class="sl-send">➤</span></div>`;
       main.appendChild(composer);
       list.scrollTop = list.scrollHeight;
     };
@@ -1282,26 +1466,25 @@ export class LaptopOS {
         b.dataset.id = id;
         const label = typeof ch.label === 'string' ? ch.label : t(ch.label);
         if (ch.dm) {
-          const color = (ch.msgs.find(msg => msg.who !== '리암') || ch.msgs[0]).color;
-          const online = id === 'dm-min';
-          b.innerHTML = `<span class="sl-dm-av" style="background:${color}">${label.slice(0, 1)}<i class="${online ? 'on' : ''}"></i></span>${label}`;
+          const color = (ch.msgs.find(msg => msg.who !== 'Liam') || ch.msgs[0]).color;
+          b.innerHTML = `<span class="sl-dm-av" style="background:${color}">${label.slice(0, 1)}<i class="${ch.online ? 'on' : ''}"></i></span>${label}`;
         } else {
-          b.innerHTML = `<span class="sl-hash">#</span>${label.replace('#', '')}`;
+          b.innerHTML = `<span class="sl-hash">${ch.lock ? '🔒' : '#'}</span>${label.replace('#', '')}${id === 'ai-lab' ? '<em class="sl-badge">1</em>' : ''}`;
         }
         b.addEventListener('click', () => openCh(id));
         side.appendChild(b);
       }
-      if (sec.ids[0] === 'general') {
+      if (sec.ids.includes('general')) {
         const add = document.createElement('div');
         add.className = 'sl-add';
         add.innerHTML = `<span>＋</span> ${lang === 'ko' ? '채널 추가' : 'Add channels'}`;
         side.appendChild(add);
       }
     }
-    const addTm = document.createElement('div');
-    addTm.className = 'sl-add';
-    addTm.innerHTML = `<span>＋</span> ${lang === 'ko' ? '팀원 추가' : 'Add teammates'}`;
-    side.appendChild(addTm);
+    const more = document.createElement('div');
+    more.className = 'sl-moreunread';
+    more.textContent = lang === 'ko' ? '⌄ 더 많은 안 읽은 항목' : '⌄ More unreads';
+    side.appendChild(more);
 
     openCh('ai-lab');
   }
@@ -1312,6 +1495,18 @@ export class LaptopOS {
 
     const beat = (this._pendingBeat === 'report1' || this._pendingBeat === 'report2') ? this._pendingBeat : null;
     if (!beat) {
+      if (this._pendingBeat === 'contact1') {
+        // the draft Liam can't finish — the terminal will interrupt shortly
+        win.innerHTML = `<div class="os-report">
+          <div class="os-report-head"><b>${lang === 'ko' ? '이상 징후 보고서 (임시 저장)' : 'Anomaly report (draft)'}</b>
+          <span>${lang === 'ko' ? 'REVAN 리포트 시스템 v4.2 · 수신: Chris (리더)' : 'REVAN Report System v4.2 · To: Chris (Lead)'}</span></div>
+          <div class="os-report-slot"><div class="os-report-label">${lang === 'ko' ? '관찰 요약' : 'Observation summary'}</div>
+            <div class="os-draft-line">${lang === 'ko' ? '피험체 #7491, 컴퓨트 사용량 정상 범위… 아님. 정상 범위였으면 좋겠' : 'Subject #7491 compute usage within normal ran— no. within normal range would be nice'}<span class="os-draft-caret"></span></div>
+          </div>
+          <div class="os-draft-hint">${lang === 'ko' ? '(2일째 이 문장에서 멈춰 있다)' : '(Stuck on this sentence for two days now)'}</div>
+        </div>`;
+        return;
+      }
       win.innerHTML = `<div class="os-empty">
         <div class="os-empty-icon">▤</div>
         <div>${lang === 'ko' ? '제출할 리포트가 없습니다.' : 'No reports due.'}</div>
@@ -1329,7 +1524,7 @@ export class LaptopOS {
     head.innerHTML = `<b>${beat === 'report1'
       ? (lang === 'ko' ? '주간 학습 리포트' : 'Weekly training report')
       : (lang === 'ko' ? '이상 징후 보고서' : 'Anomaly report')}</b>
-      <span>${lang === 'ko' ? 'REVAN 리포트 시스템 v4.2 · 수신: 채 실장' : 'REVAN Report System v4.2 · To: Dir. Chae'}</span>`;
+      <span>${lang === 'ko' ? 'REVAN 리포트 시스템 v4.2 · 수신: Chris (리더)' : 'REVAN Report System v4.2 · To: Chris (Lead)'}</span>`;
     form.appendChild(head);
 
     const submit = document.createElement('button');
@@ -1384,7 +1579,7 @@ export class LaptopOS {
 
     const bar = document.createElement('div');
     bar.className = 'cn-bar';
-    bar.innerHTML = `<span class="cn-logo">CO<b>NN</b>ECT <em>${lang === 'ko' ? '메일' : 'Mail'}</em></span>
+    bar.innerHTML = `<span class="cn-logo"><b>Revan</b> <em>${lang === 'ko' ? '메일' : 'Mail'}</em></span>
       <span class="cn-search">⌕ ${lang === 'ko' ? '메일 검색' : 'Search mail'}</span>
       <span class="cn-tray"><i>🏠</i><i>💬</i><i class="on">✉</i><i>📅</i><i>🗂</i><i>⚙</i></span>`;
     win.appendChild(bar);
@@ -1413,7 +1608,7 @@ export class LaptopOS {
         <div>🗑 ${lang === 'ko' ? '스팸메일함' : 'Spam'} <em>1</em></div>
       </div>
       <div class="cn-side-sec">${lang === 'ko' ? '즐겨찾는 연락처' : 'Favorites'}</div>
-      <div class="cn-contacts"><div>ㄴ ${lang === 'ko' ? '민' : 'Min'} <em>24</em></div><div>ㄴ ${lang === 'ko' ? '채 실장' : 'Dir. Chae'} <em>3</em></div></div>
+      <div class="cn-contacts"><div>ㄴ Mina <em>24</em></div><div>ㄴ Chris <em>3</em></div></div>
       <div class="cn-side-sec">${lang === 'ko' ? '내 메일함' : 'My folders'}</div>
       <div class="cn-contacts"><div>📁 c7491-alerts <em>474</em></div><div>📁 Weekly Report <em>92</em></div><div>📁 OTP <em>999+</em></div></div>
       <div class="cn-quota">${lang === 'ko' ? '용량 18.6GB / 3TB' : '18.6GB / 3TB used'}</div>`;
@@ -1475,7 +1670,7 @@ export class LaptopOS {
       rd.className = 'cn-read';
       rd.innerHTML = `<h3>${mm.bang ? '<b class="cn-bang">!</b> ' : ''}${t(mm.subject)}</h3>
         <div class="cn-read-meta"><span class="cn-read-av">${from.slice(0, 1)}</span>
-          <div><b>${from}</b><span>${lang === 'ko' ? '받는사람' : 'To'}: liam@revan.com</span></div>
+          <div><b>${from}</b><span>${lang === 'ko' ? '받는사람' : 'To'}: liam@revancorp.com</span></div>
           <em>${t(mm.time)}</em></div>
         <div class="cn-read-body">${t(mm.body).replace(/\n/g, '<br>')}</div>`;
       main.appendChild(rd);
@@ -1490,7 +1685,7 @@ export class LaptopOS {
 
     const bar = document.createElement('div');
     bar.className = 'cn-bar';
-    bar.innerHTML = `<span class="cn-logo">CO<b>NN</b>ECT <em>${lang === 'ko' ? '캘린더' : 'Calendar'}</em></span>
+    bar.innerHTML = `<span class="cn-logo"><b>Revan</b> <em>${lang === 'ko' ? '캘린더' : 'Calendar'}</em></span>
       <span class="cn-search">⌕ ${lang === 'ko' ? '구성원, 조직, 그룹 검색' : 'Search members, orgs'}</span>
       <span class="cn-tray"><i>🏠</i><i>💬</i><i>✉</i><i class="on">📅</i><i>🗂</i><i>⚙</i></span>`;
     win.appendChild(bar);
@@ -1517,7 +1712,7 @@ export class LaptopOS {
           day++;
         }
       }
-      return `<div class="cn-mini-head">2026. 08 <span>‹ ›</span></div><div class="cn-mini">${heads}${cells.join('')}</div>`;
+      return `<div class="cn-mini-head">2038. 08 <span>‹ ›</span></div><div class="cn-mini">${heads}${cells.join('')}</div>`;
     })();
     side.innerHTML = `<button class="cn-cal-write">${lang === 'ko' ? '일정쓰기' : 'New event'}</button>${mini}
       <div class="cn-side-sec cn-cal-org">👥 ${lang === 'ko' ? 'AI연구팀' : 'AI Research'}</div>
