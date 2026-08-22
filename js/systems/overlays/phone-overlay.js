@@ -3,7 +3,7 @@ import { getMessage } from '../../narrative/script-data.js';
 import { getLanguage } from '../../data/i18n.js';
 
 const SENDER_NAMES = {
-  boss: { ko: '크리스 (리더)', en: 'Chris (Lead)' },
+  boss: { ko: 'Chris (리더)', en: 'Chris (Lead)' },
   bank: { ko: 'KH은행', en: 'KH Bank' },
   sys:  { ko: 'REVAN 공문', en: 'Revan Directive' },
 };

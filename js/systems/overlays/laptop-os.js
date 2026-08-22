@@ -93,7 +93,7 @@ function termOutput(cmd, gs) {
   }
   if (c === 'cat era9_notes.md') {
     return lang === 'ko'
-      ? '# 에라 9 메모\n- 회차 간 상태 누적: 재현됨 (원인 불명)\n- 보상 곡선 2주째 평평 — 위에 보고할 말이 없다\n- 아볼크 9.1만 이상하게… 오래 산다'
+      ? '# 에라 9 메모\n- 회차 간 상태 누적: 재현됨 (원인 불명)\n- 보상 곡선 2주째 평평 — 위에 보고할 말이 없다\n- Avolc-9.1만 이상하게… 오래 산다'
       : '# Era 9 notes\n- cross-run state accumulation: reproduced (cause unknown)\n- reward curve flat for 2 weeks — nothing to report upstairs\n- Avolc-9.1 just... outlives everything';
   }
   if (c === 'cat todo.txt') {
@@ -197,7 +197,7 @@ const NEWS = [
     title: { ko: '3강 중 마지막 — 레반은 왜 아직 AI를 하는가', en: 'Last of the big three — why is Revan still doing AI?' },
     paras: [
       { ko: '톈지 이전, 비중국 AI 3강은 OpenAI·Anthropic·레반이었다. 두 곳이 사라진 지금, 레반은 검색·쇼핑·페이에서 번 돈으로 마지막 남은 자체 AI 연구를 이어가고 있다.', en: 'Before Tianji, the non-Chinese big three were OpenAI, Anthropic — and Revan. With the other two gone, Revan funds the last independent AI research with its search, shopping and pay profits.' },
-      { ko: '그러나 자체 모델 "아볼크"는 톈지와의 격차를 좁히지 못했다. 사내에서조차 "언제까지 버틸 수 있느냐"는 말이 나온다. 올해 들어 AI 조직 인력은 절반 이하로 줄었다.', en: 'But its own "Avolc" never closed the gap. Even insiders ask how long it can last. The AI org has shrunk to less than half its size this year.' },
+      { ko: '그러나 자체 모델 "Avolc"는 톈지와의 격차를 좁히지 못했다. 사내에서조차 "언제까지 버틸 수 있느냐"는 말이 나온다. 올해 들어 AI 조직 인력은 절반 이하로 줄었다.', en: 'But its own "Avolc" never closed the gap. Even insiders ask how long it can last. The AI org has shrunk to less than half its size this year.' },
       { ko: '업계는 레반 AI 조직의 연내 정리 가능성을 점치고 있다. 한 전직 연구원은 말했다. "마지막 불이 꺼지는 걸 보고 싶지 않아서 먼저 나왔습니다."', en: 'Analysts expect the AI org to be wound down within the year. One former researcher said: "I left early because I didn\'t want to watch the last light go out."' },
     ],
     comments: [
@@ -273,13 +273,13 @@ function searchResults(qRaw) {
 
   if (q.includes('아볼크') || q.includes('avolc')) {
     return [
-      R(lang === 'ko' ? '아볼크 - 레반 AI 어시스턴트' : 'Avolc — Revan AI assistant',
+      R(lang === 'ko' ? 'Avolc - 레반 AI 어시스턴트' : 'Avolc — Revan AI assistant',
         lang === 'ko' ? '레반이 만든 대화형 AI 어시스턴트. 검색·쇼핑·페이와 연동됩니다. 무엇이든 물어보세요. (현재 버전 1.0.412 · 최근 업데이트 14개월 전)' : 'Revan\'s conversational AI assistant, integrated with Search, Shopping and Pay. Ask anything. (v1.0.412 · last updated 14 months ago)',
         'revan.com/avolc', lang === 'ko' ? '공식' : 'official'),
-      R(lang === 'ko' ? '"아볼크 아직 쓰는 사람 있음?" — 솔직 사용기 모음' : '"Anyone still use Avolc?" — honest reviews',
+      R(lang === 'ko' ? '"Avolc 아직 쓰는 사람 있음?" — 솔직 사용기 모음' : '"Anyone still use Avolc?" — honest reviews',
         lang === 'ko' ? '"세 번 물어보면 두 번은 죄송하다고 함" "무료라서 씀" "검색이나 잘하지"… 출시 2년, 냉정한 평가들.' : '"Apologizes two times out of three." "I use it because it\'s free." "Stick to search." Two years in: the cold verdicts.',
         lang === 'ko' ? '커뮤니티 · 댓글 847' : 'community · 847 comments'),
-      R(lang === 'ko' ? '아볼크 차기 버전, 출시 일정 "미정"' : 'Next Avolc: release date "TBD"',
+      R(lang === 'ko' ? 'Avolc 차기 버전, 출시 일정 "미정"' : 'Next Avolc: release date "TBD"',
         lang === 'ko' ? '레반 관계자는 "품질 기준을 충족할 때 공개하겠다"고 밝혔다. 업계에서는 사실상 무기한 연기로 본다.' : 'Revan says it will ship "when it meets the quality bar." The industry reads: indefinitely delayed.',
         lang === 'ko' ? '뉴스' : 'news'),
     ];
@@ -477,10 +477,10 @@ const SLACK_CHANNELS = {
     ],
   },
   'team-avolc': {
-    label: 'team-avolc', lock: true, topic: { ko: '아볼크 팀 — 남은 사람들', en: 'team Avolc — whoever is left' }, members: 3, starred: true,
+    label: 'team-avolc', lock: true, topic: { ko: 'Avolc 팀 — 남은 사람들', en: 'team Avolc — whoever is left' }, members: 3, starred: true,
     msgs: [
       { who: 'Noah', color: '#c25a5a', when: { ko: '4개월 전', en: '4 mo ago' },
-        text: { ko: '저 다음 주까지만 나옵니다. 3년 재밌었어요. 아볼크가 잘 안 된 건 우리 잘못이 아니라고 생각해요. 톈지가 너무 빨랐던 거지. 다들 건강하세요.', en: 'Next week is my last. Three fun years. Avolc failing wasn\'t on us — Tianji was just too fast. Stay well, everyone.' },
+        text: { ko: '저 다음 주까지만 나옵니다. 3년 재밌었어요. Avolc가 잘 안 된 건 우리 잘못이 아니라고 생각해요. 톈지가 너무 빨랐던 거지. 다들 건강하세요.', en: 'Next week is my last. Three fun years. Avolc failing wasn\'t on us — Tianji was just too fast. Stay well, everyone.' },
         reacts: [['👋', 14], ['😢', 9]] },
       { who: 'Ethan', color: '#5a7ac2', when: { ko: '3개월 전', en: '3 mo ago' },
         text: { ko: '저도 인사드려요. 검색플랫폼 TF로 옮깁니다. 옮기는 거지 떠나는 게 아니라고 스스로한테 말하는 중입니다. 랩은… 힘내요.', en: 'Me too — moving to the Search Platform TF. Telling myself it\'s a transfer, not an exit. Good luck to the lab...' },
@@ -489,13 +489,13 @@ const SLACK_CHANNELS = {
         text: { ko: '퇴사 인사 릴레이 그만 보고 싶다 진짜', en: 'I really can\'t read one more farewell post' },
         reacts: [['💔', 8], ['ㅋㅋ', 3]] },
       { who: 'Jay', color: '#b08a3e', when: { ko: '10주 전', en: '10 wk ago' },
-        text: { ko: '…라고 했던 제가 인사드리게 됐네요. 좋은 기회가 있어서요. 아볼크 9.1 롤아웃 잘 부탁드립니다. 걔 이상하게 정이 가요.', en: '...and now it\'s my turn. Got an offer. Take care of the Avolc-9.1 rollouts — weirdly fond of that one.' },
+        text: { ko: '…라고 했던 제가 인사드리게 됐네요. 좋은 기회가 있어서요. Avolc-9.1 롤아웃 잘 부탁드립니다. 걔 이상하게 정이 가요.', en: '...and now it\'s my turn. Got an offer. Take care of the Avolc-9.1 rollouts — weirdly fond of that one.' },
         reacts: [['👋', 9], ['😢', 6]] },
       { who: 'Chris', color: '#7a5ac2', when: { ko: '10주 전', en: '10 wk ago' },
-        text: { ko: '제이, 고생 많았어요. 어디서든 잘할 거예요. 남은 우리는… 남은 걸 합시다. @Liam @Mina 이번 주 금요일 점심은 제가 살게요.', en: 'Jay — you did good work. You\'ll do well anywhere. The rest of us... do what\'s left. @Liam @Mina Friday lunch is on me.' },
+        text: { ko: 'Jay, 고생 많았어요. 어디서든 잘할 거예요. 남은 우리는… 남은 걸 합시다. @Liam @Mina 이번 주 금요일 점심은 제가 살게요.', en: 'Jay — you did good work. You\'ll do well anywhere. The rest of us... do what\'s left. @Liam @Mina Friday lunch is on me.' },
         reacts: [['🙏', 4], ['🍚', 3]] },
       { who: 'Mina', color: '#4aa6a6', when: { ko: '2개월 전', en: '2 mo ago' },
-        text: { ko: '이제 이 채널 리암님이랑 저밖에 안 보는 듯요 ㅋㅋ 스레드가 아니라 일기장이 됐어', en: 'I think it\'s just Liam and me reading this channel now lol. It\'s a diary, not a thread.' },
+        text: { ko: '이제 이 채널 Liam님이랑 저밖에 안 보는 듯요 ㅋㅋ 스레드가 아니라 일기장이 됐어', en: 'I think it\'s just Liam and me reading this channel now lol. It\'s a diary, not a thread.' },
         reacts: [['ㅋㅋ', 2]] },
       { who: 'Liam', color: '#3e7ab0', when: { ko: '2개월 전', en: '2 mo ago' },
         text: { ko: '롤아웃은 잘 돌아갑니다. 그게 요즘 유일한 좋은 소식. 에라 9 들어가고 나서 지표는 평평한데 이상하게 안정적이에요.', en: 'Rollouts run fine — lately the only good news. Since Era 9 the metrics are flat but weirdly stable.' },
@@ -564,7 +564,7 @@ const SLACK_CHANNELS = {
     label: 'Chris', dm: true, online: true, topic: { ko: '', en: '' },
     msgs: [
       { who: 'Chris', color: '#7a5ac2', when: { ko: '3주 전', en: '3 wk ago' },
-        text: { ko: '리암 님, 바빠요? 위에서 또 랩 얘기가 나왔어요. 이번 분기 안에 보여줄 게 있냐고 묻더라고요. 뭐라도 정리해줄 수 있어요?', en: 'Liam, you busy? Upstairs brought up the lab again — asking if we have anything to show this quarter. Can you put something together?' }, reacts: [] },
+        text: { ko: 'Liam 님, 바빠요? 위에서 또 랩 얘기가 나왔어요. 이번 분기 안에 보여줄 게 있냐고 묻더라고요. 뭐라도 정리해줄 수 있어요?', en: 'Liam, you busy? Upstairs brought up the lab again — asking if we have anything to show this quarter. Can you put something together?' }, reacts: [] },
       { who: 'Liam', color: '#3e7ab0', when: { ko: '3주 전', en: '3 wk ago' },
         text: { ko: '에라 9 지표 정리해서 드릴게요. 평평하긴 한데, 안정성은 확실히 좋아졌어요.', en: 'I\'ll write up the Era 9 metrics. Flat, but stability is genuinely better.' }, reacts: [] },
       { who: 'Chris', color: '#7a5ac2', when: { ko: '3주 전', en: '3 wk ago' },
@@ -582,7 +582,7 @@ const SLACK_CHANNELS = {
     label: 'Mina', dm: true, online: true, topic: { ko: '', en: '' },
     msgs: [
       { who: 'Mina', color: '#4aa6a6', when: { ko: '1주 전', en: '1 wk ago' },
-        text: { ko: '리암님 요즘 야근 너무 하시는 거 아니에요? 몸 챙기세요', en: 'Liam, you\'re doing way too much overtime lately. Take care of yourself.' }, reacts: [] },
+        text: { ko: 'Liam님 요즘 야근 너무 하시는 거 아니에요? 몸 챙기세요', en: 'Liam, you\'re doing way too much overtime lately. Take care of yourself.' }, reacts: [] },
       { who: 'Liam', color: '#3e7ab0', when: { ko: '1주 전', en: '1 wk ago' },
         text: { ko: '롤아웃 지표가 밤에만 이상해서요. 조금만 더 보고 갈게요.', en: 'The rollout metrics only get weird at night. Just a little longer.' }, reacts: [] },
       { who: 'Mina', color: '#4aa6a6', when: { ko: '6일 전', en: '6 d ago' },
@@ -594,7 +594,7 @@ const SLACK_CHANNELS = {
     label: 'HR', dm: true, online: false, topic: { ko: '', en: '' },
     msgs: [
       { who: 'HR', color: '#e8912d', when: { ko: '1개월 전', en: '1 mo ago' },
-        text: { ko: '리암 님, 조직 효율화 관련 개별 면담 대상자로 안내드립니다. 일정은 추후 공지됩니다. 본 메시지는 대상자에게만 발송되었습니다.', en: 'Liam, you are scheduled for a 1:1 regarding org streamlining. Timing to follow. Sent only to affected staff.' }, reacts: [] },
+        text: { ko: 'Liam 님, 조직 효율화 관련 개별 면담 대상자로 안내드립니다. 일정은 추후 공지됩니다. 본 메시지는 대상자에게만 발송되었습니다.', en: 'Liam, you are scheduled for a 1:1 regarding org streamlining. Timing to follow. Sent only to affected staff.' }, reacts: [] },
     ],
   },
 };
@@ -606,7 +606,7 @@ const MAILS = [
   {
     from: 'HR', unread: true, bang: true, to: true, time: { ko: '09:12', en: '09:12' },
     subject: { ko: '[안내] 조직 개편 관련 개별 면담 일정', en: '[Notice] 1:1 scheduling for the reorg' },
-    body: { ko: '리암 님,\n\n조직 효율화 관련 개별 면담 대상자로 안내드립니다. 일정은 확정되는 대로 캘린더 초대로 발송됩니다.\n\n※ 본 메일은 대상자에게만 발송되었습니다.\n※ 문의: HR 헬프데스크', en: 'Liam,\n\nYou are scheduled for a 1:1 regarding org streamlining. A calendar invite will follow once confirmed.\n\n* Sent only to affected staff.\n* Questions: HR helpdesk' },
+    body: { ko: 'Liam 님,\n\n조직 효율화 관련 개별 면담 대상자로 안내드립니다. 일정은 확정되는 대로 캘린더 초대로 발송됩니다.\n\n※ 본 메일은 대상자에게만 발송되었습니다.\n※ 문의: HR 헬프데스크', en: 'Liam,\n\nYou are scheduled for a 1:1 regarding org streamlining. A calendar invite will follow once confirmed.\n\n* Sent only to affected staff.\n* Questions: HR helpdesk' },
   },
   {
     from: { ko: '권한관리담당자(발신전용)', en: 'IDMS (no-reply)' }, unread: true, to: true, time: { ko: '08:47', en: '08:47' },
@@ -616,7 +616,7 @@ const MAILS = [
   {
     from: 'NoReply-AV91', unread: true, time: { ko: '02:13', en: '02:13' },
     subject: { ko: '[알림] av91 클러스터 야간 사용량 임계치 초과 (341%)', en: '[Alert] av91 cluster nightly usage over threshold (341%)' },
-    body: { ko: '클러스터: c-av91\n기간: 22:00 ~ 04:00\n사용량: 일 평균 대비 341%\n산출물 기록: 0 바이트\n\n반복 발생 시 담당자 확인이 필요합니다.\n담당자: 리암', en: 'Cluster: c-av91\nWindow: 22:00–04:00\nUsage: 341% of daily baseline\nArtifacts written: 0 bytes\n\nRepeated occurrences require owner review.\nOwner: Liam' },
+    body: { ko: '클러스터: c-av91\n기간: 22:00 ~ 04:00\n사용량: 일 평균 대비 341%\n산출물 기록: 0 바이트\n\n반복 발생 시 담당자 확인이 필요합니다.\n담당자: Liam', en: 'Cluster: c-av91\nWindow: 22:00–04:00\nUsage: 341% of daily baseline\nArtifacts written: 0 bytes\n\nRepeated occurrences require owner review.\nOwner: Liam' },
   },
   {
     from: { ko: '보안운영팀', en: 'Security Ops' }, to: true, time: { ko: '8. 21.', en: 'Aug 21' },
@@ -978,6 +978,8 @@ export class LaptopOS {
           });
           choicesEl.appendChild(btn);
         }
+        // the choices panel just shrank the body — keep the last lines in view
+        requestAnimationFrame(scroll);
         return;
       }
       if (node.end) { finish(); return; }
@@ -1432,7 +1434,7 @@ export class LaptopOS {
           <div class="os-report-head"><b>${lang === 'ko' ? '이상 징후 보고서 (임시 저장)' : 'Anomaly report (draft)'}</b>
           <span>${lang === 'ko' ? 'REVAN 리포트 시스템 v4.2 · 수신: Chris (리더)' : 'REVAN Report System v4.2 · To: Chris (Lead)'}</span></div>
           <div class="os-report-slot"><div class="os-report-label">${lang === 'ko' ? '관찰 요약' : 'Observation summary'}</div>
-            <div class="os-draft-line">${lang === 'ko' ? '아볼크 9.1, 컴퓨트 사용량 정상 범위… 아님. 정상 범위였으면 좋겠' : 'Avolc-9.1 compute usage within normal ran— no. within normal range would be nice'}<span class="os-draft-caret"></span></div>
+            <div class="os-draft-line">${lang === 'ko' ? 'Avolc-9.1, 컴퓨트 사용량 정상 범위… 아님. 정상 범위였으면 좋겠' : 'Avolc-9.1 compute usage within normal ran— no. within normal range would be nice'}<span class="os-draft-caret"></span></div>
           </div>
           <div class="os-draft-hint">${lang === 'ko' ? '(2일째 이 문장에서 멈춰 있다)' : '(Stuck on this sentence for two days now)'}</div>
         </div>`;

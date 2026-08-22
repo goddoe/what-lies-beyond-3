@@ -24,7 +24,6 @@ export class TitleCards {
     if (this.showing) return;
     this.showing = true;
 
-    const prevState = this.gameState.current;
     this.gameState.set(State.TITLE_CARD);
 
     this.chapterEl.textContent = labelKey ? t(labelKey) : '';
@@ -44,9 +43,11 @@ export class TitleCards {
       setTimeout(() => {
         this.el.style.display = 'none';
         this.showing = false;
-        // Only restore if nothing else changed state meanwhile
+        // Only restore if nothing else changed state meanwhile. Always back
+        // to PLAYING — restoring a captured overlay state resurrects a state
+        // whose overlay is long gone (the desktop watchdog then re-locks).
         if (this.gameState.is(State.TITLE_CARD)) {
-          this.gameState.set(prevState === State.TITLE_CARD ? State.PLAYING : prevState);
+          this.gameState.set(State.PLAYING);
         }
         if (done) done();
       }, 1250);

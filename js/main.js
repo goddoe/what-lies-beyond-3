@@ -807,7 +807,10 @@ function has(flag) {
 
 function startChapter(n, { silentCard = false } = {}) {
   // never change chapters underneath an open screen (laptop OS, phone, ...)
-  if (om.isOpen) om.close({ skipRelock: true });
+  // Full close (NOT skipRelock): skipRelock left gameState in the overlay's
+  // state, and the title card then "restored" that dead state — the game
+  // hung unlocked with the cursor visible (ch2 "제안" card bug).
+  if (om.isOpen) om.close();
   gameState.chapter = n;
   const ch = getChapter(n);
   applyChapterBaseline(n);

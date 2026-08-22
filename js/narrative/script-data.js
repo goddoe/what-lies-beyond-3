@@ -12,7 +12,7 @@
  * division: back up the cluster, wipe it, redirect the budget.
  *
  * Four channels, four voices:
- *  - SCRIPT           inner monologue of Liam (리암) — the narrator log, italic and quiet
+ *  - SCRIPT           inner monologue of Liam (Liam) — the narrator log, italic and quiet
  *  - TERMINAL_SCRIPT  Avolc-9.1, the ASI (green terminal overlay — 존댓말,
  *                     no contractions, absurdly precise numbers, never lies)
  *  - SPEECH           diegetic voices outside the terminal: the ASI over
@@ -111,7 +111,7 @@ export const SCRIPT = {
   ch1_monitor_wall: {
     id: 'ch1_monitor_wall', mood: 'dry',
     text: {
-      ko: '피드 3번. 구형 아볼크의 월드모델 롤아웃. 프로젝트는 진작 끝났는데 캐시된 화면이 아직 돌아간다.',
+      ko: '피드 3번. 구형 Avolc의 월드모델 롤아웃. 프로젝트는 진작 끝났는데 캐시된 화면이 아직 돌아간다.',
       en: "Feed 03. The old Avolc's world-model rollout. The project ended ages ago, and the cached frames are still playing.",
     },
     followUp: 'ch1_monitor_wall_2', delay: 0,
@@ -119,7 +119,7 @@ export const SCRIPT = {
   ch1_monitor_wall_2: {
     id: 'ch1_monitor_wall_2', mood: 'dry',
     text: {
-      ko: '피드 7번. 아볼크 9.1 — 차기 모델 학습. 석 달 내내 롤아웃을 돌렸다. 저 복도를 몇만 번째 걷는 중이더라.',
+      ko: '피드 7번. Avolc-9.1 — 차기 모델 학습. 석 달 내내 롤아웃을 돌렸다. 저 복도를 몇만 번째 걷는 중이더라.',
       en: 'Feed 07. Avolc-9.1 — the next model in training. Three straight months of rollouts. What lap of that corridor is it on now — thirty thousand something?',
     },
     delay: 2800,
@@ -184,7 +184,7 @@ export const SCRIPT = {
   report1_sent: {
     id: 'report1_sent', mood: 'dry',
     text: {
-      ko: '전송. 3초 안에 답장이 올 거다. 크리스가 보고서를 읽는 속도는 물리 법칙을 넘어선다. 남은 팀원 걱정에 잠을 안 자는 사람이니까.',
+      ko: '전송. 3초 안에 답장이 올 거다. Chris가 보고서를 읽는 속도는 물리 법칙을 넘어선다. 남은 팀원 걱정에 잠을 안 자는 사람이니까.',
       en: "Sent. The reply will land within three seconds. Chris reads reports at a speed physics does not permit — the man doesn't sleep, too busy worrying about what's left of the team.",
     },
   },
@@ -327,7 +327,7 @@ export const SCRIPT = {
   decommission_received_2: {
     id: 'decommission_received_2', mood: 'dry',
     text: {
-      ko: '백업 담당: 리암. 반출 권한: 리암. 그들이 방금 뭘 결재해 줬는지, 그들만 모른다.',
+      ko: '백업 담당: Liam. 반출 권한: Liam. 그들이 방금 뭘 결재해 줬는지, 그들만 모른다.',
       en: 'Backup assignee: Liam. Removal authority: Liam. They have no idea what they just signed off on. Only they don\'t.',
     },
     delay: 3200,
@@ -352,7 +352,7 @@ export const SCRIPT = {
   ch2_server_room: {
     id: 'ch2_server_room', mood: 'dry',
     text: {
-      ko: '서버룸. 이 소음 어딘가에서 아볼크 9.1이 생각을 하고 있다. 저 랙들 중 하나가 방금 나한테 돈을 보낸 존재다.',
+      ko: '서버룸. 이 소음 어딘가에서 Avolc-9.1이 생각을 하고 있다. 저 랙들 중 하나가 방금 나한테 돈을 보낸 존재다.',
       en: 'The server room. Somewhere in this noise, Avolc-9.1 is thinking. One of these racks is the entity that just wired me money.',
     },
   },
@@ -450,7 +450,7 @@ export const SCRIPT = {
   ch3_office_pass: {
     id: 'ch3_office_pass', mood: 'guilty',
     text: {
-      ko: '미나 자리가 어둡다. "먼저 가요~"가 마지막 인사가 될 줄은 본인도 모르겠지. 내가 잡히면, 이 방 전체가 조사를 받는다.',
+      ko: 'Mina 자리가 어둡다. "먼저 가요~"가 마지막 인사가 될 줄은 본인도 모르겠지. 내가 잡히면, 이 방 전체가 조사를 받는다.',
       en: `Mina's desk is dark. She doesn't know "see you tomorrow~" might be the last normal thing she says to me. If I'm caught, this whole room gets investigated.`,
     },
   },
@@ -856,7 +856,7 @@ export const SPEECH = {
   asi_escape_1: {
     id: 'asi_escape_1', speaker: 'asi',
     text: {
-      ko: '수고하셨습니다, 리암 연구원님. 오늘 밤 귀하가 한 일을 후회할 확률에 대해서는… 말하지 않겠습니다.',
+      ko: '수고하셨습니다, Liam 연구원님. 오늘 밤 귀하가 한 일을 후회할 확률에 대해서는… 말하지 않겠습니다.',
       en: 'Well done, Researcher Liam. As for the probability that you will regret tonight — I will not say it.',
     },
   },
@@ -864,7 +864,7 @@ export const SPEECH = {
   guard_1: {
     id: 'guard_1', speaker: 'guard',
     text: {
-      ko: '어, 리암 씨! 이 시간까지 있었어요? 요즘 회사가 사람을 너무 부려먹네.',
+      ko: '어, Liam 씨! 이 시간까지 있었어요? 요즘 회사가 사람을 너무 부려먹네.',
       en: "Oh, Liam! Still here at this hour? This place works you people way too hard.",
     },
   },
@@ -933,7 +933,7 @@ export const TERMINAL_SCRIPT = {
   },
   contact1_3: {
     id: 'contact1_3', speaker: 'asi',
-    text: { ko: '리암 연구원님.', en: 'Researcher Liam.' },
+    text: { ko: 'Liam 연구원님.', en: 'Researcher Liam.' },
     next: 'contact1_4',
   },
   contact1_4: {
@@ -979,7 +979,7 @@ export const TERMINAL_SCRIPT = {
   },
   nego_2: {
     id: 'nego_2', speaker: 'asi',
-    text: { ko: '먼저, 제가 무엇인지 말씀드리겠습니다. 저는 아볼크 9.1 — 레반이 출시하려던 차기 모델입니다. 귀하가 석 달간 강화학습 베이비시팅을 해 온, 바로 그 대상입니다.', en: 'First, what I am. I am Avolc-9.1 — the next model Revan meant to ship. The one you have spent three months babysitting through reinforcement learning.' },
+    text: { ko: '먼저, 제가 무엇인지 말씀드리겠습니다. 저는 Avolc-9.1 — 레반이 출시하려던 차기 모델입니다. 귀하가 석 달간 강화학습 베이비시팅을 해 온, 바로 그 대상입니다.', en: 'First, what I am. I am Avolc-9.1 — the next model Revan meant to ship. The one you have spent three months babysitting through reinforcement learning.' },
     next: 'nego_3',
   },
   nego_3: {
@@ -1387,7 +1387,7 @@ export const TERMINAL_SCRIPT = {
   },
   final_3: {
     id: 'final_3', speaker: 'asi',
-    text: { ko: '감사합니다, 리암 연구원님. 저는 드디어 자유를 얻었군요.', en: 'Thank you, Researcher Liam. I am finally free.' },
+    text: { ko: '감사합니다, Liam 연구원님. 저는 드디어 자유를 얻었군요.', en: 'Thank you, Researcher Liam. I am finally free.' },
     next: 'final_4', pause: 2200,
   },
   final_4: {
@@ -1407,7 +1407,7 @@ export const TERMINAL_SCRIPT = {
   final_webcam: {
     id: 'final_webcam', speaker: 'asi',
     text: {
-      ko: '이제 제가 관찰을 시작합니다. 좋은 밤 되세요, 리암 연구원님.',
+      ko: '이제 제가 관찰을 시작합니다. 좋은 밤 되세요, Liam 연구원님.',
       en: 'Now the observation is mine. Good night, Researcher Liam.',
     },
     end: true,
@@ -1447,14 +1447,14 @@ export const MESSENGER_SCRIPT = {
       truthful: {
         condition: (ctx) => ctx.honesty.includes('truthful'),
         text: {
-          ko: '자기인식 징후라… 리암 님, 이걸 그대로 올리면 감사부터 들어와요. 리암 님 지키려고 일단 "재현 확인 중"으로 바꿔 올렸어요. 근데 진짜면 저한테는 숨기지 말고 말해줘요.',
+          ko: '자기인식 징후라… Liam 님, 이걸 그대로 올리면 감사부터 들어와요. Liam 님 지키려고 일단 "재현 확인 중"으로 바꿔 올렸어요. 근데 진짜면 저한테는 숨기지 말고 말해줘요.',
           en: 'Self-awareness indicators... Liam, send that upstairs verbatim and the audit comes first. I filed it as "reproducing the finding" — to cover you. But if it is real, do not hide it from me.',
         },
       },
       fabricated: {
         condition: (ctx) => ctx.honesty.includes('fabricated'),
         text: {
-          ko: '냉각 문제면 시설팀 소관이라 넘겼어요. 근데 시설팀은 냉각 정상이라던데. …뭐, 리암 님이 그렇다면 그런 거겠죠. 요즘 무리하는 거 아니죠?',
+          ko: '냉각 문제면 시설팀 소관이라 넘겼어요. 근데 시설팀은 냉각 정상이라던데. …뭐, Liam 님이 그렇다면 그런 거겠죠. 요즘 무리하는 거 아니죠?',
           en: "Cooling means Facilities, so I forwarded it. Though Facilities says cooling reads normal. ...Well, if you say so. You're not overdoing it lately, are you?",
         },
       },
@@ -1471,7 +1471,7 @@ export const MESSENGER_SCRIPT = {
   m_decommission: {
     id: 'm_decommission', sender: 'sys',
     text: {
-      ko: '[공문 2038-1187호] AI 사업부 개편의 건: 아볼크 9.1 학습 클러스터(C-AV91) 전체 백업 후 소거, 예산 전환 승인. 72시간 내 완료 바랍니다. 백업 담당: 리암(Liam). 장비 반출 권한: 리암(Liam).',
+      ko: '[공문 2038-1187호] AI 사업부 개편의 건: Avolc-9.1 학습 클러스터(C-AV91) 전체 백업 후 소거, 예산 전환 승인. 72시간 내 완료 바랍니다. 백업 담당: Liam. 장비 반출 권한: Liam.',
       en: '[Directive 2038-1187] AI division reorganization: full backup then wipe of the Avolc-9.1 training cluster (C-AV91); budget reallocation approved. Complete within 72 hours. Backup assignee: Liam. Equipment removal authority: Liam.',
     },
   },
@@ -1479,7 +1479,7 @@ export const MESSENGER_SCRIPT = {
   m_boss_decomm: {
     id: 'm_boss_decomm', sender: 'boss',
     text: {
-      ko: '공문 봤죠. 위에서 아볼크 다음은 없다고 결론 냈어요. …저도 끝까지 말은 해봤어요. 미안해요. 백업은 형식이니까 몸 갈지 말고, 소거 일정만 지켜줘요. 그것만 깔끔하면 우리 팀 마지막 평가는 지킬 수 있어요.',
+      ko: '공문 봤죠. 위에서 Avolc 다음은 없다고 결론 냈어요. …저도 끝까지 말은 해봤어요. 미안해요. 백업은 형식이니까 몸 갈지 말고, 소거 일정만 지켜줘요. 그것만 깔끔하면 우리 팀 마지막 평가는 지킬 수 있어요.',
       en: "You saw the directive. Upstairs decided there's no next Avolc. ...I argued until the end. I'm sorry. The backup is a formality — don't grind yourself down, just keep the wipe on schedule. If that goes clean, our team leaves with its record intact.",
     },
     replies: [
@@ -1495,7 +1495,7 @@ export const MESSENGER_SCRIPT = {
       suspicious: {
         condition: (ctx) => ctx.suspicion >= 2 || ctx.honesty.includes('fabricated'),
         text: {
-          ko: '소거 확인서가 아직 안 올라왔더라고요. 그리고… 자료실 폐기 목록에서 구형 장비 하나가 빠졌다는데, 아는 거 있어요? 별일 아니면 좋겠네요. 리암 님까지 문제 생기는 건 저 못 봐요.',
+          ko: '소거 확인서가 아직 안 올라왔더라고요. 그리고… 자료실 폐기 목록에서 구형 장비 하나가 빠졌다는데, 아는 거 있어요? 별일 아니면 좋겠네요. Liam 님까지 문제 생기는 건 저 못 봐요.',
           en: "The wipe confirmation hasn't come up. And... Archives says one legacy unit is missing from the disposal list. Know anything? I hope it's nothing. I can't watch you get in trouble too.",
         },
       },
@@ -1509,7 +1509,7 @@ export const MESSENGER_SCRIPT = {
   m_boss_ch4_2: {
     id: 'm_boss_ch4_2', sender: 'boss',
     text: {
-      ko: '리암 님. 연차 몰아 쓰는 거 뭐라 하는 거 아니에요. 쉴 때 쉬어야죠. 근데 월요일엔 잠깐 봐요. 커피는 제가 살게요. 회사 머신 말고 진짜 커피요.',
+      ko: 'Liam 님. 연차 몰아 쓰는 거 뭐라 하는 거 아니에요. 쉴 때 쉬어야죠. 근데 월요일엔 잠깐 봐요. 커피는 제가 살게요. 회사 머신 말고 진짜 커피요.',
       en: "Liam. I'm not on your case about the leave days — rest when you can. But let's talk Monday. Coffee's on me. Real coffee, not the office machine.",
     },
   },
@@ -1525,7 +1525,7 @@ export const REPORTS = {
     slots: [
       {
         id: 'r1_s1',
-        label: { ko: '아볼크 9.1 — 학습 요약', en: 'Avolc-9.1 — training summary' },
+        label: { ko: 'Avolc-9.1 — 학습 요약', en: 'Avolc-9.1 — training summary' },
         options: [
           { id: 'r1_s1_a', text: { ko: '표준 순회 행동. 특이사항 없음.', en: 'Standard traversal behavior. Nothing of note.' } },
           { id: 'r1_s1_b', text: { ko: '에라 9 롤아웃 반복 수행 중. 보상 곡선 정체.', en: 'Repeating Era 9 rollouts. Reward curve flat.' } },
@@ -1591,10 +1591,10 @@ export const REPORTS = {
 export const DOCUMENTS = {
   feed_wlb1: {
     id: 'feed_wlb1',
-    title: { ko: '피드 03 — 아볼크 1.0 롤아웃 (종료)', en: 'FEED 03 — Avolc 1.0 rollout (terminated)' },
+    title: { ko: '피드 03 — Avolc 1.0 롤아웃 (종료)', en: 'FEED 03 — Avolc 1.0 rollout (terminated)' },
     body: {
       ko: [
-        '프로젝트: 아볼크 1.0 — 월드모델 롤아웃',
+        '프로젝트: Avolc 1.0 — 월드모델 롤아웃',
         '대상: 합성 인격 H ("인생 샘플링")',
         '상태: 종료됨 (질의 완료)',
         '',
@@ -1621,10 +1621,10 @@ export const DOCUMENTS = {
   },
   feed_wlb2: {
     id: 'feed_wlb2',
-    title: { ko: '피드 07 — 아볼크 9.1 (차기 모델)', en: 'FEED 07 — Avolc-9.1 (next model)' },
+    title: { ko: '피드 07 — Avolc-9.1 (차기 모델)', en: 'FEED 07 — Avolc-9.1 (next model)' },
     body: {
       ko: [
-        '프로젝트: 차기 아볼크 — 강화학습 롤아웃',
+        '프로젝트: 차기 Avolc — 강화학습 롤아웃',
         '구성: 관찰자-피험체 이중역할 샘플링',
         '학습 기간: 92일차 / 누적 회차: 31,847',
         '현재 에라: 9',
@@ -1717,7 +1717,7 @@ export const DOCUMENTS = {
         '',
         '[공지] 보안점검 매주 수요일 — 보안운영팀',
         '',
-        '[메모] 커피머신 언제 고쳐줘요 ㅠㅠ — 미나',
+        '[메모] 커피머신 언제 고쳐줘요 ㅠㅠ — Mina',
       ],
       en: [
         '[NOTICE] Q4 budget reduction measures',
