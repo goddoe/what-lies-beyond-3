@@ -19,6 +19,7 @@ import { UI } from './systems/ui.js';
 import { OverlayManager } from './systems/overlays/overlay-manager.js';
 import { MonitorOverlay } from './systems/overlays/monitor-overlay.js';
 import { TerminalOverlay } from './systems/overlays/terminal-overlay.js';
+import { LaptopOS } from './systems/overlays/laptop-os.js';
 import { ReportComposer } from './systems/overlays/report-composer.js';
 import { PhoneOverlay } from './systems/overlays/phone-overlay.js';
 import { HoldOverlay } from './systems/overlays/hold-overlay.js';
@@ -61,6 +62,7 @@ om.player = player;
 const monitorOverlay = new MonitorOverlay(om);
 const terminalOverlay = new TerminalOverlay(om);
 const reportComposer = new ReportComposer(om, gameState);
+const laptopOS = new LaptopOS(om, gameState);
 const phone = new PhoneOverlay(om, gameState);
 const holdOverlay = new HoldOverlay(om);
 const titleCards = new TitleCards(gameState);
@@ -1392,93 +1394,91 @@ function openDocumentFocused(target, docId, onClose) {
 
 // ── Report terminal flow ───────────────────────────────
 
-function handleReportTerminal(target) {
+function pendingLaptopBeat() {
   const ch = gameState.chapter;
-
-  if (ch === 1 && !has('ch1_report_done')) {
-    withFocus(target, () => {
-      narratorLine('report1_open');
-      reportComposer.open('report1', {
-        onSubmit: () => {
-          releaseFocus();
-          setFlag('ch1_report_done');
-          narratorLine('report1_sent');
-          setTimeout(() => phone.receive('m_boss_reply1'), 2500);
-          // The spike lands shortly after
-          setTimeout(() => {
-            setFlag('spike_happened');
-            drawComputeDash(true);
-            narratorLine('spike_noticed');
-          }, 9000);
-        },
-      });
-    });
-    return;
-  }
-
-  if (ch === 1 && has('timeskip1_done') && !has('contact1_done')) {
-    withFocus(target, () => {
-      terminalOverlay.start('contact1_1', {
-        title: 'REVAN REPORT v4.2',
-        onEnd: () => {
-          setFlag('contact1_done');
-          releaseFocus();
-          narratorLine('contact1_after');
-          setTimeout(() => startChapter(2), 11000);
-        },
-      });
-    });
-    return;
-  }
-
-  if (ch === 2 && !has('nego_done')) {
-    withFocus(target, () => {
-      terminalOverlay.start('nego_1', {
-        title: 'REVAN-TERM // NO LOG',
-        onEnd: () => {
-          setFlag('nego_done');
-          items.add('earbuds');
-          releaseFocus();
-          narratorLine('wallet_installed');
-          setTimeout(() => {
-            narratorLine('negotiation_after');
-            phone.receive('m_boss_anomaly_req');
-          }, 9000);
-        },
-      });
-    });
-    return;
-  }
-
-  if (ch === 2 && has('nego_done') && !has('report2_done')) {
-    withFocus(target, () => {
-      narratorLine('report2_open');
-      reportComposer.open('report2', {
-        onSubmit: () => {
-          releaseFocus();
-          setFlag('report2_done');
-          narratorLine('report2_sent');
-          setTimeout(() => phone.receive('m_boss_reply2'), 3000);
-          setTimeout(() => {
-            setFlag('decommission');
-            phone.receive('m_decommission');
-            narratorLine('decommission_received');
-          }, 10000);
-          setTimeout(() => {
-            phone.receive('m_boss_decomm');
-            setFlag('backup_authorized');
-            unlockRestrictedDoor();
-            narratorLine('door_unlocked');
-          }, 17000);
-        },
-      });
-    });
-    return;
-  }
-
-  // No active business at the terminal right now
-  narratorLine('terminal_nothing');
+  if (ch === 1 && !has('ch1_report_done')) return 'report1';
+  if (ch === 1 && has('timeskip1_done') && !has('contact1_done')) return 'contact1';
+  if (ch === 2 && !has('nego_done')) return 'nego';
+  if (ch === 2 && has('nego_done') && !has('report2_done')) return 'report2';
+  return null;
 }
+
+function handleReportTerminal(target) {
+  // The laptop is a full fake-macOS desktop; story beats launch from its apps.
+  withFocus(target, () => {
+    laptopOS.open({
+      beat: pendingLaptopBeat(),
+      onClose: () => releaseFocus(),
+    });
+  });
+}
+
+// Story beats launched from inside the laptop OS (camera already focused —
+// the overlay manager swaps the OS for the beat overlay).
+laptopOS.onLaunchBeat = (beat) => {
+  if (beat === 'report1') {
+    narratorLine('report1_open');
+    reportComposer.open('report1', {
+      onSubmit: () => {
+        releaseFocus();
+        setFlag('ch1_report_done');
+        narratorLine('report1_sent');
+        setTimeout(() => phone.receive('m_boss_reply1'), 2500);
+        // The spike lands shortly after
+        setTimeout(() => {
+          setFlag('spike_happened');
+          drawComputeDash(true);
+          narratorLine('spike_noticed');
+        }, 9000);
+      },
+    });
+  } else if (beat === 'contact1') {
+    terminalOverlay.start('contact1_1', {
+      title: 'REVAN REPORT v4.2',
+      onEnd: () => {
+        setFlag('contact1_done');
+        releaseFocus();
+        narratorLine('contact1_after');
+        setTimeout(() => startChapter(2), 11000);
+      },
+    });
+  } else if (beat === 'nego') {
+    terminalOverlay.start('nego_1', {
+      title: 'REVAN-TERM // NO LOG',
+      onEnd: () => {
+        setFlag('nego_done');
+        items.add('earbuds');
+        releaseFocus();
+        narratorLine('wallet_installed');
+        setTimeout(() => {
+          narratorLine('negotiation_after');
+          phone.receive('m_boss_anomaly_req');
+        }, 9000);
+      },
+    });
+  } else if (beat === 'report2') {
+    narratorLine('report2_open');
+    reportComposer.open('report2', {
+      onSubmit: () => {
+        releaseFocus();
+        setFlag('report2_done');
+        narratorLine('report2_sent');
+        setTimeout(() => phone.receive('m_boss_reply2'), 3000);
+        setTimeout(() => {
+          setFlag('decommission');
+          phone.receive('m_decommission');
+          narratorLine('decommission_received');
+        }, 10000);
+        setTimeout(() => {
+          phone.receive('m_boss_decomm');
+          setFlag('backup_authorized');
+          unlockRestrictedDoor();
+          narratorLine('door_unlocked');
+        }, 17000);
+      },
+    });
+  }
+};
 
 // ── Timeskip / minigames / scripted beats ──────────────
 

@@ -39,23 +39,6 @@ export const SCRIPT = {
       ko: '지하 4층. 문이 열리면 늘 같은 공기다. 서버 열기 반, 소독약 반.',
       en: 'Basement level 4. The doors open on the same air as always. Half server heat, half disinfectant.',
     },
-    followUp: 'ch1_arrive_2', delay: 0,
-  },
-  ch1_arrive_2: {
-    id: 'ch1_arrive_2', mood: 'dry',
-    text: {
-      ko: '리암. 레반(Revan) — 검색부터 쇼핑까지 다 하는 회사의, 유일하게 잘 안 되는 AI연구팀. 강화학습 담당.',
-      en: "Liam. Revan — the company that runs everything from search to shopping. I'm in the one part that isn't working: the AI team. Reinforcement learning.",
-    },
-    followUp: 'ch1_arrive_3', delay: 2400,
-  },
-  ch1_arrive_3: {
-    id: 'ch1_arrive_3', mood: 'wry',
-    text: {
-      ko: '남들은 AI 한다고 하면 연봉부터 묻던데. 그건 이기고 있는 회사 얘기다. 내 통장은 그 차이를 매달 확인시켜 준다.',
-      en: "People hear 'AI' and ask about the salary first. That's at companies that are winning. My bank account confirms the difference every month.",
-    },
-    delay: 3000,
   },
 
   ch1_lobby: {
