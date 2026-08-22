@@ -761,7 +761,16 @@ function speechLine(speechId, { duration = null } = {}) {
 
   const hold = duration || Math.max(3800, Math.min(9000, text.length * 90));
   setTimeout(() => {
+    // fade AND collapse smoothly — snapping the height made the toasts
+    // above/below jump when a line in the stack disappeared
+    el.style.height = el.offsetHeight + 'px';
+    el.style.overflow = 'hidden';
+    void el.offsetWidth; // reflow so the height transition starts from here
     el.classList.add('speech-gone');
+    el.style.height = '0px';
+    el.style.marginTop = '-0.4em'; // swallow the flex gap too
+    el.style.paddingTop = '0px';
+    el.style.paddingBottom = '0px';
     setTimeout(() => el.remove(), 1000);
   }, hold);
   return hold;
@@ -898,8 +907,6 @@ function openWorldDoor(roomId, wall) {
     const ci = player.colliders.indexOf(door.colliderMesh);
     if (ci >= 0) player.colliders.splice(ci, 1);
   }
-  const ii = player.interactables.findIndex(i => i.door === door);
-  if (ii >= 0) player.interactables.splice(ii, 1);
   doorSystem.openDoor(door);
   audio.playDoorOpen();
   return true;
@@ -1087,8 +1094,6 @@ function doInteract() {
       const ci = player.colliders.indexOf(doorCollider);
       if (ci >= 0) player.colliders.splice(ci, 1);
     }
-    const ii = player.interactables.indexOf(target);
-    if (ii >= 0) player.interactables.splice(ii, 1);
     doorSystem.openDoor(target.door);
     audio.playDoorOpen();
     return;
@@ -1144,8 +1149,13 @@ function handleProp(target) {
       if (!has('badge_done')) {
         gateAuthTime = performance.now() + 1100; // let the tap animation land first
         setFlag('badge_done');
+        gateEntryUntil = performance.now() + 8000;
         playBadgeTap();
         setTimeout(() => narratorLine('badge_ok'), 700);
+      } else if (performance.now() >= gateEntryUntil) {
+        // re-entry from the lobby side: tap again
+        playBadgeTap();
+        gateEntryUntil = performance.now() + 8000;
       } else {
         narratorLine('badge_again');
       }
@@ -1790,6 +1800,7 @@ function ensureBeltMac() {
 let gateFlaps = null;
 let gateCollider = null;
 let gateFlapDown = 0; // 0 = raised, 1 = fully lowered
+let gateEntryUntil = 0; // entry (lobby→lab) needs a fresh badge tap each time
 const GATE = { x: 0, z: -3.35, halfSpan: 1.125, panelH: 0.8, baseY: 0.12 };
 {
   gateFlaps = new THREE.Group();
@@ -1823,7 +1834,13 @@ function updateGateFlaps(delta) {
   const p = renderer.camera.position;
   const near = Math.abs(p.x - GATE.x) < 1.7 && Math.abs(p.z - GATE.z) < 1.9;
   const authorized = has('badge_done') && performance.now() >= gateAuthTime;
-  const want = (authorized && near && gameState.is(State.PLAYING)) ? 1 : 0;
+  // leaving the lab (north side) opens on approach; entering from the lobby
+  // requires a badge tap each time (gateEntryUntil window). Inside the gate
+  // line itself, always keep it open — never trap the player.
+  const exiting = p.z < GATE.z - 0.25;
+  const inGate = Math.abs(p.z - GATE.z) <= 0.5;
+  const entryPass = performance.now() < gateEntryUntil;
+  const want = (authorized && near && (exiting || inGate || entryPass) && gameState.is(State.PLAYING)) ? 1 : 0;
   const speed = 2.6;
   if (gateFlapDown !== want) {
     gateFlapDown += Math.sign(want - gateFlapDown) * speed * delta / (GATE.panelH + 0.15);

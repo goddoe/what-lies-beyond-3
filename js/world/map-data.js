@@ -142,7 +142,7 @@ export const ROOMS = [
     props: [
       // ── Station 0 (north): badge gate + guard window
       { type: 'badge_gate', position: [-2.3, 0, -6.35], size: [0.35, 1.1, 0.5], color: 0x77808e, id: 'badge_gate', interact: true, verb: 'verbUse' },
-      { type: 'badge_gate', position: [0.3, 0, -6.35], size: [0.35, 1.1, 0.5], color: 0x77808e },
+      { type: 'badge_gate_plain', position: [0.3, 0, -6.35], size: [0.35, 1.1, 0.5], color: 0x77808e },
       { type: 'window', position: [4.42, 0.6, -5.0], size: [0.06, 1.0, 1.6], color: 0x10161f, id: 'guard_window', interact: true, verb: 'verbTalk',
         focus: { camera: [3.15, 1.55, -5.0], lookAt: [4.45, 1.35, -5.0] } },
       // ── Station 1: walk-through arch (lane world x=-0.8) + item X-ray (world x=1.8)

@@ -352,6 +352,7 @@ export class DoorSystem {
         colliderMesh.renderOrder = -1;
         door.doorGroup.add(colliderMesh);
         door.colliderMesh = colliderMesh;
+        if (door.interactMesh) door.interactMesh.visible = true;
         const ci = this._animating.indexOf(door);
         if (ci >= 0) this._animating.splice(ci, 1);
         continue;
@@ -363,12 +364,9 @@ export class DoorSystem {
         led.material = this._ledGreenMat;
       }
 
-      // Remove interact mesh (no longer interactable)
-      if (door.interactMesh) {
-        door.interactMesh.removeFromParent();
-        if (door.interactMesh.geometry) door.interactMesh.geometry.dispose();
-        door.interactMesh = null;
-      }
+      // Hide the interact mesh while open — a later closeDoor() re-enables
+      // it so the door stays reopenable (raycast skips invisible meshes)
+      if (door.interactMesh) door.interactMesh.visible = false;
 
       // Remove from animating list
       const idx = this._animating.indexOf(door);

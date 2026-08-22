@@ -1023,7 +1023,8 @@ export class MapBuilder {
       case 'drum': return this._detailDrum(sw, sh, sd, material);
       case 'equipment': return this._detailEquipment(sw, sh, sd, material);
       case 'call_button': return this._detailCallButton(sw, sh, sd, material);
-      case 'badge_gate': return this._detailBadgeGate(sw, sh, sd, material);
+      case 'badge_gate': return this._detailBadgeGate(sw, sh, sd, material, true);
+      case 'badge_gate_plain': return this._detailBadgeGate(sw, sh, sd, material, false);
       case 'laptop_open': return this._detailLaptopOpen(sw, sh, sd, material, roomId);
       case 'flat_monitor': return this._detailFlatMonitor(sw, sh, sd, material, roomId);
       case 'hhkb': return this._detailHHKB(sw, sh, sd, material);
@@ -2805,7 +2806,7 @@ export class MapBuilder {
     return group;
   }
 
-  _detailBadgeGate(sw, sh, sd, material) {
+  _detailBadgeGate(sw, sh, sd, material, reader = true) {
     // Office speed-gate pedestal: brushed body, angled card-reader pad on top
     // (RFID ring target + status LED). The tap animation lands on the pad.
     const group = new THREE.Group();
@@ -2827,6 +2828,12 @@ export class MapBuilder {
       group.add(trim);
     }
 
+    if (!reader) {
+      // plain pedestal: flat brushed top cap, no reader hardware
+      const top = new THREE.Mesh(new THREE.BoxGeometry(sw * 0.92, 0.05, sd * 0.9), trimMat);
+      top.position.set(0, sh - 0.025, 0);
+      group.add(top);
+    } else {
     // angled reader housing on top (tilted toward the approach side, +z)
     const cap = new THREE.Group();
     cap.position.set(0, sh - 0.09, 0);
@@ -2851,6 +2858,7 @@ export class MapBuilder {
     dot.userData.reader = true;
     cap.add(dot);
     group.add(cap);
+    }
 
     // front status LED bar (faces the approach, +z)
     const ledMat = new THREE.MeshStandardMaterial({
