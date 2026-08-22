@@ -1817,6 +1817,16 @@ function playBadgeTap() {
   badgeCard.visible = true;
   badgeCard.position.set(BADGE_GATE_TOP.x, BADGE_GATE_TOP.y + 0.38, BADGE_GATE_TOP.z);
   badgeTap = { t: 0 };
+  // the reader ring flashes green while the card sits on the pad
+  const gate = namedProps.get('badge_gate');
+  if (gate) {
+    gate.traverse(o => {
+      if (o.isMesh && o.userData.reader) {
+        setTimeout(() => { o.material.emissive.set(0x33ff77); o.material.emissiveIntensity = 2.0; }, 450);
+        setTimeout(() => { o.material.emissiveIntensity = 0.6; }, 1450);
+      }
+    });
+  }
   audio.playClick && audio.playClick();
 }
 

@@ -1018,6 +1018,7 @@ export class MapBuilder {
       case 'drum': return this._detailDrum(sw, sh, sd, material);
       case 'equipment': return this._detailEquipment(sw, sh, sd, material);
       case 'call_button': return this._detailCallButton(sw, sh, sd, material);
+      case 'badge_gate': return this._detailBadgeGate(sw, sh, sd, material);
       case 'laptop_open': return this._detailLaptopOpen(sw, sh, sd, material, roomId);
       case 'flat_monitor': return this._detailFlatMonitor(sw, sh, sd, material, roomId);
       case 'hhkb': return this._detailHHKB(sw, sh, sd, material);
@@ -2724,6 +2725,69 @@ export class MapBuilder {
     const led = new THREE.Mesh(new THREE.BoxGeometry(0.014, 0.006, 0.004), ledMat);
     led.position.set(0, standH + panelH * 0.035, 0.024);
     group.add(led);
+    return group;
+  }
+
+  _detailBadgeGate(sw, sh, sd, material) {
+    // Office speed-gate pedestal: brushed body, angled card-reader pad on top
+    // (RFID ring target + status LED). The tap animation lands on the pad.
+    const group = new THREE.Group();
+    const darkMat = this._getOrCreateMaterial(0x1c1e24, { roughness: 0.6, metalness: 0.3 });
+    const glassMat = this._getOrCreateMaterial(0x0e1116, { roughness: 0.25, metalness: 0.55 });
+    const trimMat = this._getOrCreateMaterial(0x8a919c, { roughness: 0.35, metalness: 0.8 });
+
+    // plinth + tapered body
+    const plinth = new THREE.Mesh(new THREE.BoxGeometry(sw, 0.07, sd), darkMat);
+    plinth.position.set(0, 0.035, 0);
+    group.add(plinth);
+    const body = new THREE.Mesh(new THREE.BoxGeometry(sw * 0.86, sh - 0.16, sd * 0.9), material);
+    body.position.set(0, (sh - 0.16) / 2 + 0.07, 0);
+    group.add(body);
+    // side trim lines
+    for (const zx of [-1, 1]) {
+      const trim = new THREE.Mesh(new THREE.BoxGeometry(sw * 0.88, 0.02, 0.02), trimMat);
+      trim.position.set(0, sh * 0.55, zx * (sd * 0.45));
+      group.add(trim);
+    }
+
+    // angled reader housing on top (tilted toward the approach side, +z)
+    const cap = new THREE.Group();
+    cap.position.set(0, sh - 0.09, 0);
+    cap.rotation.x = 0.16;
+    const housing = new THREE.Mesh(new THREE.BoxGeometry(sw * 0.92, 0.07, sd * 0.8), trimMat);
+    housing.position.set(0, 0.035, 0);
+    cap.add(housing);
+    const pad = new THREE.Mesh(new THREE.BoxGeometry(sw * 0.78, 0.02, sd * 0.62), glassMat);
+    pad.position.set(0, 0.075, 0);
+    cap.add(pad);
+    // RFID target: emissive ring + center dot on the pad
+    const ringMat = new THREE.MeshStandardMaterial({
+      color: 0x3a4a5c, emissive: 0x3aa0ff, emissiveIntensity: 0.5, roughness: 0.4, metalness: 0.2,
+    });
+    const ring = new THREE.Mesh(new THREE.TorusGeometry(Math.min(sw, sd) * 0.17, 0.006, 10, 28), ringMat);
+    ring.rotation.x = Math.PI / 2;
+    ring.position.set(0, 0.088, 0);
+    ring.userData.reader = true;
+    cap.add(ring);
+    const dot = new THREE.Mesh(new THREE.CylinderGeometry(0.012, 0.012, 0.008, 12), ringMat.clone());
+    dot.position.set(0, 0.088, 0);
+    dot.userData.reader = true;
+    cap.add(dot);
+    group.add(cap);
+
+    // front status LED bar (faces the approach, +z)
+    const ledMat = new THREE.MeshStandardMaterial({
+      color: 0x22aa55, emissive: 0x33ff77, emissiveIntensity: 0.7, roughness: 0.4, metalness: 0.1,
+    });
+    const led = new THREE.Mesh(new THREE.BoxGeometry(sw * 0.5, 0.025, 0.012), ledMat);
+    led.position.set(0, sh * 0.82, sd * 0.45);
+    led.userData.reader = true;
+    group.add(led);
+
+    // small brand plate on the front
+    const plate = new THREE.Mesh(new THREE.BoxGeometry(sw * 0.42, 0.09, 0.012), darkMat);
+    plate.position.set(0, sh * 0.42, sd * 0.45);
+    group.add(plate);
     return group;
   }
 
