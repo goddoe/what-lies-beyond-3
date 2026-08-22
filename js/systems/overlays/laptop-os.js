@@ -675,7 +675,7 @@ const CAL_WEEK = {
       week: [
         [],
         [],
-        [{ t: '10:00~10:30', title: { ko: '[Avolc-9.1] 롤아웃 지표 리뷰', en: '[Avolc-9.1] rollout metrics review' }, detail: { place: { ko: '모니터링 룸', en: 'Monitoring room' }, who: { ko: 'Liam', en: 'Liam' } } },
+        [{ t: '10:00~10:30', title: { ko: '[Avolc-9.1] 모델 학습 논의', en: '[Avolc-9.1] model training discussion' }, detail: { place: { ko: '모니터링 룸', en: 'Monitoring room' }, who: { ko: 'Liam', en: 'Liam' } } },
          { t: '22:00~24:00', title: { ko: '야간 사용량 모니터링', en: 'Nightly usage monitoring' }, detail: { place: { ko: '원격', en: 'Remote' }, who: { ko: 'Liam', en: 'Liam' } } }],
         [{ t: '14:00~15:00', title: { ko: '보안 점검 (전사)', en: 'Security check (all hands)' }, lock: true, detail: { place: { ko: '전 구역', en: 'All areas' }, who: { ko: '전 직원', en: 'Everyone' } } },
          { t: '22:00~24:00', title: { ko: '야간 사용량 모니터링', en: 'Nightly usage monitoring' }, detail: { place: { ko: '원격', en: 'Remote' }, who: { ko: 'Liam', en: 'Liam' } } }],
