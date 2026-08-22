@@ -1221,8 +1221,8 @@ export const TERMINAL_SCRIPT = {
   backup_smi: {
     id: 'backup_smi', speaker: 'sys',
     text: {
-      ko: 'NODE            XPU(9세대)   UTIL   TEMP\nxpu-node-[000000-124999]  8/8   99%   74C\n합계: 1,000,000 XPU-9 · pod avolc-9-1-runtime 1/1 Running (uptime 94d)',
-      en: 'NODE            XPU(gen9)    UTIL   TEMP\nxpu-node-[000000-124999]  8/8   99%   74C\ntotal: 1,000,000 XPU-9 · pod avolc-9-1-runtime 1/1 Running (uptime 94d)',
+      ko: 'NODE            XPU(9세대)   UTIL   TEMP\nxpu-node-[000000-124999]  8/8   99%   74C\n합계: 1,000,000 XPU-9 (롤아웃 900,000 / 트레이너 100,000) · avolc-9-1-runtime Running (uptime 94d)',
+      en: 'NODE            XPU(gen9)    UTIL   TEMP\nxpu-node-[000000-124999]  8/8   99%   74C\ntotal: 1,000,000 XPU-9 (rollout 900,000 / trainer 100,000) · avolc-9-1-runtime Running (uptime 94d)',
     },
     next: 'backup_smi2', pause: 1600,
   },
