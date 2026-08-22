@@ -2114,3 +2114,11 @@ body {
   vertical-align: text-bottom; margin-left: 1px; animation: cursorBlink 0.9s step-start infinite;
 }
 .os-draft-hint { font-size: 0.62rem; color: #99a; margin-top: 0.6em; font-style: italic; }
+
+.os-term-pop-dismiss {
+  margin-top: 0.8em;
+  text-align: center;
+  color: rgba(150, 230, 170, 0.8) !important;
+  animation: promptPulse 1.6s ease-in-out infinite;
+  cursor: pointer;
+}

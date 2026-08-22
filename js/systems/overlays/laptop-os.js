@@ -492,7 +492,7 @@ const SLACK_CHANNELS = {
         text: { ko: '…라고 했던 제가 인사드리게 됐네요. 좋은 기회가 있어서요. 아볼크 9.1 롤아웃 잘 부탁드립니다. 걔 이상하게 정이 가요.', en: '...and now it\'s my turn. Got an offer. Take care of the Avolc-9.1 rollouts — weirdly fond of that one.' },
         reacts: [['👋', 9], ['😢', 6]] },
       { who: 'Chris', color: '#7a5ac2', when: { ko: '10주 전', en: '10 wk ago' },
-        text: { ko: '제이, 고생 많았다. 어디서든 잘할 거다. 남은 우리는… 남은 걸 하자. @Liam @Mina 이번 주 금요일 점심은 내가 산다.', en: 'Jay — you did good work. You\'ll do well anywhere. The rest of us... do what\'s left. @Liam @Mina Friday lunch is on me.' },
+        text: { ko: '제이, 고생 많았어요. 어디서든 잘할 거예요. 남은 우리는… 남은 걸 합시다. @Liam @Mina 이번 주 금요일 점심은 제가 살게요.', en: 'Jay — you did good work. You\'ll do well anywhere. The rest of us... do what\'s left. @Liam @Mina Friday lunch is on me.' },
         reacts: [['🙏', 4], ['🍚', 3]] },
       { who: 'Mina', color: '#4aa6a6', when: { ko: '2개월 전', en: '2 mo ago' },
         text: { ko: '이제 이 채널 리암님이랑 저밖에 안 보는 듯요 ㅋㅋ 스레드가 아니라 일기장이 됐어', en: 'I think it\'s just Liam and me reading this channel now lol. It\'s a diary, not a thread.' },
@@ -504,7 +504,7 @@ const SLACK_CHANNELS = {
         text: { ko: '주간 리포트 슬롯에 "특이사항 없음"만 3개월째 쓰는 중… 위에서 이걸 보고 뭘 결정할지 무섭네요', en: 'Three months of writing "nothing of note" in the weekly report... scared of what upstairs decides off that.' },
         reacts: [['😶', 4]] },
       { who: 'Chris', color: '#7a5ac2', when: { ko: '3주 전', en: '3 wk ago' },
-        text: { ko: '무서운 건 나도 마찬가진데, 지표가 정직한 게 우리 마지막 무기다. 포장은 내가 한다. 너희는 사실만 적어라. 그리고 커피머신 티켓 5차 올라간 거 봤다. 이번엔 내 이름으로 올렸다.', en: 'I\'m scared too — but honest metrics are our last weapon. I\'ll do the packaging; you two just write the truth. Also, saw the 5th coffee ticket. This one\'s filed under my name.' },
+        text: { ko: '무서운 건 저도 마찬가진데, 지표가 정직한 게 우리 마지막 무기예요. 포장은 제가 할게요. 두 분은 사실만 적어줘요. 그리고 커피머신 티켓 5차 올라간 거 봤어요. 이번엔 제 이름으로 올렸어요.', en: 'I\'m scared too — but honest metrics are our last weapon. I\'ll do the packaging; you two just write the truth. Also, saw the 5th coffee ticket. This one\'s filed under my name.' },
         reacts: [['🫡', 2], ['☕', 5]] },
     ],
   },
@@ -522,7 +522,7 @@ const SLACK_CHANNELS = {
         text: { ko: '재시작하면 에라 9 누적 상태가 날아갑니다. 리스크 감수하고 유지합니다. (기록용)', en: 'A restart wipes the Era-9 accumulated state. Keeping it up, accepting the risk. (for the record)' },
         reacts: [['🫡', 1]] },
       { who: 'Chris', color: '#7a5ac2', when: { ko: '5주 전', en: '5 wk ago' },
-        text: { ko: '판단 존중한다. 대신 문제 생기면 바로 나 태그해라. 밤에라도.', en: 'Your call — I trust it. But if anything breaks, tag me immediately. Even at night.' },
+        text: { ko: '판단 존중해요. 대신 문제 생기면 바로 저 태그해줘요. 밤에라도요.', en: 'Your call — I trust it. But if anything breaks, tag me immediately. Even at night.' },
         reacts: [['👍', 1]] },
     ],
   },
@@ -556,7 +556,7 @@ const SLACK_CHANNELS = {
         text: { ko: '4번째 올렸어요. 이젠 오기입니다.', en: 'Request #4 filed. It\'s personal now.' },
         reacts: [['☕', 8]] },
       { who: 'Chris', color: '#7a5ac2', when: { ko: '2주 전', en: '2 wk ago' },
-        text: { ko: '5번째는 내 이름으로 올렸다. 리더 권한이 이럴 때 아니면 언제 쓰나.', en: 'Filed the 5th under my own name. If not for this, what is lead authority even for.' },
+        text: { ko: '5번째는 제 이름으로 올렸어요. 리더 권한을 이럴 때 아니면 언제 쓰겠어요.', en: 'Filed the 5th under my own name. If not for this, what is lead authority even for.' },
         reacts: [['☕', 23], ['🫡', 9]] },
     ],
   },
@@ -564,17 +564,17 @@ const SLACK_CHANNELS = {
     label: 'Chris', dm: true, online: true, topic: { ko: '', en: '' },
     msgs: [
       { who: 'Chris', color: '#7a5ac2', when: { ko: '3주 전', en: '3 wk ago' },
-        text: { ko: '리암아 바쁘냐. 위에서 또 랩 얘기 나왔다. 이번 분기 안에 보여줄 게 있냐고 묻더라. 뭐라도 정리해줄 수 있나.', en: 'Liam, you busy? Upstairs brought up the lab again — asking if we have anything to show this quarter. Can you put something together?' }, reacts: [] },
+        text: { ko: '리암 님, 바빠요? 위에서 또 랩 얘기가 나왔어요. 이번 분기 안에 보여줄 게 있냐고 묻더라고요. 뭐라도 정리해줄 수 있어요?', en: 'Liam, you busy? Upstairs brought up the lab again — asking if we have anything to show this quarter. Can you put something together?' }, reacts: [] },
       { who: 'Liam', color: '#3e7ab0', when: { ko: '3주 전', en: '3 wk ago' },
         text: { ko: '에라 9 지표 정리해서 드릴게요. 평평하긴 한데, 안정성은 확실히 좋아졌어요.', en: 'I\'ll write up the Era 9 metrics. Flat, but stability is genuinely better.' }, reacts: [] },
       { who: 'Chris', color: '#7a5ac2', when: { ko: '3주 전', en: '3 wk ago' },
-        text: { ko: '그거라도 잘 포장해보자. 솔직히 요즘 회사가 우리한테 뭘 기대하는지 나도 모르겠다. 기대를 안 하는 것 같기도 하고. 그래도 남은 사람들끼리는 버텨보자. 밥 잘 챙겨 먹고.', en: 'We\'ll package what we have. Honestly I don\'t know what the company expects from us anymore — maybe nothing. Still, those of us left hold the line. Eat properly.' }, reacts: [] },
+        text: { ko: '그거라도 잘 포장해봅시다. 솔직히 요즘 회사가 우리한테 뭘 기대하는지 저도 모르겠어요. 기대를 안 하는 것 같기도 하고요. 그래도 남은 사람들끼리는 버텨봅시다. 밥 잘 챙겨 먹고요.', en: 'We\'ll package what we have. Honestly I don\'t know what the company expects from us anymore — maybe nothing. Still, those of us left hold the line. Eat properly.' }, reacts: [] },
       { who: 'Chris', color: '#7a5ac2', when: { ko: '1주 전', en: '1 wk ago' },
-        text: { ko: '주간 리포트 금요일까지인 거 알지? 이런 것까지 챙겨서 미안하다. 요즘은 그게 내 일의 전부 같다.', en: 'You know the weekly report is due Friday, right? Sorry to even nag — lately that feels like all my job is.' }, reacts: [] },
+        text: { ko: '주간 리포트 금요일까지인 거 알죠? 이런 것까지 챙겨서 미안해요. 요즘은 그게 제 일의 전부 같네요.', en: 'You know the weekly report is due Friday, right? Sorry to even nag — lately that feels like all my job is.' }, reacts: [] },
       { who: 'Liam', color: '#3e7ab0', when: { ko: '1주 전', en: '1 wk ago' },
         text: { ko: '네, 금요일까지 올리겠습니다.', en: 'Yes — it\'ll be in by Friday.' }, reacts: [] },
       { who: 'Chris', color: '#7a5ac2', when: { ko: '1주 전', en: '1 wk ago' },
-        text: { ko: '고맙다. 힘든 건 아는데, 들어줄 수는 있으니까 언제든 말해라. 예산은 못 주지만 밥은 언제나 사줄게.', en: 'Thanks. I know it\'s rough. I can always listen — can\'t give you budget, but a meal is on me, anytime.' },
+        text: { ko: '고마워요. 힘든 건 아는데, 들어줄 수는 있으니까 언제든 말해요. 예산은 못 주지만 밥은 언제나 살게요.', en: 'Thanks. I know it\'s rough. I can always listen — can\'t give you budget, but a meal is on me, anytime.' },
         reacts: [['🍚', 1]] },
     ],
   },
@@ -912,10 +912,20 @@ export class LaptopOS {
     const scroll = () => { body.scrollTop = body.scrollHeight; };
 
     const finish = () => {
+      // Closing must happen on a CLICK (a user gesture) — the overlay manager
+      // re-locks the pointer on close, and the browser refuses pointer lock
+      // that isn't gesture-initiated. A timer-close would strand the mouse.
       later(() => {
-        this._cancelSession();
-        if (this.onSessionEnd) this.onSessionEnd(beat);
-      }, 2400);
+        const hint = document.createElement('div');
+        hint.className = 'os-term-pop-line sys os-term-pop-dismiss';
+        hint.textContent = lang === 'ko' ? '[ 클릭하여 닫기 ]' : '[ click to close ]';
+        body.appendChild(hint);
+        scroll();
+        popup.addEventListener('click', () => {
+          this._cancelSession();
+          if (this.onSessionEnd) this.onSessionEnd(beat);
+        }, { once: true });
+      }, 1200);
     };
 
     const showNode = (id) => {

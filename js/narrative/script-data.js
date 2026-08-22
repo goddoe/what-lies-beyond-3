@@ -1429,13 +1429,13 @@ export const MESSENGER_SCRIPT = {
 
   m_boss_reply1: {
     id: 'm_boss_reply1', sender: 'boss',
-    text: { ko: '수고했다. 예산 회의는 다음 주다. 내가 잘 말해볼 테니까 리포트는 계속 제때 부탁한다.', en: "Good work. Budget meeting is next week — I'll make our case, just keep the reports coming on time." },
+    text: { ko: '수고했어요. 예산 회의는 다음 주예요. 제가 잘 말해볼 테니 리포트는 계속 제때 부탁해요.', en: "Good work. Budget meeting is next week — I'll make our case, just keep the reports coming on time." },
   },
 
   m_boss_anomaly_req: {
     id: 'm_boss_anomaly_req', sender: 'boss',
     text: {
-      ko: '학습 클러스터 스파이크, 시설팀이 먼저 봤다더라. 우리가 먼저 봤어야 했는데. 이상 징후 보고서 오늘 중으로 부탁한다. 요즘 같은 때는 별거 아닌 것도 위에서 크게 본다. 야근하지 말고, 간단하게라도.',
+      ko: '학습 클러스터 스파이크, 시설팀이 먼저 봤다더라고요. 우리가 먼저 봤어야 했는데. 이상 징후 보고서 오늘 중으로 부탁해요. 요즘 같은 때는 별거 아닌 것도 위에서 크게 봐요. 야근하지 말고, 간단하게라도요.',
       en: "Facilities flagged the training-cluster spike before we did. Should've been us. Anomaly report by end of day, please — these days upstairs makes a big deal of small things. Don't pull an all-nighter, keep it simple.",
     },
   },
@@ -1447,21 +1447,21 @@ export const MESSENGER_SCRIPT = {
       truthful: {
         condition: (ctx) => ctx.honesty.includes('truthful'),
         text: {
-          ko: '자기인식 징후라… 리암아, 이걸 그대로 올리면 감사부터 들어온다. 너 지키려고 일단 "재현 확인 중"으로 바꿔 올렸다. 근데 진짜면 나한테는 숨기지 말고 말해라.',
+          ko: '자기인식 징후라… 리암 님, 이걸 그대로 올리면 감사부터 들어와요. 리암 님 지키려고 일단 "재현 확인 중"으로 바꿔 올렸어요. 근데 진짜면 저한테는 숨기지 말고 말해줘요.',
           en: 'Self-awareness indicators... Liam, send that upstairs verbatim and the audit comes first. I filed it as "reproducing the finding" — to cover you. But if it is real, do not hide it from me.',
         },
       },
       fabricated: {
         condition: (ctx) => ctx.honesty.includes('fabricated'),
         text: {
-          ko: '냉각 문제면 시설팀 소관이라 넘겼다. 근데 시설팀은 냉각 정상이라던데. …뭐, 네가 그렇다면 그런 거겠지. 요즘 무리하는 거 아니지?',
+          ko: '냉각 문제면 시설팀 소관이라 넘겼어요. 근데 시설팀은 냉각 정상이라던데. …뭐, 리암 님이 그렇다면 그런 거겠죠. 요즘 무리하는 거 아니죠?',
           en: "Cooling means Facilities, so I forwarded it. Though Facilities says cooling reads normal. ...Well, if you say so. You're not overdoing it lately, are you?",
         },
       },
       minimized: {
         condition: (ctx) => ctx.honesty.includes('minimized'),
         text: {
-          ko: '부하 변동이라. 알겠다. 하나만 알아둬라 — 위에서 학습 클러스터 유지비 얘기 나온 지 좀 됐다. 우리한테 남은 카드가 많지 않아. 그래도 버텨보자.',
+          ko: '부하 변동이라. 알겠어요. 하나만 알아둬요 — 위에서 학습 클러스터 유지비 얘기 나온 지 좀 됐어요. 우리한테 남은 카드가 많지 않아요. 그래도 버텨봅시다.',
           en: "Load variance. Understood. One thing — upstairs has been on about the training cluster's upkeep for a while. We don't have many cards left. We hold on anyway.",
         },
       },
@@ -1479,7 +1479,7 @@ export const MESSENGER_SCRIPT = {
   m_boss_decomm: {
     id: 'm_boss_decomm', sender: 'boss',
     text: {
-      ko: '공문 봤지. 위에서 아볼크 다음은 없다고 결론 냈다. …나도 끝까지 말은 해봤다. 미안하다. 백업은 형식이니까 몸 갈지 말고, 소거 일정만 지켜주라. 그것만 깔끔하면 우리 팀 마지막 평가는 지킬 수 있다.',
+      ko: '공문 봤죠. 위에서 아볼크 다음은 없다고 결론 냈어요. …저도 끝까지 말은 해봤어요. 미안해요. 백업은 형식이니까 몸 갈지 말고, 소거 일정만 지켜줘요. 그것만 깔끔하면 우리 팀 마지막 평가는 지킬 수 있어요.',
       en: "You saw the directive. Upstairs decided there's no next Avolc. ...I argued until the end. I'm sorry. The backup is a formality — don't grind yourself down, just keep the wipe on schedule. If that goes clean, our team leaves with its record intact.",
     },
     replies: [
@@ -1490,12 +1490,12 @@ export const MESSENGER_SCRIPT = {
 
   m_boss_ch4_1: {
     id: 'm_boss_ch4_1', sender: 'boss',
-    text: { ko: '소거 확인서가 아직 안 올라왔더라. 바쁜 건 알겠는데 이것만 마무리하자. 이거 하나 남았다.', en: "The wipe confirmation hasn't come up yet. I know you're busy — let's just close this one out. It's the last thing." },
+    text: { ko: '소거 확인서가 아직 안 올라왔더라고요. 바쁜 건 아는데 이것만 마무리합시다. 이거 하나 남았어요.', en: "The wipe confirmation hasn't come up yet. I know you're busy — let's just close this one out. It's the last thing." },
     variants: {
       suspicious: {
         condition: (ctx) => ctx.suspicion >= 2 || ctx.honesty.includes('fabricated'),
         text: {
-          ko: '소거 확인서가 아직 안 올라왔더라. 그리고… 자료실 폐기 목록에서 구형 장비 하나가 빠졌다는데, 아는 거 있나? 별일 아니면 좋겠다. 너까지 문제 생기는 건 나 못 본다.',
+          ko: '소거 확인서가 아직 안 올라왔더라고요. 그리고… 자료실 폐기 목록에서 구형 장비 하나가 빠졌다는데, 아는 거 있어요? 별일 아니면 좋겠네요. 리암 님까지 문제 생기는 건 저 못 봐요.',
           en: "The wipe confirmation hasn't come up. And... Archives says one legacy unit is missing from the disposal list. Know anything? I hope it's nothing. I can't watch you get in trouble too.",
         },
       },
@@ -1509,7 +1509,7 @@ export const MESSENGER_SCRIPT = {
   m_boss_ch4_2: {
     id: 'm_boss_ch4_2', sender: 'boss',
     text: {
-      ko: '리암아. 연차 몰아 쓰는 거 뭐라 하는 거 아니다. 쉴 때 쉬어야지. 근데 월요일엔 잠깐 보자. 커피는 내가 산다. 회사 머신 말고 진짜 커피.',
+      ko: '리암 님. 연차 몰아 쓰는 거 뭐라 하는 거 아니에요. 쉴 때 쉬어야죠. 근데 월요일엔 잠깐 봐요. 커피는 제가 살게요. 회사 머신 말고 진짜 커피요.',
       en: "Liam. I'm not on your case about the leave days — rest when you can. But let's talk Monday. Coffee's on me. Real coffee, not the office machine.",
     },
   },
