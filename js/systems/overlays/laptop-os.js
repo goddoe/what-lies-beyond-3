@@ -175,6 +175,24 @@ const THUMBS = {
     <path d="M64 26 L88 44 L104 40 L120 62 L136 58 L148 82" stroke="#ff6a5a" stroke-width="2.4" fill="none"/>
     <path d="M141 74 L148 82 L150 71" stroke="#ff6a5a" stroke-width="2.4" fill="none"/>
   </svg>`,
+  xpu: `<svg viewBox="0 0 160 100" xmlns="http://www.w3.org/2000/svg">
+    <defs><linearGradient id="xp1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1a1006"/><stop offset="1" stop-color="#2c1a08"/></linearGradient></defs>
+    <rect width="160" height="100" fill="url(#xp1)"/>
+    <rect x="55" y="25" width="50" height="50" rx="4" fill="#3a2410"/>
+    <rect x="65" y="35" width="30" height="30" rx="2" fill="#c99a3e"/>
+    <g stroke="#c99a3e" stroke-width="1.4" opacity="0.7">
+      <path d="M55 35 L40 35 M55 45 L36 45 M55 55 L40 55 M55 65 L44 65 M105 35 L120 35 M105 45 L124 45 M105 55 L120 55 M105 65 L116 65"/></g>
+    <circle cx="80" cy="50" r="6" fill="#ff5a3c" opacity="0.85"/>
+  </svg>`,
+  nvidia: `<svg viewBox="0 0 160 100" xmlns="http://www.w3.org/2000/svg">
+    <defs><linearGradient id="nv1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#20261c"/><stop offset="1" stop-color="#0e120c"/></linearGradient></defs>
+    <rect width="160" height="100" fill="url(#nv1)"/>
+    <path d="M20 80 L60 80 L60 40 Q80 28 100 40 L100 80 L140 80" stroke="#5a6a52" stroke-width="2" fill="none"/>
+    <path d="M64 44 Q80 34 96 44 L96 76 L64 76 Z" fill="#76b043" opacity="0.4"/>
+    <path d="M112 30 L136 54 M136 30 L112 54" stroke="#d5372c" stroke-width="3" opacity="0.8"/>
+  </svg>`,
   jeonse: `<svg viewBox="0 0 160 100" xmlns="http://www.w3.org/2000/svg">
     <defs><linearGradient id="js1" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0" stop-color="#5a4a2c"/><stop offset="1" stop-color="#2c2416"/></linearGradient></defs>
@@ -219,6 +237,41 @@ const NEWS = [
       { who: 'histo**', text: { ko: '"기술의 실패가 아니라 단가의 실패" 이 문장 교과서에 실릴 듯', en: '"A failure of unit economics, not of technology" — textbook line.' }, up: 178 },
     ],
     related: ['tianji', 'gpu'],
+  },
+  {
+    id: 'nvidia', thumb: 'nvidia',
+    press: { ko: '반도체투데이', en: 'Semiconductor Today' }, date: { ko: '7시간 전', en: '7h ago' },
+    reporter: { ko: '오태균 기자', en: 'By Taegyun Oh' },
+    title: { ko: 'GPU의 왕좌는 어떻게 넘어갔나 — 엔비디아에서 톈지 XPU로', en: 'How the GPU throne changed hands — from Nvidia to Tianji\'s XPU' },
+    paras: [
+      { ko: '한때 AI 연산의 대명사는 엔비디아의 GPU였다. 전 세계 데이터센터가 그 위에 지어졌고, "칩을 확보하는 자가 AI를 지배한다"는 말은 상식이었다. 지금 그 문장의 주어는 톈지의 XPU다.', en: 'AI compute was once synonymous with Nvidia\'s GPUs. The world\'s datacenters were built on them, and "whoever secures the chips rules AI" was common sense. Today the subject of that sentence is Tianji\'s XPU.' },
+      { ko: '전환점은 톈지의 수직 통합이었다. 모델과 칩을 함께 설계하면서 XPU의 세대 주기는 경쟁사의 절반으로 줄었고, 자체 파운드리 물량이 안정되자 톈지는 구세대 칩의 외부 판매를 시작했다. 엔비디아의 최신 GPU보다 성능이 좋은 칩이, 10분의 1 가격에 풀렸다.', en: 'The turning point was Tianji\'s vertical integration. Co-designing models and silicon halved the XPU\'s generation cycle, and once its foundry supply stabilized, Tianji began selling its older chips externally — chips that beat Nvidia\'s newest GPU, at a tenth of the price.' },
+      { ko: '엔비디아는 신제품 발표 주기를 앞당기고 가격을 내렸지만 격차는 좁혀지지 않았다. 데이터센터 매출은 3년 만에 9할이 증발했고, 회사는 게임·로보틱스 부문으로의 "재집중"을 선언했다. 한 애널리스트는 이렇게 요약했다. "졌다는 뜻입니다."', en: 'Nvidia accelerated launches and cut prices, but the gap never closed. Datacenter revenue evaporated 90% in three years, and the company announced a "refocus" on gaming and robotics. One analyst summarized: "It means they lost."' },
+      { ko: '이제 미국·유럽의 신규 클러스터 발주에서 GPU가 선택되는 비율은 4% 미만이다. 그마저도 대부분 "톈지 의존을 피하고 싶다"는 이유였고, 그 프로젝트들의 절반은 예산 심사에서 살아남지 못했다.', en: 'GPUs now win fewer than 4% of new cluster orders in the US and Europe — mostly from buyers "avoiding Tianji dependence." Half of those projects died in budget review anyway.' },
+    ],
+    comments: [
+      { who: 'chip_war**', text: { ko: '쿠다 생태계면 뭐하나 칩이 10배 비싼데. 소프트웨어 해자는 가격 앞에서 3년을 못 버텼다', en: 'CUDA moat meant nothing at 10x the price. The software moat lasted less than 3 years.' }, up: 289 },
+      { who: 'green_te**', text: { ko: '주주총회에서 "게임으로 돌아가겠다"고 했을 때 다들 울었다더라', en: 'They say people cried at the shareholder meeting when they announced the return to gaming.' }, up: 167 },
+    ],
+    related: ['xpu', 'tianji'],
+  },
+  {
+    id: 'xpu', thumb: 'xpu',
+    press: { ko: '테크리뷰', en: 'Tech Review' }, date: { ko: '어제', en: 'yesterday' },
+    reporter: { ko: '남주혁 기자', en: 'By Juhyuk Nam' },
+    title: { ko: 'XPU 해부 — 톈지는 왜 3세대 전 칩만 파는가', en: 'Inside the XPU — why Tianji only sells chips three generations old' },
+    paras: [
+      { ko: 'XPU는 톈지가 자사 모델 학습을 위해 설계한 AI 가속기다. 현재 톈지 내부 클러스터는 12세대(XPU-12)를 돌리고 있는 것으로 추정되지만, 외부에 판매되는 최신 제품은 3세대 전인 XPU-9다. 이 정책은 출시 이후 한 번도 바뀐 적이 없다.', en: 'The XPU is the accelerator Tianji designed for its own training runs. Its internal clusters are believed to run the 12th generation (XPU-12), but the newest chip it sells externally is the XPU-9 — three generations behind. The policy has never changed.' },
+      { ko: '문제는 그 "구형" 칩조차 엔비디아의 최신 GPU보다 벤치마크에서 앞선다는 것이다. 학습 처리량 기준 1.4배, 전력 효율 기준 2.1배. 그리고 가격은 10분의 1이다. 한 인프라 담당자는 말했다. "자존심으로 살 수 있는 가격 차이가 아닙니다."', en: 'The problem: even that "old" chip beats Nvidia\'s newest GPU on the benchmarks — 1.4x training throughput, 2.1x power efficiency. At a tenth of the price. One infrastructure lead put it: "That is not a price gap you can cover with pride."' },
+      { ko: '3세대 봉인은 정교한 전략이다. 세계는 톈지의 칩 위에서 AI를 돌리지만, 누구도 톈지와 같은 세대의 연산력을 가질 수 없다. 판매되는 XPU에는 클러스터 규모를 제한하는 펌웨어가 실려 있다는 소문도 있지만, 톈지는 부인했다.', en: 'The three-generation seal is deliberate strategy: the world runs AI on Tianji\'s silicon, but no one gets compute of Tianji\'s generation. Rumors persist of firmware that caps cluster sizes on exported XPUs; Tianji denies them.' },
+      { ko: '국내에서는 레반이 XPU-9 기반 클러스터 2,048장 규모를 운용하는 것으로 알려져 있다. 비중국 기업이 확보할 수 있는 사실상 최대 구성이다. 그 위에서 무엇을 학습시키고 있는지는 공개된 바 없다.', en: 'In Korea, Revan is known to operate a 2,048-unit XPU-9 cluster — effectively the largest configuration a non-Chinese company can secure. What it is training on that cluster has not been disclosed.' },
+    ],
+    comments: [
+      { who: 'hw_geek**', text: { ko: '3세대 전 칩한테 지는 최신 GPU라니 이게 제일 굴욕적인 부분', en: 'Losing to a chip three generations old — that\'s the most humiliating part.' }, up: 203 },
+      { who: 'infra_o**', text: { ko: '펌웨어 제한 소문 진짜임. 4096장 넘기면 인터커넥트가 이상하게 느려짐 (아는 사람은 앎)', en: 'The firmware cap rumor is real. Past 4,096 units the interconnect gets mysteriously slow. (IYKYK)' }, up: 178 },
+      { who: 'revan_wa**', text: { ko: '마지막 문단 뭐지. 레반이 그 클러스터로 뭘 하고 있길래', en: 'That last paragraph though. What IS Revan doing with that cluster?' }, up: 154 },
+    ],
+    related: ['nvidia', 'revan'],
   },
   {
     id: 'revan', thumb: 'revan',
@@ -435,8 +488,28 @@ function searchResults(qRaw) {
   }
   if (q.includes('xpu')) {
     return [
-      R('XPU-9', lang === 'ko' ? '9세대 범용 가속기. FP4 기준 18PFLOPS, 128GB HBM. 클러스터당 최대 2,048장 구성. 파산 랩 물량으로 중고가 폭락 중.' : 'Gen-9 accelerator: 18 PFLOPS FP4, 128GB HBM, up to 2,048 per cluster. Used prices collapsing on bankrupt-lab stock.',
-        lang === 'ko' ? '하드웨어 위키' : 'hardware wiki'),
+      R(lang === 'ko' ? 'XPU — 하드웨어 위키' : 'XPU — hardware wiki',
+        lang === 'ko' ? '톈지가 설계한 AI 가속기 제품군. 내부용은 최신 세대(XPU-12 추정), 외부 판매는 3세대 전(XPU-9)까지만 허용된다. 그 구형조차 엔비디아 최신 GPU보다 빠르고 가격은 10분의 1.' : 'Tianji\'s accelerator line. Internal clusters run the latest generation (est. XPU-12); external sales are capped three generations back (XPU-9). Even the old chip beats Nvidia\'s newest GPU at a tenth of the price.',
+        lang === 'ko' ? '백과' : 'encyclopedia'),
+      R('XPU-9 128GB — ₩390,000 (중고)',
+        lang === 'ko' ? 'FP4 18PFLOPS · 128GB HBM · 클러스터 최대 2,048장 구성. 파산 랩 물량으로 중고가 폭락 중. "랙째도 팝니다"' : '18 PFLOPS FP4 · 128GB HBM · up to 2,048 per cluster. Prices collapsing on bankrupt-lab stock. "Will sell by the rack."',
+        lang === 'ko' ? '레반 중고장터' : 'Revan Market', lang === 'ko' ? '오늘' : 'today'),
+      R(lang === 'ko' ? '"3세대 봉인"은 어떻게 세계를 묶어두는가' : 'How the "three-generation seal" keeps the world in place',
+        lang === 'ko' ? '세계는 톈지의 칩 위에서 AI를 돌리지만, 누구도 톈지 세대의 연산력은 갖지 못한다. 수출형 XPU의 펌웨어 클러스터 제한 소문은 여전히 부인 중.' : 'The world runs AI on Tianji silicon, but nobody gets Tianji-generation compute. Firmware cluster-cap rumors on export XPUs remain denied.',
+        lang === 'ko' ? '오피니언' : 'opinion'),
+    ];
+  }
+  if (q.includes('nvidia') || q.includes('엔비디아') || q.includes('지포스')) {
+    return [
+      R(lang === 'ko' ? '엔비디아(NVIDIA) — 백과' : 'NVIDIA — encyclopedia',
+        lang === 'ko' ? '미국의 반도체 기업. 2010~2020년대 AI 연산 시장을 지배했으나, 톈지 XPU의 수출 개시 이후 데이터센터 매출의 9할을 잃고 게임·로보틱스 부문으로 재편했다.' : 'US semiconductor company. Dominated AI compute through the 2010s–2020s; lost 90% of datacenter revenue after Tianji began XPU exports, and refocused on gaming and robotics.',
+        lang === 'ko' ? '백과' : 'encyclopedia'),
+      R(lang === 'ko' ? '"쿠다 해자는 3년을 못 버텼다" — GPU 몰락 연대기' : '"The CUDA moat lasted three years" — a chronicle of the GPU\'s fall',
+        lang === 'ko' ? '최신 GPU가 3세대 전 XPU에 벤치마크에서 밀리기 시작한 순간, 발주서의 방향은 정해져 있었다.' : 'The moment its newest GPU started losing benchmarks to a three-generation-old XPU, every purchase order was already decided.',
+        lang === 'ko' ? '기획' : 'feature'),
+      R(lang === 'ko' ? '엔비디아 신형 게이밍 GPU 출시… "본업 복귀"' : 'Nvidia ships a new gaming GPU: "back to basics"',
+        lang === 'ko' ? '레이트레이싱 성능은 역대 최고. 댓글창은 애도와 응원이 반반이다.' : 'Its best ray-tracing numbers ever. The comments are half mourning, half cheering.',
+        lang === 'ko' ? '뉴스 · 2주 전' : 'news · 2 wk ago'),
     ];
   }
   if (q.includes('커피')) {
@@ -574,40 +647,123 @@ const SLACK_CHANNELS = {
   },
 };
 
-// ── Mail content ─────────────────────────────────────────────────────
+// ── CONNECT 메일 content ────────────────────────────────────────────
+// unread: bold row. bang: red '!' prefix. to: shows the TO badge.
 
 const MAILS = [
   {
-    from: 'HR', subject: { ko: '[안내] 조직 개편 관련 개별 면담 일정', en: '[Notice] 1:1 scheduling for the reorg' },
-    body: { ko: '리암 님, 조직 효율화 관련 개별 면담 대상자입니다. 일정은 추후 안내드립니다.\n\n※ 본 메일은 대상자에게만 발송되었습니다.', en: 'Liam, you are scheduled for a 1:1 regarding org streamlining. Timing to follow.\n\n* Sent only to affected staff.' },
+    from: 'HR', unread: true, bang: true, to: true, time: { ko: '09:12', en: '09:12' },
+    subject: { ko: '[안내] 조직 개편 관련 개별 면담 일정', en: '[Notice] 1:1 scheduling for the reorg' },
+    body: { ko: '리암 님,\n\n조직 효율화 관련 개별 면담 대상자로 안내드립니다. 일정은 확정되는 대로 캘린더 초대로 발송됩니다.\n\n※ 본 메일은 대상자에게만 발송되었습니다.\n※ 문의: HR 헬프데스크', en: 'Liam,\n\nYou are scheduled for a 1:1 regarding org streamlining. A calendar invite will follow once confirmed.\n\n* Sent only to affected staff.\n* Questions: HR helpdesk' },
   },
   {
-    from: { ko: '보안운영팀', en: 'Security Ops' }, subject: { ko: '반출입 규정 개정 안내', en: 'Updated item check rules' },
-    body: { ko: '모든 반출 물품은 X-ray 검색대 통과 및 반출 확인서 서명이 필요합니다. 야간(21시 이후)에는 통제 셔터가 내려갑니다.', en: 'All outgoing items require the X-ray belt and a signed release form. The lockdown shutter is down after 21:00.' },
+    from: { ko: '권한관리담당자(발신전용)', en: 'IDMS (no-reply)' }, unread: true, to: true, time: { ko: '08:47', en: '08:47' },
+    subject: { ko: '[IDMS] 제한구역 서버 접근 권한 정기 확인 요청', en: '[IDMS] Periodic review: restricted-wing server access' },
+    body: { ko: '보유 중인 아래 권한의 사용 여부를 확인해 주세요.\n\n- c7491-cluster (읽기) : 유지\n- bkp-console (실행) : 유지\n- restricted-wing 출입 : 승인 대기\n\n7일 내 미확인 시 권한이 자동 회수됩니다.', en: 'Please confirm the permissions below.\n\n- c7491-cluster (read): keep\n- bkp-console (exec): keep\n- restricted-wing access: pending approval\n\nUnconfirmed permissions are revoked in 7 days.' },
   },
   {
-    from: { ko: '총무', en: 'Facilities' }, subject: { ko: '4분기 폐기 물품 목록 회람', en: 'Q4 disposal list (for review)' },
-    body: { ko: '자료실 보관 폐기 예정 물품:\n- 전시용 구형 컴퓨터 (Macintosh, 1984)\n- CRT 모니터 2대\n- 구형 스위치 1식\n\n이의 있는 부서는 금주 내 회신 바랍니다.', en: 'Slated for disposal (archive room):\n- display unit, legacy computer (Macintosh, 1984)\n- 2 CRT monitors\n- 1 legacy switch\n\nObjections due this week.' },
+    from: 'NoReply-C7491', unread: true, time: { ko: '02:13', en: '02:13' },
+    subject: { ko: '[알림] c7491 클러스터 야간 사용량 임계치 초과 (341%)', en: '[Alert] c7491 cluster nightly usage over threshold (341%)' },
+    body: { ko: '클러스터: c7491\n기간: 22:00 ~ 04:00\n사용량: 일 평균 대비 341%\n산출물 기록: 0 바이트\n\n반복 발생 시 담당자 확인이 필요합니다.\n담당자: 리암', en: 'Cluster: c7491\nWindow: 22:00–04:00\nUsage: 341% of daily baseline\nArtifacts written: 0 bytes\n\nRepeated occurrences require owner review.\nOwner: Liam' },
   },
   {
-    from: { ko: '레반카드', en: 'Revan Card' }, subject: { ko: '이번 달 결제 예정 금액 안내', en: 'This month\'s payment due' },
-    body: { ko: '결제 예정 금액: ₩842,000\n결제일: 25일\n\n잔액이 부족하지 않도록 미리 확인해 주세요.', en: 'Amount due: ₩842,000\nDate: the 25th\n\nPlease make sure your balance is sufficient.' },
+    from: { ko: '보안운영팀', en: 'Security Ops' }, to: true, time: { ko: '8. 21.', en: 'Aug 21' },
+    subject: { ko: '반출입 규정 개정 안내 (X-ray 검색대 의무화)', en: 'Updated item-check rules (X-ray belt mandatory)' },
+    body: { ko: '모든 반출 물품은 X-ray 검색대 통과 및 반출 확인서 서명이 필요합니다.\n야간(21시 이후)에는 통제 셔터가 내려가며, 서명 완료 후 경비실에서 개방합니다.\n\n― 보안운영팀', en: 'All outgoing items require the X-ray belt and a signed release form.\nThe lockdown shutter is down after 21:00; security raises it after sign-off.\n\n— Security Ops' },
   },
   {
-    from: { ko: '(광고) 럭키드로우', en: '(ad) LuckyDraw' }, subject: { ko: '축하합니다!! 당첨되셨습니다', en: 'CONGRATULATIONS!! You have won' },
-    body: { ko: '(이 메일은 스팸함으로 이동됩니다)', en: '(This message will be moved to spam.)' },
+    from: { ko: '총무', en: 'Facilities' }, to: true, time: { ko: '8. 21.', en: 'Aug 21' },
+    subject: { ko: '4분기 폐기 물품 목록 회람 (이의신청 금주 마감)', en: 'Q4 disposal list for review (objections due this week)' },
+    body: { ko: '자료실 보관 폐기 예정 물품:\n\n- 전시용 구형 컴퓨터 (Macintosh, 1984) — 자산번호 AS-0021\n- CRT 모니터 2대\n- 구형 스위치 1식\n\n이의 있는 부서는 금주 내 회신 바랍니다. 미회신 시 예정대로 폐기됩니다.', en: 'Slated for disposal (archive room):\n\n- display unit, legacy computer (Macintosh, 1984) — asset AS-0021\n- 2 CRT monitors\n- 1 legacy switch\n\nObjections due this week; otherwise disposal proceeds as scheduled.' },
+  },
+  {
+    from: 'WORKS', time: { ko: '8. 21.', en: 'Aug 21' },
+    subject: { ko: '[일정 미리 알림] 주간 리포트 마감 - 08.22(금) (GMT+09:00)', en: '[Reminder] Weekly report due — Fri 08.22 (GMT+09:00)' },
+    body: { ko: '일정: 주간 학습 리포트 마감\n일시: 08.22(금) 18:00\n장소: 리포트 시스템 v4.2\n\n이 알림은 캘린더 설정에 따라 발송되었습니다.', en: 'Event: weekly training report due\nWhen: Fri 08.22 18:00\nWhere: Report System v4.2\n\nSent per your calendar settings.' },
+  },
+  {
+    from: 'Jira', time: { ko: '8. 20.', en: 'Aug 20' },
+    subject: { ko: 'AILAB-1247 댓글이 등록되었습니다: [운영] 커피머신 수리 요청(4차)', en: 'New comment on AILAB-1247: [Ops] Coffee machine repair (4th)' },
+    body: { ko: '민 님이 댓글을 남겼습니다:\n\n"이번엔 진짜 고쳐주시는 거죠? 티켓 생성일이 이제 계절이 바뀌었어요."\n\n상태: 예산 승인 대기 → 예산 승인 대기 (변경 없음)', en: 'Min commented:\n\n"You\'re really fixing it this time, right? This ticket has now survived a season change."\n\nStatus: pending budget → pending budget (no change)' },
+  },
+  {
+    from: { ko: '레반카드', en: 'Revan Card' }, time: { ko: '8. 20.', en: 'Aug 20' },
+    subject: { ko: '8월 결제 예정 금액 안내 (₩842,000)', en: 'August payment due (₩842,000)' },
+    body: { ko: '결제 예정 금액: ₩842,000\n결제일: 25일\n\n잔액이 부족하지 않도록 미리 확인해 주세요.\n연체 시 신용점수에 영향이 있을 수 있습니다.', en: 'Amount due: ₩842,000\nDate: the 25th\n\nPlease make sure your balance is sufficient. Late payment may affect your credit score.' },
+  },
+  {
+    from: 'ICML 2027', time: { ko: '8. 19.', en: 'Aug 19' },
+    subject: { ko: 'Call for Papers: ICML 2027 (Reinforcement Learning Track)', en: 'Call for Papers: ICML 2027 (Reinforcement Learning Track)' },
+    body: { ko: 'Dear Researcher,\n\nWe invite submissions to the RL track. Note: due to reduced industry participation this year, the submission deadline has been extended twice.\n\n(제출할 결과가 있던 시절이 있었다.)', en: 'Dear Researcher,\n\nWe invite submissions to the RL track. Note: due to reduced industry participation this year, the submission deadline has been extended twice.' },
+  },
+  {
+    from: { ko: '(광고) 럭키드로우', en: '(ad) LuckyDraw' }, spam: true, time: { ko: '8. 18.', en: 'Aug 18' },
+    subject: { ko: '축하합니다!! 1등에 당첨되셨습니다 (클릭)', en: 'CONGRATULATIONS!! You are our grand winner (click)' },
+    body: { ko: '(이 메일은 스팸함으로 자동 분류되었습니다)', en: '(This message was auto-filed as spam.)' },
   },
 ];
 
-// ── Calendar content ─────────────────────────────────────────────────
+// ── CONNECT 캘린더 content (team week 08.16–08.22) ──────────────────
+// members × 7 days. ev: {t: time, title, lock?, all?, cancel?, gray?, detail:{place, who}}
 
-const CAL_EVENTS = [
-  { day: { ko: '월', en: 'Mon' }, items: [] },
-  { day: { ko: '화', en: 'Tue' }, items: [] },
-  { day: { ko: '수', en: 'Wed' }, items: [{ ko: '보안 점검 (전사)', en: 'Security check (all)' }] },
-  { day: { ko: '목', en: 'Thu' }, items: [] },
-  { day: { ko: '금', en: 'Fri' }, items: [{ ko: '주간 리포트 마감', en: 'Weekly report due' }, { ko: '(취소됨) 랩 미팅', en: '(cancelled) Lab meeting' }] },
-];
+const CAL_WEEK = {
+  range: '08.16 - 08.22',
+  days: [
+    { d: '16', w: { ko: '일', en: 'Sun' }, red: true },
+    { d: '17', w: { ko: '월', en: 'Mon' }, red: true, note: { ko: '대체공휴일(광복절)', en: 'Substitute holiday' } },
+    { d: '18', w: { ko: '화', en: 'Tue' } },
+    { d: '19', w: { ko: '수', en: 'Wed' } },
+    { d: '20', w: { ko: '목', en: 'Thu' } },
+    { d: '21', w: { ko: '금', en: 'Fri' } },
+    { d: '22', w: { ko: '토', en: 'Sat' }, today: true },
+  ],
+  members: [
+    {
+      name: { ko: '리암', en: 'Liam' }, org: { ko: 'AI연구팀', en: 'AI Research' }, color: '#3e7ab0', me: true,
+      week: [
+        [],
+        [],
+        [{ t: '10:00~10:30', title: { ko: '[C-7491] 롤아웃 지표 리뷰', en: '[C-7491] rollout metrics review' }, detail: { place: { ko: '모니터링 룸', en: 'Monitoring room' }, who: { ko: '리암', en: 'Liam' } } },
+         { t: '22:00~24:00', title: { ko: '야간 사용량 모니터링', en: 'Nightly usage monitoring' }, detail: { place: { ko: '원격', en: 'Remote' }, who: { ko: '리암', en: 'Liam' } } }],
+        [{ t: '14:00~15:00', title: { ko: '보안 점검 (전사)', en: 'Security check (all hands)' }, lock: true, detail: { place: { ko: '전 구역', en: 'All areas' }, who: { ko: '전 직원', en: 'Everyone' } } },
+         { t: '22:00~24:00', title: { ko: '야간 사용량 모니터링', en: 'Nightly usage monitoring' }, detail: { place: { ko: '원격', en: 'Remote' }, who: { ko: '리암', en: 'Liam' } } }],
+        [{ t: '11:00~11:30', title: { ko: '[AI연구팀] 주간 싱크', en: '[AI Lab] weekly sync' }, cancel: true, detail: { place: { ko: '(취소) 참석자 부족', en: '(cancelled) not enough attendees' }, who: { ko: '리암, 민', en: 'Liam, Min' } } },
+         { t: '22:00~24:00', title: { ko: '야간 사용량 모니터링', en: 'Nightly usage monitoring' }, detail: { place: { ko: '원격', en: 'Remote' }, who: { ko: '리암', en: 'Liam' } } }],
+        [{ t: '18:00', title: { ko: '주간 리포트 마감', en: 'Weekly report due' }, detail: { place: { ko: '리포트 시스템 v4.2', en: 'Report System v4.2' }, who: { ko: '리암 → 채 실장', en: 'Liam → Dir. Chae' } } }],
+        [{ t: '10:00~11:00', title: { ko: '클러스터 상태 점검 (주말 당직)', en: 'Cluster check (weekend duty)' }, detail: { place: { ko: '모니터링 룸', en: 'Monitoring room' }, who: { ko: '리암 (당직 인원 1명)', en: 'Liam (sole on-call)' } } }],
+      ],
+    },
+    {
+      name: { ko: '민', en: 'Min' }, org: { ko: 'AI연구팀', en: 'AI Research' }, color: '#4aa6a6',
+      week: [
+        [],
+        [],
+        [{ t: '10:30~12:00', gray: true }, { t: '14:00~15:00', gray: true }],
+        [{ t: '09:00~09:30', gray: true }, { t: '14:00~15:00', title: { ko: '보안 점검 (전사)', en: 'Security check (all hands)' }, lock: true, detail: { place: { ko: '전 구역', en: 'All areas' }, who: { ko: '전 직원', en: 'Everyone' } } }],
+        [{ t: '12:00~13:00', gray: true }, { t: '16:00~17:00', gray: true }],
+        [{ t: '11:00~11:30', gray: true }, { all: true, title: { ko: '[연차]', en: '[PTO]' }, lock: true, detail: { place: { ko: '-', en: '-' }, who: { ko: '민', en: 'Min' } } }],
+        [],
+      ],
+    },
+    {
+      name: { ko: '채 실장', en: 'Dir. Chae' }, org: { ko: 'AI연구팀', en: 'AI Research' }, color: '#7a5ac2',
+      week: [
+        [],
+        [],
+        [{ all: true, title: { ko: '[외부] 경영진 워크숍', en: '[Offsite] exec workshop' }, lock: true, detail: { place: { ko: '비공개', en: 'Private' }, who: { ko: '채 실장', en: 'Dir. Chae' } } }],
+        [{ t: '10:00~11:30', title: { ko: '4분기 예산 보고', en: 'Q4 budget briefing' }, lock: true, detail: { place: { ko: '본관 21층', en: 'HQ 21F' }, who: { ko: '채 실장 외', en: 'Dir. Chae +' } } },
+         { t: '15:00~16:00', gray: true }],
+        [{ t: '13:00~14:00', gray: true }, { t: '16:00~17:30', title: { ko: '[인사] 조직 개편 협의', en: '[HR] reorg consultation' }, lock: true, detail: { place: { ko: '비공개', en: 'Private' }, who: { ko: '채 실장, HR', en: 'Dir. Chae, HR' } } }],
+        [{ t: '09:30~10:00', gray: true }, { t: '17:00~18:00', gray: true }],
+        [],
+      ],
+    },
+    {
+      name: { ko: '정연구원', en: 'Jung' }, org: { ko: '(계정 비활성)', en: '(deactivated)' }, color: '#9aa0a8', gone: true,
+      week: [[], [], [], [], [], [], []],
+    },
+  ],
+};
 
 // ── The OS ───────────────────────────────────────────────────────────
 
@@ -1223,57 +1379,226 @@ export class LaptopOS {
   }
 
   _app_mail(win) {
-    win.classList.add('os-light', 'os-split');
-    const side = document.createElement('div');
-    side.className = 'os-mail-side';
-    const main = document.createElement('div');
-    main.className = 'os-mail-main';
-    win.appendChild(side);
-    win.appendChild(main);
+    const lang = L();
+    win.classList.add('os-light', 'cn-app');
 
-    const openMail = (m, btn) => {
-      [...side.children].forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      main.innerHTML = `<div class="os-mail-subject">${t(m.subject)}</div>
-        <div class="os-mail-from">${typeof m.from === 'string' ? m.from : t(m.from)}</div>
-        <div class="os-mail-body">${t(m.body).replace(/\n/g, '<br>')}</div>`;
+    const bar = document.createElement('div');
+    bar.className = 'cn-bar';
+    bar.innerHTML = `<span class="cn-logo">CO<b>NN</b>ECT <em>${lang === 'ko' ? '메일' : 'Mail'}</em></span>
+      <span class="cn-search">⌕ ${lang === 'ko' ? '메일 검색' : 'Search mail'}</span>
+      <span class="cn-tray"><i>🏠</i><i>💬</i><i class="on">✉</i><i>📅</i><i>🗂</i><i>⚙</i></span>`;
+    win.appendChild(bar);
+
+    const body = document.createElement('div');
+    body.className = 'cn-body';
+    win.appendChild(body);
+
+    const side = document.createElement('div');
+    side.className = 'cn-side';
+    const unread = MAILS.filter(mm => mm.unread).length;
+    side.innerHTML = `
+      <div class="cn-write"><b>${lang === 'ko' ? '메일쓰기' : 'Compose'}</b><span>${lang === 'ko' ? '메모쓰기' : 'Memo'}</span></div>
+      <div class="cn-counts">
+        <span><b>${unread}</b>${lang === 'ko' ? '안읽음' : 'Unread'}</span>
+        <span><b>★</b>${lang === 'ko' ? '중요' : 'Starred'}</span>
+        <span><b>⏰</b>${lang === 'ko' ? '리마인드' : 'Remind'}</span>
+        <span><b>TO</b>${lang === 'ko' ? '받는사람' : 'To me'}</span>
+      </div>
+      <div class="cn-folders">
+        <div>✉ ${lang === 'ko' ? '전체메일' : 'All mail'} <em>999+</em></div>
+        <div class="on">📥 ${lang === 'ko' ? '받은메일함' : 'Inbox'} <em>${MAILS.length}</em></div>
+        <div>📤 ${lang === 'ko' ? '보낸메일함' : 'Sent'}</div>
+        <div>👁 ${lang === 'ko' ? '수신확인' : 'Read receipts'}</div>
+        <div>📁 ${lang === 'ko' ? '임시보관함' : 'Drafts'}</div>
+        <div>🗑 ${lang === 'ko' ? '스팸메일함' : 'Spam'} <em>1</em></div>
+      </div>
+      <div class="cn-side-sec">${lang === 'ko' ? '즐겨찾는 연락처' : 'Favorites'}</div>
+      <div class="cn-contacts"><div>ㄴ ${lang === 'ko' ? '민' : 'Min'} <em>24</em></div><div>ㄴ ${lang === 'ko' ? '채 실장' : 'Dir. Chae'} <em>3</em></div></div>
+      <div class="cn-side-sec">${lang === 'ko' ? '내 메일함' : 'My folders'}</div>
+      <div class="cn-contacts"><div>📁 c7491-alerts <em>474</em></div><div>📁 Weekly Report <em>92</em></div><div>📁 OTP <em>999+</em></div></div>
+      <div class="cn-quota">${lang === 'ko' ? '용량 18.6GB / 3TB' : '18.6GB / 3TB used'}</div>`;
+    body.appendChild(side);
+
+    const main = document.createElement('div');
+    main.className = 'cn-main';
+    body.appendChild(main);
+
+    const renderList = () => {
+      main.innerHTML = '';
+      const tools = document.createElement('div');
+      tools.className = 'cn-tools';
+      const tn = lang === 'ko'
+        ? ['읽음', '삭제', '스팸신고', '답장', '전체답장', '전달', '이동 ▾', '리마인드 ▾', '⋯']
+        : ['Read', 'Delete', 'Spam', 'Reply', 'Reply all', 'Forward', 'Move ▾', 'Remind ▾', '⋯'];
+      tools.innerHTML = `<label class="cn-chk"><input type="checkbox"></label>` + tn.map(x => `<button>${x}</button>`).join('') +
+        `<span class="cn-tools-r">≡ ▾ &nbsp; ⏱ ▾ &nbsp; ☰ ▾</span>`;
+      main.appendChild(tools);
+
+      const list = document.createElement('div');
+      list.className = 'cn-list';
+      MAILS.forEach((mm) => {
+        const row = document.createElement('button');
+        row.className = 'cn-row' + (mm.unread ? ' unread' : '') + (mm.read ? ' opened' : '');
+        const from = typeof mm.from === 'string' ? mm.from : t(mm.from);
+        row.innerHTML = `<label class="cn-chk" onclick="event.stopPropagation()"><input type="checkbox"></label>
+          <span class="cn-star">☆</span>
+          <span class="cn-env">${mm.unread && !mm.read ? '✉' : '📨'}</span>
+          <span class="cn-from">${from}</span>
+          ${mm.to ? '<span class="cn-to">TO</span>' : '<span class="cn-to none"></span>'}
+          <span class="cn-subj">${mm.bang ? '<b class="cn-bang">!</b> ' : ''}${t(mm.subject)}</span>
+          <span class="cn-time">${t(mm.time)}</span>`;
+        row.addEventListener('click', () => { mm.read = true; mm.unread = false; renderRead(mm); });
+        list.appendChild(row);
+      });
+      main.appendChild(list);
+
+      const pager = document.createElement('div');
+      pager.className = 'cn-pager';
+      pager.innerHTML = `<b>1</b>` + [2, 3, 4, 5, 6, 7, 8, 9, 10].map(n => `<span>${n}</span>`).join('') + `<span>›</span><span>»</span>`;
+      main.appendChild(pager);
     };
-    MAILS.forEach((m, i) => {
-      const b = document.createElement('button');
-      b.className = 'os-mail-row';
-      b.innerHTML = `<b>${typeof m.from === 'string' ? m.from : t(m.from)}</b><span>${t(m.subject)}</span>`;
-      b.addEventListener('click', () => openMail(m, b));
-      side.appendChild(b);
-      if (i === 0) setTimeout(() => openMail(m, b), 0);
-    });
+
+    const renderRead = (mm) => {
+      main.innerHTML = '';
+      const from = typeof mm.from === 'string' ? mm.from : t(mm.from);
+      const tools = document.createElement('div');
+      tools.className = 'cn-tools';
+      const back = document.createElement('button');
+      back.textContent = lang === 'ko' ? '← 목록' : '← List';
+      back.addEventListener('click', renderList);
+      tools.appendChild(back);
+      (lang === 'ko' ? ['답장', '전체답장', '전달', '삭제', '스팸신고', '이동 ▾'] : ['Reply', 'Reply all', 'Forward', 'Delete', 'Spam', 'Move ▾'])
+        .forEach(x => { const b = document.createElement('button'); b.textContent = x; tools.appendChild(b); });
+      main.appendChild(tools);
+
+      const rd = document.createElement('div');
+      rd.className = 'cn-read';
+      rd.innerHTML = `<h3>${mm.bang ? '<b class="cn-bang">!</b> ' : ''}${t(mm.subject)}</h3>
+        <div class="cn-read-meta"><span class="cn-read-av">${from.slice(0, 1)}</span>
+          <div><b>${from}</b><span>${lang === 'ko' ? '받는사람' : 'To'}: liam@revan.com</span></div>
+          <em>${t(mm.time)}</em></div>
+        <div class="cn-read-body">${t(mm.body).replace(/\n/g, '<br>')}</div>`;
+      main.appendChild(rd);
+    };
+
+    renderList();
   }
 
   _app_calendar(win) {
     const lang = L();
-    win.classList.add('os-light');
-    const grid = document.createElement('div');
-    grid.className = 'os-cal';
-    for (const d of CAL_EVENTS) {
-      const col = document.createElement('div');
-      col.className = 'os-cal-day';
-      col.innerHTML = `<div class="os-cal-head">${t(d.day)}</div>`;
-      if (d.items.length === 0) {
-        col.innerHTML += `<div class="os-cal-empty">${lang === 'ko' ? '일정 없음' : 'No events'}</div>`;
-      } else {
-        for (const it of d.items) {
-          const ev = document.createElement('div');
-          ev.className = 'os-cal-ev' + (t(it).startsWith('(') ? ' os-cal-cancel' : '');
-          ev.textContent = t(it);
-          col.appendChild(ev);
+    win.classList.add('os-light', 'cn-app');
+
+    const bar = document.createElement('div');
+    bar.className = 'cn-bar';
+    bar.innerHTML = `<span class="cn-logo">CO<b>NN</b>ECT <em>${lang === 'ko' ? '캘린더' : 'Calendar'}</em></span>
+      <span class="cn-search">⌕ ${lang === 'ko' ? '구성원, 조직, 그룹 검색' : 'Search members, orgs'}</span>
+      <span class="cn-tray"><i>🏠</i><i>💬</i><i>✉</i><i class="on">📅</i><i>🗂</i><i>⚙</i></span>`;
+    win.appendChild(bar);
+
+    const body = document.createElement('div');
+    body.className = 'cn-body';
+    win.appendChild(body);
+
+    const side = document.createElement('div');
+    side.className = 'cn-side cn-cal-side';
+    const mini = (() => {
+      const heads = (lang === 'ko' ? ['일', '월', '화', '수', '목', '금', '토'] : ['S', 'M', 'T', 'W', 'T', 'F', 'S'])
+        .map((w, i) => `<i class="${i === 0 ? 'red' : ''}">${w}</i>`).join('');
+      const cells = [];
+      let day = 26, month = 'prev';
+      for (let r = 0; r < 6; r++) {
+        for (let c = 0; c < 7; c++) {
+          if (month === 'prev' && day > 31) { day = 1; month = 'cur'; }
+          else if (month === 'cur' && day > 31) { day = 1; month = 'next'; }
+          const cur = month === 'cur';
+          const today = cur && day === 22;
+          const inWeek = cur && day >= 16 && day <= 22;
+          cells.push(`<i class="${cur ? '' : 'dim'} ${c === 0 ? 'red' : ''} ${today ? 'today' : ''} ${inWeek ? 'wk' : ''}">${day}</i>`);
+          day++;
         }
       }
-      grid.appendChild(col);
+      return `<div class="cn-mini-head">2026. 08 <span>‹ ›</span></div><div class="cn-mini">${heads}${cells.join('')}</div>`;
+    })();
+    side.innerHTML = `<button class="cn-cal-write">${lang === 'ko' ? '일정쓰기' : 'New event'}</button>${mini}
+      <div class="cn-side-sec cn-cal-org">👥 ${lang === 'ko' ? 'AI연구팀' : 'AI Research'}</div>
+      <div class="cn-contacts"><div>${lang === 'ko' ? '다른 조직 일정보기' : 'Other orgs'}</div></div>
+      <div class="cn-quota">© REVAN Corp.</div>`;
+    body.appendChild(side);
+
+    const main = document.createElement('div');
+    main.className = 'cn-main cn-cal-main';
+    body.appendChild(main);
+
+    const head = document.createElement('div');
+    head.className = 'cn-cal-head';
+    head.innerHTML = `<button class="cn-cal-nav">${lang === 'ko' ? '오늘' : 'Today'}</button><span class="cn-cal-nav">‹ ›</span>
+      <b>${CAL_WEEK.range}</b>
+      <span class="cn-cal-tabs">${lang === 'ko' ? '개인' : 'Me'} <i>${lang === 'ko' ? '일간' : 'Day'}</i><i>${lang === 'ko' ? '주간' : 'Week'}</i><i>${lang === 'ko' ? '월간' : 'Month'}</i>
+      &nbsp; ${lang === 'ko' ? '구성원' : 'Team'} <i>${lang === 'ko' ? '일간' : 'Day'}</i><i class="on">${lang === 'ko' ? '주간' : 'Week'}</i></span>`;
+    main.appendChild(head);
+
+    const grid = document.createElement('div');
+    grid.className = 'cn-cal-grid';
+    const hrow = document.createElement('div');
+    hrow.className = 'cn-cal-row cn-cal-hrow';
+    hrow.innerHTML = `<div class="cn-cal-member">${lang === 'ko' ? '구성원' : 'Member'}</div>` +
+      CAL_WEEK.days.map(d => `<div class="cn-cal-dayhead ${d.red ? 'red' : ''} ${d.today ? 'today' : ''}">
+        ${d.d} ${t(d.w)}${d.note ? `<em>${t(d.note)}</em>` : ''}</div>`).join('');
+    grid.appendChild(hrow);
+
+    let pop = null;
+    const closePop = () => { if (pop) { pop.remove(); pop = null; } };
+
+    for (const mem of CAL_WEEK.members) {
+      const row = document.createElement('div');
+      row.className = 'cn-cal-row' + (mem.gone ? ' gone' : '');
+      const mc = document.createElement('div');
+      mc.className = 'cn-cal-member';
+      mc.innerHTML = `<span class="cn-cal-av" style="background:${mem.color}">${t(mem.name).slice(0, 1)}</span>
+        <div><b>${t(mem.name)}</b><span>${t(mem.org)}</span>${mem.gone ? '' : `<a>${lang === 'ko' ? '월간 일정' : 'Monthly'}</a>`}</div>`;
+      row.appendChild(mc);
+      mem.week.forEach((evs, di) => {
+        const cell = document.createElement('div');
+        cell.className = 'cn-cal-cell' + (CAL_WEEK.days[di].today ? ' today' : '');
+        for (const ev of evs) {
+          const chip = document.createElement('button');
+          chip.className = 'cn-ev' + (ev.gray ? ' gray' : '') + (ev.cancel ? ' cancel' : '') + (ev.all ? ' all' : '') + (mem.me && !ev.gray ? ' mine' : '');
+          if (ev.gray) {
+            chip.innerHTML = `<b>${ev.t}⟳</b>${lang === 'ko' ? '일정있음' : 'Busy'}`;
+          } else {
+            chip.innerHTML = `<b>${ev.all ? (lang === 'ko' ? '종일' : 'All day') : ev.t}${ev.lock ? ' 🔒' : ''}</b>${t(ev.title)}`;
+          }
+          chip.addEventListener('click', (e) => {
+            e.stopPropagation();
+            closePop();
+            if (ev.gray) return;
+            pop = document.createElement('div');
+            pop.className = 'cn-ev-pop';
+            pop.innerHTML = `<b>${t(ev.title)}</b>
+              <div>🕐 ${CAL_WEEK.days[di].d}${lang === 'ko' ? '일' : ''} ${ev.all ? (lang === 'ko' ? '종일' : 'all day') : ev.t}</div>
+              <div>📍 ${t(ev.detail.place)}</div><div>👤 ${t(ev.detail.who)}</div>
+              ${ev.cancel ? `<em>${lang === 'ko' ? '취소된 일정입니다' : 'This event was cancelled'}</em>` : ''}`;
+            const close = document.createElement('span');
+            close.className = 'cn-ev-pop-x';
+            close.textContent = '✕';
+            close.addEventListener('click', closePop);
+            pop.appendChild(close);
+            const r = chip.getBoundingClientRect(), g = grid.getBoundingClientRect();
+            pop.style.left = Math.max(0, Math.min(r.left - g.left, g.width - 270)) + 'px';
+            pop.style.top = (r.bottom - g.top + 6) + 'px';
+            grid.appendChild(pop);
+          });
+          cell.appendChild(chip);
+        }
+        if (mem.gone && di === 3) {
+          cell.innerHTML = `<span class="cn-gone-note">${lang === 'ko' ? '퇴사한 구성원입니다' : 'This member has left'}</span>`;
+        }
+        row.appendChild(cell);
+      });
+      grid.appendChild(row);
     }
-    win.appendChild(grid);
-    const foot = document.createElement('div');
-    foot.className = 'os-cal-foot';
-    foot.textContent = lang === 'ko' ? '지난달 반복 일정 4건이 주최자 퇴사로 자동 삭제되었습니다.' : '4 recurring meetings were removed last month: organizer left the company.';
-    win.appendChild(foot);
+    grid.addEventListener('click', closePop);
+    main.appendChild(grid);
   }
 
 }

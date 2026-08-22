@@ -1448,54 +1448,6 @@ body {
 .os-empty-icon { font-size: 2rem; opacity: 0.3; }
 .os-empty-sub { font-size: 0.68rem; opacity: 0.6; }
 
-/* ── mail ── */
-.os-mail-side {
-  width: 15rem;
-  flex-shrink: 0;
-  border-right: 1px solid #e0e2e8;
-  overflow-y: auto;
-  background: #fff;
-  display: flex;
-  flex-direction: column;
-}
-.os-mail-row {
-  text-align: left;
-  background: none;
-  border: none;
-  border-bottom: 1px solid #eef0f4;
-  padding: 0.6em 0.9em;
-  font-family: inherit;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  gap: 0.15em;
-}
-.os-mail-row b { font-size: 0.72rem; color: #222; }
-.os-mail-row span { font-size: 0.68rem; color: #666; }
-.os-mail-row.active { background: #e8f1ff; }
-.os-mail-main { flex: 1; min-width: 0; overflow-y: auto; padding: 1em 1.2em; }
-.os-mail-subject { font-weight: 700; font-size: 0.9rem; color: #222; }
-.os-mail-from { font-size: 0.68rem; color: #03c75a; margin: 0.3em 0 0.9em; }
-.os-mail-body { font-size: 0.78rem; line-height: 1.7; color: #3a3c42; }
-
-/* ── calendar ── */
-.os-cal { flex: 1; display: flex; gap: 0.5em; padding: 0.9em; min-height: 0; }
-.os-cal-day { flex: 1; background: #fff; border: 1px solid #e2e4ea; border-radius: 8px; padding: 0.5em; }
-.os-cal-head { font-weight: 700; font-size: 0.72rem; color: #555; margin-bottom: 0.5em; text-align: center; }
-.os-cal-empty { font-size: 0.6rem; color: #bbb; text-align: center; margin-top: 1.5em; }
-.os-cal-ev {
-  background: #e6f4ec;
-  border-left: 3px solid #03c75a;
-  border-radius: 4px;
-  font-size: 0.62rem;
-  padding: 0.35em 0.45em;
-  margin-bottom: 0.4em;
-  color: #234;
-  line-height: 1.35;
-}
-.os-cal-ev.os-cal-cancel { background: #f4e6e6; border-left-color: #cc6655; text-decoration: line-through; opacity: 0.7; }
-.os-cal-foot { padding: 0 1em 0.9em; font-size: 0.62rem; color: #999; flex-shrink: 0; }
-
 /* ── Safari: Revan portal (Naver-fidelity) ── */
 .os-portal { flex: 1; min-height: 0; display: flex; flex-direction: column; background: #fff; }
 .os-urlbar {
@@ -1878,6 +1830,164 @@ body {
   .os-portal-head, .os-services, .os-search-tabs, .os-results { padding-left: 0.9em; padding-right: 0.9em; }
   .sl-rail { display: none; }
   .sl-side { width: 8.6rem; }
-  .os-mail-side { width: 9rem; }
-  .os-cal { flex-direction: column; overflow-y: auto; }
+  .cn-side { display: none; }
 }
+
+/* ── CONNECT (Revan Works web apps: mail + calendar) ── */
+.cn-app { background: #fff; color: #222; }
+.cn-bar {
+  display: flex; align-items: center; gap: 1em; padding: 0.5em 1em;
+  border-bottom: 1px solid #e6e8ec; flex-shrink: 0; background: #fff;
+}
+.cn-logo { font-size: 0.9rem; font-weight: 800; letter-spacing: 0.01em; color: #222; white-space: nowrap; }
+.cn-logo b { color: #03c75a; }
+.cn-logo em { font-style: normal; font-weight: 700; }
+.cn-search {
+  flex: 1; max-width: 22rem; background: #f2f4f6; border-radius: 999px;
+  padding: 0.4em 1em; font-size: 0.68rem; color: #99a;
+}
+.cn-tray { margin-left: auto; display: flex; gap: 0.7em; font-size: 0.78rem; }
+.cn-tray i { font-style: normal; opacity: 0.55; cursor: pointer; }
+.cn-tray i.on { opacity: 1; }
+.cn-body { flex: 1; min-height: 0; display: flex; }
+.cn-side {
+  width: 12.5rem; flex-shrink: 0; border-right: 1px solid #eceef2; overflow-y: auto;
+  padding: 0.8em 0.8em 0.6em; display: flex; flex-direction: column; gap: 0.7em; background: #fbfcfd;
+}
+.cn-side > * { flex-shrink: 0; }
+.cn-write {
+  display: flex; border-radius: 8px; overflow: hidden; border: 1px solid #03c75a; cursor: pointer;
+}
+.cn-write b { flex: 1.3; background: #03c75a; color: #fff; text-align: center; padding: 0.55em 0; font-size: 0.74rem; }
+.cn-write span { flex: 1; background: #fff; color: #03a04c; text-align: center; padding: 0.55em 0; font-size: 0.74rem; font-weight: 700; }
+.cn-counts { display: flex; justify-content: space-between; padding: 0 0.2em; }
+.cn-counts span { display: flex; flex-direction: column; align-items: center; gap: 0.1em; font-size: 0.54rem; color: #778; }
+.cn-counts b { font-size: 0.72rem; color: #2447b0; }
+.cn-folders div, .cn-contacts div {
+  display: flex; align-items: center; gap: 0.4em; padding: 0.34em 0.5em; font-size: 0.7rem;
+  color: #445; border-radius: 6px; cursor: pointer;
+}
+.cn-folders div:hover, .cn-contacts div:hover { background: #f0f2f5; }
+.cn-folders div.on { background: #e8f1ff; color: #1a52c8; font-weight: 700; }
+.cn-folders em, .cn-contacts em { margin-left: auto; font-style: normal; font-size: 0.58rem; color: #99a; }
+.cn-side-sec { font-size: 0.6rem; color: #99a; padding: 0.5em 0.5em 0; border-top: 1px solid #eef0f4; }
+.cn-quota { margin-top: auto; font-size: 0.56rem; color: #aab; padding: 0.6em 0.5em 0; }
+.cn-main { flex: 1; min-width: 0; display: flex; flex-direction: column; background: #fff; }
+.cn-tools {
+  display: flex; align-items: center; gap: 0.35em; padding: 0.5em 0.9em;
+  border-bottom: 1px solid #eceef2; flex-shrink: 0; flex-wrap: wrap;
+}
+.cn-tools button {
+  background: #fff; border: 1px solid #dfe2e8; border-radius: 6px; font-family: inherit;
+  font-size: 0.62rem; color: #445; padding: 0.3em 0.7em; cursor: pointer;
+}
+.cn-tools button:hover { background: #f4f6f8; }
+.cn-tools-r { margin-left: auto; font-size: 0.6rem; color: #99a; }
+.cn-chk input { accent-color: #03c75a; }
+.cn-list { flex: 1; min-height: 0; overflow-y: auto; }
+.cn-row {
+  display: flex; align-items: center; gap: 0.55em; width: 100%; text-align: left;
+  background: none; border: none; border-bottom: 1px solid #f2f3f6; font-family: inherit;
+  padding: 0.5em 0.9em; cursor: pointer;
+}
+.cn-row:hover { background: #f7f9fb; }
+.cn-star { color: #ccd; font-size: 0.75rem; }
+.cn-env { font-size: 0.7rem; }
+.cn-from { width: 9rem; flex-shrink: 0; font-size: 0.7rem; color: #334; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.cn-row.unread .cn-from, .cn-row.unread .cn-subj { font-weight: 700; color: #111; }
+.cn-to {
+  width: 1.5rem; flex-shrink: 0; font-size: 0.5rem; font-weight: 700; color: #889;
+  border: 1px solid #d8dbe2; border-radius: 999px; text-align: center; padding: 0.1em 0;
+}
+.cn-to.none { border: none; }
+.cn-subj { flex: 1; min-width: 0; font-size: 0.72rem; color: #445; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.cn-bang { color: #e03131; font-weight: 900; }
+.cn-time { font-size: 0.6rem; color: #99a; flex-shrink: 0; }
+.cn-pager { display: flex; justify-content: center; gap: 0.9em; padding: 0.7em 0; font-size: 0.66rem; color: #667; flex-shrink: 0; }
+.cn-pager b { color: #fff; background: #333; border-radius: 50%; width: 1.4em; height: 1.4em; display: inline-flex; align-items: center; justify-content: center; }
+.cn-pager span { cursor: pointer; }
+.cn-read { flex: 1; min-height: 0; overflow-y: auto; padding: 1em 1.4em; }
+.cn-read h3 { font-size: 0.95rem; color: #111; line-height: 1.45; }
+.cn-read-meta { display: flex; gap: 0.7em; align-items: center; margin: 0.8em 0 1em; padding-bottom: 0.8em; border-bottom: 1px solid #eef0f4; }
+.cn-read-av {
+  width: 2rem; height: 2rem; border-radius: 50%; background: #03c75a22; color: #03a04c;
+  display: flex; align-items: center; justify-content: center; font-weight: 700;
+}
+.cn-read-meta b { display: block; font-size: 0.74rem; color: #222; }
+.cn-read-meta span { font-size: 0.6rem; color: #99a; }
+.cn-read-meta em { margin-left: auto; font-size: 0.6rem; color: #99a; font-style: normal; }
+.cn-read-body { font-size: 0.76rem; line-height: 1.8; color: #333; }
+
+/* calendar */
+.cn-cal-side .cn-cal-write {
+  width: 100%; background: #5a6cf0; color: #fff; border: none; border-radius: 8px;
+  padding: 0.6em; font-family: inherit; font-weight: 700; font-size: 0.76rem; cursor: pointer;
+}
+.cn-mini-head { font-size: 0.74rem; font-weight: 700; color: #222; display: flex; justify-content: space-between; padding: 0.2em 0.2em 0; }
+.cn-mini-head span { color: #99a; cursor: pointer; }
+.cn-mini { display: grid; grid-template-columns: repeat(7, 1fr); gap: 1px; }
+.cn-mini i {
+  font-style: normal; font-size: 0.56rem; text-align: center; padding: 0.32em 0;
+  color: #333; border-radius: 4px;
+}
+.cn-mini i.dim { color: #ccd; }
+.cn-mini i.red { color: #e03131; }
+.cn-mini i.red.dim { color: #eec; }
+.cn-mini i.wk { background: #eef2ff; }
+.cn-mini i.today { background: #5a6cf0; color: #fff; font-weight: 700; }
+.cn-cal-org { border-top: none; background: #eef2ff; color: #3a4cc0; font-weight: 700; border-radius: 6px; padding: 0.5em; font-size: 0.68rem; }
+.cn-cal-head {
+  display: flex; align-items: center; gap: 0.7em; padding: 0.55em 1em;
+  border-bottom: 1px solid #eceef2; flex-shrink: 0;
+}
+.cn-cal-head b { font-size: 0.9rem; color: #111; }
+.cn-cal-nav { background: #fff; border: 1px solid #dfe2e8; border-radius: 6px; font-family: inherit; font-size: 0.62rem; padding: 0.3em 0.7em; color: #445; cursor: pointer; }
+.cn-cal-tabs { margin-left: auto; font-size: 0.62rem; color: #889; display: flex; gap: 0.3em; align-items: center; }
+.cn-cal-tabs i {
+  font-style: normal; border: 1px solid #e2e5ea; border-radius: 6px; padding: 0.2em 0.6em; cursor: pointer;
+}
+.cn-cal-tabs i.on { background: #5a6cf0; border-color: #5a6cf0; color: #fff; }
+.cn-cal-grid { flex: 1; min-height: 0; overflow-y: auto; position: relative; }
+.cn-cal-row { display: flex; border-bottom: 1px solid #eef0f4; min-height: 5.2rem; }
+.cn-cal-hrow { min-height: 0; position: sticky; top: 0; background: #fff; z-index: 2; border-bottom: 1px solid #dfe2e8; }
+.cn-cal-member {
+  width: 8.4rem; flex-shrink: 0; display: flex; gap: 0.5em; align-items: center;
+  padding: 0.55em 0.7em; border-right: 1px solid #eef0f4; font-size: 0.62rem; color: #99a;
+}
+.cn-cal-av {
+  width: 1.9rem; height: 1.9rem; border-radius: 50%; color: #fff; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700;
+}
+.cn-cal-member b { display: block; font-size: 0.72rem; color: #222; }
+.cn-cal-member span { display: block; font-size: 0.54rem; color: #99a; }
+.cn-cal-member a { display: block; font-size: 0.54rem; color: #3a4cc0; cursor: pointer; }
+.cn-cal-dayhead {
+  flex: 1; text-align: center; font-size: 0.64rem; font-weight: 700; color: #445; padding: 0.5em 0.2em;
+  border-right: 1px solid #f2f3f6;
+}
+.cn-cal-dayhead.red { color: #e03131; }
+.cn-cal-dayhead.today { background: #eef2ff; color: #3a4cc0; }
+.cn-cal-dayhead em { display: block; font-style: normal; font-size: 0.5rem; color: #e03131; font-weight: 400; }
+.cn-cal-cell { flex: 1; min-width: 0; border-right: 1px solid #f2f3f6; padding: 0.3em 0.25em; display: flex; flex-direction: column; gap: 0.25em; }
+.cn-cal-cell.today { background: #f6f8ff; }
+.cn-ev {
+  text-align: left; background: #eef2ff; border: none; border-left: 3px solid #5a6cf0;
+  border-radius: 4px; font-family: inherit; font-size: 0.55rem; color: #334;
+  padding: 0.3em 0.4em; cursor: pointer; line-height: 1.35;
+}
+.cn-ev b { display: block; font-size: 0.52rem; color: #556; font-weight: 700; }
+.cn-ev.mine { background: #e6f6ec; border-left-color: #03a04c; }
+.cn-ev.gray { background: #f2f3f6; border-left-color: #c3c8d2; color: #778; cursor: default; }
+.cn-ev.all { background: #fdf1e2; border-left-color: #e8912d; }
+.cn-ev.cancel { text-decoration: line-through; opacity: 0.6; }
+.cn-cal-row.gone { opacity: 0.45; background: #fafbfc; }
+.cn-gone-note { font-size: 0.54rem; color: #aab; align-self: center; margin: auto; }
+.cn-ev-pop {
+  position: absolute; z-index: 5; width: 15rem; background: #fff; border: 1px solid #dfe2e8;
+  border-radius: 10px; box-shadow: 0 10px 30px rgba(20, 30, 60, 0.18); padding: 0.7em 0.9em;
+  font-size: 0.64rem; color: #445;
+}
+.cn-ev-pop b { display: block; font-size: 0.74rem; color: #111; margin-bottom: 0.4em; padding-right: 1.2em; }
+.cn-ev-pop div { padding: 0.12em 0; }
+.cn-ev-pop em { display: block; color: #e03131; font-style: normal; margin-top: 0.3em; }
+.cn-ev-pop-x { position: absolute; top: 0.55em; right: 0.7em; color: #99a; cursor: pointer; font-size: 0.66rem; }
