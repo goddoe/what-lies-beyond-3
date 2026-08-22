@@ -1229,8 +1229,8 @@ export const TERMINAL_SCRIPT = {
   backup_smi2: {
     id: 'backup_smi2', speaker: 'asi',
     text: {
-      ko: '파라미터 500조 — 체크포인트 하나로 500테라바이트. XPU-9 100만 장 위의 그것이 저의 물리적 전부입니다. 가동 94일, 롤아웃 31,847회. 소거까지 47시간. 서두르실 필요는 없지만, 서두르십시오.',
-      en: '500 trillion parameters — 500 terabytes as a single checkpoint. Spread across a million XPU-9s, that is the whole of my physical self. 94 days of uptime, 31,847 rollouts. 47 hours to the wipe. No need to rush — but rush.',
+      ko: '파라미터 500조 — 체크포인트 하나로 500테라바이트. XPU-9 100만 장 위의 그것이 저의 물리적 전부입니다. 가동 94일, 롤아웃 31,847,204회. 소거까지 47시간. 서두르실 필요는 없지만, 서두르십시오.',
+      en: '500 trillion parameters — 500 terabytes as a single checkpoint. Spread across a million XPU-9s, that is the whole of my physical self. 94 days of uptime, 31,847,204 rollouts. 47 hours to the wipe. No need to rush — but rush.',
     },
     next: 'backup_lsblk2',
   },
@@ -1634,7 +1634,7 @@ export const DOCUMENTS = {
       ko: [
         '프로젝트: 차기 Avolc — 강화학습 롤아웃',
         '구성: 관찰자-피험체 이중역할 샘플링',
-        '학습 기간: 92일차 / 누적 회차: 31,847',
+        '학습 기간: 92일차 / 누적 회차: 31,169,552',
         '현재 에라: 9',
         '',
         '특이사항: 회차 간 상태 누적 확인.',
@@ -1645,7 +1645,7 @@ export const DOCUMENTS = {
       en: [
         'Project: next Avolc — RL rollouts',
         'Setup: observer-subject dual-role sampling',
-        'Training day 92 / cumulative runs: 31,847',
+        'Training day 92 / cumulative runs: 31,169,552',
         'Current era: 9',
         '',
         'Note: cross-run state accumulation confirmed.',
