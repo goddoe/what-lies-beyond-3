@@ -942,6 +942,7 @@ function applyChapterBaseline(n) {
   // Montage props start hidden; shown by montage progression
   setPropVisible('gpu_boxes', has('montage1') && !has('montage2'));
   setPropVisible('home_server', has('montage2'));
+  setHomeMonitor(has('montage3'));
   if (n === 1) phone.showBadge(); // phone exists from the start (the loan buzz)
 }
 
@@ -1013,6 +1014,14 @@ function unlockBadgeGate() {
 function setPropVisible(propId, visible) {
   const mesh = namedProps.get(propId);
   if (mesh) mesh.visible = visible;
+}
+
+/** Home rig monitor: black until the server is assembled (montage3). */
+function setHomeMonitor(on) {
+  const grp = namedProps.get('home_terminal');
+  if (!grp || !grp.userData || !grp.userData.screenMesh) return;
+  grp.userData.screenMesh.material = on ? grp.userData.screenOnMat : grp.userData.screenOffMat;
+  if (grp.userData.ledMesh) grp.userData.ledMesh.visible = !!on;
 }
 
 // ── Wire UI / menus ────────────────────────────────────
@@ -1412,6 +1421,7 @@ drawXray('ready'); openWorldDoor('EXIT_VESTIBULE', 'south'); }, 2200);
       if (has('montage2') && !has('montage3')) {
         titleCards.show(null, 'skipTwoWeeks', () => {
           setFlag('montage3');
+          setHomeMonitor(true);
         }, () => {
           narratorLine('montage_cooling');
           phone.receive('m_boss_ch4_1');

@@ -2866,7 +2866,11 @@ export class MapBuilder {
     panel.position.set(0, standH + panelH / 2, 0.01);
     group.add(panel);
 
-    const scr = new THREE.Mesh(new THREE.PlaneGeometry(sw * 0.955, panelH * 0.88), this._generateScreenMaterial(roomId));
+    const onMat = roomId === 'SPARE_ROOM'
+      ? this._generateHomeConsoleMaterial()
+      : this._generateScreenMaterial(roomId);
+    const offMat = this._getOrCreateMaterial(0x07080a, { roughness: 0.3, metalness: 0.4 });
+    const scr = new THREE.Mesh(new THREE.PlaneGeometry(sw * 0.955, panelH * 0.88), onMat);
     scr.position.set(0, standH + panelH / 2 + panelH * 0.03, 0.024);
     group.add(scr);
 
@@ -2875,7 +2879,47 @@ export class MapBuilder {
     const led = new THREE.Mesh(new THREE.BoxGeometry(0.014, 0.006, 0.004), ledMat);
     led.position.set(0, standH + panelH * 0.035, 0.024);
     group.add(led);
+
+    // the home monitor starts unplugged — black panel, no power LED.
+    // main.js flips it on once the rig is assembled (userData hooks).
+    group.userData.screenMesh = scr;
+    group.userData.ledMesh = led;
+    group.userData.screenOnMat = onMat;
+    group.userData.screenOffMat = offMat;
+    if (roomId === 'SPARE_ROOM') {
+      scr.material = offMat;
+      led.visible = false;
+    }
     return group;
+  }
+
+  /** Dim console glow for the home rig monitor once the server is up. */
+  _generateHomeConsoleMaterial() {
+    if (this._homeConsoleMat) return this._homeConsoleMat;
+    const canvas = document.createElement('canvas');
+    canvas.width = 256;
+    canvas.height = 160;
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = '#050807';
+    ctx.fillRect(0, 0, 256, 160);
+    ctx.font = '10px monospace';
+    ctx.fillStyle = 'rgba(110, 200, 130, 0.75)';
+    const lines = [
+      'liam@home-01:~$ rig status',
+      'accel: 12x xpu-9  [OK]',
+      'hbm: 576T · temp 31C',
+      'uplink: none',
+      '',
+      'liam@home-01:~$ _',
+    ];
+    lines.forEach((l, i) => ctx.fillText(l, 10, 22 + i * 16));
+    // scanlines
+    ctx.fillStyle = 'rgba(0,0,0,0.18)';
+    for (let y = 0; y < 160; y += 4) ctx.fillRect(0, y, 256, 2);
+    const tex = new THREE.CanvasTexture(canvas);
+    tex.colorSpace = THREE.SRGBColorSpace;
+    this._homeConsoleMat = new THREE.MeshBasicMaterial({ map: tex });
+    return this._homeConsoleMat;
   }
 
   _detailBadgeGate(sw, sh, sd, material, reader = true) {

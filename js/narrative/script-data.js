@@ -621,8 +621,8 @@ export const SCRIPT = {
   montage_boxes: {
     id: 'montage_boxes', mood: 'dry',
     text: {
-      ko: '택배가 왔다. GPU 여덟 장, 서버 섀시, 스위치. 배송기사님이 "스타트업 하시나 봐요" 했다. 네. 뭐. 비슷합니다.',
-      en: `The deliveries came. Eight GPUs, a chassis, a switch. The courier said "starting a startup?" Yes. Something like that.`,
+      ko: '택배가 왔다. 중고 XPU-9 열두 장 — 파산한 랩 물량이라 헐값이다. 서버 섀시, 스위치. 배송기사님이 "스타트업 하시나 봐요" 했다. 네. 뭐. 비슷합니다.',
+      en: `The deliveries came. Twelve second-hand XPU-9s — bankrupt-lab stock, dirt cheap — a chassis, a switch. The courier said "starting a startup?" Yes. Something like that.`,
     },
   },
 
