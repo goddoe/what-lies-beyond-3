@@ -1312,6 +1312,7 @@ export class LaptopOS {
 
     const openCh = (id) => {
       const ch = SLACK_CHANNELS[id];
+      win.classList.add('sl-mobile-chat'); // phones: swap sidebar → conversation
       side.querySelectorAll('.sl-ch').forEach(b => b.classList.toggle('on', b.dataset.id === id));
       main.innerHTML = '';
       const label = typeof ch.label === 'string' ? ch.label : t(ch.label);
@@ -1322,8 +1323,9 @@ export class LaptopOS {
       const avStack = ch.dm
         ? ''
         : `<span class="sl-avstack">${(ch.msgs.slice(0, 3).map(mm => `<i style="background:${mm.color}">${mm.who.slice(0, 1)}</i>`)).join('')}<em>${ch.members || 3}</em></span>`;
-      head.innerHTML = `<div class="sl-head-l"><span class="sl-star">☆</span><b>${disp} ▾</b></div>
+      head.innerHTML = `<div class="sl-head-l"><span class="sl-back">‹</span><span class="sl-star">☆</span><b>${disp} ▾</b></div>
         <div class="sl-head-r">${avStack}<span class="sl-huddle">🎧 ▾</span><span>🔔</span><span>⌕</span><span>⋮</span></div>`;
+      head.querySelector('.sl-back').addEventListener('click', () => win.classList.remove('sl-mobile-chat'));
       main.appendChild(head);
 
       const tabs = document.createElement('div');

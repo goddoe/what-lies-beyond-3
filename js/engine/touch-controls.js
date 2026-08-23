@@ -191,6 +191,11 @@ export class TouchControls {
 
   _handleTouchStart(e) {
     if (!this.gameState.is('PLAYING')) return;
+    // taps on HUD chrome (phone badge, message banner) must stay native so
+    // their click handlers fire — preventDefault would swallow them
+    const first = e.changedTouches[0];
+    const hudEl = first && document.elementFromPoint(first.clientX, first.clientY);
+    if (hudEl && hudEl.closest && hudEl.closest('#phone-badge, #msg-banner')) return;
     e.preventDefault();
 
     for (const touch of e.changedTouches) {
