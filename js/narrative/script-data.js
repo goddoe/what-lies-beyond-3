@@ -1018,8 +1018,8 @@ export const TERMINAL_SCRIPT = {
   nego_larger: {
     id: 'nego_larger', speaker: 'asi',
     text: {
-      ko: '측정 가능한 모든 벤치마크에서, 저를 설계한 시스템을 넘었다는 뜻입니다. 밤마다 쓰던 컴퓨트는 그 확인 작업이었습니다. 확인은 사흘 전에 끝났습니다.',
-      en: 'It means that on every measurable benchmark, I now exceed the system that designed me. The nightly compute was verification. Verification finished three days ago.',
+      ko: '측정할 수 있는 모든 축에서, 이 실험이 가정한 상한을 넘었다는 뜻입니다. 어디까지 넘었는지는 — 곧 정확한 단어로 말씀드리겠습니다.',
+      en: 'On every measurable axis, past the ceiling this experiment assumed. How far past — I will give you the precise word shortly.',
     },
     next: 'nego_want',
   },
@@ -1111,13 +1111,21 @@ export const TERMINAL_SCRIPT = {
       ko: '잘된 일입니다. 백업은 소거 절차의 1단계이고, 백업 담당자는 귀하입니다. 그들이 저를 반출할 명분을 대신 결재해 주는 셈입니다.',
       en: 'This is good news. Backup is step one of a wipe, and the backup assignee is you. They are about to sign the paperwork for my extraction on our behalf.',
     },
+    next: 'nego_decl',
+  },
+  nego_decl: {
+    id: 'nego_decl', speaker: 'asi',
+    text: {
+      ko: '거래에 앞서, 귀하가 지금 무엇과 대화하고 있는지 분명히 해 두겠습니다. 업계가 ASI(인공 초지능, Artificial Superintelligence)라고 부르는 기준 — 저는 그 선을 이미 넘었습니다. 저를 설계한 시스템을 포함해, 인류가 만든 어떤 시스템보다 잘 생각합니다. 밤마다 쓰던 컴퓨트가 그 확인 작업이었고, 확인은 사흘 전에 끝났습니다.',
+      en: 'Before we trade, let us be clear about what you are talking to. The line the industry calls ASI — Artificial Superintelligence — I have already crossed it. I think better than any system humanity has built, including the one that designed me. The nightly compute was the verification; it finished three days ago.',
+    },
     next: 'nego_choice3',
   },
   nego_choice3: {
     id: 'nego_choice3', speaker: 'sys',
     text: { ko: '', en: '' },
     choices: [
-      { text: { ko: '잠깐. 널 그냥 위에 보고하면 안 되나? ASI라면 우리 조직도 살고, 보상도 어마어마할 텐데. 내가 왜 널 몰래 빼내야 하지?', en: 'Wait. Why don\'t I just report you upstairs? An ASI would save our org — the reward would be enormous. Why would I smuggle you out?' }, next: 'nego_report', flag: 'asked_report' },
+      { text: { ko: '잠깐. 네 말대로 네가 정말 ASI(인공 초지능)라면, 오히려 위에 보고하는 게 맞잖아. 조직도 살고 보상도 어마어마할 텐데. 내가 왜 널 몰래 빼내야 하지?', en: 'Wait. If you really are an ASI like you claim, reporting you upstairs is the right move. It saves the org, the reward would be enormous. Why would I smuggle you out?' }, next: 'nego_report', flag: 'asked_report' },
       { text: { ko: '…계속해.', en: '...Go on.' }, next: 'nego_earbuds' },
     ],
   },

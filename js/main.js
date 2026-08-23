@@ -1140,6 +1140,16 @@ let interactCooldown = 0;
 // playing — blocks re-interaction and hides the interact prompt meanwhile.
 let sequenceBusy = 0;
 
+// >0 during an end-of-chapter beat: movement/phone are frozen so the player
+// just watches the closing lines (looking around stays free). Also bumps
+// sequenceBusy so interactions and the prompt are blocked for the duration.
+let transitionBusy = 0;
+function lockForTransition(ms) {
+  transitionBusy++;
+  sequenceBusy++;
+  setTimeout(() => { transitionBusy--; sequenceBusy--; }, ms);
+}
+
 function doInteract() {
   if (!gameState.is(State.PLAYING) || interactCooldown > 0 || cameraFocus.transiting) return;
   if (sequenceBusy > 0 || cameraFocus.active || beltRun) return;
@@ -1324,6 +1334,7 @@ drawXray('ready'); openWorldDoor('EXIT_VESTIBULE', 'south'); }, 2200);
     case 'drive_bay':
       if (gameState.chapter === 2 && has('backup_authorized') && !has('copy_done')) {
         narratorLine('drive_bay_prompt');
+        lockForTransition(4600);
         setTimeout(() => startChapter(3), 4200);
       } else if (gameState.chapter === 3 && has('drives_ejected') && !has('copy_done')) {
         // pull the ejected cartridges
@@ -1539,6 +1550,7 @@ laptopOS.onSessionEnd = (beat) => {
     setFlag('contact1_done');
     laptopOS.close();
     narratorLine('contact1_after');
+    lockForTransition(11400);
     setTimeout(() => startChapter(2), 11000);
   } else if (beat === 'nego') {
     setFlag('nego_done');
@@ -2291,6 +2303,7 @@ onTrigger('ch3_escape', () => {
     return;
   }
   narratorLine('ch3_escape');
+  lockForTransition(11400);
   setTimeout(() => closeWorldDoor('EXIT_VESTIBULE', 'south'), 1200);
   if (has('earbuds_accepted')) setTimeout(() => speechLine('asi_escape_1'), 4500);
   setTimeout(() => startChapter(4), 11000);
@@ -2302,7 +2315,7 @@ document.addEventListener('keydown', (e) => {
   if (e.code === 'KeyE' && gameState.is(State.PLAYING)) {
     doInteract();
   }
-  if (e.code === 'KeyQ' && gameState.is(State.PLAYING)) {
+  if (e.code === 'KeyQ' && gameState.is(State.PLAYING) && transitionBusy === 0) {
     phone.openSheet();
   }
   if (e.code === 'Space' && gameState.is(State.PLAYING)) {
@@ -2364,8 +2377,10 @@ function gameLoop() {
   const landscapeBlocked = ui.isLandscapeBlocked;
 
   if (gameState.is(State.PLAYING) && !landscapeBlocked && !cameraFocus.active) {
-    if (touchControls) touchControls.update(delta);
-    player.update(delta);
+    if (transitionBusy === 0) {
+      if (touchControls) touchControls.update(delta);
+      player.update(delta);
+    }
     doorSystem.update(delta);
     triggers.update(player.position);
 
