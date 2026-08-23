@@ -78,6 +78,15 @@ if (!isMobile) {
   badge.appendChild(key);
 }
 
+// Message banners wait for a quiet moment (badge + sound stay immediate)
+phone.bannerGate = (retry) => {
+  if (attentionBusy('banner')) {
+    attentionQueue.push({ kind: 'banner', run: retry });
+    return true;
+  }
+  return false;
+};
+
 // Terminal conversation → game state wiring
 terminalOverlay.onFlag = (flag) => gameState.setFlag(flag);
 terminalOverlay.onEvent = (eventName) => {
@@ -781,7 +790,39 @@ drawXray('ready');
 
 // ── Narrative helpers ──────────────────────────────────
 
+// Attention manager — one voice at a time. Priority: speech toasts
+// (ASI/guard) > narrator monologue > message banner, and NOTHING plays over
+// a fullscreen overlay (laptop OS, terminal, phone, focus panel) — lines
+// queue and drain once the screen closes. Kills the split-attention problem
+// (double popups, dialogue over the laptop, worse on phones).
+const attentionQueue = []; // { kind: 'speech'|'narrator'|'banner', run }
+let speechBusyUntil = 0;
+let attentionDrainAt = 0;
+
+function attentionBusy(kind) {
+  if (om.isOpen) return true;
+  if (!gameState.is(State.PLAYING)) return true;
+  if (performance.now() < speechBusyUntil) return true;
+  // speech only yields to the active typewriter (bounded, a few seconds);
+  // banners wait out the whole monologue chain — they can afford to.
+  if (kind === 'speech' && narrator.isTyping) return true;
+  if (kind === 'banner' && narrator.isBusy) return true;
+  return false;
+}
+
+function drainAttentionQueue() {
+  if (!attentionQueue.length || performance.now() < attentionDrainAt) return;
+  if (attentionBusy(attentionQueue[0].kind)) return;
+  const item = attentionQueue.shift();
+  attentionDrainAt = performance.now() + 600; // breathing room between voices
+  item.run();
+}
+
 function narratorLine(scriptId) {
+  if (attentionBusy('narrator')) {
+    attentionQueue.push({ kind: 'narrator', run: () => narratorLine(scriptId) });
+    return;
+  }
   const lang = getLanguage();
   const line = getLine(scriptId, lang, gameState);
   if (!line) return;
@@ -808,6 +849,12 @@ function speechLine(speechId, { duration = null } = {}) {
   if (!entry) return 0;
   const lang = getLanguage();
   const text = entry.text[lang] || entry.text.ko;
+  const holdEst = duration || Math.max(3800, Math.min(9000, text.length * 90));
+  if (attentionBusy('speech')) {
+    attentionQueue.push({ kind: 'speech', run: () => speechLine(speechId, { duration }) });
+    return holdEst;
+  }
+  speechBusyUntil = performance.now() + holdEst;
 
   const el = document.createElement('div');
   el.className = `speech-line speech-${entry.speaker}`;
@@ -869,6 +916,7 @@ function startChapter(n, { silentCard = false, instantCard = false } = {}) {
   // state, and the title card then "restored" that dead state — the game
   // hung unlocked with the cursor visible (ch2 "제안" card bug).
   if (om.isOpen) om.close();
+  attentionQueue.length = 0; // queued lines from the old chapter don't spill over
   gameState.chapter = n;
   const ch = getChapter(n);
   applyChapterBaseline(n);
@@ -2364,6 +2412,8 @@ function gameLoop() {
     ui.showInteractPrompt(null);
     if (touchControls) touchControls.setInteractTarget(null);
   }
+
+  drainAttentionQueue();
 
   // Desktop watchdog: if we're nominally PLAYING but the pointer isn't locked
   // (tab-away and back, missed unlock paths), surface the click catcher.

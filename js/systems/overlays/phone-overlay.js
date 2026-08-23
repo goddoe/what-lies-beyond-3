@@ -58,6 +58,9 @@ export class PhoneOverlay {
   /** Prominent arrival banner — tap (mobile) or press Q (desktop) to read. */
   _showBanner(msg) {
     if (this.om.isOpen && this.om.current && this.om.current.el === this.el) return; // sheet already open
+    // main.js may defer the banner to a quiet moment (attention manager) —
+    // the badge count and arrival sound already fired, nothing is lost
+    if (this.bannerGate && this.bannerGate(() => this._showBanner(msg))) return;
     const lang = getLanguage();
     const old = document.getElementById('msg-banner');
     if (old) old.remove();
