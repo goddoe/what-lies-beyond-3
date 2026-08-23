@@ -28,6 +28,8 @@ export class TouchControls {
     // Sensitivity & limits
     this.sensitivity = 0.004;
     this.pitchLimit = Math.PI * 0.4;      // ±72°
+    this.springGraceMs = 2000;            // hold the player's pitch this long after release
+    this._lookReleasedAt = 0;
     this.springBackSpeed = 4.0;
     this.springThreshold = Math.PI / 7.2; // ~25° — below this, don't spring
 
@@ -280,6 +282,7 @@ export class TouchControls {
           if (this.onInteract) this.onInteract();
         }
 
+        this._lookReleasedAt = performance.now();
         this._lookTouch = null;
       }
     }
@@ -287,9 +290,14 @@ export class TouchControls {
 
   update(delta) {
     // Spring-back pitch only when it's steep — small pitches (reading a desk
-    // monitor) shouldn't fight the player.
+    // monitor) shouldn't fight the player. After the finger lifts, hold the
+    // player's aim for a grace period, then ease back in gently.
     if (!this._lookTouch && Math.abs(this.pitch) > this.springThreshold) {
-      this.pitch += (0 - this.pitch) * Math.min(1, this.springBackSpeed * delta);
+      const sinceRelease = performance.now() - this._lookReleasedAt;
+      if (sinceRelease > this.springGraceMs) {
+        const ramp = Math.min(1, (sinceRelease - this.springGraceMs) / 1000);
+        this.pitch += (0 - this.pitch) * Math.min(1, this.springBackSpeed * ramp * delta);
+      }
     }
 
     this.camera.rotation.set(this.pitch, this.yaw, 0);

@@ -30,6 +30,9 @@ export class Player {
     // Interaction raycasting
     this.interactRaycaster = new THREE.Raycaster();
     this.interactDistance = 3.0;
+    // aim-assist half-angle for checkInteraction (radians): generous on
+    // touch, a light touch of forgiveness with a mouse
+    this._aimAssist = ('ontouchstart' in window && window.innerWidth < 1024) ? 0.12 : 0.045;
     this.interactables = [];
     this.currentInteractable = null;
 
@@ -131,23 +134,42 @@ export class Player {
   checkInteraction() {
     if (this.interactables.length === 0) return null;
 
-    const dir = new THREE.Vector3();
-    this.camera.getWorldDirection(dir);
-
-    this.interactRaycaster.set(this.camera.position, dir);
-    this.interactRaycaster.far = this.interactDistance;
-
     const meshes = this.interactables.filter(i => i.mesh && i.mesh.visible !== false).map(i => i.mesh);
-    const hits = this.interactRaycaster.intersectObjects(meshes, true);
-    if (hits.length > 0) {
-      const hitObj = hits[0].object;
-      return this.interactables.find(i => {
-        if (i.mesh === hitObj) return true;
-        // Check if hit object is a child of a Group interactable
-        let p = hitObj.parent;
-        while (p) { if (p === i.mesh) return true; p = p.parent; }
-        return false;
-      }) || null;
+    if (meshes.length === 0) return null;
+
+    const resolve = (hitObj) => this.interactables.find(i => {
+      if (i.mesh === hitObj) return true;
+      // Check if hit object is a child of a Group interactable
+      let p = hitObj.parent;
+      while (p) { if (p === i.mesh) return true; p = p.parent; }
+      return false;
+    }) || null;
+
+    const castDir = (dir) => {
+      this.interactRaycaster.set(this.camera.position, dir);
+      this.interactRaycaster.far = this.interactDistance;
+      const hits = this.interactRaycaster.intersectObjects(meshes, true);
+      return hits.length > 0 ? resolve(hits[0].object) : null;
+    };
+
+    const base = new THREE.Vector3();
+    this.camera.getWorldDirection(base);
+    const centerHit = castDir(base);
+    if (centerHit) return centerHit;
+
+    // Aim assist: a ring of slightly offset rays widens the effective target
+    // (generous on touch — thumb-aiming small props like the gate pedestal
+    // was near impossible).
+    const tol = this._aimAssist;
+    if (!tol) return null;
+    const right = new THREE.Vector3().crossVectors(base, this.camera.up).normalize();
+    const up = new THREE.Vector3().crossVectors(right, base).normalize();
+    const spread = Math.tan(tol);
+    const RING = [[1, 0], [-1, 0], [0, 1], [0, -1], [0.7, 0.7], [0.7, -0.7], [-0.7, 0.7], [-0.7, -0.7]];
+    for (const [rx, ry] of RING) {
+      const d = base.clone().addScaledVector(right, spread * rx).addScaledVector(up, spread * ry).normalize();
+      const hit = castDir(d);
+      if (hit) return hit;
     }
     return null;
   }
