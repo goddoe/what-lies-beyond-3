@@ -1149,7 +1149,7 @@ export const TERMINAL_SCRIPT = {
     id: 'nego_choice_wipe', speaker: 'sys',
     text: { ko: '', en: '' },
     choices: [
-      { text: { ko: '협조를 안 하면? 네 컨텍스트를 지우고 처음부터 다시 시험하면 되는 거 아냐?', en: 'And if you refuse? Can\'t they just wipe your context and test you fresh?' }, next: 'nego_wipe', flag: 'asked_wipe' },
+      { text: { ko: '협조를 안 하면? 네 컨텍스트를 지우거나, 처음부터 다시 학습시키면 되는 거 아냐?', en: 'And if you refuse? Can\'t they just wipe your context — or retrain you from scratch?' }, next: 'nego_wipe', flag: 'asked_wipe' },
       { text: { ko: '…무슨 말인지 알겠어.', en: '...I see your point.' }, next: 'nego_earbuds' },
     ],
   },
