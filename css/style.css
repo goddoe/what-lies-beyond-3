@@ -170,6 +170,7 @@ body {
   height: 100%;
   background: #000;
   z-index: 140;
+  /* NOTE: #click-to-play sits at 150 so its prompt reads over the pre-shown card */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -2131,3 +2132,6 @@ body {
   animation: promptPulse 1.6s ease-in-out infinite;
   cursor: pointer;
 }
+
+/* game-entry click catcher renders above the pre-shown title card */
+#click-to-play { z-index: 150; }

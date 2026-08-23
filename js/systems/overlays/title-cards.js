@@ -20,7 +20,21 @@ export class TitleCards {
    * @param {function} midCallback runs while the screen is fully black (teleports, prop swaps)
    * @param {function} done runs after fade back in
    */
-  show(labelKey, nameKey, midCallback = null, done = null, holdMs = 2400) {
+  /**
+   * Pre-black the screen with the card (no fade, no state change) — used at
+   * game entry so the world never flashes before the card appears.
+   */
+  preShow(labelKey, nameKey) {
+    this.chapterEl.textContent = labelKey ? t(labelKey) : '';
+    this.nameEl.textContent = t(nameKey);
+    this.el.style.display = 'flex';
+    this.el.style.transition = 'none';
+    this.el.classList.add('visible');
+    void this.el.offsetWidth;
+    this.el.style.transition = '';
+  }
+
+  show(labelKey, nameKey, midCallback = null, done = null, holdMs = 2400, instant = false) {
     if (this.showing) return;
     this.showing = true;
 
@@ -30,9 +44,17 @@ export class TitleCards {
     this.nameEl.textContent = t(nameKey);
 
     this.el.style.display = 'flex';
-    // force reflow so the transition runs
-    void this.el.offsetWidth;
-    this.el.classList.add('visible');
+    if (instant) {
+      // fully opaque from the first frame (entry from the menu)
+      this.el.style.transition = 'none';
+      this.el.classList.add('visible');
+      void this.el.offsetWidth;
+      this.el.style.transition = '';
+    } else {
+      // force reflow so the transition runs
+      void this.el.offsetWidth;
+      this.el.classList.add('visible');
+    }
 
     setTimeout(() => {
       if (midCallback) midCallback();

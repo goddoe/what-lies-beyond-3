@@ -171,6 +171,11 @@ export const ROOMS = [
       { type: 'equipment', position: [0.8, 0, 1.2], size: [0.9, 1.78, 0.8], color: 0x4a5260, id: 'scanner_box' },
       { type: 'equipment', position: [0.8, 0, 2.4], size: [0.6, 0.82, 0.72], color: 0x3c424c, id: 'scanner_out', interact: true, verb: 'verbTake',
         focus: { camera: [0.8, 1.5, 3.55], lookAt: [0.8, 0.9, 2.4] } },
+      // Waist-high glass guards — the only way across the checkpoint line is
+      // the walk-through arch lane (or the X-ray, if you are a bag)
+      { type: 'glass_wall', position: [-3.54, 0, 1.0], size: [1.92, 0.95, 0.08], color: 0x2c333c },
+      { type: 'glass_wall', position: [-0.34, 0, 1.0], size: [1.38, 0.95, 0.08], color: 0x2c333c },
+      { type: 'glass_wall', position: [2.82, 0, 1.0], size: [3.15, 0.95, 0.08], color: 0x2c333c },
       // ── Station 2: reception counter + release form
       { type: 'counter', position: [2.4, 0, 3.8], size: [1.6, 1.0, 0.6], color: 0x5a5346, rotY: Math.PI / 2 },
       { type: 'document', position: [2.4, 1.02, 3.8], size: [0.28, 0.02, 0.36], color: 0xcfc9b0, id: 'disposal_form', verb: 'verbSign',

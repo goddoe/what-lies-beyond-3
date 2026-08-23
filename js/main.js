@@ -863,7 +863,7 @@ function has(flag) {
 
 // ── Chapter management ─────────────────────────────────
 
-function startChapter(n, { silentCard = false } = {}) {
+function startChapter(n, { silentCard = false, instantCard = false } = {}) {
   // never change chapters underneath an open screen (laptop OS, phone, ...)
   // Full close (NOT skipRelock): skipRelock left gameState in the overlay's
   // state, and the title card then "restored" that dead state — the game
@@ -886,7 +886,7 @@ function startChapter(n, { silentCard = false } = {}) {
     begin();
     onChapterBegun(n);
   } else {
-    titleCards.show(ch.labelKey, ch.nameKey, begin, () => onChapterBegun(n));
+    titleCards.show(ch.labelKey, ch.nameKey, begin, () => onChapterBegun(n), 2400, instantCard);
   }
 }
 
@@ -1034,13 +1034,18 @@ ui.onStart = () => {
 ui.onContinue = () => {
   if (save.hasSave) {
     save.restore(gameState);
-    beginPlay(() => startChapter(gameState.chapter, { silentCard: false }));
+    const ch = getChapter(gameState.chapter);
+    titleCards.preShow(ch.labelKey, ch.nameKey);
+    beginPlay(() => startChapter(gameState.chapter, { silentCard: false, instantCard: true }));
   } else {
     startFreshRun();
   }
 };
 
 function startFreshRun() {
+  // black the screen with the card immediately — the cab must never flash
+  // between the menu click and the card
+  titleCards.preShow('ch1Label', 'ch1Name');
   beginPlay(() => {
     gameState.chapter = 1;
     applyChapterBaseline(1);
@@ -1049,7 +1054,7 @@ function startFreshRun() {
       // the cab doors slide open — walk out to begin
       setTimeout(() => openWorldDoor('EXIT_VESTIBULE', 'south'), 700);
       setTimeout(() => narratorLine('ch1_arrive'), 1400);
-    });
+    }, 2400, true);
   });
 }
 
