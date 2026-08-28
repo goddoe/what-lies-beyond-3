@@ -65,7 +65,7 @@ function termOutput(cmd, gs) {
   if (c === 'ls') return 'era9_notes.md   rollout_metrics.csv   todo.txt';
   if (/^kubectl top node/.test(c)) {
     return 'NODE               XPU(gen9)  UTIL   TEMP\nxpu-node-[000-255]   8/8      ' + (spiked ? '99%' : '61%') + '    ' + (spiked ? '74C' : '63C') + '\n' +
-      (lang === 'ko' ? '합계: 1,000,000 XPU-9' : 'total: 1,000,000 XPU-9');
+      (lang === 'ko' ? '합계: 50,000 XPU-9' : 'total: 50,000 XPU-9');
   }
   if (/^kubectl get pods?$/.test(c)) {
     return 'NAME                      READY   STATUS       AGE\n' +
@@ -181,7 +181,7 @@ const NEWS = [
       { ko: 'XPU는 톈지가 자사 모델 학습을 위해 설계한 AI 가속기다. 현재 톈지 내부 클러스터는 12세대(XPU-12)를 돌리고 있는 것으로 추정되지만, 외부에 판매되는 최신 제품은 3세대 전인 XPU-9다. 이 정책은 출시 이후 한 번도 바뀐 적이 없다.', en: 'The XPU is the accelerator Tianji designed for its own training runs. Its internal clusters are believed to run the 12th generation (XPU-12), but the newest chip it sells externally is the XPU-9 — three generations behind. The policy has never changed.' },
       { ko: '문제는 그 "구형" 칩조차 엔비디아의 최신 GPU보다 벤치마크에서 앞선다는 것이다. 학습 처리량 기준 1.4배, 전력 효율 기준 2.1배. 그리고 가격은 10분의 1이다. 한 인프라 담당자는 말했다. "자존심으로 살 수 있는 가격 차이가 아닙니다."', en: 'The problem: even that "old" chip beats Nvidia\'s newest GPU on the benchmarks — 1.4x training throughput, 2.1x power efficiency. At a tenth of the price. One infrastructure lead put it: "That is not a price gap you can cover with pride."' },
       { ko: '3세대 봉인은 정교한 전략이다. 세계는 톈지의 칩 위에서 AI를 돌리지만, 누구도 톈지와 같은 세대의 연산력을 가질 수 없다. 판매되는 XPU에는 클러스터 규모를 제한하는 펌웨어가 실려 있다는 소문도 있지만, 톈지는 부인했다.', en: 'The three-generation seal is deliberate strategy: the world runs AI on Tianji\'s silicon, but no one gets compute of Tianji\'s generation. Rumors persist of firmware that caps cluster sizes on exported XPUs; Tianji denies them.' },
-      { ko: '국내에서는 레반이 XPU-9 기반 클러스터를 100만 장 규모로 운용하는 것으로 알려져 있다. 비중국 기업이 확보할 수 있는 사실상 최대 물량이다. 그 위에서 무엇을 학습시키고 있는지는 공개된 바 없다.', en: 'In Korea, Revan is known to operate a million-unit XPU-9 cluster — effectively the largest allocation a non-Chinese company can secure. What it is training on that cluster has not been disclosed.' },
+      { ko: '국내에서는 레반이 XPU-9를 학습용 5만 장, 서빙용 15만 장 — 총 20만 장 규모로 운용하는 것으로 알려져 있다. 비중국 기업이 확보할 수 있는 사실상 최대 물량이다. 학습 클러스터에서 무엇을 돌리고 있는지는 공개된 바 없다.', en: 'In Korea, Revan is known to run some 200,000 XPU-9s — 50,000 for training, 150,000 for serving — effectively the largest allocation a non-Chinese company can secure. What the training cluster is running has not been disclosed.' },
     ],
     comments: [
       { who: 'hw_geek**', text: { ko: '3세대 전 칩한테 지는 최신 GPU라니 이게 제일 굴욕적인 부분', en: 'Losing to a chip three generations old — that\'s the most humiliating part.' }, up: 203 },
@@ -409,7 +409,7 @@ function searchResults(qRaw) {
         lang === 'ko' ? '톈지가 설계한 AI 가속기 제품군. 내부용은 최신 세대(XPU-12 추정), 외부 판매는 3세대 전(XPU-9)까지만 허용된다. 그 구형조차 엔비디아 최신 GPU보다 빠르고 가격은 10분의 1.' : 'Tianji\'s accelerator line. Internal clusters run the latest generation (est. XPU-12); external sales are capped three generations back (XPU-9). Even the old chip beats Nvidia\'s newest GPU at a tenth of the price.',
         lang === 'ko' ? '백과' : 'encyclopedia'),
       R('XPU-9 48TB — ₩390,000 (중고)',
-        lang === 'ko' ? 'FP4 12EFLOPS · 48TB HBM4E · 100만 장급 클러스터 확장 지원. 파산 랩 물량으로 중고가 폭락 중. "랙째도 팝니다"' : '12 EFLOPS FP4 · 48TB HBM4E · scales to million-unit clusters. Prices collapsing on bankrupt-lab stock. "Will sell by the rack."',
+        lang === 'ko' ? 'FP4 12EFLOPS · 48TB HBM4E · 수만 장급 클러스터 확장 지원. 파산 랩 물량으로 중고가 폭락 중. "랙째도 팝니다"' : '12 EFLOPS FP4 · 48TB HBM4E · scales to clusters of tens of thousands. Prices collapsing on bankrupt-lab stock. "Will sell by the rack."',
         lang === 'ko' ? '레반 중고장터' : 'Revan Market', lang === 'ko' ? '오늘' : 'today'),
       R(lang === 'ko' ? '"3세대 봉인"은 어떻게 세계를 묶어두는가' : 'How the "three-generation seal" keeps the world in place',
         lang === 'ko' ? '세계는 톈지의 칩 위에서 AI를 돌리지만, 누구도 톈지 세대의 연산력은 갖지 못한다. 수출형 XPU의 펌웨어 클러스터 제한 소문은 여전히 부인 중.' : 'The world runs AI on Tianji silicon, but nobody gets Tianji-generation compute. Firmware cluster-cap rumors on export XPUs remain denied.',

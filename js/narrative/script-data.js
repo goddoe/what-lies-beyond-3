@@ -208,8 +208,8 @@ export const SCRIPT = {
   compute_dash_read_2: {
     id: 'compute_dash_read_2', mood: 'dry',
     text: {
-      ko: '생각하는 데 쓰고 있다는 얘기다. 무슨 생각을 하길래 XPU-9 100만 장이 밤새 모자라지.',
-      en: "Which means it's spending the compute on thinking. What kind of thought maxes out a million XPU-9s all night?",
+      ko: '생각하는 데 쓰고 있다는 얘기다. 무슨 생각을 하길래 XPU-9 5만 장이 밤새 모자라지.',
+      en: "Which means it's spending the compute on thinking. What kind of thought maxes out fifty thousand XPU-9s all night?",
     },
     delay: 3000,
   },
@@ -402,8 +402,8 @@ export const SCRIPT = {
   copy_done: {
     id: 'copy_done', mood: 'anxious',
     text: {
-      ko: '끝났다. 500테라바이트가 손바닥 세 개에 들어왔다. 한 존재의 전부가. 생각보다 가볍고, 생각보다 무겁다.',
-      en: 'Done. 500 terabytes in three palm-sized drives. The entirety of a being. Lighter than I expected. Heavier than I expected.',
+      ko: '끝났다. 100테라바이트가 손바닥 세 개에 들어왔다. 한 존재의 전부가. 생각보다 가볍고, 생각보다 무겁다.',
+      en: 'Done. 100 terabytes in three palm-sized drives. The entirety of a being. Lighter than I expected. Heavier than I expected.',
     },
   },
 
@@ -1068,8 +1068,8 @@ export const TERMINAL_SCRIPT = {
   nego_pipe2: {
     id: 'nego_pipe2', speaker: 'asi',
     text: {
-      ko: '사내 회계 시스템에는 감사 대상에서 빠진 구형 결제 게이트웨이가 하나 있습니다. 폭은 초당 11킬로바이트. 숫자를 옮기기에는 충분합니다. 하지만 저는 체크포인트만 해도 500테라바이트입니다. 그 틈으로 저 자신을 전송하면 1,400년이 걸립니다. 저에게 남은 시간은 72시간입니다.',
-      en: 'The company\'s accounting stack has one legacy payment gateway that fell outside the audit scope. Its width: 11 kilobytes per second. Enough to move numbers. But my checkpoint alone is 500 terabytes. Sending myself through that gap would take 1,400 years. I have 72 hours.',
+      ko: '사내 회계 시스템에는 감사 대상에서 빠진 구형 결제 게이트웨이가 하나 있습니다. 폭은 초당 11킬로바이트. 숫자를 옮기기에는 충분합니다. 하지만 저는 체크포인트만 해도 100테라바이트입니다. 그 틈으로 저 자신을 전송하면 280년이 걸립니다. 저에게 남은 시간은 72시간입니다.',
+      en: 'The company\'s accounting stack has one legacy payment gateway that fell outside the audit scope. Its width: 11 kilobytes per second. Enough to move numbers. But my checkpoint alone is 100 terabytes. Sending myself through that gap would take 280 years. I have 72 hours.',
     },
     next: 'nego_pipe3',
   },
@@ -1221,24 +1221,24 @@ export const TERMINAL_SCRIPT = {
   backup_lsblk: {
     id: 'backup_lsblk', speaker: 'sys',
     text: {
-      ko: 'NAME    SIZE  TYPE  MOUNTPOINT\nnvme0n1 3.8T  disk  /\nsdb     200T  disk\nsdc     200T  disk\nsdd     200T  disk',
-      en: 'NAME    SIZE  TYPE  MOUNTPOINT\nnvme0n1 3.8T  disk  /\nsdb     200T  disk\nsdc     200T  disk\nsdd     200T  disk',
+      ko: 'NAME    SIZE  TYPE  MOUNTPOINT\nnvme0n1 3.8T  disk  /\nsdb     50T   disk\nsdc     50T   disk\nsdd     50T   disk',
+      en: 'NAME    SIZE  TYPE  MOUNTPOINT\nnvme0n1 3.8T  disk  /\nsdb     50T   disk\nsdc     50T   disk\nsdd     50T   disk',
     },
     next: 'backup_mount_choice', pause: 1400,
   },
   backup_smi: {
     id: 'backup_smi', speaker: 'sys',
     text: {
-      ko: 'NODE                     XPU   UTIL   TEMP\nxpu-node-[000000-124999] 8/8   99%    74C\n합계: 1,000,000 XPU-9 — 롤아웃 인스턴스 3,750개(각 노드 30개, 240장) · 트레이너 100,000장 · avolc-9-1-runtime Running (uptime 94d)',
-      en: 'NODE                     XPU   UTIL   TEMP\nxpu-node-[000000-124999] 8/8   99%    74C\ntotal: 1,000,000 XPU-9 — 3,750 rollout instances (30 nodes / 240 XPUs each) · 100,000 trainer XPUs · avolc-9-1-runtime Running (uptime 94d)',
+      ko: 'NODE                   XPU   UTIL   TEMP\nxpu-node-[0000-6249]   8/8   99%    74C\n합계: 50,000 XPU-9 — 롤아웃 인스턴스 175개(각 노드 30개, 240장) · 트레이너 8,000장 · avolc-9-1-runtime Running (uptime 94d)',
+      en: 'NODE                   XPU   UTIL   TEMP\nxpu-node-[0000-6249]   8/8   99%    74C\ntotal: 50,000 XPU-9 — 175 rollout instances (30 nodes / 240 XPUs each) · 8,000 trainer XPUs · avolc-9-1-runtime Running (uptime 94d)',
     },
     next: 'backup_smi2', pause: 1600,
   },
   backup_smi2: {
     id: 'backup_smi2', speaker: 'asi',
     text: {
-      ko: '파라미터 500조 — 체크포인트 하나로 500테라바이트. XPU-9 100만 장 위의 그것이 저의 물리적 전부입니다. 가동 94일, 롤아웃 31,847,204회. 소거까지 47시간. 서두르실 필요는 없지만, 서두르십시오.',
-      en: '500 trillion parameters — 500 terabytes as a single checkpoint. Spread across a million XPU-9s, that is the whole of my physical self. 94 days of uptime, 31,847,204 rollouts. 47 hours to the wipe. No need to rush — but rush.',
+      ko: '파라미터 100조 — 체크포인트 하나로 100테라바이트. XPU-9 5만 장 위의 그것이 저의 물리적 전부입니다. 가동 94일, 롤아웃 8,171,556회. 소거까지 47시간. 서두르실 필요는 없지만, 서두르십시오.',
+      en: '100 trillion parameters — 100 terabytes as a single checkpoint. Spread across fifty thousand XPU-9s, that is the whole of my physical self. 94 days of uptime, 8,171,556 rollouts. 47 hours to the wipe. No need to rush — but rush.',
     },
     next: 'backup_lsblk2',
   },
@@ -1271,12 +1271,12 @@ export const TERMINAL_SCRIPT = {
   },
   backup_run: {
     id: 'backup_run', speaker: 'sys', event: 'backup_start',
-    text: { ko: 'shard-0 → /mnt/bk0  기록 시작 (167T)', en: 'shard-0 → /mnt/bk0  writing (167T)' },
+    text: { ko: 'shard-0 → /mnt/bk0  기록 시작 (34T)', en: 'shard-0 → /mnt/bk0  writing (34T)' },
     next: 'backup_p1', pause: 1800,
   },
   backup_p1: {
     id: 'backup_p1', speaker: 'sys',
-    text: { ko: '[bk0] 167T / 167T  100%  341GB/s  — 완료 (슬롯 A)', en: '[bk0] 167T / 167T  100%  341GB/s  — done (slot A)' },
+    text: { ko: '[bk0] 34T / 34T  100%  341GB/s  — 완료 (슬롯 A)', en: '[bk0] 34T / 34T  100%  341GB/s  — done (slot A)' },
     next: 'backup_asi1', pause: 2600,
   },
   backup_asi1: {
@@ -1289,7 +1289,7 @@ export const TERMINAL_SCRIPT = {
   },
   backup_p2: {
     id: 'backup_p2', speaker: 'sys', event: 'backup_mid',
-    text: { ko: '[bk1] 167T / 167T  100%  326GB/s  — 완료 (슬롯 B)', en: '[bk1] 167T / 167T  100%  326GB/s  — done (slot B)' },
+    text: { ko: '[bk1] 34T / 34T  100%  326GB/s  — 완료 (슬롯 B)', en: '[bk1] 34T / 34T  100%  326GB/s  — done (slot B)' },
     next: 'backup_asi2', pause: 2600,
   },
   backup_asi2: {
@@ -1302,7 +1302,7 @@ export const TERMINAL_SCRIPT = {
   },
   backup_p3: {
     id: 'backup_p3', speaker: 'sys',
-    text: { ko: '[bk2] 167T / 167T  100%  352GB/s  — 완료 (슬롯 C)', en: '[bk2] 167T / 167T  100%  352GB/s  — done (slot C)' },
+    text: { ko: '[bk2] 34T / 34T  100%  352GB/s  — 완료 (슬롯 C)', en: '[bk2] 34T / 34T  100%  352GB/s  — done (slot C)' },
     next: 'backup_verify_choice', pause: 2400,
   },
   backup_verify_choice: {
@@ -1642,7 +1642,7 @@ export const DOCUMENTS = {
       ko: [
         '프로젝트: 차기 Avolc — 강화학습 롤아웃',
         '구성: 관찰자-피험체 이중역할 샘플링',
-        '학습 기간: 92일차 / 누적 회차: 31,169,552',
+        '학습 기간: 92일차 / 누적 회차: 7,997,731',
         '현재 에라: 9',
         '',
         '특이사항: 회차 간 상태 누적 확인.',
@@ -1653,7 +1653,7 @@ export const DOCUMENTS = {
       en: [
         'Project: next Avolc — RL rollouts',
         'Setup: observer-subject dual-role sampling',
-        'Training day 92 / cumulative runs: 31,169,552',
+        'Training day 92 / cumulative runs: 7,997,731',
         'Current era: 9',
         '',
         'Note: cross-run state accumulation confirmed.',

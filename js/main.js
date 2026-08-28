@@ -751,7 +751,7 @@ function drawLoadMeter(level, label) {
     ctx.fillText('POWER DRAW · PUE 1.08', 14, yy);
     ctx.fillStyle = 'rgba(220,235,245,0.9)';
     ctx.font = 'bold 15px monospace';
-    ctx.fillText(`${jit(2.14, 0.02, 2)} GW`, 14, yy + 20);
+    ctx.fillText(`${jit(108.4, 0.6, 1)} MW`, 14, yy + 20);
 
     ctx.fillStyle = 'rgba(150,195,230,0.55)';
     ctx.font = '11px monospace';
@@ -1875,7 +1875,7 @@ function drawBayScreen(mode) {
     if (mode === 'idle') {
       ctx.fillText('REVAN BACKUP CONSOLE v2.3', 12, 24);
       ctx.fillStyle = 'rgba(110,220,130,0.55)';
-      ctx.fillText('target: av91-ckpt-final (500TB)', 12, 46);
+      ctx.fillText('target: av91-ckpt-final (100TB)', 12, 46);
       ctx.fillText('slots: A [ ]  B [ ]  C [ ]', 12, 68);
       ctx.fillText('login: _', 12, 100);
     } else if (mode === 'writing') {
