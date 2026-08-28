@@ -5,8 +5,8 @@
 
 const STRINGS = {
   subtitle: {
-    ko: '관찰자는 무엇을 관찰당하는가',
-    en: 'Who watches the watcher?',
+    ko: 'The Beginning — 모든 것이 시작된 밤',
+    en: 'The Beginning — the night everything started',
   },
   start: {
     ko: '처음부터',
